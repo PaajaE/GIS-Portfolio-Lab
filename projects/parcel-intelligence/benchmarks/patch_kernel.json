@@ -1,0 +1,78 @@
+{
+  "algorithm": "per-parcel k x k square opening (k=5, 2 m cells) then 4-connected component labelling restricted to one parcel; reference = scipy.ndimage per parcel bounding box, Rust = single raster pass (separable run-length erosion/dilation + union-find)",
+  "hardware": {
+    "cpu": "Apple M4",
+    "logical_cpus": "10",
+    "ram_gb": 16.0,
+    "os": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)",
+    "threads": "single-threaded (both implementations)"
+  },
+  "harness": "timeit.repeat(number=1); reference repeat=3, Rust repeat=7",
+  "sizes": [
+    {
+      "cells": 3406164,
+      "shape": [
+        948,
+        3593
+      ],
+      "parcels_present": 286,
+      "identical": true,
+      "reference_min_s": 0.0582,
+      "reference_median_s": 0.0584,
+      "rust_min_s": 0.0221,
+      "rust_median_s": 0.023,
+      "speedup_median": 2.54
+    },
+    {
+      "cells": 6812328,
+      "shape": [
+        1896,
+        3593
+      ],
+      "parcels_present": 1347,
+      "identical": true,
+      "reference_min_s": 0.1791,
+      "reference_median_s": 0.1809,
+      "rust_min_s": 0.0516,
+      "rust_median_s": 0.052,
+      "speedup_median": 3.48
+    },
+    {
+      "cells": 13624656,
+      "shape": [
+        3792,
+        3593
+      ],
+      "parcels_present": 3350,
+      "identical": true,
+      "reference_min_s": 0.3896,
+      "reference_median_s": 0.3904,
+      "rust_min_s": 0.1086,
+      "rust_median_s": 0.1099,
+      "speedup_median": 3.55
+    },
+    {
+      "cells": 27245719,
+      "shape": [
+        7583,
+        3593
+      ],
+      "parcels_present": 6090,
+      "identical": true,
+      "reference_min_s": 0.7591,
+      "reference_median_s": 0.7702,
+      "rust_min_s": 0.2263,
+      "rust_median_s": 0.2286,
+      "speedup_median": 3.37
+    }
+  ],
+  "pipeline_estimate": {
+    "kernel_calls_per_full_run": 25,
+    "reference_s": 19.3,
+    "rust_s": 5.7
+  }
+}
