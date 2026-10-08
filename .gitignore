@@ -1,1 +1,12 @@
 .DS_Store
+
+# Raw and intermediate data are never committed
+projects/*/data/
+
+# Python / Rust build products
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+target/
+*.so

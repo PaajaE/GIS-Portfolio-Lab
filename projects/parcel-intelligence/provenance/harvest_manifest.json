@@ -1,0 +1,250 @@
+{
+  "sources": {
+    "town": {
+      "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/TOWNSSURVEY_POLYM/FeatureServer/0",
+      "where": "TOWN_ID=8",
+      "fields": "TOWN,TOWN_ID",
+      "features": 1,
+      "file": "town.geojson",
+      "sha256": "2f7e456064542a6c1c097cf93cafbb747aa235bf7496fa51591c25958501cd62",
+      "acquired_utc": "2026-10-08T22:43:56+00:00",
+      "layer_name": "TOWNSSURVEY_POLYM",
+      "copyright": "",
+      "source_spatial_reference": {
+        "wkid": 102100,
+        "latestWkid": 3857
+      },
+      "last_edit_utc": "2020-03-05T16:37:56.910000+00:00",
+      "description_head": ""
+    },
+    "parcels": {
+      "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/Massachusetts_Property_Tax_Parcels/FeatureServer/0",
+      "where": "TOWN_ID=8",
+      "fields": "MAP_PAR_ID,LOC_ID,POLY_TYPE,TOWN_ID,PROP_ID,FY,LOT_SIZE,LOT_UNITS,USE_CODE,USE_DESC,SITE_ADDR,ZONING,YEAR_BUILT,BLD_AREA,UNITS,TOTAL_VAL",
+      "features": 7330,
+      "file": "parcels.geojson",
+      "sha256": "3d7a245dfdf4ac14c29cb90bba41ecbc8d6677f59f1f4175d54dd5a63b8935da",
+      "acquired_utc": "2026-10-08T22:45:12+00:00",
+      "layer_name": "Massachusetts Property Tax Parcels",
+      "copyright": "Commonwealth of Massachusetts Bureau of Geographic Information (MassGIS)",
+      "source_spatial_reference": {
+        "wkid": 102100,
+        "latestWkid": 3857
+      },
+      "last_edit_utc": "2026-10-07T20:08:31.115000+00:00",
+      "description_head": "MassGIS' Level 3 Assessors\u2019 Parcel Mapping data set was developed through a competitive procurement funded by MassGIS. Each community in the Commonwealth was bid on by one or more vendors and the unit of work awarded was a city or town. The specification for this work was Level 3 of the MassGIS Digital Parcel Standard. Standardization of assessor parcel mapping is complete for 350 of Massachusetts"
+    },
+    "flood": {
+      "url": "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/FEMA/FEMA_National_Flood_Hazard_Layer/FeatureServer/0",
+      "where": "1=1",
+      "fields": "DFIRM_ID,VERSION_ID,FLD_AR_ID,FLD_ZONE,ZONE_SUBTY,SFHA_TF,SOURCE_CIT",
+      "features": 672,
+      "file": "flood.geojson",
+      "sha256": "d010b31d551591d066f82349e954aac3a18756bb0d257b3d2d77fda20caecc7a",
+      "acquired_utc": "2026-10-08T22:45:35+00:00",
+      "layer_name": "FEMA National Flood Hazard Layer",
+      "copyright": "Federal Emergency Management Agency",
+      "source_spatial_reference": {
+        "falseM": -100000,
+        "xyTolerance": 0.001,
+        "mUnits": 10000,
+        "zUnits": 10000,
+        "latestWkid": 26986,
+        "zTolerance": 0.001,
+        "wkid": 26986,
+        "xyUnits": 10000,
+        "mTolerance": 0.001,
+        "falseX": -36530900,
+        "falseY": -28803200,
+        "falseZ": -100000
+      },
+      "last_edit_utc": null,
+      "description_head": "The National Flood Hazard Layer (NFHL) data incorporates all Flood Insurance Rate Map (FIRM) databases published by the Federal Emergency Management Agency (FEMA), and any Letters Of Map Revision (LOMRs) that have been issued against those databases since their publication date. It is updated on a monthly basis. The FIRM Database is the digital, geospatial version of the flood hazard information s"
+    },
+    "wetlands": {
+      "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/DEP_Wetlands/FeatureServer/1",
+      "where": "1=1",
+      "fields": "WETCODE,IT_VALC,IT_VALDESC,POLY_CODE,SOURCE",
+      "features": 1098,
+      "file": "wetlands.geojson",
+      "sha256": "9ad6e6603132eee802aa2687ec98823e25b83458cd49880f822fcbd266caf217",
+      "acquired_utc": "2026-10-08T22:45:54+00:00",
+      "layer_name": "DEP Wetland Areas",
+      "copyright": "Massachusetts Deptartment of Environmental Protection (MassDEP) Wetlands Conservancy Program (WCP)",
+      "source_spatial_reference": {
+        "wkid": 26986,
+        "latestWkid": 26986
+      },
+      "last_edit_utc": "2026-04-08T17:38:19.311000+00:00",
+      "description_head": "The MassDEP Wetlands dataset comprises two ArcGIS geodatabase feature classes:The WETLANDSDEP_POLY layer contains polygon features delineating mapped wetland resource areas and attribute codes indicating wetland type.The WETLANDSDEP_ARC layer was generated from the polygon features and contains arc attribute coding based on the adjacent polygons as well as arcs defined as hydrologic connections.To"
+    },
+    "streams": {
+      "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/1_25_000_USGS_MassDEP_Hydrography/FeatureServer/0",
+      "where": "ARC_CODE IN (4,5,6,11)",
+      "fields": "ARC_CODE,MINOR_TOT,NAME,RESOLUTION,SOURCE",
+      "features": 281,
+      "file": "streams.geojson",
+      "sha256": "6345df94f8d8e6a828dec9f4f33606e787c2b10e82195edd081bf95ae3b17528",
+      "acquired_utc": "2026-10-08T22:46:03+00:00",
+      "layer_name": "1:25,000 USGS-MassDEP Linear Water Features",
+      "copyright": "MassDEP, USGS, MassGIS",
+      "source_spatial_reference": {
+        "wkid": 26986,
+        "latestWkid": 26986
+      },
+      "last_edit_utc": "2026-04-09T05:02:21.449000+00:00",
+      "description_head": "This MassDEP Hydrography layer is an enhanced version of the older U.S. Geological survey 1:25,000 Hydrography datalayer. It represents hydrographic (water-related) features, including surface water (lakes, ponds, and reservoirs), wetlands, bogs, flats, rivers, streams, and others."
+    },
+    "waterbodies": {
+      "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/1_25_000_USGS_MassDEP_Hydrography/FeatureServer/1",
+      "where": "1=1",
+      "fields": "NAME,POLY_CODE,MINOR_TOT,PWSID,SOURCE",
+      "features": 211,
+      "file": "waterbodies.geojson",
+      "sha256": "a5c851bb98821961f27429b63f88fcc8e2552a7e89f2a5887d5bbfb4d408e8dd",
+      "acquired_utc": "2026-10-08T22:46:11+00:00",
+      "layer_name": "1:25,000 USGS-MassDEP Water Bodies",
+      "copyright": "MassDEP, USGS, MassGIS",
+      "source_spatial_reference": {
+        "wkid": 26986,
+        "latestWkid": 26986
+      },
+      "last_edit_utc": "2026-04-09T05:02:21.484000+00:00",
+      "description_head": "This MassDEP Hydrography layer is an enhanced version of the older U.S. Geological survey 1:25,000 Hydrography datalayer. It represents hydrographic (water-related) features, including surface water (lakes, ponds, and reservoirs), wetlands, bogs, flats, rivers, streams, and others."
+    },
+    "openspace": {
+      "url": "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/FeatureServer/0",
+      "where": "1=1",
+      "fields": "POLY_ID,SITE_NAME,OWNER_TYPE,PRIM_PURP,PUB_ACCESS,LEV_PROT,ARTICLE97,OS_TYPE,LOC_ID,CAL_DATE_R",
+      "features": 611,
+      "file": "openspace.geojson",
+      "sha256": "9c7217c728d6bd3e9cc76925643177604a1ec374426724af0ecc6ed04646fcfe",
+      "acquired_utc": "2026-10-08T22:46:21+00:00",
+      "layer_name": "Protected and Recreational OpenSpace (Polygons)",
+      "copyright": "MassGIS, Executive Office of Energy and Environmental Affairs",
+      "source_spatial_reference": {
+        "falseM": -100000,
+        "xyTolerance": 0.001,
+        "mUnits": 10000,
+        "zUnits": 1,
+        "latestWkid": 26986,
+        "zTolerance": 2,
+        "wkid": 26986,
+        "xyUnits": 122610652.81195112,
+        "mTolerance": 0.001,
+        "falseX": -36530900,
+        "falseY": -28803200,
+        "falseZ": 0
+      },
+      "last_edit_utc": null,
+      "description_head": "The protected and recreational open space datalayer contains the boundaries of conservation lands and outdoor recreational facilities in Massachusetts. The associated database contains relevant information about each parcel, including ownership, level of protection, public accessibility, assessor\u2019s map and lot numbers, and related legal interests held on the land, including conservation restrictio"
+    },
+    "roads": {
+      "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/MassDOTRoads_gdb/FeatureServer/0",
+      "where": "1=1",
+      "fields": "STREETNAME,CLASS,RDTYPE,ADMIN_TYPE,F_CLASS,JURISDICTN,SURFACE_TP,FACILITY,RD_SEG_ID",
+      "features": 2008,
+      "file": "roads.geojson",
+      "sha256": "e1a272b70e7071c4b0ac80f798b655817e6e9af93b26f01d394e7b0edd2ddfe3",
+      "acquired_utc": "2026-10-08T22:46:41+00:00",
+      "layer_name": "MassDOT Roads",
+      "copyright": "Massachusetts Department of Transportation (MassDOT), MassGIS",
+      "source_spatial_reference": {
+        "wkid": 26986,
+        "latestWkid": 26986
+      },
+      "last_edit_utc": "2026-02-04T05:39:06.908000+00:00",
+      "description_head": "This layer represents all the public and many of the private roadways in Massachusetts, including designations for Interstate, U.S. and State routes.Formerly known as the Massachusetts Highway Department (MHD) Roads, then the Executive Office of Transportation - Office of Transportation Planning (EOT-OTP) Roads, the MassGIS-MassDOT Roads layer includes linework from the 1:5,000 road and rail cente"
+    },
+    "buildings": {
+      "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/Building_Structures/FeatureServer/0",
+      "where": "1=1",
+      "fields": "STRUCT_ID,SOURCE,SOURCEDATE,AREA_SQ_FT,ARCHIVED",
+      "features": 9306,
+      "file": "buildings.geojson",
+      "sha256": "7b7a331b3339ece5f9402f9dc4ad9eb07587312617f7964cd1f85f5aaaef5b5c",
+      "acquired_utc": "2026-10-08T22:48:05+00:00",
+      "layer_name": "Building Structures",
+      "copyright": "Rolta, MassGIS, City of Boston",
+      "source_spatial_reference": {
+        "wkid": 26986,
+        "latestWkid": 26986
+      },
+      "last_edit_utc": "2026-05-22T04:15:03.228000+00:00",
+      "description_head": "This dataset consists of 2-dimensional roof outlines (\"roofprints\") for all buildings larger than 150 square feet, as initially interpreted by a contractor (Rolta) for the whole area of the Commonwealth using DigitalGlobe ortho images obtained in 2011 and 2012, supplemented with LiDAR (Light Detection And Ranging) data collected from 2002 to 2011 for the eastern half of the state.The roofprints as"
+    },
+    "sewer": {
+      "url": "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/DEP_SEWER_SERVICE_AREAS/FeatureServer/2",
+      "where": "1=1",
+      "fields": "SYSTNAME,PERMIT_ID,TOWNNAME,SERVCECONF,SERVCEYEAR",
+      "features": 4,
+      "file": "sewer.geojson",
+      "sha256": "b84df6f11d095bd1d66c6f151b4a63e00f5b233e7a6c43a11a44ed09d4544042",
+      "acquired_utc": "2026-10-08T22:48:12+00:00",
+      "layer_name": "POTW Sewer Service Area",
+      "copyright": "MassDEP, Water Utility Resilience Program. 2025. Sewer Service Area for publicly owned treatment works and groundwater discharge permittees (PubV2025_10).",
+      "source_spatial_reference": {
+        "falseM": -100000,
+        "xyTolerance": 0.001,
+        "mUnits": 10000,
+        "zUnits": 10000,
+        "latestWkid": 26986,
+        "zTolerance": 0.001,
+        "wkid": 26986,
+        "xyUnits": 10000,
+        "mTolerance": 0.001,
+        "falseX": -36530900,
+        "falseY": -28803200,
+        "falseZ": -100000
+      },
+      "last_edit_utc": null,
+      "description_head": "<DIV STYLE=\"text-align:Left;\"><DIV><DIV><P><SPAN STYLE=\"font-weight:bold;\">Terms of Use:</SPAN></P><P><SPAN>Data Limitations Disclaimer </SPAN></P><P><SPAN>The MassDEP Estimated Sewer System Service Area Boundaries datalayer may not be complete, may contain errors, omissions, and other inaccuracies, and the data are subject to change. The user\u2019s use of and/or reliance on the information contained "
+    },
+    "prihab": {
+      "url": "https://s3.us-east-1.amazonaws.com/download.massgis.digital.mass.gov/shapefiles/state/prihab.zip",
+      "features": 16,
+      "file": "prihab.geojson",
+      "sha256": "6bab44deabc6ecd3e8f12174f9c1d1d8e636f6a190b5d853ab9d7df6e9cf294b",
+      "acquired_utc": "2026-10-08T22:48:20+00:00",
+      "source_crs": "EPSG:26986",
+      "statewide_features": 2158,
+      "metadata_files": [
+        "PRIHAB_POLY.shp.xml"
+      ]
+    },
+    "dem": {
+      "provider": "USGS 3D Elevation Program",
+      "project": "MA_Western_B24",
+      "tiles": [
+        "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/MA_Western_B24/TIFF/USGS_1M_18_x70y469_MA_Western_B24.tif",
+        "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/MA_Western_B24/TIFF/USGS_1M_18_x70y470_MA_Western_B24.tif",
+        "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/MA_Western_B24/TIFF/USGS_1M_18_x70y471_MA_Western_B24.tif"
+      ],
+      "publication_dates": [
+        "2026-03-20"
+      ],
+      "file": "dem_1m_utm18.tif",
+      "sha256": "f7aaac3b97e4fa03154cf6bc28181437b2aeadc4536a653ca3be6878e2de4065",
+      "acquired_utc": "2026-10-08T22:50:58+00:00",
+      "crs": "EPSG:26918",
+      "res": [
+        1.0,
+        1.0
+      ],
+      "shape": [
+        15390,
+        7701
+      ],
+      "nodata": -999999.0,
+      "elev_range_sample_m": [
+        37.25963592529297,
+        334.7471008300781
+      ]
+    }
+  },
+  "aoi": {
+    "town": "Amherst",
+    "town_id": 8,
+    "buffer_m": 250
+  }
+}
