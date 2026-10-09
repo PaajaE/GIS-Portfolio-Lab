@@ -1,6 +1,12 @@
 # FirePath — plan (decision-ready draft)
 
-> Status: **plan for approval, 2026-10-09.** Nothing has been harvested at scale, modelled or built.
+> **Revision 2 (2026-10-09), after `CRITICAL_REVIEW.md`.** Changed: §6 (now a summary; the binding
+> specification is in `METHOD.md`), §8–§10 (observation audit, secondary measures, artefact criteria),
+> §12 (fixtures, Rust scope), §14 (`make probe`), §16 (milestones M1a/M1b, gates, measured costs) and
+> §17 (decisions D1–D3). Everything else is v1 (commit `f85b51b`), kept for history; where v1 text
+> conflicts with `METHOD.md`, METHOD wins. M0 status: `M0_RESULTS.md`.
+>
+> Status of v1: **plan for approval, 2026-10-09.** Nothing has been harvested at scale, modelled or built.
 > Spec: §7 (FirePath), with §2, §3, §12, §13, §16. Method decisions are recorded in `METHOD.md`, sources in
 > `DATA_SOURCES.md`. Statements are marked **[verified]** (checked during planning, with the source),
 > **[sourced]** (taken from a primary/official source but not checked against the data) or
@@ -243,107 +249,30 @@ steps.
 
 ---
 
-## 6. Model formulation
+## 6. Model formulation (revision 2: summary; the specification is `METHOD.md`)
 
-An explicit **rate-of-spread → anisotropic arrival-time** model. It is not a burn/no-burn cellular
-automaton: every burnable cell gets a continuous arrival time.
+v1 of this section had four defects found in review (CRITICAL_REVIEW P0-1 to P0-6). The binding
+equations, algorithm semantics and the published-vs-FirePath split are now in `METHOD.md` ("Spread-rate
+model", "Propagation", "Edge geometry and barriers", "Initial perimeter"). In short:
 
-### 6.1 Head rate of spread
-
-For cell *i* at time *t*:
-
-```
-R_head(i,t) = k · g(f_i) · R0(f_i, M) · (1 + φ_E(i,t))
-φ_E          = | a_w · φ_w(U_mid(i,t), f_i) · ê_wind(i,t)  +  a_s · φ_s(tanθ_i, f_i) · ê_upslope(i) |
-```
-
-- `R0(f, M)` is Rothermel's (1972) no-wind, no-slope surface ROS for fuel model *f* at moisture scenario
-  *M*, following the equations as compiled in Andrews (2018, RMRS-GTR-371) and the Scott & Burgan parameters.
-  It is computed once per fuel code in Python (table), which is a stated physics prior, not a calibrated
-  value.
-- `φ_w = C · U_mid^B · (β/β_op)^(−E)` (Rothermel wind factor; C, B, E, β, β_op per fuel model, from the same
-  table). `U_mid` = HRRR 10 m speed → 20 ft → × WAF.
-- `φ_s = 5.275 · β^(−0.3) · tan²θ` (Rothermel slope factor).
-- **Vector combination** of wind and slope (Rothermel 1972 / Finney 1998 practice): the two factors add as
-  vectors in the wind and upslope directions. The resultant gives the **direction of maximum spread** and
-  `φ_E`, and inverting `φ_w` gives the effective wind speed `U_E`.
-- Stated modifiers (the free parameters, §6.7): global spread coefficient `k`; fuel multiplier `g` by
-  fuel group; wind sensitivity `a_w`; slope sensitivity `a_s`; moisture multiplier `m` (scales dead
-  moistures inside `R0` and `φ`).
-- Two guards: `U_E` is capped at the Rothermel/Andrews wind limit, and `R_head` = 0 if dead moisture ≥
-  extinction moisture.
-
-### 6.2 Direction dependence (ellipse)
-
-Length-to-breadth ratio from effective midflame wind (Anderson 1983, as used in FARSITE):
-`LB = 0.936·e^(0.2566·U_E) + 0.461·e^(−0.1548·U_E) − 0.397` (U_E in mi/h), capped at 8.
-Eccentricity `e = √(LB² − 1)/LB`. Spread rate in a direction at angle ψ from the maximum-spread
-direction, for a fire growing from the rear focus (Richards 1990; Finney 2002 MTT):
-
-```
-R(ψ) = R_head · (1 − e) / (1 − e·cos ψ)
-```
-
-Backing ROS is `R_head·(1−e)/(1+e)`. Flanks follow from the same expression.
-
-### 6.3 Per-neighbour travel time
-
-For each stencil offset (Δr, Δc), a precomputed list gives the cells the straight segment between cell
-centres crosses and the length in each (an exact grid traversal). Travel time = Σ ℓ_j / R_j(ψ), where ψ is
-the segment's direction relative to each crossed cell's maximum-spread direction. **An edge is invalid if
-any crossed cell is a barrier.** This prevents knight-move "jumps" over a one-cell barrier or past a
-diagonal corner (tested, §12).
-
-### 6.4 Propagation algorithm and its geometric bias
-
-**Label-setting (Dijkstra) shortest arrival time on a 16-neighbour stencil** (8 + 8 knight moves), with a
-32-neighbour option (adding (±3,±1), (±3,±2) and transposes). This is the minimum-travel-time idea of Finney
-(2002) on a fixed lattice. Fronts restricted to stencil directions **over-estimate** arrival (under-predict
-spread) away from those directions. For isotropic spread the worst-case relative error is
-1/cos(Δ/2) − 1, where Δ is the largest angular gap: 8-neighbour 8.2 %, **16-neighbour 2.7 %**,
-32-neighbour 1.3 %. The error grows for elongated ellipses. Mitigation: (1) analytic fixtures measure the
-error as a function of LB and wind angle (§12); (2) the default stencil is the smallest that keeps the error
-< 3 % at LB ≤ 4 on the fixture; (3) the 16 vs 32 stencil comparison runs on every real fire as an
-**artefact check** (§10). Fast marching / ordered-upwind methods would be more accurate but much more
-complex. They are not planned unless the artefact check shows the stencil error is comparable to the
-physical sensitivities.
-
-### 6.5 Time-varying wind
-
-Wind and therefore `R_head`, LB and direction are piecewise-constant per hour (HRRR). Traversal of an
-edge starting at time `t_u` integrates progress along the segment through the hour boundaries it crosses
-(distance covered = ∫ R(τ) dτ). Because the progress is monotone, the travel-time function is **FIFO**
-(a later start never arrives earlier), so time-dependent Dijkstra stays exact on the graph (Kaufman &
-Smith 1993). A strip fixture with a wind switch has an analytic answer (§12).
-
-### 6.6 Ignition and stopping
-
-- **Mode A (primary, for evaluation): initialise from the first usable observed perimeter** at its scan
-  time `t0`. Interior cells = burned at t0, boundary cells are sources. This removes ignition location/time
-  error from the spread-rate evaluation.
-- **Mode B (secondary): point ignition** at the reported POO and discovery time (InciWeb/IRWIN), to show how
-  much error comes from ignition.
-- **One-step-ahead variant of Mode A:** re-initialise from the observed perimeter at each `t_{k−1}` and
-  predict to `t_k`. This isolates day-to-day spread-rate skill from accumulated error.
-- **Stopping rule:** propagate until the heap minimum exceeds `T_end` = end of the evaluation window
-  (+ 48 h margin for censored error metrics). Cells not reached are "not burned by T_end". There is no
-  other extinction rule (no burnout, no suppression).
-- **Evaluation window (pre-registered):** from the first usable perimeter to the earlier of (a) the first
-  perimeter time at which observed area ≥ 90 % of the final area and (b) 7 days. Masked days (§2.3) are
-  excluded from metrics, not from the run.
-
-### 6.7 Free parameters and physical ranges
-
-| Parameter | Meaning | Range (prior bounds) | Calibrated? |
-|---|---|---|---|
-| `k` | global spread coefficient (the "ROS adjustment factor" of FARSITE practice) | 0.2 – 5 (log-uniform) | yes |
-| `a_w` | wind sensitivity (multiplies φ_w; absorbs WAF and HRRR speed bias) | 0.3 – 3 (log) | yes |
-| `a_s` | slope sensitivity (multiplies φ_s) | 0.3 – 3 (log) | yes |
-| `g_timber / g_grass` | fuel multiplier: relative adjustment of timber/timber-understory (TL/TU) vs grass/grass-shrub/shrub (GR/GS/SH) models; `g_grass` = 1 | 0.3 – 3 (log) | yes |
-| `m` | moisture multiplier on dead fuel moistures | 0.7 – 1.3 | **no, a scenario variable**: it is confounded with `k` (both scale `R0`), so it is varied in §10 and fixed at 1 in calibration |
-| stencil, cell size, LB cap | numerical choices | 16/32; 30/60/90 m; 8 | no (artefact checks) |
-
----
+- **ROS:** Rothermel/Albini surface spread per Scott & Burgan model (E1–E3), with the published wind–slope
+  vector combination and effective-wind inversion (E4–E5) and the Andrews et al. (2013) ROS cap (E6).
+  FirePath multipliers sit **outside** the published wind function: `k`, `g`, `a_s`, and (D3) a
+  wind-speed multiplier `a_U` before WAF. v1's `a_w` inside φ_w distorted the ellipse through the
+  inversion.
+- **Shape:** elliptical, ray speed from the rear focus (E8). v1's length-to-breadth formula used m/s
+  coefficients with mi/h input (LB 8 instead of 2.8 at 10 mi/h). The corrected form and the choice of
+  relation are **D2**.
+- **Geometry:** the slope plane per cell, converted to horizontal speeds.
+- **Propagation:** the exact edge-arrival function (pieces × hourly intervals, FIFO proven and tested),
+  label-setting, vertex barrier rule, and Mode A initial-perimeter semantics. **The 16-neighbour stencil
+  of v1 is rejected:** its arrival error is 20–120 % for LB 2–5 (measured = predicted). The scheme
+  (radius-8 label-setting vs Eulerian level set) is **D1**, settled by the M1a bake-off under criteria
+  fixed in CRITICAL_REVIEW P0-1.
+- **Time:** HRRR analyses apply on centred hourly intervals. Moisture is static per fire (METHOD M1–M5).
+- **Ignition and stopping:** unchanged from v1 (Mode A primary, Mode B secondary, one-step-ahead
+  variant, stop at T_end + 48 h; evaluation window from the first usable perimeter to min(90 % of
+  final area, 7 days)).
 
 ## 7. Baselines (calibrated on the same fires, same objective, same initialisation)
 
@@ -414,6 +343,11 @@ Smith 1993). A strip fixture with a wind switch has an analytic answer (§12).
   - Network coupling (§11) and scenario results are presented as **reconstructions** only for fires that
     meet G1 and G2. Other fires are shown with their errors and the failure is explained (e.g. spotting
     run, wind error).
+- **Observation audit and secondary measures (revision 2):** every perimeter sequence is audited before
+  scoring (METHOD O1: new/removed cells, jitter vs retraction, inconsistent cells excluded and counted,
+  steps with > 2 % retraction flagged). Secondary measures separate early from late (METHOD O3: interval
+  widths, early/inside/late shares, boundary timing error, area ratio, ≤ 30 h interval split). The G1/G2
+  thresholds above are unchanged and must not change after validation results are seen.
 - **Hand checks:** a frozen sample (`validation/hand_check_sample.json`): for each validation fire, the
   best, median and worst step by primary error, plus every masked day. Figures show observed perimeter,
   model and B1, with legends. `validation/HAND_CHECKS.md` has an "AI notes" column labelled
@@ -432,10 +366,11 @@ Smith 1993). A strip fixture with a wind switch has an analytic answer (§12).
   uniform within the ranges above, plus parameter vectors drawn from the behavioural set. Seeds come from
   `numpy.random.SeedSequence(20261009).spawn(n)`, one per fire and design. Scenario parameters are generated
   in Python and passed to Rust as arrays, so the Rust kernel has **no RNG**.
-- **Artefact checks, reported separately, never as physical drivers:** stencil 16 vs 32; cell size 30 /
-  60 / 90 m; ignition jitter (Mode B ± 1 and ± 3 cells); grid orientation (analytic fixture: arrival-time
-  error vs wind angle 0–90° in 7.5° steps; on real fires, a 16/32 stencil comparison). A physical
-  sensitivity smaller than the artefact spread is not claimed.
+- **Artefact checks, reported separately, never as physical drivers (revision 2):** the scheme chosen
+  in D1 must first pass the bake-off criteria (CRITICAL_REVIEW P0-1). On real fires: cell size 30 / 60 /
+  90 m; ignition jitter (Mode B ± 1 and ± 3 cells); grid rotation (a fire rerun on a grid rotated by
+  22.5°, fuels by nearest) and, for label-setting, radius 8 vs 12. v1's "16 vs 32" check is dropped, because
+  both are biased. A physical sensitivity smaller than the artefact spread is not claimed.
 - **Probability-of-burning-by-time:** **not claimed by default.** The input ranges are expert ranges, not
   calibrated probability distributions, and 2 validation fires cannot establish reliability. The ensemble
   is shown as **scenario agreement** (share of scenarios with the cell burned by t, and the 10–90 %
@@ -472,6 +407,11 @@ arrival time  →  modelled closure time per road segment  →  hourly network r
 
 ## 12. Rust (the core of this project)
 
+**Revision 2:** if D1 selects the level set, Rust owns the narrow-band time stepping instead of the heap.
+Cell state, neighbour evaluation, the ROS lookup and parallel scenarios stay in Rust. The Python reference
+measures ≈ 75 µs/cell (radius 2) and ≈ 1.6 ms/cell (radius 8) on the cloud container, which makes a radius-8
+calibration in Python infeasible (≈ 1 h per 2.5 M-cell run).
+
 **Why Rust here (recorded in METHOD.md):** calibration (≈ 3,000 parameter vectors × 3 fires × 2 seeds),
 leave-one-out refits, Morris + LHS ensembles (≈ 400 runs × 5 fires) and the artefact grid add up to
 **~25,000 propagations of 0.5–4 M cells with time-dependent edge costs**. A pure-Python label-setting
@@ -502,7 +442,20 @@ are measured in the benchmark, not assumed.
 - **Edge / nodata / non-burnable:** as in §5. Edges never leave the grid. An empty source set gives all
   cells "not reached". A source cell on a barrier is an error.
 
-**Fixtures with analytic answers (Rust tests and pytest against the reference):**
+**Fixtures with analytic answers (revision 2).** The items marked ✔ are implemented in `tests/` against
+the Python reference and pass (57 tests). The Rust kernel must pass the same files.
+- ✔ isotropic point source = stencil gauge exactly; ✔ uniform-wind ellipse vs an independent SciPy graph
+  oracle (rel. 1e-9) and the continuum ellipse (graph ≥ continuum, excess = predicted stencil error);
+  ✔ wind-direction change vs the Minkowski-sum reference; ✔ two-fuel strip with the interval change
+  inside an edge (hand-computed); ✔ anti-diagonal wall; ✔ wall with a gap vs the visibility-graph
+  geodesic; ✔ initial perimeter: large polygon vs Shapely distance, 1-cell and sub-cell protrusions, lake
+  at the boundary, wall next to the perimeter, boundary-only seeding equivalence; ✔ empty sources,
+  ignition on a barrier, t_stop; ✔ symmetry/determinism; ✔ FIFO and independent time-marching for
+  A_e; ✔ observation audit; ✔ moisture mapping; ✔ LB units.
+- To add in M1a: the inclined-plane (slope-plane geometry) fixture; Rothermel table tests (E1–E11); the
+  bake-off fixtures for the level-set candidate.
+
+v1 list (kept for history):
 1. Uniform fuel, no wind, no slope, point source: arrival equals the **stencil gauge distance** exactly
    (the convex-hull norm of the stencil vectors), and Euclidean within the 2.7 % / 1.3 % bounds.
 2. Uniform wind: the burned area at T is the analytic ellipse with the ignition at the rear focus. Test
@@ -603,7 +556,7 @@ shared-structure changes, and I will not make them without your approval (Q4).**
 
 | Target | Module | Output |
 |---|---|---|
-| `make probe` | `firepath.probe` | reachability + auth table per source (`provenance/probe.json`) |
+| `make probe` | `firepath.probe` (implemented, stdlib only) | reachability + auth + NIROPS/NIFC inventory + disk (`provenance/probe_<label>.json`) |
 | `make harvest` | `harvest` | `data/raw/<fire>/…`, `provenance/harvest_manifest.json` (URL, query, version code, sha256, acquired UTC, service edit date, LANDFIRE version, HRRR keys) |
 | `make prepare` | `prepare` | per-fire grid: `data/interim/<fire>/{fuel,cc,ch,dem,slope,aspect,barrier}.tif`, `wind_<hour>.npz` (300 m, UTM-relative U/V), `observed.parquet`, `obs_interval.tif` |
 | `make fueltable` | `fuels` | `data/interim/fuel_table.parquet` (R0, C, B, E, β/β_op, WAF inputs per SB40 code × moisture scenario) |
@@ -656,20 +609,26 @@ shared-structure changes, and I will not make them without your approval (Q4).**
 
 ---
 
-## 16. Milestones (vertical slices; each ends with exit criteria and one local commit)
+## 16. Milestones (revision 2; vertical slices; each ends with exit criteria and one local commit)
 
-| # | Milestone | Exit criteria | Commit |
+Dependency order: **M0 (Mac probe) ∥ M1a → M1b → M2 → [gate: fixtures + screening] → M3 → M4 →
+[gate: G1/G2] → M5 → M6 → M7 → M8 → M9.** Calibration (M3) does not start until M1a's fixtures pass,
+M1b ran end-to-end, and the screening (`fire_screening.json`) is frozen. Network (M6) and the web app (M8)
+do not start until validation (M4) has written its G1/G2 verdicts.
+
+| # | Milestone | Exit criteria (measurable) | Commit |
 |---|---|---|---|
-| **M0** | Probe, inventory and screening (the Mac) | `make probe` table for every source (reachable / needs key or account / blocked) committed; NIROPS perimeter inventory with scan times for the pool; `fire_screening.json` frozen with the final fire set and masked days; `df -h` ≥ 30 GB free recorded; open questions answered | `chore(firepath): probe, screening, frozen fire set` |
-| **M1** | **Slice 1: one calibration fire end-to-end with the Python reference** (Mangum 2020: mid-size, timber + slope; not a validation fire) | harvest → prepare → fuel table → reference propagation (Mode A and one-step) → B0/B1 → all metrics and an error map for hand-picked (not calibrated) parameters; fixtures 1–7 pass against the reference; stage-boundary tests on real outputs; leakage test passes | `feat(firepath): slice 1 — reference model on Mangum` |
-| **M2** | Rust kernel at parity (no optimisation) | the PyO3 crate builds in `uv sync`; all fixtures + 50 random grids agree with the reference within tolerance; bit-identical across thread counts; first benchmark rows at 2 sizes | `feat(firepath): Rust propagation kernel at parity` |
-| **M3** | All calibration fires + calibration | harvest/prepare for Bush and Telegraph; DE (3 seeds) for model, B0 and B1; behavioural sets, profiles, leave-one-fire-out; **lock commit** of `locked_params.json` | `feat(firepath): calibration` + `chore(firepath): lock parameters` |
-| **M4** | Validation (once) | Tunnel and Pipeline harvested, prepared and evaluated once against the lock; per-fire, per-step table with B0/B1; error maps; audit; G1/G2 verdicts written down; hand-check sample frozen, review sheet with an empty human column | `feat(firepath): validation on held-out fires` |
-| **M5** | Sensitivity, ensembles, artefacts | Morris ranking; LHS N=256 per fire; agreement rasters; stencil/cell-size/ignition/orientation tables; physical vs artefact statements | `feat(firepath): sensitivity and scenario ensembles` |
-| **M6** | Network coupling | only for fires with G1+G2; closures, hourly population/travel time with ranges; comparison with documented closures | `feat(firepath): road-closure and network exposure` |
-| **M7** | Benchmark | full §12 table on the Mac (release build), honest reading | `perf(firepath): propagation benchmark` |
-| **M8** | Web app | web-ux pass; `summary.json`-driven text; payload measured; browser check at 320/400/1280 px; keyboard pass; D19+ recorded in `DESIGN_DECISIONS.md` | `feat(firepath): web app` |
-| **M9** | Docs, publication prep | README, METHOD, DATA_SOURCES complete; Pages change prepared **only with your approval**; ready for `/quality-gate projects/firepath` | `docs(firepath): case study` |
+| **M0** | Probe, inventory, screening | ✔ probe implemented + crawler tested; ✔ cloud run. Open: `provenance/probe_build-mac.json` committed; every source classified reachable / needs key / blocked; NIROPS inventory with scan times for all pool fires; Pipeline/Haywire rule applied; LANDFIRE version availability per fire; ≥ 30 GB free; `validation/fire_screening.json` frozen with masked days | `chore(firepath): M0 probe on build Mac` |
+| **M1a** | **Mathematical specification + analytic fixtures (no data)** | D1–D3 decided. Bake-off run, criteria 1–5 reported for both candidates, winner recorded. Inclined-plane fixture passes. Rothermel/SB40 table (E1–E11) implemented in Python: R0, φ_w, φ_s for all 40 models × D1–D4 × L1–L4 match pyretechnics within rel. 1e-6 (or every difference explained) and published GTR-153 chart values within chart precision. Primary-source checks done or explicitly left [hypothesis] for E6, E7, E11, E12. All tests pass | `feat(firepath): M1a spec and fixtures` |
+| **M1b** | **Slice 1: Mangum 2020 end-to-end with the Python reference** (calibration fire, never a validation fire) | provenance manifest with sha256 for every input; LANDFIRE rule version with the leakage test (no 2020 disturbance in the AOI); HRRR rotated and assigned to intervals (test vector); gridMET → moisture M1–M5; perimeter audit O1 report; Mode A run from the first usable perimeter + one-step-ahead; B0/B1 with hand-set (not calibrated) parameters; all O2/O3 metrics per step; error maps with legends; stage-boundary tests on the real outputs (CRS, grid identity, codes, nodata, time order). **Grid:** 90 m for the full fire and 30 m on one sub-window, because the reference costs ≈ 1.6 ms/cell at radius 8 (≈ 6 min at 90 m) | `feat(firepath): M1b reference slice on Mangum` |
+| M2 | Rust kernel at parity | the M1a scheme in Rust; all fixture files + 50 random grids within tolerance; bit-identical across thread counts; first benchmark rows | `feat(firepath): Rust kernel at parity` |
+| M3 | Calibration fires + calibration | gate passed; Bush, Telegraph prepared; DE (3 seeds) for the model, B0, B1; profiles; leave-one-fire-out; lock commit | `feat(firepath): calibration` + lock |
+| M4 | Validation (once) | as v1; G1/G2 verdicts written before any network or web work | `feat(firepath): validation` |
+| M5 | Sensitivity, ensembles, artefacts | as v1 §10 (revision 2 artefact list) | `feat(firepath): sensitivity` |
+| M6 | Network coupling | only fires meeting G1+G2 | `feat(firepath): network exposure` |
+| M7 | Benchmark | §12 table on the Mac | `perf(firepath): benchmark` |
+| M8 | Web app | after M4; as v1 | `feat(firepath): web app` |
+| M9 | Docs, publication prep | as v1; Pages only with approval | `docs(firepath): case study` |
 
 **Budget (build Mac: M4, 10 cores, 16 GB):**
 - **Disk:** raw ≤ 6 GB kept (LANDFIRE ≈ 0.5 GB; 3DEP windowed reads ≈ 0.3 GB; HRRR byte-range messages
@@ -704,6 +663,17 @@ shared-structure changes, and I will not make them without your approval (Q4).**
 ---
 
 ## 17. Open questions for you
+
+**Revision 2: decisions that need your approval now** (detail and evidence in `CRITICAL_REVIEW.md`):
+- **D1, propagation scheme:** approve the M1a bake-off (radius-8 label-setting vs Eulerian level set) under
+  the pre-declared criteria, and accept the winner even if it is the level set.
+- **D2, length-to-breadth relation:** Anderson-type (mi/h coefficients 0.1147/0.0692, cap 8) as the
+  default, 1 + 0.25 U as a sensitivity, both verified at the primary source in M1a.
+- **D3, wind sensitivity:** a wind-speed multiplier `a_U` before WAF, instead of v1's `a_w` on φ_w.
+- **D5, M0 on the Mac:** run `make probe` there and commit `provenance/probe_build-mac.json`.
+- Q1–Q7 below remain open as in v1 (Q5 is now D5).
+
+v1 questions:
 
 1. **Q1, fire set.** Approve the **Arizona R3 temporal-holdout set** (calibrate Bush 2020, Mangum 2020,
    Telegraph 2021; validate Tunnel 2022, Pipeline 2022, with the listed alternatives)? The alternative is a

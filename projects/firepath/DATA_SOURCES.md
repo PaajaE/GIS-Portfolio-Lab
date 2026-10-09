@@ -9,6 +9,13 @@ reachable; landfire.gov, lfps.usgs.gov, edcintl.cr.usgs.gov, services3.arcgis.co
 firms.modaps.eosdis.nasa.gov, northwestknowledge.net, census.gov and tnmaccess.nationalmap.gov were refused
 by that session's egress proxy (HTTP 403). This says nothing about the Mac.
 
+**Revision 2 (2026-10-09):** the M0 probe (`src/firepath/probe.py`) has run in the cloud session only
+(`provenance/probe_cloud-session.json`; 3 of 32 endpoints answered, 28 refused by the session proxy, 1
+timeout). The build-Mac run is pending (`M0_RESULTS.md`). The review also read, but did not use as data,
+the open-source implementation *pyretechnics* 2026.8.10 (PyPI sdist, EPL-2.0, sha256
+`37aa56941e5d4d6bb2f4119ecbee92e1b32508354cc6c1535898f3b2c665ba66`) to cross-check equations; it is not a
+dependency.
+
 **Target CRS:** NAD83 / UTM 12N (EPSG:26912), metres, 30 m grid per fire (PLAN §5).
 
 ## NOAA HRRR analyses (f00)
