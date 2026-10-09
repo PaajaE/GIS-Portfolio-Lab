@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "parcel-web",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "http-server@14.1.1", "projects/parcel-intelligence/web", "-p", "8137", "-c-1", "--silent"],
+      "port": 8137
+    }
+  ]
+}

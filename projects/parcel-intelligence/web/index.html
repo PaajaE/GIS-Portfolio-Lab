@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parcel Intelligence — Amherst, MA</title>
+<meta name="description" content="How much of each Amherst parcel remains potentially feasible to build on under stated screening assumptions, what constrains it, and how robust that conclusion is.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@6.11.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/pmtiles@4.5.0/dist/pmtiles.js" defer></script>
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#q">Skip to parcel search and report</a>
+
+<header class="intro">
+  <p class="eyebrow">Parcel Intelligence · Amherst, Massachusetts</p>
+  <h1>Where is there still room to build — and how much of that depends on the assumptions?</h1>
+  <p class="lede">
+    A spatial screen of <strong data-v="results.parcels">…</strong> parcels against flood zones, wetlands and streams,
+    protected land, steep slopes, setbacks and existing development. Each parcel gets the
+    <em>largest contiguous potentially feasible area</em> under three stated assumption sets.
+    This is potential feasibility under stated screening assumptions — not a legal development entitlement.
+  </p>
+
+  <figure class="robust-bar" aria-labelledby="robust-caption">
+    <div class="bar" id="robust-bar" role="img" aria-describedby="robust-caption"></div>
+    <figcaption id="robust-caption">
+      Parcels by how many scenarios leave a contiguous patch of at least
+      <span data-v="patch_definition.min_patch_m2" data-fmt="int">…</span>&nbsp;m² (a
+      <span data-v="patch_definition.open_size_m">…</span>&nbsp;m × <span data-v="patch_definition.open_size_m">…</span>&nbsp;m square must fit).
+      Darker = holds under stricter assumptions. This bar is also the map legend.
+    </figcaption>
+  </figure>
+</header>
+
+<main>
+  <section class="workbench" aria-label="Interactive map and parcel report">
+    <div class="map-wrap">
+      <div id="map" role="region" aria-label="Map of Amherst parcels. Select a parcel by clicking it, or use the search in the parcel panel."></div>
+      <p class="map-note">Map: precomputed results; parcel lines are assessor maps, not surveys.</p>
+    </div>
+
+    <aside class="panel" id="inspector" aria-label="Map controls and parcel report">
+      <div class="search" role="search">
+        <label for="q">Find a parcel by address or parcel ID</label>
+        <div class="combo">
+          <input id="q" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false"
+                 aria-controls="q-list" autocomplete="off" placeholder="e.g. 60 Hobart Ln" spellcheck="false">
+          <ul id="q-list" role="listbox" aria-label="Matching parcels" hidden></ul>
+        </div>
+      </div>
+
+      <fieldset class="seg" id="mode">
+        <legend>Map shows</legend>
+        <label><input type="radio" name="mode" value="robustness" checked><span>Robustness</span></label>
+        <label><input type="radio" name="mode" value="conservative"><span>Conservative</span></label>
+        <label><input type="radio" name="mode" value="moderate"><span>Moderate</span></label>
+        <label><input type="radio" name="mode" value="aggressive"><span>Aggressive</span></label>
+      </fieldset>
+      <p class="mode-help" id="mode-help" aria-live="polite"></p>
+
+      <details class="layers" open>
+        <summary>Constraint layers</summary>
+        <ul>
+          <li><label><input type="checkbox" data-layer="flood"><span class="sw sw-flood"></span>FEMA flood zones (1% / 0.2% annual chance)</label></li>
+          <li><label><input type="checkbox" data-layer="wetlands"><span class="sw sw-wet"></span>Wetlands and water (MassDEP)</label></li>
+          <li><label><input type="checkbox" data-layer="protected"><span class="sw sw-prot"></span>Protected open space</label></li>
+          <li><label><input type="checkbox" data-layer="habitat"><span class="sw sw-hab"></span>Priority habitat (NHESP)</label></li>
+          <li><label><input type="checkbox" data-layer="slope"><span class="sw sw-slope"></span>Slope ≥ 15 / 25 / 35 %</label></li>
+          <li><label><input type="checkbox" data-layer="buildings" checked><span class="sw sw-bld"></span>Buildings</label></li>
+        </ul>
+      </details>
+
+      <div id="report" class="report" aria-live="polite">
+        <h2>Parcel report</h2>
+        <p class="muted">Select a parcel on the map or search for one. The report compares the three scenarios, shows what constrains the parcel and which single constraint matters most.</p>
+      </div>
+    </aside>
+  </section>
+
+  <article class="case" id="case">
+    <section id="problem">
+      <h2>Problem</h2>
+      <p>Early site screening usually reduces a parcel to one number: its area minus mapped constraints, or a parcel-average slope.
+        Both hide the internal structure that decides whether anything can be built — a parcel can have plenty of unconstrained
+        area that is split into slivers by a wetland buffer, a steep bank and the setback from its own lot lines.
+        The question here is: <strong>given a parcel and stated planning assumptions, how much of it remains potentially feasible,
+        which constraints dominate, and how robust is that conclusion?</strong></p>
+    </section>
+
+    <section id="why">
+      <h2>Why it matters</h2>
+      <p>Housing committees, land trusts and site-selection analysts need to decide which parcels deserve a closer look —
+        survey, soils tests, legal review. A screen that overstates usable land wastes that effort; one that hides how much the
+        answer depends on a threshold invites false confidence. This screen reports the contiguous patch, not the sum of
+        fragments, and shows the result under three assumption sets rather than one.</p>
+    </section>
+
+    <section id="area">
+      <h2>Study area and analytical unit</h2>
+      <p>Town of Amherst, Massachusetts: <span data-v="results.parcels">…</span> assessor parcels (FY2026, condominium stacks merged),
+        hilly in the south (Holyoke Range) and east, with broad floodplains and wetlands along the Fort River and Mill River.
+        The <strong>parcel is the reporting unit</strong>, but feasibility is computed on a <span data-v="patch_definition.cell_m">…</span>&nbsp;m grid
+        in NAD83 / Massachusetts Mainland (EPSG:26986) so that the shape of the feasible area inside each parcel is kept.</p>
+    </section>
+
+    <section id="data">
+      <h2>Data</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Dataset</th><th scope="col">Provider · vintage</th><th scope="col">Used for</th></tr></thead>
+        <tbody>
+          <tr><td>Level 3 assessor parcels</td><td>MassGIS, FY2026 assessor data</td><td>reporting unit, land use, zoning code</td></tr>
+          <tr><td>1 m lidar DEM (MA_Western_B24)</td><td>USGS 3DEP, published 2026-03</td><td>slope (averaged to 2 m)</td></tr>
+          <tr><td>National Flood Hazard Layer</td><td>FEMA via MassGIS, FEMA data as of 2023-07-02</td><td>floodway, 1% and 0.2% annual-chance zones</td></tr>
+          <tr><td>Wetlands; 1:25k hydrography</td><td>MassDEP / MassGIS</td><td>wetland, water and stream setbacks</td></tr>
+          <tr><td>Protected and Recreational Open Space</td><td>MassGIS / EEA</td><td>protected land by level of protection</td></tr>
+          <tr><td>Priority Habitats of Rare Species</td><td>NHESP, 15th ed. (2021)</td><td>conservative scenario only</td></tr>
+          <tr><td>MassDOT road inventory; building structures</td><td>MassDOT / MassGIS</td><td>existing development, frontage, road distance</td></tr>
+          <tr><td>Sewer service areas</td><td>MassDEP, 2025</td><td>servicing context (not a constraint)</td></tr>
+        </tbody>
+      </table></div>
+      <p class="muted">MassGIS data are public domain (credit: MassGIS (Bureau of Geographic Information), Commonwealth of Massachusetts EOTSS); USGS and FEMA data are U.S. public domain. Full provenance, checksums and acquisition dates are in <code>DATA_SOURCES.md</code>.</p>
+    </section>
+
+    <section id="method">
+      <h2>Method</h2>
+      <ol class="steps">
+        <li><strong>Hard constraints</strong> are rasterized per scenario at cell centres: flood zone, wetland/water/stream buffer, protected land, priority habitat (conservative), slope at or above the threshold, a uniform setback from parcel lines, and existing buildings and road surface.</li>
+        <li><strong>Morphological opening</strong> removes slivers: a cell stays only if a <span data-v="patch_definition.open_size_m">…</span>&nbsp;m square of feasible cells of the same parcel contains it.</li>
+        <li><strong>Connected components</strong> (4-connected, never across parcel lines) give the largest contiguous patch and the number of patches of at least <span data-v="patch_definition.min_patch_m2" data-fmt="int">…</span>&nbsp;m².</li>
+        <li><strong>Baselines</strong>: a naive parcel-level screen (parcel-mean slope and a single point test) and the net unconstrained area (parcel minus constraints, no contiguity).</li>
+        <li><strong>Leave-one-out</strong>: each site constraint is dropped in turn to find the one whose removal enlarges the largest patch most (the binding constraint).</li>
+      </ol>
+      <div class="table-wrap"><table id="scenario-table">
+        <caption>Scenario assumptions (hard exclusions; soft factors such as sewer service are reported, not mixed in)</caption>
+        <thead><tr><th scope="col">Assumption</th><th scope="col">Conservative</th><th scope="col">Moderate</th><th scope="col">Aggressive</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+    </section>
+
+    <section id="rust">
+      <h2>Rust / algorithm</h2>
+      <p>The opening and component labelling must respect parcel boundaries: a feasible cell in one parcel must never help its neighbour pass the opening or join its patch. The reference implementation loops over parcels with <code>scipy.ndimage</code>; the Rust kernel does the same in one raster pass (separable run-length erosion and dilation conditioned on parcel id, then union-find). Both produce <strong>identical integers</strong> on the full town and on 72 randomized fixtures.</p>
+      <div class="table-wrap"><table id="bench-table">
+        <caption></caption>
+        <thead><tr><th scope="col" class="n">Cells</th><th scope="col" class="n">Parcels</th><th scope="col" class="n">SciPy reference (s)</th><th scope="col" class="n">Rust (s)</th><th scope="col" class="n">Speed-up</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+      <p id="bench-note" class="muted"></p>
+    </section>
+
+    <section id="validation">
+      <h2>Validation</h2>
+      <p>There is no ground truth for “developable”, so validation checks structural correctness and compares with independent information that measures something related, not the same thing.</p>
+      <ul class="checks" id="validation-list"></ul>
+    </section>
+
+    <section id="results">
+      <h2>Results and sensitivity</h2>
+      <div class="table-wrap"><table id="results-table">
+        <caption>Town totals over eligible parcels (hectares). Naive and net baselines vs the largest contiguous patch.</caption>
+        <thead><tr><th scope="col">Scenario</th><th scope="col" class="n">Parcels with usable patch</th><th scope="col" class="n">Naive screen</th><th scope="col" class="n">Net unconstrained</th><th scope="col" class="n">Largest contiguous patch</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+      <h3>Which assumption moves the result most?</h3>
+      <p class="muted">One assumption at a time is set to its conservative or aggressive value, everything else at moderate. Bars show the change in parcels with a usable patch.</p>
+      <div id="tornado" class="tornado" role="img" aria-describedby="tornado-text"></div>
+      <p id="tornado-text" class="sr-only"></p>
+    </section>
+
+    <section id="limitations">
+      <h2>Limitations — what this screen cannot tell you</h2>
+      <ul>
+        <li><strong>Not entitlement.</strong> Zoning dimensional rules, permitted uses, septic suitability (Title 5), soils, ledge, access easements and wetland delineation in the field are not modelled. Wetland buffers here approximate regulated areas; they are not determinations.</li>
+        <li><strong>Uniform setback.</strong> The setback from lot lines is one value per scenario, not the district-specific front/side/rear yards.</li>
+        <li><strong>Flood data vintage.</strong> FEMA NFHL as republished by MassGIS (FEMA data as of 2023-07-02). Later map revisions are not included; FEMA's own service was not reachable from the build machine.</li>
+        <li><strong>Parcel geometry.</strong> Assessor maps are not surveys; a 2 m grid misplaces boundaries by up to a cell. Area error vs exact overlay is reported in Validation.</li>
+        <li><strong>Terrain.</strong> Bare-earth lidar is post-construction and interpolated under buildings; graded house pads read as flat.</li>
+        <li><strong>Road surface</strong> uses an assumed half-width by road class, not measured pavement.</li>
+        <li><strong>Distances are straight-line</strong> from the patch to a road centreline — not access or travel time. Frontage is a geometric proxy, not legal frontage.</li>
+        <li><strong>Tax-exempt land</strong> (municipal, state, institutional) is shown but not screened.</li>
+      </ul>
+    </section>
+
+    <section id="downloads">
+      <h2>Downloads and source</h2>
+      <ul>
+        <li><a href="data/downloads/amherst_parcel_screening.csv" download>Parcel results, CSV</a> (no geometry)</li>
+        <li><a href="data/downloads/amherst_parcel_screening.parquet" download>Parcel results, GeoParquet</a> (EPSG:26986)</li>
+        <li>Pipeline, tests and benchmark: <code>projects/parcel-intelligence</code> in the portfolio repository (<code>make all</code> rebuilds everything locally).</li>
+      </ul>
+    </section>
+  </article>
+</main>
+
+<footer class="foot">
+  <p>Data: MassGIS (Bureau of Geographic Information), Commonwealth of Massachusetts EOTSS; MassDEP; MassDOT; NHESP; USGS 3DEP; FEMA. Font: Noto Sans (SIL OFL 1.1). Map: MapLibre GL JS, PMTiles.</p>
+</footer>
+</body>
+</html>

@@ -28,6 +28,8 @@ from . import config as C
 from .patches import screen_patches_reference
 
 FIG = C.ROOT / "validation" / "figures"
+# Parcels discussed in METHOD.md (hand checks); always rendered in addition to the sample.
+DOCUMENTED = (1090, 3424, 4907, 1795)
 
 
 def check_kernel(bits) -> dict:
@@ -146,6 +148,7 @@ def sample_parcels(m: pd.DataFrame, per_class: int = 2, seed: int = 20261008) ->
     # plus the parcels where naive vs patch disagree most (largest overstatement)
     over = (m["naive_m2_mod"] - m["largest_m2_mod"]).sort_values(ascending=False)
     picks += [int(i) for i in over.index[:2] if i not in picks]
+    picks += [p for p in DOCUMENTED if p not in picks]
     return picks
 
 
@@ -157,6 +160,8 @@ def figures(picks: list[int], m: pd.DataFrame) -> list[dict]:
     from matplotlib.colors import ListedColormap
 
     FIG.mkdir(parents=True, exist_ok=True)
+    for stale in FIG.glob("parcel_*.png"):
+        stale.unlink()
     g = A.grid()
     with rasterio.open(C.INTERIM / "dem_2m.tif") as src:
         dem = src.read(1)

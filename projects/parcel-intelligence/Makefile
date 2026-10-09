@@ -35,4 +35,4 @@ test:
 	cd rust && cargo test -q
 
 serve:
-	cd web && python3 -m http.server 8000
+	npx --yes http-server@14.1.1 web -p 8137 -c-1   # needs HTTP Range support for PMTiles

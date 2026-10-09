@@ -1,0 +1,581 @@
+{
+ "generated_from": "make all (local pipeline)",
+ "scenarios": {
+  "conservative": {
+   "slope_pct": 15.0,
+   "wetland_buffer_m": 50.0,
+   "perennial_stream_buffer_m": 61.0,
+   "other_stream_buffer_m": 30.0,
+   "flood": "sfha_and_0.2pct",
+   "protection_levels": [
+    "P",
+    "T",
+    "L"
+   ],
+   "exclude_priority_habitat": true,
+   "yard_m": 10.0,
+   "exclude_chapter_land": true
+  },
+  "moderate": {
+   "slope_pct": 25.0,
+   "wetland_buffer_m": 30.0,
+   "perennial_stream_buffer_m": 30.0,
+   "other_stream_buffer_m": 15.0,
+   "flood": "sfha",
+   "protection_levels": [
+    "P"
+   ],
+   "exclude_priority_habitat": false,
+   "yard_m": 6.0,
+   "exclude_chapter_land": false
+  },
+  "aggressive": {
+   "slope_pct": 35.0,
+   "wetland_buffer_m": 15.0,
+   "perennial_stream_buffer_m": 15.0,
+   "other_stream_buffer_m": 8.0,
+   "flood": "floodway",
+   "protection_levels": [
+    "P"
+   ],
+   "exclude_priority_habitat": false,
+   "yard_m": 3.0,
+   "exclude_chapter_land": false
+  }
+ },
+ "scenario_order": [
+  "conservative",
+  "moderate",
+  "aggressive"
+ ],
+ "patch_definition": {
+  "open_size_m": 10.0,
+  "min_patch_m2": 500.0,
+  "cell_m": 2.0,
+  "connectivity": 4
+ },
+ "results": {
+  "runtime_s": 17.5,
+  "parcels": 6091,
+  "scenarios": {
+   "conservative": {
+    "eligible_parcels": 5462,
+    "usable_parcels": 1389,
+    "naive_pass_parcels": 4072,
+    "naive_area_ha": 1722.5,
+    "net_area_ha": 752.5,
+    "cleaned_area_ha": 629.4,
+    "largest_patch_area_ha": 497.2,
+    "constraint_area_ha": {
+     "flood": 318.3,
+     "wetland_water": 1264.8,
+     "protected": 1020.9,
+     "priority_habitat": 510.9,
+     "steep_slope": 527.9,
+     "yard_setback": 1367.3,
+     "existing_development": 165.4,
+     "no_data": 0.0
+    }
+   },
+   "moderate": {
+    "eligible_parcels": 5540,
+    "usable_parcels": 3024,
+    "naive_pass_parcels": 4891,
+    "naive_area_ha": 2585.0,
+    "net_area_ha": 1652.8,
+    "cleaned_area_ha": 1505.6,
+    "largest_patch_area_ha": 1286.3,
+    "constraint_area_ha": {
+     "flood": 332.2,
+     "wetland_water": 1019.8,
+     "protected": 1057.9,
+     "priority_habitat": 0.0,
+     "steep_slope": 214.7,
+     "yard_setback": 942.4,
+     "existing_development": 167.0,
+     "no_data": 0.0
+    }
+   },
+   "aggressive": {
+    "eligible_parcels": 5540,
+    "usable_parcels": 4204,
+    "naive_pass_parcels": 5176,
+    "naive_area_ha": 2846.6,
+    "net_area_ha": 2228.0,
+    "cleaned_area_ha": 2082.7,
+    "largest_patch_area_ha": 1833.4,
+    "constraint_area_ha": {
+     "flood": 68.4,
+     "wetland_water": 718.2,
+     "protected": 1057.9,
+     "priority_habitat": 0.0,
+     "steep_slope": 81.4,
+     "yard_setback": 494.6,
+     "existing_development": 167.0,
+     "no_data": 0.0
+    }
+   }
+  },
+  "robustness": {
+   "assumption-dependent": 1635,
+   "robust": 1389,
+   "constrained": 1336,
+   "only aggressive": 1180,
+   "not screened": 551
+  },
+  "binding_constraint_mod": {
+   "existing_development": 3521,
+   "steep_slope": 711,
+   "wetland_water": 677,
+   "none": 514,
+   "protected": 90,
+   "flood": 27
+  }
+ },
+ "sensitivity": [
+  {
+   "group": "moderate (reference)",
+   "variant": "moderate",
+   "usable_parcels": 3024,
+   "largest_patch_total_ha": 1286.3
+  },
+  {
+   "group": "slope threshold",
+   "variant": "conservative",
+   "usable_parcels": 2581,
+   "largest_patch_total_ha": 980.9
+  },
+  {
+   "group": "slope threshold",
+   "variant": "aggressive",
+   "usable_parcels": 3145,
+   "largest_patch_total_ha": 1407.2
+  },
+  {
+   "group": "wetland & stream setbacks",
+   "variant": "conservative",
+   "usable_parcels": 2785,
+   "largest_patch_total_ha": 1144.8
+  },
+  {
+   "group": "wetland & stream setbacks",
+   "variant": "aggressive",
+   "usable_parcels": 3170,
+   "largest_patch_total_ha": 1379.7
+  },
+  {
+   "group": "flood definition",
+   "variant": "conservative",
+   "usable_parcels": 3011,
+   "largest_patch_total_ha": 1280.5
+  },
+  {
+   "group": "flood definition",
+   "variant": "aggressive",
+   "usable_parcels": 3034,
+   "largest_patch_total_ha": 1307.8
+  },
+  {
+   "group": "open-space protection levels",
+   "variant": "conservative",
+   "usable_parcels": 3024,
+   "largest_patch_total_ha": 1286.3
+  },
+  {
+   "group": "priority habitat",
+   "variant": "conservative",
+   "usable_parcels": 2955,
+   "largest_patch_total_ha": 1155.6
+  },
+  {
+   "group": "yard setback",
+   "variant": "conservative",
+   "usable_parcels": 1970,
+   "largest_patch_total_ha": 1020.6
+  },
+  {
+   "group": "yard setback",
+   "variant": "aggressive",
+   "usable_parcels": 3888,
+   "largest_patch_total_ha": 1540.1
+  },
+  {
+   "group": "chapter 61 land",
+   "variant": "conservative",
+   "usable_parcels": 2963,
+   "largest_patch_total_ha": 1060.8
+  },
+  {
+   "group": "minimum patch width (opening)",
+   "variant": "6 m square",
+   "usable_parcels": 3444,
+   "largest_patch_total_ha": 1405.2
+  },
+  {
+   "group": "minimum patch width (opening)",
+   "variant": "14 m square",
+   "usable_parcels": 2640,
+   "largest_patch_total_ha": 1157.5
+  }
+ ],
+ "validation": {
+  "kernel_full_town_moderate": {
+   "identical_outputs": true,
+   "reference_s": 0.76,
+   "rust_s": 0.235
+  },
+  "rasterization_vs_geos": {
+   "flood": {
+    "parcels_affected": 402,
+    "total_vector_ha": 648.94,
+    "total_raster_ha": 648.93,
+    "abs_error_m2_median": 8.7,
+    "abs_error_m2_p95": 46.2,
+    "abs_error_share_of_parcel_p95": 0.0046
+   },
+   "wetland_water": {
+    "parcels_affected": 1702,
+    "total_vector_ha": 1837.6,
+    "total_raster_ha": 1837.58,
+    "abs_error_m2_median": 6.6,
+    "abs_error_m2_p95": 35.4,
+    "abs_error_share_of_parcel_p95": 0.0071
+   },
+   "protected": {
+    "parcels_affected": 1397,
+    "total_vector_ha": 2511.9,
+    "total_raster_ha": 2511.91,
+    "abs_error_m2_median": 0.2,
+    "abs_error_m2_p95": 30.3,
+    "abs_error_share_of_parcel_p95": 0.0027
+   }
+  },
+  "assessor_comparison": {
+   "n": {
+    "developable": 176,
+    "undevelopable": 264
+   },
+   "auc": {
+    "naive_con": 0.59,
+    "net_con": 0.75,
+    "largest_con": 0.728,
+    "naive_mod": 0.675,
+    "net_mod": 0.762,
+    "largest_mod": 0.763,
+    "naive_agg": 0.704,
+    "net_agg": 0.747,
+    "largest_agg": 0.75,
+    "parcel_area_only": 0.641
+   },
+   "median_m2": {
+    "largest_con": {
+     "developable": 618.0,
+     "undevelopable": 0.0
+    },
+    "largest_mod": {
+     "developable": 1690.0,
+     "undevelopable": 0.0
+    },
+    "largest_agg": {
+     "developable": 2774.0,
+     "undevelopable": 372.0
+    }
+   },
+   "usable_share_con": {
+    "developable": 0.54,
+    "undevelopable": 0.186
+   },
+   "usable_share_mod": {
+    "developable": 0.841,
+    "undevelopable": 0.333
+   },
+   "usable_share_agg": {
+    "developable": 0.932,
+    "undevelopable": 0.47
+   },
+   "auc_difference_95ci": {
+    "largest_minus_net_mod": [
+     -0.009,
+     0.011
+    ],
+    "largest_minus_naive_mod": [
+     0.046,
+     0.131
+    ]
+   }
+  },
+  "post2000_buildings": {
+   "parcels": 446,
+   "footprint_cells": 39034,
+   "share_in_flood": 0.0,
+   "share_in_wetland_water": 0.042,
+   "share_in_protected": 0.0269,
+   "share_in_steep_slope": 0.0361,
+   "share_in_priority_habitat": 0.024
+  },
+  "hand_check_sample": [
+   {
+    "pid": 409,
+    "robustness": "robust"
+   },
+   {
+    "pid": 738,
+    "robustness": "robust"
+   },
+   {
+    "pid": 1080,
+    "robustness": "assumption-dependent"
+   },
+   {
+    "pid": 6038,
+    "robustness": "assumption-dependent"
+   },
+   {
+    "pid": 3424,
+    "robustness": "only aggressive"
+   },
+   {
+    "pid": 4789,
+    "robustness": "only aggressive"
+   },
+   {
+    "pid": 4822,
+    "robustness": "constrained"
+   },
+   {
+    "pid": 4869,
+    "robustness": "constrained"
+   },
+   {
+    "pid": 1795,
+    "robustness": "not screened"
+   },
+   {
+    "pid": 644,
+    "robustness": "not screened"
+   },
+   {
+    "pid": 1090,
+    "robustness": "assumption-dependent"
+   },
+   {
+    "pid": 4907,
+    "robustness": "constrained"
+   }
+  ]
+ },
+ "benchmark": {
+  "algorithm": "per-parcel k x k square opening (k=5, 2 m cells) then 4-connected component labelling restricted to one parcel; reference = scipy.ndimage per parcel bounding box, Rust = single raster pass (separable run-length erosion/dilation + union-find)",
+  "hardware": {
+   "cpu": "Apple M4",
+   "logical_cpus": "10",
+   "ram_gb": 16.0,
+   "os": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+   "python": "3.13.16",
+   "numpy": "2.5.3",
+   "scipy": "1.18.1",
+   "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)",
+   "threads": "single-threaded (both implementations)"
+  },
+  "harness": "timeit.repeat(number=1); reference repeat=3, Rust repeat=7",
+  "sizes": [
+   {
+    "cells": 3406164,
+    "shape": [
+     948,
+     3593
+    ],
+    "parcels_present": 286,
+    "identical": true,
+    "reference_min_s": 0.0592,
+    "reference_median_s": 0.0599,
+    "rust_min_s": 0.0219,
+    "rust_median_s": 0.0222,
+    "speedup_median": 2.7
+   },
+   {
+    "cells": 6812328,
+    "shape": [
+     1896,
+     3593
+    ],
+    "parcels_present": 1347,
+    "identical": true,
+    "reference_min_s": 0.1835,
+    "reference_median_s": 0.1838,
+    "rust_min_s": 0.0515,
+    "rust_median_s": 0.0523,
+    "speedup_median": 3.51
+   },
+   {
+    "cells": 13624656,
+    "shape": [
+     3792,
+     3593
+    ],
+    "parcels_present": 3350,
+    "identical": true,
+    "reference_min_s": 0.3912,
+    "reference_median_s": 0.3952,
+    "rust_min_s": 0.1085,
+    "rust_median_s": 0.1097,
+    "speedup_median": 3.6
+   },
+   {
+    "cells": 27245719,
+    "shape": [
+     7583,
+     3593
+    ],
+    "parcels_present": 6090,
+    "identical": true,
+    "reference_min_s": 0.7773,
+    "reference_median_s": 0.7799,
+    "rust_min_s": 0.2278,
+    "rust_median_s": 0.2314,
+    "speedup_median": 3.37
+   }
+  ],
+  "pipeline_estimate": {
+   "kernel_calls_per_full_run": 25,
+   "reference_s": 19.5,
+   "rust_s": 5.8
+  }
+ },
+ "provenance": {
+  "town": {
+   "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/TOWNSSURVEY_POLYM/FeatureServer/0",
+   "features": 1,
+   "acquired_utc": "2026-10-08T22:43:56+00:00",
+   "last_edit_utc": "2020-03-05T16:37:56.910000+00:00",
+   "copyright": "",
+   "publication_dates": null,
+   "project": null
+  },
+  "parcels": {
+   "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/Massachusetts_Property_Tax_Parcels/FeatureServer/0",
+   "features": 7330,
+   "acquired_utc": "2026-10-08T22:45:12+00:00",
+   "last_edit_utc": "2026-10-07T20:08:31.115000+00:00",
+   "copyright": "Commonwealth of Massachusetts Bureau of Geographic Information (MassGIS)",
+   "publication_dates": null,
+   "project": null
+  },
+  "flood": {
+   "url": "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/FEMA/FEMA_National_Flood_Hazard_Layer/FeatureServer/0",
+   "features": 672,
+   "acquired_utc": "2026-10-08T22:45:35+00:00",
+   "last_edit_utc": null,
+   "copyright": "Federal Emergency Management Agency",
+   "publication_dates": null,
+   "project": null
+  },
+  "wetlands": {
+   "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/DEP_Wetlands/FeatureServer/1",
+   "features": 1098,
+   "acquired_utc": "2026-10-08T22:45:54+00:00",
+   "last_edit_utc": "2026-04-08T17:38:19.311000+00:00",
+   "copyright": "Massachusetts Deptartment of Environmental Protection (MassDEP) Wetlands Conservancy Program (WCP)",
+   "publication_dates": null,
+   "project": null
+  },
+  "streams": {
+   "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/1_25_000_USGS_MassDEP_Hydrography/FeatureServer/0",
+   "features": 281,
+   "acquired_utc": "2026-10-08T22:46:03+00:00",
+   "last_edit_utc": "2026-04-09T05:02:21.449000+00:00",
+   "copyright": "MassDEP, USGS, MassGIS",
+   "publication_dates": null,
+   "project": null
+  },
+  "waterbodies": {
+   "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/1_25_000_USGS_MassDEP_Hydrography/FeatureServer/1",
+   "features": 211,
+   "acquired_utc": "2026-10-08T22:46:11+00:00",
+   "last_edit_utc": "2026-04-09T05:02:21.484000+00:00",
+   "copyright": "MassDEP, USGS, MassGIS",
+   "publication_dates": null,
+   "project": null
+  },
+  "openspace": {
+   "url": "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/FeatureServer/0",
+   "features": 611,
+   "acquired_utc": "2026-10-08T22:46:21+00:00",
+   "last_edit_utc": null,
+   "copyright": "MassGIS, Executive Office of Energy and Environmental Affairs",
+   "publication_dates": null,
+   "project": null
+  },
+  "roads": {
+   "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/MassDOTRoads_gdb/FeatureServer/0",
+   "features": 2008,
+   "acquired_utc": "2026-10-08T22:46:41+00:00",
+   "last_edit_utc": "2026-02-04T05:39:06.908000+00:00",
+   "copyright": "Massachusetts Department of Transportation (MassDOT), MassGIS",
+   "publication_dates": null,
+   "project": null
+  },
+  "buildings": {
+   "url": "https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/Building_Structures/FeatureServer/0",
+   "features": 9306,
+   "acquired_utc": "2026-10-08T22:48:05+00:00",
+   "last_edit_utc": "2026-05-22T04:15:03.228000+00:00",
+   "copyright": "Rolta, MassGIS, City of Boston",
+   "publication_dates": null,
+   "project": null
+  },
+  "sewer": {
+   "url": "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/DEP_SEWER_SERVICE_AREAS/FeatureServer/2",
+   "features": 4,
+   "acquired_utc": "2026-10-08T22:48:12+00:00",
+   "last_edit_utc": null,
+   "copyright": "MassDEP, Water Utility Resilience Program. 2025. Sewer Service Area for publicly owned treatment works and groundwater discharge permittees (PubV2025_10).",
+   "publication_dates": null,
+   "project": null
+  },
+  "prihab": {
+   "url": "https://s3.us-east-1.amazonaws.com/download.massgis.digital.mass.gov/shapefiles/state/prihab.zip",
+   "features": 16,
+   "acquired_utc": "2026-10-08T22:48:20+00:00",
+   "last_edit_utc": null,
+   "copyright": null,
+   "publication_dates": null,
+   "project": null
+  },
+  "dem": {
+   "url": null,
+   "features": null,
+   "acquired_utc": "2026-10-08T22:50:58+00:00",
+   "last_edit_utc": null,
+   "copyright": null,
+   "publication_dates": [
+    "2026-03-20"
+   ],
+   "project": "MA_Western_B24"
+  }
+ },
+ "overlays": {
+  "coordinates": [
+   [
+    -72.550425,
+    42.436316
+   ],
+   [
+    -72.460998,
+    42.436316
+   ],
+   [
+    -72.460998,
+    42.299029
+   ],
+   [
+    -72.550425,
+    42.299029
+   ]
+  ],
+  "size": [
+   1991,
+   4137
+  ]
+ }
+}

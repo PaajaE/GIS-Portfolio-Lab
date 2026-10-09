@@ -45,4 +45,10 @@ Wording guardrails (output must be no stronger than the evidence):
 - `/quality-gate <project path>`: run by the user to get an independent, evidence-based review of finished work.
 
 ## Established layout and commands
-None yet. Record them here once a project settles them.
+Settled by Parcel Intelligence (2026-10-08); reuse unless a project needs otherwise.
+- One self-contained directory per project: `projects/<name>/` with its own `pyproject.toml` + `uv.lock`, `Makefile`, `METHOD.md`, `DATA_SOURCES.md`, `README.md`, `src/<pkg>/`, `tests/`, `rust/`, `web/`, `provenance/`, `benchmarks/`, `validation/`.
+- Python ↔ Rust: a PyO3/maturin crate in `rust/` installed as a uv path dependency (`uv sync` builds it, release profile). The pure-Rust kernel builds and tests without Python (`python` cargo feature enabled by maturin).
+- `data/` (raw, interim, out) is git-ignored; `web/data/` holds the published derived artifacts.
+- Commands (run inside the project directory): `uv sync`, `make harvest`, `make all`, `make bench`, `make test`, `make serve` (dev server must support HTTP Range for PMTiles).
+- Toolchain on the build Mac: uv and rustup/tippecanoe via Homebrew (`/opt/homebrew/bin`, rustup in `/opt/homebrew/opt/rustup/bin`); GDAL/PROJ come from the rasterio/pyproj wheels, not a system install.
+- Web: static MapLibre + PMTiles, conventions in `docs/product/DESIGN_DECISIONS.md`. Preview via `.claude/launch.json`.
