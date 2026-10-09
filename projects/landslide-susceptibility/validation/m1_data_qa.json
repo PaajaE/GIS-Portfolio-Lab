@@ -1,0 +1,312 @@
+{
+ "inventory": {
+  "n_features_bbox": 26050,
+  "by_event": {
+   "helene": 19970,
+   "undated": 4321,
+   "1940-08": 1226,
+   "2004": 130,
+   "other": 111,
+   "2017": 58,
+   "2018": 46,
+   "1977": 46,
+   "2021": 33,
+   "2020": 21,
+   "2013": 15,
+   "2009": 11,
+   "2019": 7,
+   "2006": 5,
+   "2005": 5,
+   "1916": 5,
+   "1996": 4,
+   "1998": 3,
+   "2008": 3,
+   "2015": 3,
+   "2010": 3,
+   "1995": 2,
+   "2003": 2,
+   "2002": 2,
+   "1994": 2,
+   "2012": 2,
+   "2023": 2,
+   "2024": 2,
+   "1976": 1,
+   "1997": 1,
+   "1984": 1,
+   "1987": 1,
+   "1988": 1,
+   "2007": 1,
+   "1990": 1,
+   "1992": 1,
+   "1993": 1,
+   "1878": 1
+  },
+  "by_feature_type": {
+   "Source Area": 9367,
+   "Outline": 7243,
+   "Deposit": 5812,
+   "Transport Zone": 3425,
+   "Source Area (Reactivated)": 203
+  },
+  "invalid_geometries": 3,
+  "empty_geometries": 0,
+  "duplicate_geometries": 5,
+  "positives_by_county": {
+   "Buncombe County": 1806,
+   "Yancey County": 1156
+  },
+  "exist_conf_unparsed": 0,
+  "loc_conf_unparsed": 0,
+  "positives_aoi": 2962,
+  "positive_area_m2": {
+   "median": 93.6,
+   "p95": 427.6
+  },
+  "matches_feasibility_counts": true,
+  "undated_in_aoi": 123
+ },
+ "dem": {
+  "aoi": {
+   "tiles": 54,
+   "projects": {
+    "NC_Phase5_2018_A18": 48,
+    "TN_Eastern_2_16_B16_Del4_2016": 6
+   },
+   "lidar_dates_by_project": {
+    "NC_Phase5_2018_A18": [
+     "2017-02-11",
+     "2017-04-11"
+    ],
+    "TN_Eastern_2_16_B16_Del4_2016": [
+     "2016-02-05",
+     "2016-04-04"
+    ]
+   },
+   "tiles_without_dates": 0,
+   "latest_lidar_date": "2017-04-11",
+   "transfer_gb": 16.63,
+   "crs_26917": true,
+   "res": [
+    5.0,
+    5.0
+   ],
+   "origin_on_5m_lattice": true,
+   "nodata_share_in_counties": 0.0,
+   "nodata_share_in_buffer": 0.0,
+   "elev_min_max_m": [
+    397.9543762207031,
+    2037.1168212890625
+   ],
+   "elev_in_plausible_range": true,
+   "worst_seam_p99_abs_m": 0.8758618164062497,
+   "worst_seam_share_gt_1m": 0.0073369083527768855,
+   "max_seam_diff_m": 17.65185546875,
+   "seams_p99_gt_20cm": [
+    "USGS_one_meter_x36y398_TN_Eastern_2_16_B16_Del4_2016",
+    "USGS_one_meter_x36y399_TN_Eastern_2_16_B16_Del4_2016",
+    "USGS_one_meter_x37y399_TN_Eastern_2_16_B16_Del4_2016",
+    "USGS_one_meter_x37y400_TN_Eastern_2_16_B16_Del4_2016"
+   ],
+   "pre_event": true
+  },
+  "watauga": {
+   "tiles": 29,
+   "projects": {
+    "NC_Phase5_2018_A18": 18,
+    "TN_Eastern_2_16_B16_Del4_2016": 6,
+    "NC_Phase4_2017_A17": 5
+   },
+   "lidar_dates_by_project": {
+    "NC_Phase5_2018_A18": [
+     "2017-02-11",
+     "2017-04-11"
+    ],
+    "NC_Phase4_2017_A17": [
+     "2016-02-27",
+     "2017-10-30"
+    ],
+    "TN_Eastern_2_16_B16_Del4_2016": [
+     "2016-02-05",
+     "2016-04-04"
+    ]
+   },
+   "tiles_without_dates": 0,
+   "latest_lidar_date": "2017-10-30",
+   "transfer_gb": 7.52,
+   "crs_26917": true,
+   "res": [
+    5.0,
+    5.0
+   ],
+   "origin_on_5m_lattice": true,
+   "nodata_share_in_counties": 0.0,
+   "nodata_share_in_buffer": 0.0,
+   "elev_min_max_m": [
+    407.9358825683594,
+    1811.648681640625
+   ],
+   "elev_in_plausible_range": true,
+   "worst_seam_p99_abs_m": 0.4819470214843733,
+   "worst_seam_share_gt_1m": 0.001731648859714329,
+   "max_seam_diff_m": 6.4937744140625,
+   "seams_p99_gt_20cm": [
+    "USGS_1M_17_x45y400_NC_Phase4_2017_A17",
+    "USGS_1M_17_x45y401_NC_Phase4_2017_A17",
+    "USGS_1M_17_x45y402_NC_Phase4_2017_A17",
+    "USGS_1M_17_x46y402_NC_Phase4_2017_A17",
+    "USGS_one_meter_x41y402_TN_Eastern_2_16_B16_Del4_2016",
+    "USGS_one_meter_x42y402_TN_Eastern_2_16_B16_Del4_2016",
+    "USGS_one_meter_x42y403_TN_Eastern_2_16_B16_Del4_2016",
+    "USGS_one_meter_x43y403_TN_Eastern_2_16_B16_Del4_2016"
+   ],
+   "pre_event": true
+  }
+ },
+ "rasters": {
+  "0_20240928-000000.": {
+   "driver": "GRIB",
+   "unit": "[mm]",
+   "res_deg": 0.009999999714244895,
+   "valid_max_mm": 962.7999877929688,
+   "missing_cells": 1512918
+  },
+  "0_20240928-120000.": {
+   "driver": "GRIB",
+   "unit": "[mm]",
+   "res_deg": 0.009999999714244895,
+   "valid_max_mm": 900.0,
+   "missing_cells": 1512918
+  },
+  "nlcd2021_aoi": {
+   "epsg": 5070,
+   "res": [
+    30.0,
+    30.0
+   ],
+   "shape": [
+    2964,
+    2777
+   ],
+   "declared_nodata": 0.0,
+   "n_values": 15,
+   "max": 95,
+   "zero_share": 0.0
+  },
+  "nlcd2021_watauga": {
+   "epsg": 5070,
+   "res": [
+    30.0,
+    30.0
+   ],
+   "shape": [
+    1400,
+    1669
+   ],
+   "declared_nodata": 0.0,
+   "n_values": 15,
+   "max": 95,
+   "zero_share": 0.0
+  },
+  "tcc2021_aoi": {
+   "epsg": 5070,
+   "res": [
+    30.0,
+    30.0
+   ],
+   "shape": [
+    2964,
+    2777
+   ],
+   "declared_nodata": 0.0,
+   "n_values": 101,
+   "max": 254,
+   "zero_share": 0.13674452328433337
+  },
+  "tcc2021_watauga": {
+   "epsg": 5070,
+   "res": [
+    30.0,
+    30.0
+   ],
+   "shape": [
+    1400,
+    1669
+   ],
+   "declared_nodata": 0.0,
+   "n_values": 101,
+   "max": 254,
+   "zero_share": 0.11457502353847471
+  }
+ },
+ "vectors": {
+  "counties": [
+   "Yancey County",
+   "Buncombe County",
+   "Watauga County"
+  ],
+  "huc12": {
+   "n": 214,
+   "invalid": 0,
+   "epsg": 4326
+  },
+  "huc10": {
+   "n": 57,
+   "invalid": 0,
+   "epsg": 4326
+  },
+  "geology_1985": {
+   "n": 283,
+   "invalid": 0,
+   "epsg": 4326
+  },
+  "ncgs_observations": {
+   "n": 7341,
+   "invalid": 0,
+   "epsg": 4326
+  },
+  "ncgs_ground_ruptures": {
+   "n": 158,
+   "invalid": 0,
+   "epsg": 4326
+  },
+  "buildings": {
+   "n": 160651,
+   "invalid": 1,
+   "licence": "not stated (local only)"
+  },
+  "ssurgo_NC021": {
+   "n": 35176,
+   "invalid": 4,
+   "brockdepmin_null_share": 0.45627700705026153,
+   "hydgrpdcd_null_share": 0.0259551967250398
+  },
+  "ssurgo_NC189": {
+   "n": 14846,
+   "invalid": 0,
+   "brockdepmin_null_share": 0.5198033140239795,
+   "hydgrpdcd_null_share": 0.015155597467331267
+  },
+  "ssurgo_NC199": {
+   "n": 14695,
+   "invalid": 1,
+   "brockdepmin_null_share": 0.5287512759441987,
+   "hydgrpdcd_null_share": 0.016468186457978904
+  },
+  "tl_2024_37021_roads": {
+   "n": 13820,
+   "epsg": 4269
+  },
+  "tl_2024_37189_roads": {
+   "n": 4685,
+   "epsg": 4269
+  },
+  "tl_2024_37199_roads": {
+   "n": 3738,
+   "epsg": 4269
+  }
+ },
+ "disk": {
+  "data_gb": 1.4,
+  "free_gb": 69.1
+ }
+}

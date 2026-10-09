@@ -1,0 +1,26 @@
+[project]
+name = "landslide"
+version = "0.1.0"
+description = "Landslide susceptibility (initiation) from the NCGS Helene inventory, Buncombe + Yancey, NC"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "numpy>=2.1",
+    "scipy>=1.14",       # spatial statistics in the feasibility check; reference kernels later
+    "rasterio>=1.4",     # GDAL raster I/O (DEM tiles, GRIB rainfall, WCS GeoTIFFs)
+    "geopandas>=1.0",    # vector overlay on GEOS/shapely, GeoParquet I/O
+    "pyogrio>=0.10",     # fast GDAL vector I/O for geopandas
+    "pyarrow>=17",       # Parquet / GeoParquet
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/landslide"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
