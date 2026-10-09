@@ -58,6 +58,7 @@ CHECKS = [
     ("mtbs_perims_zip", "MTBS national perimeters zip (HEAD)", "https://edcintl.cr.usgs.gov/downloads/sciweb1/shared/MTBS_Fire/data/composite_data/burned_area_extent_shapefile/mtbs_perimeter_data.zip", "HEAD", 0, {}),
     ("nifc_services", "NIFC ArcGIS Online services list", "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services?f=json", "GET", 2_000_000, {}),
     ("nifc_ftp_root", "NIFC FTP incident data (NIROPS IR)", "https://ftp.wildfire.gov/public/incident_specific_data/", "GET", 500_000, {}),
+    ("nirops_tools", "NIROPS tools (IRIN template / layer pack: naming convention)", "https://ftp.wildfire.gov/public/nirops/Tools/", "GET", 200_000, {}),
     ("mendeley_meta", "Mendeley NIROPS progression dataset metadata", "https://data.mendeley.com/public-api/datasets/95rj5d379g", "GET", 500_000, {"Accept": "application/vnd.mendeley-public-dataset.1+json"}),
     ("firms_nokey", "FIRMS API without MAP_KEY (expects key error)", "https://firms.modaps.eosdis.nasa.gov/api/data_availability/csv/NO_KEY/all", "GET", 20_000, {}),
     ("feds_collections", "NASA FEDS via VEDA OGC API", "https://openveda.cloud/api/features/collections?f=json", "GET", 500_000, {}),
@@ -137,6 +138,9 @@ def links(html: bytes) -> list[str]:
     return re.findall(r'href="([^"?#]+)"', html.decode("utf-8", "replace"))
 
 
+# standard NIROPS layers (Heat Perimeter, Intense Heat, Scattered Heat, Isolated Heat Sources)
+IR_PRODUCTS = {"heat_perimeter": "heatperimeter", "intense_heat": "intenseheat",
+               "scattered_heat": "scatteredheat", "isolated_heat": "isolatedheat"}
 TS = re.compile(r"(20\d{2})[-_]?([01]\d)[-_]?([0-3]\d)[-_ T]?([0-2]\d)?([0-5]\d)?")
 
 
@@ -178,8 +182,10 @@ def nirops_inventory(root: str = NIROPS_ROOT, budget: int = 250) -> dict:
                         queue.append((full, depth + 1))
                     elif not l.endswith("/") and ("/ir/" in low or "ir" in l.lower().split("_")):
                         m = TS.search(l)
+                        name = urllib.parse.unquote(l).lower().replace("_", "").replace(" ", "")
+                        product = next((k for k, v in IR_PRODUCTS.items() if v in name), None)
                         rec["ir_files"].append({"file": urllib.parse.unquote(full), "timestamp_in_name":
-                                                m.group(0) if m else None})
+                                                m.group(0) if m else None, "product": product})
             if l.endswith("/") and depth < 2 and re.search(r"20(19|2[0-4])", l):
                 queue.append((full, depth + 1))
     if queue:

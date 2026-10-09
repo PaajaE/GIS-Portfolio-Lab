@@ -25,7 +25,7 @@ from pathlib import Path
 import numpy as np
 
 from .ellipse import eccentricity
-from .levelset import propagate_levelset
+from .levelset import propagate_hybrid, propagate_levelset
 from .reference import propagate, uniform_field
 
 CELL = 30.0
@@ -66,7 +66,9 @@ def t_ref_two_winds(dx, dy, r0, t1, ecc, th1, th2, r_head=1.0):
 
 def run(scheme, f, t_stop, **kw):
     t = time.perf_counter()
-    if scheme.startswith("levelset"):
+    if scheme == "hybrid":
+        res = propagate_hybrid(f, points=[(*SRC, 0.0)], t_stop=t_stop, r0_cells=R0_CELLS, radius=8, **kw)
+    elif scheme.startswith(("levelset", "hybrid")):
         order = 5 if scheme == "levelset5" else 2
         res = propagate_levelset(f, points=[(*SRC, 0.0)], t_stop=t_stop, r0_cells=R0_CELLS, order=order, **kw)
     else:
@@ -83,7 +85,7 @@ def forward_errors(res, ecc, theta, scheme, min_cells=25):
                 continue
             if abs(np.angle(np.exp(1j * (np.arctan2(dy, dx) - theta)))) > np.pi / 2:
                 continue
-            tr = (t_ref_disc(dx, dy, R0_CELLS * CELL, ecc, theta) if scheme.startswith("levelset")
+            tr = (t_ref_disc(dx, dy, R0_CELLS * CELL, ecc, theta) if scheme.startswith(("levelset", "hybrid"))
                   else t_ref_point(dx, dy, ecc, theta))
             errs.append(res.arrival[r, c] / tr - 1)
     return np.array(errs)
@@ -93,7 +95,7 @@ def exact_area(t, ecc, scheme, r_head=1.0):
     a = r_head * t / (1 + ecc)
     b = a * np.sqrt(1 - ecc * ecc)
     area = np.pi * a * b
-    if scheme.startswith("levelset"):  # Steiner: disc (+) ellipse
+    if scheme.startswith(("levelset", "hybrid")):  # Steiner: disc (+) ellipse
         r0 = R0_CELLS * CELL
         h = ((a - b) / (a + b)) ** 2
         perim = np.pi * (a + b) * (1 + 3 * h / (10 + np.sqrt(4 - 3 * h)))
@@ -135,7 +137,7 @@ def wind_change(schemes):
             th1, th2 = np.radians(10.0), np.radians(100.0)
             f = uniform_field((N, N), r_head=1.0, ecc=ecc, theta=[th1, th2], t_change=[t1], cell_m=CELL)
             res, sec = run(scheme, f, t_stop=3000.0)
-            r0 = R0_CELLS * CELL if scheme.startswith("levelset") else 0.0
+            r0 = R0_CELLS * CELL if scheme.startswith(("levelset", "hybrid")) else 0.0
             errs = []
             for r in range(0, N, 3):
                 for c in range(0, N, 3):

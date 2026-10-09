@@ -108,13 +108,16 @@ class Result:
 
 
 def propagate(f: SpreadField, radius: int = 2, *, points=(), inside: np.ndarray | None = None,
-              t0: float = 0.0, t_stop: float = inf, boundary_sources_only: bool = False) -> Result:
+              t0: float = 0.0, t_stop: float = inf, boundary_sources_only: bool = False,
+              seed: np.ndarray | None = None) -> Result:
     """Time-dependent label-setting propagation.
 
     points: iterable of (r, c, t) point ignitions (Mode B); each must be a burnable cell.
     inside: bool mask of cells whose centre lies inside the initial perimeter (Mode A) at time t0.
     boundary_sources_only: seed only inside cells that have at least one valid edge to a burnable
         outside cell. Must give identical arrivals to seeding all inside cells (tested).
+    seed: optional per-cell upper-bound labels (e.g. level-set arrivals); every finite burnable seed cell
+        is a source at its seed time, so the result is min(seed, graph paths from seeded cells).
     """
     nr, nc = f.shape
     barrier = ~f.burnable
@@ -142,6 +145,11 @@ def propagate(f: SpreadField, radius: int = 2, *, points=(), inside: np.ndarray 
         if t < arrival[r, c]:
             arrival[r, c] = t
             heapq.heappush(heap, (float(t), r * nc + c))
+    if seed is not None:
+        for r, c in zip(*np.nonzero(np.isfinite(seed) & f.burnable & ~done)):
+            if seed[r, c] < arrival[r, c]:
+                arrival[r, c] = float(seed[r, c])
+                heapq.heappush(heap, (float(seed[r, c]), int(r) * nc + int(c)))
     while heap:
         t_u, k = heapq.heappop(heap)
         r, c = divmod(k, nc)

@@ -8,6 +8,7 @@ from firepath.probe import nirops_inventory
 
 TREE = [
     "southwest/2022_Incidents/AZ-COF-000123_Tunnel/IR/20220419/20220419_2130_Tunnel_IR_HeatPerimeter.shp",
+    "southwest/2022_Incidents/AZ-COF-000123_Tunnel/IR/20220419/20220419_2130_Tunnel_IR_IntenseHeat.shp",
     "southwest/2022_Incidents/AZ-COF-000123_Tunnel/IR/20220420/20220420_2205_Tunnel_IR_HeatPerimeter.shp",
     "southwest/2022_Incidents/AZ-COF-000456_Double/IR/Pipeline/20220613_0115_Pipeline_IR.kmz",
     "southwest/2022_Incidents/AZ-COF-000456_Double/IR/Haywire/20220613_0120_Haywire_IR.kmz",
@@ -36,7 +37,10 @@ def test_crawler_finds_ir_files_and_timestamps(tmp_path):
         srv.shutdown()
     assert "southwest/" in out["regions"]
     tunnel = out["fires"]["Tunnel 2022"]
-    assert sorted(f["timestamp_in_name"] for f in tunnel["ir_files"]) == ["20220419_2130", "20220420_2205"]
+    assert sorted(f["timestamp_in_name"] for f in tunnel["ir_files"]) == ["20220419_2130", "20220419_2130",
+                                                                          "20220420_2205"]
+    assert sorted(str(f["product"]) for f in tunnel["ir_files"]) == ["heat_perimeter", "heat_perimeter",
+                                                                     "intense_heat"]
     pipe = {f["file"].rsplit("/", 1)[1] for f in out["fires"]["Pipeline 2022"]["ir_files"]}
     assert pipe == {"20220613_0115_Pipeline_IR.kmz", "20220613_0120_Haywire_IR.kmz"}
     assert "Telegraph 2021" not in out["fires"]

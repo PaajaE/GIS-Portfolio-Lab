@@ -79,7 +79,13 @@ first thing to check in its output.
 
 ## 3. Pipeline / Haywire separability
 
-**Unknown.** The probe looks for (a) separate IR files or sub-folders per fire under the "Double" incident on
+**M1a-2 source check (news reports, not perimeter files):** the fire that merged with Haywire on 13–14
+June 2022 was the **Double Fire**. Pipeline was a separate fire about 6 miles away (Coconino County
+updates, CNN, Fox10, ABC15, via search). The v1 plan's "Pipeline + Haywire merged incident" was wrong
+(an InciWeb page for the Double incident also carried Pipeline bulletins). Separability is therefore
+**likely** but **not verified in the perimeter data**.
+
+Earlier status: **unknown.** The probe looks for (a) separate IR files or sub-folders per fire under the "Double" incident on
 the FTP, and (b) separate incident names or IRWIN ids in NIFC perimeter services. Decision rule (from PLAN
 §2.3, S6): if per-fire perimeters with scan times exist for the evaluation window, Pipeline stays a
 validation fire; if only merged "Double" perimeters exist after the fires joined, the evaluation window
@@ -94,10 +100,19 @@ are unconfirmed.
 | Fire | Fire year | Version by rule | Rejected (contains the fire) | Availability |
 |---|---|---|---|---|
 | Woodbury | 2019 | LF 2016 Remap (200) | LF 2019 Limited, LF 2020 | not verified |
-| Bush, Mangum | 2020 | LF 2019 Limited **if it publishes FBFM40/CC/CH**, else LF 2016 Remap (200) | LF 2020 (220) | not verified; whether LF 2019L has fuels is open |
+| Bush, Mangum | 2020 | **LF 2016 Remap (200)**: its FBFM40 is "2019 capable" per catalog metadata; no FBFM40 for "LF 2019 Limited" was found (M1a-2 search) | LF 2020 (220) | not verified on the Mac; 2017–2019 disturbances missing (stale fuels) |
 | Telegraph | 2021 | LF 2020 (220) | LF 2022 (230) | not verified |
 | Tunnel, Pipeline, Cerro Pelado | 2022 | LF 2020 (220) | LF 2022 (230) | not verified |
 | South Fork | 2024 | LF 2023 (240) | LF 2024 (250) | not verified |
+
+## 4b. NIROPS product naming (M1a-2 source check)
+
+NIROPS interpreters deliver four standard layers: Heat Perimeter (polygon), Intense Heat, Scattered Heat
+and Isolated Heat Sources [sourced: an Alaska ordering guide, via search]. The official naming convention
+is in the IRIN template and layer pack under `ftp.wildfire.gov/public/nirops/Tools/`. The probe now
+checks that directory and tags crawled files by product type; only *Heat Perimeter* files are used as
+observed perimeters. The scan-time encoding is still unknown and is the first thing to check in the Mac
+probe output.
 
 ## 5. Disk and storage
 

@@ -1,6 +1,6 @@
 {
   "label": "cloud-session",
-  "utc": "2026-10-09T05:36:13+00:00",
+  "utc": "2026-10-09T14:58:52+00:00",
   "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
   "machine": "x86_64",
   "python": "3.13.16",
@@ -17,11 +17,11 @@
     {
       "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20220419/conus/hrrr.t21z.wrfsfcf00.grib2.idx",
       "method": "GET",
-      "utc": "2026-10-09T05:36:13+00:00",
+      "utc": "2026-10-09T14:58:52+00:00",
       "status": 200,
       "reason": "OK",
       "final_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20220419/conus/hrrr.t21z.wrfsfcf00.grib2.idx",
-      "elapsed_s": 0.45,
+      "elapsed_s": 0.49,
       "headers": {
         "content-type": "binary/octet-stream",
         "content-length": "9118",
@@ -39,11 +39,11 @@
     {
       "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20220419/conus/hrrr.t21z.wrfsfcf00.grib2",
       "method": "GET",
-      "utc": "2026-10-09T05:36:13+00:00",
+      "utc": "2026-10-09T14:58:52+00:00",
       "status": 206,
       "reason": "Partial Content",
       "final_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20220419/conus/hrrr.t21z.wrfsfcf00.grib2",
-      "elapsed_s": 0.3,
+      "elapsed_s": 0.32,
       "headers": {
         "content-type": "binary/octet-stream",
         "content-length": "4096",
@@ -62,10 +62,10 @@
     {
       "url": "https://landfire.gov/",
       "method": "GET",
-      "utc": "2026-10-09T05:36:13+00:00",
+      "utc": "2026-10-09T14:58:53+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.07,
+      "elapsed_s": 0.08,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -75,10 +75,10 @@
     {
       "url": "https://landfire.gov/data/lf_versions",
       "method": "GET",
-      "utc": "2026-10-09T05:36:13+00:00",
+      "utc": "2026-10-09T14:58:53+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.27,
+      "elapsed_s": 0.4,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -88,10 +88,10 @@
     {
       "url": "https://lfps.usgs.gov/api/",
       "method": "GET",
-      "utc": "2026-10-09T05:36:14+00:00",
+      "utc": "2026-10-09T14:58:53+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.27,
+      "elapsed_s": 0.36,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -101,10 +101,10 @@
     {
       "url": "https://lfps.usgs.gov/api/products",
       "method": "GET",
-      "utc": "2026-10-09T05:36:14+00:00",
+      "utc": "2026-10-09T14:58:53+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.27,
+      "elapsed_s": 0.32,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -114,10 +114,10 @@
     {
       "url": "https://lfps.usgs.gov/api/job/submit",
       "method": "GET",
-      "utc": "2026-10-09T05:36:14+00:00",
+      "utc": "2026-10-09T14:58:54+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.3,
+      "elapsed_s": 0.41,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -127,10 +127,10 @@
     {
       "url": "https://landfire.gov/data-downloads/US_200/LF2016_FBFM40_200_CONUS.zip",
       "method": "HEAD",
-      "utc": "2026-10-09T05:36:15+00:00",
+      "utc": "2026-10-09T14:58:54+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.3,
+      "elapsed_s": 0.27,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -140,10 +140,10 @@
     {
       "url": "https://landfire.gov/data-downloads/US_220/LF2022_FBFM40_220_CONUS.zip",
       "method": "HEAD",
-      "utc": "2026-10-09T05:36:15+00:00",
+      "utc": "2026-10-09T14:58:54+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.29,
+      "elapsed_s": 0.31,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -153,10 +153,10 @@
     {
       "url": "https://landfire.gov/data-downloads/US_230/LF2022_FBFM40_230_CONUS.zip",
       "method": "HEAD",
-      "utc": "2026-10-09T05:36:15+00:00",
+      "utc": "2026-10-09T14:58:55+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.27,
+      "elapsed_s": 0.32,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -166,10 +166,10 @@
     {
       "url": "https://landfire.gov/data-downloads/US_240/LF2023_FBFM40_240_CONUS.zip",
       "method": "HEAD",
-      "utc": "2026-10-09T05:36:15+00:00",
+      "utc": "2026-10-09T14:58:55+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.26,
+      "elapsed_s": 0.39,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -179,10 +179,10 @@
     {
       "url": "https://www.mtbs.gov/direct-download",
       "method": "GET",
-      "utc": "2026-10-09T05:36:16+00:00",
+      "utc": "2026-10-09T14:58:55+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.27,
+      "elapsed_s": 0.36,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -192,10 +192,10 @@
     {
       "url": "https://edcintl.cr.usgs.gov/downloads/sciweb1/shared/MTBS_Fire/data/composite_data/burned_area_extent_shapefile/mtbs_perimeter_data.zip",
       "method": "HEAD",
-      "utc": "2026-10-09T05:36:16+00:00",
+      "utc": "2026-10-09T14:58:56+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.13,
+      "elapsed_s": 0.29,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -205,10 +205,10 @@
     {
       "url": "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services?f=json",
       "method": "GET",
-      "utc": "2026-10-09T05:36:16+00:00",
+      "utc": "2026-10-09T14:58:56+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.28,
+      "elapsed_s": 0.3,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -218,10 +218,10 @@
     {
       "url": "https://ftp.wildfire.gov/public/incident_specific_data/",
       "method": "GET",
-      "utc": "2026-10-09T05:36:16+00:00",
+      "utc": "2026-10-09T14:58:56+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.27,
+      "elapsed_s": 0.31,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -229,12 +229,25 @@
       "purpose": "NIFC FTP incident data (NIROPS IR)"
     },
     {
-      "url": "https://data.mendeley.com/public-api/datasets/95rj5d379g",
+      "url": "https://ftp.wildfire.gov/public/nirops/Tools/",
       "method": "GET",
-      "utc": "2026-10-09T05:36:17+00:00",
+      "utc": "2026-10-09T14:58:57+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.26,
+      "elapsed_s": 0.34,
+      "attempts": [
+        "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+      ],
+      "id": "nirops_tools",
+      "purpose": "NIROPS tools (IRIN template / layer pack: naming convention)"
+    },
+    {
+      "url": "https://data.mendeley.com/public-api/datasets/95rj5d379g",
+      "method": "GET",
+      "utc": "2026-10-09T14:58:57+00:00",
+      "status": null,
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "elapsed_s": 0.3,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -244,10 +257,10 @@
     {
       "url": "https://firms.modaps.eosdis.nasa.gov/api/data_availability/csv/NO_KEY/all",
       "method": "GET",
-      "utc": "2026-10-09T05:36:17+00:00",
+      "utc": "2026-10-09T14:58:57+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.31,
+      "elapsed_s": 0.29,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -257,10 +270,10 @@
     {
       "url": "https://openveda.cloud/api/features/collections?f=json",
       "method": "GET",
-      "utc": "2026-10-09T05:36:17+00:00",
+      "utc": "2026-10-09T14:58:58+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.28,
+      "elapsed_s": 0.4,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -270,10 +283,10 @@
     {
       "url": "https://www.northwestknowledge.net/metdata/data/",
       "method": "GET",
-      "utc": "2026-10-09T05:36:17+00:00",
+      "utc": "2026-10-09T14:58:58+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.31,
+      "elapsed_s": 0.39,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -283,7 +296,7 @@
     {
       "url": "https://www.northwestknowledge.net/metdata/data/fm100_2022.nc",
       "method": "HEAD",
-      "utc": "2026-10-09T05:36:18+00:00",
+      "utc": "2026-10-09T14:58:58+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
       "elapsed_s": 0.28,
@@ -296,10 +309,10 @@
     {
       "url": "http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_met_fm100_1979_CurrentYear_CONUS.nc.das",
       "method": "GET",
-      "utc": "2026-10-09T05:37:14+00:00",
+      "utc": "2026-10-09T14:59:55+00:00",
       "status": null,
       "error": "URLError: <urlopen error timed out>",
-      "elapsed_s": 25.06,
+      "elapsed_s": 25.11,
       "attempts": [
         "URLError: <urlopen error timed out>",
         "URLError: <urlopen error timed out>",
@@ -311,10 +324,10 @@
     {
       "url": "https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National%20Elevation%20Dataset%20(NED)%201/3%20arc-second&bbox=-111.8,35.2,-111.4,35.5&max=5&outputFormat=JSON",
       "method": "GET",
-      "utc": "2026-10-09T05:37:45+00:00",
+      "utc": "2026-10-09T15:00:26+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.27,
+      "elapsed_s": 0.33,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -324,10 +337,10 @@
     {
       "url": "https://www2.census.gov/geo/tiger/TIGER2022/EDGES/tl_2022_04005_edges.zip",
       "method": "HEAD",
-      "utc": "2026-10-09T05:37:46+00:00",
+      "utc": "2026-10-09T15:00:26+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.29,
+      "elapsed_s": 0.35,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -337,10 +350,10 @@
     {
       "url": "https://www2.census.gov/geo/tiger/TIGER2020/TABBLOCK20/tl_2020_04_tabblock20.zip",
       "method": "HEAD",
-      "utc": "2026-10-09T05:37:46+00:00",
+      "utc": "2026-10-09T15:00:27+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.32,
+      "elapsed_s": 0.38,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -350,10 +363,10 @@
     {
       "url": "https://disasters.geoplatform.gov/USA_Structures/",
       "method": "GET",
-      "utc": "2026-10-09T05:37:46+00:00",
+      "utc": "2026-10-09T15:00:27+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.28,
+      "elapsed_s": 0.31,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -363,10 +376,10 @@
     {
       "url": "https://www.arcgis.com/sharing/rest/search?q=title%3A%22USA%20Structures%22&num=5&f=json",
       "method": "GET",
-      "utc": "2026-10-09T05:37:46+00:00",
+      "utc": "2026-10-09T15:00:27+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.25,
+      "elapsed_s": 0.34,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -376,10 +389,10 @@
     {
       "url": "https://api.figshare.com/v2/articles/19858927",
       "method": "GET",
-      "utc": "2026-10-09T05:37:47+00:00",
+      "utc": "2026-10-09T15:00:28+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.26,
+      "elapsed_s": 0.29,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -389,10 +402,10 @@
     {
       "url": "https://inciweb.wildfire.gov/incident-information/azcof-tunnel-fire",
       "method": "GET",
-      "utc": "2026-10-09T05:37:47+00:00",
+      "utc": "2026-10-09T15:00:28+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.29,
+      "elapsed_s": 0.26,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -402,10 +415,10 @@
     {
       "url": "https://www.wfas.net/nfmd/public/index.php",
       "method": "GET",
-      "utc": "2026-10-09T05:37:47+00:00",
+      "utc": "2026-10-09T15:00:28+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.32,
+      "elapsed_s": 0.35,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -415,10 +428,10 @@
     {
       "url": "https://raws.dri.edu/",
       "method": "GET",
-      "utc": "2026-10-09T05:37:48+00:00",
+      "utc": "2026-10-09T15:00:29+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.28,
+      "elapsed_s": 0.35,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -428,10 +441,10 @@
     {
       "url": "https://api.synopticdata.com/v2/stations/metadata?stid=KFLG",
       "method": "GET",
-      "utc": "2026-10-09T05:37:48+00:00",
+      "utc": "2026-10-09T15:00:29+00:00",
       "status": null,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "elapsed_s": 0.26,
+      "elapsed_s": 0.31,
       "attempts": [
         "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       ],
@@ -441,11 +454,11 @@
     {
       "url": "https://pypi.org/pypi/pyretechnics/json",
       "method": "GET",
-      "utc": "2026-10-09T05:37:48+00:00",
+      "utc": "2026-10-09T15:00:29+00:00",
       "status": 200,
       "reason": "OK",
       "final_url": "https://pypi.org/pypi/pyretechnics/json",
-      "elapsed_s": 0.12,
+      "elapsed_s": 0.09,
       "headers": {
         "content-type": "application/json",
         "content-length": "28646"
@@ -460,14 +473,5 @@
       "id": "pypi_pyretechnics",
       "purpose": "pyretechnics package metadata (PyPI)"
     }
-  ],
-  "nirops_inventory": {
-    "root": "https://ftp.wildfire.gov/public/incident_specific_data/",
-    "requests": 1,
-    "regions": [],
-    "fires": {},
-    "notes": [
-      "root not listable: None URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
-    ]
-  }
+  ]
 }
