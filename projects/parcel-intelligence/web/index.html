@@ -28,9 +28,9 @@
   </p>
 
   <figure class="robust-bar" aria-labelledby="robust-caption">
-    <p class="bar-label">Vacant parcels <small>(no mapped building, or assessor vacant-land class)</small></p>
+    <p class="bar-label">Vacant parcels <small>(no mapped building footprint and no assessor year built)</small></p>
     <div class="bar" id="robust-bar-vacant" role="img" aria-describedby="robust-caption"></div>
-    <p class="bar-label">Built parcels <small>(patch = land beside the existing building)</small></p>
+    <p class="bar-label">Built parcels <small>(patch = land beside the existing structure)</small></p>
     <div class="bar" id="robust-bar-built" role="img" aria-describedby="robust-caption"></div>
     <figcaption id="robust-caption">
       Parcels by how many scenarios leave a <em>qualifying patch</em>: one contiguous area of at least
@@ -191,7 +191,7 @@
         <li><strong>Road surface</strong> uses an assumed half-width by road class, not measured pavement.</li>
         <li><strong>Distances are straight-line</strong> from the patch to a road centreline — not access or travel time. Frontage is a geometric proxy, not legal frontage.</li>
         <li><strong>Tax-exempt land</strong> (municipal, state, institutional) is shown but not screened.</li>
-        <li><strong>Vacancy</strong> means no mapped building footprint or an assessor vacant-land use class; footprints are mostly from 2011 imagery and use codes can be outdated, so some parcels are misclassified.</li>
+        <li><strong>Vacancy</strong> means no mapped building footprint at least half inside the parcel and no assessor year built. Footprints are mostly from 2011 imagery and assessor records can be outdated, so some parcels are misclassified; parcels the assessor codes as vacant land but that have a structure are counted as built and flagged.</li>
         <li><strong>Hand checks are AI-assisted and pending human review</strong> (see Validation).</li>
       </ul>
     </section>

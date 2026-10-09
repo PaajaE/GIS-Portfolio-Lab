@@ -363,7 +363,7 @@ function renderReport(pid) {
     <p class="meta">${esc(r("use"))} · zoning ${esc(r("zone") || "n/a")} · ${m2(area)} (${(area / 4046.86).toFixed(2)} ac) · ID ${esc(r("loc"))}</p>
     <span class="badge"><i style="background:${rob.color}"></i>${esc(rob.label)}</span>
     <p class="claim">${esc(rob.long[0].toUpperCase() + rob.long.slice(1))}.${screened ? "" : " Physical results below are shown for context only."}</p>
-    <p class="claim">${r("vac") ? `<strong>Vacant</strong> ${r("bld") ? "by assessor use code (a mapped building footprint exists — check)" : "(no mapped building)"}.` : `<strong>Built</strong>: the patch is unconstrained land beside the existing building (for example a yard), not a separate building site.`}</p>
+    <p class="claim">${r("vac") ? `<strong>Vacant</strong>: no mapped building footprint and no assessor year built.` : (r("conf") ? `<strong>Counted as built</strong> because a structure is mapped or assessed, although the assessor codes it as vacant land (possibly a barn or garage, or an outdated record). Whether the patch is a separate site is unknown — check.` : `<strong>Built</strong>: the patch is unconstrained land beside the existing structure (for example a yard), not a separate building site.`)}</p>
 
     <h3>Largest contiguous potentially feasible patch</h3>
     <div class="bars">${scenBars}</div>

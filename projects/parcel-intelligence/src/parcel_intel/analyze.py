@@ -274,14 +274,28 @@ def slope_stats() -> pd.DataFrame:
 
 @cache
 def vacancy() -> pd.DataFrame:
-    """Vacant = no mapped building footprint cell in the parcel, or an assessor vacant-land
-    use class. Built parcels' patches are mostly yards beside an existing building."""
-    p = parcels()
-    cells = per_parcel_sum((pidx() > 0) & building_mask())[1:]
+    """Vacant = no structure on the parcel. A parcel has a structure if at least half of some
+    mapped building footprint lies inside it (so a neighbour's footprint spilling over an
+    assessor line does not count) or the assessor records a year built (catches buildings
+    newer than the mostly-2011 footprints). The assessor vacant-land class is reported but
+    does not override a structure; such conflicts are flagged for review."""
+    p = parcels()[["pid", "geometry", "use_code", "year_built"]]
+    b = vec("buildings")[["geometry"]].reset_index(drop=True)
+    b["b_area"] = b.area
+    ov = gpd.overlay(b, p[["pid", "geometry"]], how="intersection", keep_geom_type=True)
+    own = ov.loc[ov.area >= 0.5 * ov["b_area"], "pid"].value_counts()
+    own_footprint = own.reindex(p["pid"], fill_value=0).to_numpy() > 0
+    assessor_building = (p["year_built"].fillna(0) > 0).to_numpy()
     code = p["use_code"].fillna("").str[:2].isin(C.VACANT_LAND_CLASSES).to_numpy()
-    has_building = cells > 0
+    has_structure = own_footprint | assessor_building
     return pd.DataFrame(
-        {"has_building": has_building, "vacant_land_code": code, "vacant": ~has_building | code},
+        {
+            "has_building": own_footprint,
+            "assessor_building": assessor_building,
+            "vacant_land_code": code,
+            "vacant": ~has_structure,
+            "vacancy_conflict": code & has_structure,
+        },
         index=pd.RangeIndex(1, n_parcels() + 1, name="pid"),
     )
 
@@ -405,7 +419,10 @@ def main() -> None:
     summary["robustness_vacant"] = m.loc[m["vacant"], "robustness"].value_counts().to_dict()
     summary["robustness_built"] = m.loc[~m["vacant"], "robustness"].value_counts().to_dict()
     summary["vacant_parcels"] = int(m["vacant"].sum())
-    summary["vacant_definition"] = "no mapped building footprint cell, or assessor vacant-land class 13x/39x/44x"
+    summary["vacant_definition"] = (
+        "no structure: no mapped building footprint at least half inside the parcel and no assessor year built"
+    )
+    summary["vacancy_conflicts"] = int(m["vacancy_conflict"].sum())
     em = m["eligible_mod"]
     summary["binding_constraint_mod"] = m.loc[em, "binding_constraint_mod"].value_counts().to_dict()
     summary["binding_constraint_mod_vacant"] = m.loc[em & m["vacant"], "binding_constraint_mod"].value_counts().to_dict()

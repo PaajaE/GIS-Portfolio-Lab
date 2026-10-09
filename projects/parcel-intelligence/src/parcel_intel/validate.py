@@ -248,8 +248,20 @@ def main() -> None:
         "assessor_comparison": check_assessor(m),
         "post2000_buildings": check_buildings(bits),
     }
-    picks = sample_parcels(m)
+    # The hand-check sample is frozen once drawn, so the human review sheet stays valid
+    # when upstream changes would otherwise re-draw it (delete the file to re-sample).
+    frozen = C.ROOT / "validation" / "hand_check_sample.json"
+    if frozen.exists():
+        picks = json.loads(frozen.read_text())["pids"]
+    else:
+        picks = sample_parcels(m)
+        frozen.write_text(json.dumps({"pids": picks, "rule": sample_parcels.__doc__.strip()}, indent=2))
     res["hand_check_sample"] = figures(picks, m)
+    # Review list: assessor says vacant land, but a structure is mapped or assessed (counted as built)
+    pm = A.parcels().set_index("pid")[["loc_id", "site_addr", "use_code", "use_desc", "year_built", "area_m2"]]
+    conf = pm.join(m[["has_building", "assessor_building", "robustness", "largest_m2_mod"]])[m["vacancy_conflict"]]
+    conf.round(0).to_csv(C.ROOT / "validation" / "vacancy_conflicts.csv")
+    res["vacancy_conflicts"] = int(len(conf))
     (C.OUT / "validation.json").write_text(json.dumps(res, indent=2))
     print(json.dumps(res, indent=2))
 

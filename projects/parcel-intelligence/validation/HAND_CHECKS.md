@@ -2,9 +2,10 @@
 
 The figures in `figures/` are rendered by `make validate` (`parcel_intel.validate`): left = hard
 constraints of the moderate scenario over a hillshade, right = feasible area after the 10 m opening for
-each scenario (nested). Sample: one vacant and one built parcel (> 4,000 m²) per screened robustness
-class (seeded), the two screened parcels where the naive baseline overstates most, and parcels
-discussed in `METHOD.md`.
+each scenario (nested). Sample (frozen in `hand_check_sample.json` so this sheet stays valid): one vacant and one built parcel
+(> 4,000 m²) per screened robustness class (seeded, drawn under the first vacancy rule), the two screened
+parcels where the naive baseline overstates most, and parcels discussed in `METHOD.md`. Under the current
+vacancy rule pid 209 is *built* (conflict), so the "robust · vacant" stratum is represented by 4193 only.
 
 The **"AI notes"** column is a visual plausibility check by the coding assistant (Claude), made against
 the same input layers the model uses. It is not independent and not a human review. The **"Human
@@ -16,7 +17,7 @@ Areas: largest contiguous patch, conservative / moderate / aggressive (m²).
 
 | pid | Address · assessor use | Patch con/mod/agg | Class · vacancy | AI notes (2026-10-08) | Human review |
 |---|---|---|---|---|---|
-| 209 | University Dr · Developable Commercial Land | 3,140 / 3,732 / 5,420 | robust · vacant (by use code) | Two mapped buildings on a parcel coded *vacant* land → counted vacant by the code rule although footprints exist. Steep bank along the north edge. Patch avoids buildings. Plausible geometry; **vacancy flag questionable** (outdated code or footprint?). | |
+| 209 | University Dr · Developable Commercial Land | 3,140 / 3,732 / 5,420 | robust · **built (vacancy conflict)** | Two mapped buildings on a parcel the assessor codes as vacant land. First counted vacant by the code; under the current rule counted built and flagged (one of 45 conflicts, `vacancy_conflicts.csv`). Steep bank along the north edge; patch avoids the buildings. Geometry plausible; which record is current is unknown. | |
 | 850 | 100 Cowls Rd · Single family | 820 / 1,308 / 2,804 | robust · built | Patch is the yard south of the house; slope cells and a small wetland buffer in the north. Plausible; patch is yard, not a separate lot. | |
 | 2181 | Montague Rd · Ch. 61A Christmas trees | 58,184 / 71,320 / 85,880 | assumption-dependent · vacant | Large open field; wetland buffers on both ends. Class driven by Chapter 61 eligibility (excluded in conservative), not by physical constraints — the right panel shows physical feasibility only. Plausible. | |
 | 6048 | 29 Stagecoach Rd · Single family | 272 / 1,588 / 2,944 | assumption-dependent · built | Scattered slope cells split the lot; the 10 m conservative setback fragments it below 500 m². Plausible; yard space. | |
@@ -36,6 +37,6 @@ Areas: largest contiguous patch, conservative / moderate / aggressive (m²).
 2. Private-way pavement counted as feasible (pid 3424) → road surface added to existing development.
 
 ## Open questions for the human reviewer
-- Is the vacancy rule (no footprint **or** vacant-land use code) right for parcels like 209?
+- Is the vacancy rule right? Current rule: *built* if a mapped footprint lies ≥ 50 % inside the parcel or the assessor records a year built; the vacant-land use code never overrides that. Check pid 209 and a handful of the 45 rows in `vacancy_conflicts.csv` against imagery (demolished? barn/garage only? outdated code?).
 - Are the Chapter 61 parcels (2181, 2755) appropriately "assumption-dependent", or should Chapter land be reported separately?
 - Do the wetland buffers look right against orthoimagery (1090, 302, 5868)?

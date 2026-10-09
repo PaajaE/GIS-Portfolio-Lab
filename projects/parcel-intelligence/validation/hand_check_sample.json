@@ -1,0 +1,4 @@
+{
+  "pids": [209, 850, 2181, 6048, 302, 5868, 5167, 2020, 4193, 2755, 1090, 3424, 4907, 1795],
+  "rule": "One vacant and one built parcel (> 4,000 m2) per screened robustness class, drawn with seed 20261008 under the first vacancy rule (2026-10-08), plus the two screened parcels with the largest naive overstatement and parcels documented in METHOD.md. Frozen for human review."
+}

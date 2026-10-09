@@ -1,0 +1,46 @@
+pid,loc_id,site_addr,use_code,use_desc,year_built,area_m2,has_building,assessor_building,robustness,largest_m2_mod
+4,F_373859_2973664,MEADOW ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,54528.0,True,False,constrained,0.0
+10,F_374012_2974834,MEADOW ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,48132.0,True,False,constrained,0.0
+20,F_374461_2975269,62 RUSSELLVILLE RD,3930,Agricultural/Horticultural Land not included in Chapter 61A,,39579.0,True,False,constrained,0.0
+25,F_374606_2972826,MEADOW ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,43555.0,True,False,constrained,0.0
+27,F_374735_2976340,RUSSELLVILLE RD,3930,Agricultural/Horticultural Land not included in Chapter 61A,,124784.0,True,False,constrained,0.0
+28,F_374769_2973080,MEADOW ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,25582.0,True,False,constrained,0.0
+143,F_376296_2950607,WEST POMEROY LN,1320,Undevelopable Residential Land,,3384.0,True,False,constrained,0.0
+209,F_376654_2961063,UNIVERSITY DR,3900,Developable Commercial Land,,9198.0,True,False,robust,3732.0
+326,F_377198_2940927,WEST ST,1320,Undevelopable Residential Land,,2890.0,True,False,robust,1676.0
+589,F_377970_2940496,1352 WEST ST,130,Developable Residential Land,1973.0,142958.0,True,True,robust,94504.0
+936,F_378610_2962007,DANA ST,1320,Undevelopable Residential Land,,275.0,True,False,constrained,0.0
+1220,F_379291_2978447,195 MONTAGUE RD,1300,Developable Residential Land,,34520.0,True,False,robust,25828.0
+1257,F_379376_2975802,PINE ST,3932,Apr Field,,17428.0,True,False,constrained,0.0
+1470,F_379781_2975612,NORTH PLEASANT ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,110664.0,True,False,constrained,0.0
+1572,F_379941_2975211,TEAWADDLE LN,3930,Agricultural/Horticultural Land not included in Chapter 61A,,78943.0,True,False,constrained,0.0
+2023,F_380709_2963850,43-51 NORTH PLEASANT ST,130,Developable Residential Land,1900.0,857.0,False,True,constrained,0.0
+2235,F_381196_2963330,26 SPRING ST,130,Developable Residential Land,2020.0,1322.0,True,True,constrained,0.0
+2398,F_381557_2944502,BAY RD,3930,Agricultural/Horticultural Land not included in Chapter 61A,,531150.0,True,False,constrained,0.0
+2895,F_382747_2963194,RAILROAD ST,3900,Developable Commercial Land,,13222.0,True,False,robust,5832.0
+3070,F_383171_2964114,HIGH ST,1320,Undevelopable Residential Land,,405.0,True,False,constrained,0.0
+3106,F_383256_2964146,42-46 HIGH ST,130,Developable Residential Land,1900.0,744.0,True,True,constrained,0.0
+3163,F_383359_2944284,495 MIDDLE ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,255327.0,True,False,constrained,0.0
+3231,F_383497_2963885,HIGH ST,1320,Undevelopable Residential Land,,669.0,True,False,constrained,0.0
+3251,F_383545_2945533,MIDDLE ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,94880.0,True,False,constrained,0.0
+4091,F_385313_2949684,SOUTH EAST ST,1300,Developable Residential Land,,6316.0,True,False,robust,4128.0
+4111,F_385376_2962076,133 SOUTH EAST ST,130,Developable Residential Land,2022.0,5008.0,True,True,assumption-dependent,1144.0
+4183,F_385647_2964320,NORTH EAST ST,1300,Developable Residential Land,,5868.0,True,False,assumption-dependent,1640.0
+4255,F_385918_2954040,SOUTH EAST ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,191132.0,True,False,constrained,0.0
+4271,F_385974_2972174,NORTH EAST ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,213686.0,True,False,constrained,0.0
+4290,F_386050_2968966,NORTH EAST ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,229177.0,True,False,constrained,0.0
+4335,F_386224_2946664,1384 SOUTH EAST ST,1300,Developable Residential Land,,15976.0,True,False,robust,11656.0
+4403,F_386520_2963804,815-817 MAIN ST,1300,Developable Residential Land,,2088.0,True,False,constrained,0.0
+4411,F_386557_2952894,SOUTH EAST ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,257058.0,True,False,constrained,0.0
+4464,F_386782_2972721,NORTH EAST ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,40649.0,True,False,constrained,0.0
+4486,F_386856_2983951,EAST LEVERETT RD,1320,Undevelopable Residential Land,,156458.0,True,False,robust,139072.0
+4512,F_386984_2969519,NORTH EAST ST,1320,Undevelopable Residential Land,,808.0,True,False,constrained,0.0
+4573,F_387238_2983383,EAST LEVERETT RD,1300,Developable Residential Land,,13321.0,True,False,robust,1472.0
+4577,F_387253_2960234,199 BELCHERTOWN RD,3932,Apr Field,,59899.0,True,False,constrained,0.0
+4822,F_388514_2944636,SOUTH EAST ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,204707.0,True,False,constrained,0.0
+4888,F_388763_2966630,NORTH EAST ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,368569.0,True,False,constrained,0.0
+4961,F_389116_2943622,SOUTH EAST ST,1320,Undevelopable Residential Land,,80030.0,True,False,robust,31492.0
+4979,F_389186_2960520,BELCHERTOWN RD,3930,Agricultural/Horticultural Land not included in Chapter 61A,,143836.0,True,False,constrained,0.0
+4992,F_389235_2970977,NORTH EAST ST,3930,Agricultural/Horticultural Land not included in Chapter 61A,,302314.0,True,False,constrained,0.0
+5022,F_389377_2942471,BAY RD,3930,Agricultural/Horticultural Land not included in Chapter 61A,,221878.0,True,False,constrained,0.0
+6007,F_393521_2940909,BAY RD,1300,Developable Residential Land,,7182.0,True,False,robust,3736.0

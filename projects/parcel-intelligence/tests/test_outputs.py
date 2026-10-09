@@ -79,9 +79,10 @@ def test_no_owner_fields(parcels):
 
 
 def test_vacancy_and_binding(parcels):
-    # vacant = no mapped building or a vacant-land use code; built parcels must have a building
-    assert (parcels.loc[~parcels.vacant, "has_building"]).all()
-    assert parcels.loc[parcels.vacant & parcels.has_building, "vacant_land_code"].all()
+    # vacant = no structure (own footprint or assessor year built); the use code never overrides it
+    structure = parcels.has_building | parcels.assessor_building
+    assert (parcels.vacant == ~structure).all()
+    assert (parcels.vacancy_conflict == (parcels.vacant_land_code & structure)).all()
     # neither the uniform setback nor existing development may be reported as a binding site constraint
     assert not parcels.binding_constraint_mod.isin(["yard_setback", "existing_development"]).any()
 

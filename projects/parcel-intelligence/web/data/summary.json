@@ -55,17 +55,17 @@
   "connectivity": 4
  },
  "results": {
-  "runtime_s": 17.5,
+  "runtime_s": 17.4,
   "parcels": 6091,
   "scenarios": {
    "conservative": {
     "eligible_parcels": 5462,
-    "eligible_vacant": 547,
-    "eligible_built": 4915,
+    "eligible_vacant": 498,
+    "eligible_built": 4964,
     "qualifying_parcels": 1389,
-    "qualifying_vacant": 163,
-    "qualifying_built": 1226,
-    "largest_patch_vacant_ha": 114.9,
+    "qualifying_vacant": 149,
+    "qualifying_built": 1240,
+    "largest_patch_vacant_ha": 96.7,
     "naive_pass_parcels": 4072,
     "naive_area_ha": 1722.5,
     "net_area_ha": 752.5,
@@ -84,12 +84,12 @@
    },
    "moderate": {
     "eligible_parcels": 5540,
-    "eligible_vacant": 612,
-    "eligible_built": 4928,
+    "eligible_vacant": 565,
+    "eligible_built": 4975,
     "qualifying_parcels": 3024,
-    "qualifying_vacant": 314,
-    "qualifying_built": 2710,
-    "largest_patch_vacant_ha": 406.2,
+    "qualifying_vacant": 300,
+    "qualifying_built": 2724,
+    "largest_patch_vacant_ha": 373.2,
     "naive_pass_parcels": 4891,
     "naive_area_ha": 2585.0,
     "net_area_ha": 1652.8,
@@ -108,12 +108,12 @@
    },
    "aggressive": {
     "eligible_parcels": 5540,
-    "eligible_vacant": 612,
-    "eligible_built": 4928,
+    "eligible_vacant": 565,
+    "eligible_built": 4975,
     "qualifying_parcels": 4204,
-    "qualifying_vacant": 384,
-    "qualifying_built": 3820,
-    "largest_patch_vacant_ha": 541.8,
+    "qualifying_vacant": 368,
+    "qualifying_built": 3836,
+    "largest_patch_vacant_ha": 505.4,
     "naive_pass_parcels": 5176,
     "naive_area_ha": 2846.6,
     "net_area_ha": 2228.0,
@@ -140,20 +140,21 @@
   },
   "robustness_vacant": {
    "not screened": 341,
-   "constrained": 228,
-   "robust": 163,
+   "constrained": 197,
    "assumption-dependent": 151,
-   "only aggressive": 70
+   "robust": 149,
+   "only aggressive": 68
   },
   "robustness_built": {
    "assumption-dependent": 1484,
-   "robust": 1226,
-   "only aggressive": 1110,
-   "constrained": 1108,
+   "robust": 1240,
+   "constrained": 1139,
+   "only aggressive": 1112,
    "not screened": 210
   },
-  "vacant_parcels": 953,
-  "vacant_definition": "no mapped building footprint cell, or assessor vacant-land class 13x/39x/44x",
+  "vacant_parcels": 906,
+  "vacant_definition": "no structure: no mapped building footprint at least half inside the parcel and no assessor year built",
+  "vacancy_conflicts": 45,
   "binding_constraint_mod": {
    "none": 3075,
    "steep_slope": 1482,
@@ -162,132 +163,132 @@
    "flood": 36
   },
   "binding_constraint_mod_vacant": {
-   "none": 255,
-   "steep_slope": 140,
-   "wetland_water": 136,
-   "protected": 73,
-   "flood": 8
+   "none": 246,
+   "steep_slope": 131,
+   "wetland_water": 128,
+   "protected": 50,
+   "flood": 10
   }
  },
  "sensitivity": [
   {
    "group": "moderate (reference)",
    "variant": "moderate",
-   "qualifying_vacant": 314,
+   "qualifying_vacant": 300,
    "qualifying_parcels": 3024,
-   "largest_patch_vacant_ha": 406.2,
+   "largest_patch_vacant_ha": 373.2,
    "largest_patch_total_ha": 1286.3
   },
   {
    "group": "slope threshold",
    "variant": "conservative",
-   "qualifying_vacant": 281,
+   "qualifying_vacant": 267,
    "qualifying_parcels": 2581,
-   "largest_patch_vacant_ha": 286.9,
+   "largest_patch_vacant_ha": 266.7,
    "largest_patch_total_ha": 980.9
   },
   {
    "group": "slope threshold",
    "variant": "aggressive",
-   "qualifying_vacant": 318,
+   "qualifying_vacant": 304,
    "qualifying_parcels": 3145,
-   "largest_patch_vacant_ha": 456.3,
+   "largest_patch_vacant_ha": 421.5,
    "largest_patch_total_ha": 1407.2
   },
   {
    "group": "wetland & stream setbacks",
    "variant": "conservative",
-   "qualifying_vacant": 288,
+   "qualifying_vacant": 275,
    "qualifying_parcels": 2785,
-   "largest_patch_vacant_ha": 366.5,
+   "largest_patch_vacant_ha": 335.6,
    "largest_patch_total_ha": 1144.8
   },
   {
    "group": "wetland & stream setbacks",
    "variant": "aggressive",
-   "qualifying_vacant": 335,
+   "qualifying_vacant": 319,
    "qualifying_parcels": 3170,
-   "largest_patch_vacant_ha": 431.7,
+   "largest_patch_vacant_ha": 397.8,
    "largest_patch_total_ha": 1379.7
   },
   {
    "group": "flood definition",
    "variant": "conservative",
-   "qualifying_vacant": 313,
+   "qualifying_vacant": 298,
    "qualifying_parcels": 3011,
-   "largest_patch_vacant_ha": 403.7,
+   "largest_patch_vacant_ha": 370.5,
    "largest_patch_total_ha": 1280.5
   },
   {
    "group": "flood definition",
    "variant": "aggressive",
-   "qualifying_vacant": 317,
+   "qualifying_vacant": 303,
    "qualifying_parcels": 3034,
-   "largest_patch_vacant_ha": 413.7,
+   "largest_patch_vacant_ha": 383.6,
    "largest_patch_total_ha": 1307.8
   },
   {
    "group": "open-space protection levels",
    "variant": "conservative",
-   "qualifying_vacant": 314,
+   "qualifying_vacant": 300,
    "qualifying_parcels": 3024,
-   "largest_patch_vacant_ha": 406.2,
+   "largest_patch_vacant_ha": 373.2,
    "largest_patch_total_ha": 1286.3
   },
   {
    "group": "priority habitat",
    "variant": "conservative",
-   "qualifying_vacant": 284,
+   "qualifying_vacant": 269,
    "qualifying_parcels": 2955,
-   "largest_patch_vacant_ha": 365.1,
+   "largest_patch_vacant_ha": 331.9,
    "largest_patch_total_ha": 1155.6
   },
   {
    "group": "yard setback",
    "variant": "conservative",
-   "qualifying_vacant": 266,
+   "qualifying_vacant": 252,
    "qualifying_parcels": 1970,
-   "largest_patch_vacant_ha": 364.5,
+   "largest_patch_vacant_ha": 333.6,
    "largest_patch_total_ha": 1020.6
   },
   {
    "group": "yard setback",
    "variant": "aggressive",
-   "qualifying_vacant": 352,
+   "qualifying_vacant": 337,
    "qualifying_parcels": 3888,
-   "largest_patch_vacant_ha": 443.2,
+   "largest_patch_vacant_ha": 408.2,
    "largest_patch_total_ha": 1540.1
   },
   {
    "group": "chapter 61 land",
    "variant": "conservative",
-   "qualifying_vacant": 266,
+   "qualifying_vacant": 250,
    "qualifying_parcels": 2963,
-   "largest_patch_vacant_ha": 243.0,
+   "largest_patch_vacant_ha": 208.7,
    "largest_patch_total_ha": 1060.8
   },
   {
    "group": "minimum patch width (opening)",
    "variant": "6 m square",
-   "qualifying_vacant": 325,
+   "qualifying_vacant": 310,
    "qualifying_parcels": 3444,
-   "largest_patch_vacant_ha": 423.0,
+   "largest_patch_vacant_ha": 389.4,
    "largest_patch_total_ha": 1405.2
   },
   {
    "group": "minimum patch width (opening)",
    "variant": "14 m square",
-   "qualifying_vacant": 298,
+   "qualifying_vacant": 284,
    "qualifying_parcels": 2640,
-   "largest_patch_vacant_ha": 381.4,
+   "largest_patch_vacant_ha": 349.3,
    "largest_patch_total_ha": 1157.5
   }
  ],
  "validation": {
   "kernel_full_town_moderate": {
    "identical_outputs": true,
-   "reference_s": 0.79,
-   "rust_s": 0.237
+   "reference_s": 0.76,
+   "rust_s": 0.228
   },
   "rasterization_vs_geos": {
    "flood": {
@@ -387,7 +388,7 @@
    {
     "pid": 209,
     "robustness": "robust",
-    "vacant": true
+    "vacant": false
    },
    {
     "pid": 850,
@@ -454,7 +455,8 @@
     "robustness": "not screened",
     "vacant": false
    }
-  ]
+  ],
+  "vacancy_conflicts": 45
  },
  "benchmark": {
   "algorithm": "per-parcel k x k square opening (k=5, 2 m cells) then 4-connected component labelling restricted to one parcel; reference = scipy.ndimage per parcel bounding box, Rust = single raster pass (separable run-length erosion/dilation + union-find)",

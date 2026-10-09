@@ -8,7 +8,7 @@ protected open space, NHESP priority habitat, lidar slope, a lot-line setback an
 under three explicit assumption sets. Per parcel it reports the *largest contiguous potentially feasible
 patch*, whether it qualifies (≥ 500 m²), a robustness class across the scenarios, vacant vs built, the
 constraint breakdown and the binding site constraint. On built parcels the patch is mostly the yard beside
-the building, so results are split and the vacant figures lead (moderate: 314 of 612 screened vacant
+the building, so results are split and the vacant figures lead (moderate: 300 of 565 screened vacant
 parcels qualify). Hand checks are AI-assisted and **pending human review** ([`validation/HAND_CHECKS.md`](validation/HAND_CHECKS.md)).
 Result wording: *potential feasibility under stated spatial screening assumptions* — not entitlement.
 
@@ -58,7 +58,7 @@ GeoParquet, EPSG:26986, one row per parcel. Suffix `_con` / `_mod` / `_agg` = sc
 | `largest_m2_*` | **largest contiguous potentially feasible patch** (m²) |
 | `n_patches_*` | patches ≥ 500 m² |
 | `qualifying_*` | eligible and largest patch ≥ 500 m² (a *qualifying patch*) |
-| `has_building`, `vacant_land_code`, `vacant` | mapped building footprint in parcel · assessor vacant-land class 13x/39x/44x · vacant = no building or vacant-land class |
+| `has_building`, `assessor_building`, `vacant_land_code`, `vacant`, `vacancy_conflict` | a mapped footprint ≥ 50 % inside · assessor year built · assessor vacant-land class 13x/39x/44x · vacant = neither structure signal · vacant-land code but a structure (counted as built) |
 | `c_<constraint>_m2_*` | parcel area under each constraint category (m², categories overlap) |
 | `relief_<constraint>_m2` | gain in moderate largest patch if that constraint alone is dropped (m²) |
 | `binding_constraint_mod`, `dominant_constraint_mod` | site constraint with the largest relief (setback and existing development excluded) / category with the largest area |

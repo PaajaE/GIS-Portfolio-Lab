@@ -181,6 +181,7 @@ def export_details(parcels: gpd.GeoDataFrame) -> None:
         "vac": p["vacant"].astype(int),
         "vcode": p["vacant_land_code"].astype(int),
         "bld": p["has_building"].astype(int),
+        "conf": p["vacancy_conflict"].astype(int),
         "front": p["frontage_public_m"].round(),
         "rdist": p["patch_road_dist_m_mod"].round().fillna(-1),
         "road": p["nearest_road_name"].fillna(""),

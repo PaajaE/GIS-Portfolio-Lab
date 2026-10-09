@@ -80,8 +80,14 @@ Two transparent baselines, both reported per parcel and scenario:
 5. **Robustness class** from the three scenarios (they are nested — every constraint and the opening are
    monotone — and nesting is asserted for every parcel): *robust* (qualifies in all), *assumption-dependent*
    (moderate + aggressive), *only aggressive*, *constrained* (none), *not screened* (tax-exempt).
-6. **Vacant vs built.** *Vacant* = no mapped building footprint cell in the parcel, or an assessor
-   vacant-land class (13x residential, 39x commercial, 44x industrial); everything else is *built*. On a
+6. **Vacant vs built.** A parcel has a *structure* if at least half of some mapped building footprint
+   lies inside it (so a neighbour's footprint spilling over an assessor line does not count) or the
+   assessor records a year built (catches houses newer than the mostly-2011 footprints). *Vacant* = no
+   structure (906 parcels, 565 of them screened in the moderate scenario); everything else is *built*.
+   The assessor vacant-land class (13x/39x/44x) is reported but does not override a structure; the 45
+   parcels where it conflicts (23 agricultural parcels, code 393, plus 22 vacant residential/commercial codes) are counted
+   as built and flagged (`vacancy_conflict`, list in `validation/vacancy_conflicts.csv`); the report does
+   not call their patch a yard. On a
    built parcel the patch is almost always the yard beside the building — land outside mapped
    constraints, not a separate building site. Every town-level result is reported for both groups, and
    the vacant figures lead.
@@ -151,24 +157,24 @@ person yet. Defects these checks found and that were fixed: mixed assessor recor
 raised: vacant-coded parcels with mapped buildings (pid 209), cul-de-sac bulbs (pid 3424).
 
 ## Uncertainty and sensitivity
-One-at-a-time, from moderate. Moderate reference: **314 of 612 screened vacant parcels** qualify (406 ha in
-their largest patches); 3,024 of 5,540 screened parcels overall, 2,710 of them built.
+One-at-a-time, from moderate. Moderate reference: **300 of 565 screened vacant parcels** qualify (373 ha in
+their largest patches); 3,024 of 5,540 screened parcels overall, 2,724 of them built.
 
 | Assumption varied (stricter / looser) | Vacant parcels qualifying | All parcels qualifying |
 |---|---|---|
-| uniform lot-line setback 10 m / 3 m | 266 / 352 (−48 / +38) | 1,970 / 3,888 (−1,054 / +864) |
-| Chapter 61 land excluded | 266 (−48) | 2,963 (−61) |
-| slope 15 % / 35 % | 281 / 318 (−33 / +4) | 2,581 / 3,145 (−443 / +121) |
-| priority habitat excluded | 284 (−30) | 2,955 (−69) |
-| wetland & stream setbacks | 288 / 335 (−26 / +21) | 2,785 / 3,170 (−239 / +146) |
-| minimum patch width 14 m / 6 m | 298 / 325 (−16 / +11) | 2,640 / 3,444 (−384 / +420) |
-| flood definition | 313 / 317 (−1 / +3) | 3,011 / 3,034 (−13 / +10) |
-| protected-land levels P+T+L | 314 (0) | 3,024 (0: the T/L parcels are tax-exempt anyway) |
+| Chapter 61 land excluded | 250 (−50) | 2,963 (−61) |
+| uniform lot-line setback 10 m / 3 m | 252 / 337 (−48 / +37) | 1,970 / 3,888 (−1,054 / +864) |
+| slope 15 % / 35 % | 267 / 304 (−33 / +4) | 2,581 / 3,145 (−443 / +121) |
+| priority habitat excluded | 269 (−31) | 2,955 (−69) |
+| wetland & stream setbacks | 275 / 319 (−25 / +19) | 2,785 / 3,170 (−239 / +146) |
+| minimum patch width 14 m / 6 m | 284 / 310 (−16 / +10) | 2,640 / 3,444 (−384 / +420) |
+| flood definition | 298 / 303 (−2 / +3) | 3,011 / 3,034 (−13 / +10) |
+| protected-land levels P+T+L | 300 (0) | 3,024 (0: the T/L parcels are tax-exempt anyway) |
 
 **Conclusion.** Counted over all parcels, the result is dominated by the lot-line setback and the minimum
 patch width — i.e. by how much yard is left on built lots, which is not the decision question. Over
 **vacant** parcels the picture is more balanced and more relevant: the stricter values of the setback, Chapter 61
-status, the slope threshold, priority habitat and wetland setbacks each remove 26–48 parcels (8–15 %), while the
+status, the slope threshold, priority habitat and wetland setbacks each remove 25–50 parcels (8–17 %), while the
 flood definition barely matters (floodplain parcels are mostly constrained by wetlands too). This is why
 the app shows robustness classes and leads with vacant parcels. Not quantified: positional error of parcel
 lines and wetland mapping (no independent reference data); resolution sensitivity (1 m vs 2 m slope).
@@ -232,7 +238,9 @@ proxy (not legal frontage), and sewer share is servicing context.
 | 2026-10-08 | Binding constraint excludes the uniform setback | include all | the setback always "binds" by construction (4,038 parcels) |
 | 2026-10-08 | Python ↔ Rust via PyO3/maturin as a uv path dependency | CLI binary exchanging files | zero-copy NumPy, one `uv sync`, testable from pytest |
 | 2026-10-08 | Tax-exempt parcels not screened | screen all | public/institutional land is not on the development market; still shown |
-| 2026-10-08 | Split results vacant / built; lead with vacant (quality gate) | single totals | 2,710 of 3,024 qualifying parcels (moderate) are built — their patch is a yard |
+| 2026-10-08 | Split results vacant / built; lead with vacant (quality gate) | single totals | 2,724 of 3,024 qualifying parcels (moderate) are built — their patch is a yard |
+| 2026-10-08 | Vacancy = no structure (own footprint ≥ 50 % inside, or assessor year built); use code does not override (final review) | footprint cell anywhere OR vacant-land code | 44 vacant-coded parcels had their own mapped building, 11 "vacant" parcels had an assessed building (half built 2017–2025), 28 parcels were "built" only through a neighbour's footprint spillover |
+| 2026-10-08 | Hand-check sample frozen in `validation/hand_check_sample.json` | re-draw each run | a human review sheet must not change under the reviewer |
 | 2026-10-08 | Existing development excluded from the binding-constraint choice (quality gate) | include | "binding = existing building" on 64 % of eligible parcels meant "demolish the house" |
 | 2026-10-08 | "Usable" renamed "qualifying patch" (quality gate) | keep | the threshold screens area outside mapped constraints; it does not establish usability |
 | 2026-10-08 | Hand-check sample: one vacant + one built per class, naive-overstatement picks from screened parcels only (quality gate) | 2 random per class, all parcels | first sample's overstatement picks were tax-exempt parcels |
