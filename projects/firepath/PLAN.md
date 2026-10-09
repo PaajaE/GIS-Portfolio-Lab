@@ -611,6 +611,12 @@ shared-structure changes, and I will not make them without your approval (Q4).**
 
 ## 16. Milestones (revision 2; vertical slices; each ends with exit criteria and one local commit)
 
+**Revision 3 (after M1a):** M1a is split into **M1a-1** (done: spec, fixtures, D2, D3, bake-off) and
+**M1a-2**. M1a-2 covers: the heterogeneous-mosaic experiment with its threshold declared beforehand
+(proposal in M1A_RESULTS); radius-16 graph wind-change test and cost; one sub-cell barrier treatment
+for the level set, then a re-run of criterion 4; the owner's D1 decision; the Rothermel/SB40 fuel table;
+the inclined-plane fixture; and the primary-source full-text checks (on the Mac). M1b and M2 wait for D1.
+
 Dependency order: **M0 (Mac probe) ∥ M1a → M1b → M2 → [gate: fixtures + screening] → M3 → M4 →
 [gate: G1/G2] → M5 → M6 → M7 → M8 → M9.** Calibration (M3) does not start until M1a's fixtures pass,
 M1b ran end-to-end, and the screening (`fire_screening.json`) is frozen. Network (M6) and the web app (M8)
@@ -619,7 +625,7 @@ do not start until validation (M4) has written its G1/G2 verdicts.
 | # | Milestone | Exit criteria (measurable) | Commit |
 |---|---|---|---|
 | **M0** | Probe, inventory, screening | ✔ probe implemented + crawler tested; ✔ cloud run. Open: `provenance/probe_build-mac.json` committed; every source classified reachable / needs key / blocked; NIROPS inventory with scan times for all pool fires; Pipeline/Haywire rule applied; LANDFIRE version availability per fire; ≥ 30 GB free; `validation/fire_screening.json` frozen with masked days | `chore(firepath): M0 probe on build Mac` |
-| **M1a** | **Mathematical specification + analytic fixtures (no data)** | D1–D3 decided. Bake-off run, criteria 1–5 reported for both candidates, winner recorded. Inclined-plane fixture passes. Rothermel/SB40 table (E1–E11) implemented in Python: R0, φ_w, φ_s for all 40 models × D1–D4 × L1–L4 match pyretechnics within rel. 1e-6 (or every difference explained) and published GTR-153 chart values within chart precision. Primary-source checks done or explicitly left [hypothesis] for E6, E7, E11, E12. All tests pass | `feat(firepath): M1a spec and fixtures` |
+| **M1a** | **Mathematical specification + analytic fixtures (no data).** *Status 2026-10-09 (`M1A_RESULTS.md`): D2 decided, D3 adopted provisionally, bake-off run, **D1 undecided** (no scheme passed); fuel table, inclined plane and primary-source checks still open* | D1–D3 decided. Bake-off run, criteria 1–5 reported for both candidates, winner recorded. Inclined-plane fixture passes. Rothermel/SB40 table (E1–E11) implemented in Python: R0, φ_w, φ_s for all 40 models × D1–D4 × L1–L4 match pyretechnics within rel. 1e-6 (or every difference explained) and published GTR-153 chart values within chart precision. Primary-source checks done or explicitly left [hypothesis] for E6, E7, E11, E12. All tests pass | `feat(firepath): M1a spec and fixtures` |
 | **M1b** | **Slice 1: Mangum 2020 end-to-end with the Python reference** (calibration fire, never a validation fire) | provenance manifest with sha256 for every input; LANDFIRE rule version with the leakage test (no 2020 disturbance in the AOI); HRRR rotated and assigned to intervals (test vector); gridMET → moisture M1–M5; perimeter audit O1 report; Mode A run from the first usable perimeter + one-step-ahead; B0/B1 with hand-set (not calibrated) parameters; all O2/O3 metrics per step; error maps with legends; stage-boundary tests on the real outputs (CRS, grid identity, codes, nodata, time order). **Grid:** 90 m for the full fire and 30 m on one sub-window, because the reference costs ≈ 1.6 ms/cell at radius 8 (≈ 6 min at 90 m) | `feat(firepath): M1b reference slice on Mangum` |
 | M2 | Rust kernel at parity | the M1a scheme in Rust; all fixture files + 50 random grids within tolerance; bit-identical across thread counts; first benchmark rows | `feat(firepath): Rust kernel at parity` |
 | M3 | Calibration fires + calibration | gate passed; Bush, Telegraph prepared; DE (3 seeds) for the model, B0, B1; profiles; leave-one-fire-out; lock commit | `feat(firepath): calibration` + lock |
@@ -665,8 +671,12 @@ do not start until validation (M4) has written its G1/G2 verdicts.
 ## 17. Open questions for you
 
 **Revision 2: decisions that need your approval now** (detail and evidence in `CRITICAL_REVIEW.md`):
-- **D1, propagation scheme:** approve the M1a bake-off (radius-8 label-setting vs Eulerian level set) under
-  the pre-declared criteria, and accept the winner even if it is the level set.
+- **D1, propagation scheme:** the bake-off ran (M1A_RESULTS). No scheme passed all criteria, so this is
+  open again. Recommendation: approve the M1a-2 experiments (mosaic reference, radius-16 wind change,
+  level-set barrier treatment), then decide between the WENO5 level set and the radius-16 graph on
+  those results.
+- **D2:** decided (FARSITE form, m/s effective midflame, cap 8; BehavePlus linear as a sensitivity).
+- **D3:** `a_u` adopted provisionally, with λ as a separate input-uncertainty factor.
 - **D2, length-to-breadth relation:** Anderson-type (mi/h coefficients 0.1147/0.0692, cap 8) as the
   default, 1 + 0.25 U as a sensitivity, both verified at the primary source in M1a.
 - **D3, wind sensitivity:** a wind-speed multiplier `a_U` before WAF, instead of v1's `a_w` on φ_w.

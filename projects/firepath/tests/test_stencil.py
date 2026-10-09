@@ -89,3 +89,11 @@ def test_stencil_angular_error_grows_with_elongation():
     assert worst > 0.5
     worst_r8 = max(stencil_error(8, 4.0, np.radians(a))["head"] for a in range(0, 46, 1))
     assert worst_r8 < 0.07
+
+
+def test_bakeoff_criterion1_for_large_stencils_is_exactly_predictable():
+    """Exact asymptotic values used in M1A_RESULTS.md (wind angles 0-45 deg, 2.5 deg steps)."""
+    def worst(r, lb):
+        return max(stencil_error(r, lb, np.radians(2.5 * i))["forward_max"] for i in range(19))
+    assert worst(8, 4.0) > 0.05 and worst(8, 8.0) > 0.10        # radius 8 fails criterion 1
+    assert worst(16, 4.0) < 0.05 and worst(16, 8.0) < 0.10      # radius 16 passes criterion 1

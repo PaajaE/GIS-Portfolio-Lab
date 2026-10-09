@@ -1,6 +1,8 @@
 # FirePath — Method
 
-> Status: **specification, revision 2 (2026-10-09), after `CRITICAL_REVIEW.md`.** Spec section: §7.
+> Status: **specification, revision 3 (2026-10-09), after M1a (`M1A_RESULTS.md`).** Spec section: §7.
+> Revision 3 changes: E7 decided (D2), E12 documented, `a_u` adopted provisionally (D3) with a separate
+> input-uncertainty factor λ, and the propagation-scheme status after the bake-off (D1 still open).
 > No model has been run on real data. Where a choice is still open (decisions D1–D3 in
 > `CRITICAL_REVIEW.md`), both options are written down and nothing is silently adopted. The labels
 > **[published]** (an equation from the cited literature) and **[FirePath]** (an approximation or choice
@@ -55,20 +57,21 @@ were unreachable from the review session.
 | E3 | Slope factor | φ_s = 5.275 β^−0.3 tan²θ | **[published]** Rothermel 1972; cross-checked | θ = slope angle of the cell plane | closed form |
 | E4 | Wind–slope combination | **φ⃗_E = φ_w ŵ + a_s φ_s ŝ** (vector sum; ŵ downwind, ŝ upslope, both in the slope plane); R_head = k·g(f)·R0·(1 + \|φ⃗_E\|); direction of max spread = φ⃗_E / \|φ⃗_E\| (upslope if φ_E = 0 and φ_s > 0) | **[published]** vector method (Rothermel 1983; Finney 1998; Andrews 2018); pyretechnics projects onto the slope plane. `k`, `g`, `a_s` are **[FirePath]** multipliers | dimensionless | aligned wind+slope reproduces R0(1+φ_w+φ_s); opposed gives \|φ_w − φ_s\| |
 | E5 | Effective wind | U_E = φ_w⁻¹(\|φ⃗_E\|) = [\|φ⃗_E\| (β/β_op)^E / C]^(1/B), always with the **unmodified** published φ_w | **[published]**; cross-checked | ft/min | round trip φ_w(U_E) = φ_E |
-| E6 | Wind / ROS limit | default **R_head ≤ U_E** (same units) | **[published]** Andrews, Cruz & Rothermel 2013 (abstract read; full text to verify). Original U_E ≤ 0.9 I_R kept as a sensitivity | — | both branches |
-| E7 | Length-to-breadth | **D2 open:** (a) LB = 0.936 e^(0.1147 U) + 0.461 e^(−0.0692 U) − 0.397, U = U_E in **mi/h**, cap 8; (b) LB = 1 + 0.25 U_E (mi/h) | (a) Anderson 1983-type, as in FARSITE/BehavePlus per pyretechnics' "behave" mode [sourced]; the m/s form has 0.2566/0.1548 (PLAN v1 unit error, CRITICAL_REVIEW P0-2); (b) attributed to Rothermel 1991 [to verify] | — | `test_anderson_units_mph_vs_ms_forms_agree`; LB(0) = 1 |
+| E6 | Wind / ROS limit | default **R_head ≤ max(U_E, k·g·R0)** (same units; the max() keeps the cap from falling below the no-wind ROS, a FirePath guard) | **[published]** Andrews, Cruz & Rothermel 2013 (abstract read; full text to verify). Original U_E ≤ 0.9 I_R kept as a sensitivity | — | both branches |
+| E7 | Length-to-breadth | **D2 decided (rev 3):** LB = 0.936 e^(0.2566 U_E) + 0.461 e^(−0.1548 U_E) − 0.397, **U_E = effective midflame wind in m/s**, capped at 8 (≡ 0.1147 / 0.0692 per mi/h). Sensitivity: LB = 1 + 0.25 U_E (U_E in mi/h) | **[published]** Finney 1998 (RMRS-RP-4, FARSITE): Anderson (1983) relation, single ellipse, −0.397 added so that LB(0) = 1, cap 8 from Alexander (1985); m/s units and "effective midflame" read from search excerpts of the primary document (full text not opened; Anderson 1983 not accessed). Sensitivity relation: BehavePlus source code (`xfblib.cpp`) | dimensionless; U_E from E5 | `test_anderson_units_mph_vs_ms_forms_agree`, `test_lb_relations_at_reference_speeds` |
 | E8 | Directional spread (ray speed from the ignition point at the rear focus) | e = √(LB² − 1)/LB; r(ψ) = R_head (1 − e)/(1 − e cos ψ), ψ = angle from the max-spread direction | **[published]** elliptical fire shape (Albini & Chase 1980 for e; Richards 1990; used as the travel-time norm by MTT, Finney 2002) | head r(0) = R_head; back (1−e)/(1+e)·R_head | `test_ellipse_basics`; uniform-wind fixture |
 | E9 | Moisture damping and extinction | η_M = 1 − 2.59 r + 5.11 r² − 3.52 r³, r = min(M_f/M_x, 1), per category; live extinction M_x,live = max(M_x,dead, 2.9 W′(1 − M_f,dead/M_x,dead) − 0.226) | **[published]** Rothermel 1972; Albini 1976 [to cross-check] | fractions | η_M(0) = 1, η_M(1) = 0; extinction gives R0 = 0, so the cell becomes a barrier (static) |
 | E10 | Dynamic fuel models | cured share T = clamp((120 − M_lh)/90, 0, 1) of the live herbaceous load moves to a dead herbaceous class with the live herbaceous SAV and the dead 1-h moisture | **[published]** Scott & Burgan 2005; consistent with the IFTDSS table and pyretechnics | M_lh in % | `test_dynamic_fuel_curing` |
 | E11 | Wind adjustment factor | unsheltered WAF = 1.83/ln((20 + 0.36 H)/(0.13 H)), H = fuel bed depth (ft); sheltered WAF = 0.555/(√(f H_c) ln((20 + 0.36 H_c)/(0.13 H_c))) | **[published]** Andrews 2012 (GTR-266), via pyretechnics. **Unresolved:** the definition of the crown-fill portion f (pyretechnics: CC/3, crown ratio 1) and the sheltering threshold | H_c canopy height (ft) | after the source check |
-| E12 | 10 m → 20 ft wind | U_20ft = U_10m / 1.15 | **[FirePath, hypothesis]**: source to be found (CRITICAL_REVIEW P1-10) | — | — |
+| E12 | 10 m → 20 ft wind | U_20ft = U_10m / 1.15 | **[FirePath convention, unverified]**: no primary source found; one press source gives /1.2 for the NWS; a neutral log profile gives 1.09–1.20 for z0 = 0.03–0.5 m (computed). The factor is a constant multiplier on wind speed, so any error is **absorbed by `a_u`** and cannot be separated from it | — | — |
 
-**Free parameters** (replacing PLAN v1 §6.7, pending D3):
+**Free parameters** (revision 3: D3 adopted provisionally, see M1A_RESULTS §D3):
 
 | Parameter | Meaning | Range | Calibrated |
 |---|---|---|---|
 | `k` | global spread coefficient (outside the bracket in E4) | 0.2–5, log | yes |
-| `a_U` (D3 recommendation; v1 had `a_w` on φ_w) | multiplier on the 20 ft wind speed before WAF; acts on φ_w and LB through E2/E5/E7 | 0.5–2, log | yes |
+| `a_u` (D3, provisional; v1 had `a_w` on φ_w) | systematic multiplier on the 20 ft wind speed before WAF: absorbs HRRR speed bias, the E12 conversion and WAF error; acts on φ_w and LB only through E2/E5/E7 | 0.5–2, log | yes (then fixed) |
+| λ (not a model parameter) | **input-uncertainty** multiplier on wind speed in scenarios; effective speed = λ·a_u·U20. Centred at 1; its spread comes from independent HRRR-vs-station *random* error, not bias (the bias is in `a_u`) | from data (M1b) | no: scenario only |
 | `a_s` | multiplier on φ_s inside the vector sum | 0.3–3, log | yes, if identifiable |
 | `g_timber/g_grass` | fuel-group multiplier (TL/TU vs GR/GS/SH) | 0.3–3, log | yes, if identifiable |
 | `m` | multiplier on the three dead moistures | 0.7–1.3 | **no**: scenario variable (confounded with `k`) |
@@ -90,8 +93,14 @@ inclined-plane fixture (M1a).
 - M4: dynamic transfer per E10.
 - M5: `m` scales M1–M2 only.
 
-**Fixed during calibration:** M1–M4, `m` = 1, LB relation (D2), stencil/scheme (D1), WAF rule, wind
-conversion. **Scenario variables:** `m`, live scenario, wind-speed and direction offsets, fuel map
+**Fixed during calibration:** M1–M4, `m` = 1, λ = 1, LB relation (D2), stencil/scheme (D1), WAF rule,
+wind conversion. **Separation of model sensitivity from input uncertainty (D3):** `a_u` and λ enter only as
+the product λ·a_u, so the model cannot tell them apart (tested: identical arrival fields). The separation is
+by design: `a_u` is estimated once on the calibration fires and frozen; λ is varied only in scenarios, with
+a distribution taken from an independent comparison (HRRR vs RAWS). Results report the two sources apart:
+the parameter range (behavioural set of `a_u`) and the input range (λ).
+
+**Scenario variables:** `m`, live scenario, wind-speed and direction offsets, fuel map
 version, `a_s` within its behavioural range. **Identifiability (expected; profiles decide):** `k` strong;
 `k`–`a_U` correlated on wind-driven days; `a_s`, `g` weak unless the calibration fires contrast them;
 `m` not separable from `k`.
@@ -106,9 +115,31 @@ non-burnable fuel (NB 91/92/93/98/99), missing fuel, missing DEM, or R0 = 0 at i
 Barriers are time-invariant, because moisture is static and wind never makes a burnable cell's speed zero
 (R_head ≥ R0·k·g > 0 and e < 1).
 
-**D1 is open** (label-setting on a large stencil vs Eulerian level set; CRITICAL_REVIEW P0-1). The
-label-setting specification below is complete and implemented in `firepath.reference`. If D1 selects the
-level set, this section gets a time-stepping specification, and P2–P4 remain as a fixture reference.
+**D1 is open after the M1a bake-off** (`M1A_RESULTS.md`): no candidate passed all pre-declared criteria.
+Both candidates are implemented and specified, and neither is adopted.
+- **Label-setting** (P1–P4 below, `firepath.reference`). Exact on its graph and on barriers. Its
+  angular error is exactly predictable (`firepath.stencil_table`). At radius 8 it fails the accuracy,
+  area-spread and wind-change criteria.
+- **Eulerian level set** (L1–L4 below, `firepath.levelset`). The WENO5 variant passes the accuracy and
+  wind-change criteria, misses the area-spread criterion at LB 8 (3.5 % vs 3 %), and fails the barrier
+  fixtures (late behind one-cell gaps and around obstacle corners). It also has an O(Δx) delay at fuel-speed
+  contrasts (diagnostic).
+
+**L1. Equation.** φ < 0 is burned. φ_t + H(∇φ) = 0, where H(p) is the support function of the unit-time
+spread set (focus-anchored ellipse, E8): H(p) = a[e(p·ŵ) + √((p·ŵ)² + (1 − e²)(p·ŵ⊥)²)], with
+a = R_head/(1 + e). This is the front-normal speed of the Huygens envelope **[published principle]**. It
+is not the ray speed applied to the normal direction, which pyretechnics uses.
+**L2. Discretisation [FirePath].** Local Lax–Friedrichs numerical Hamiltonian with the dissipation bound
+|∂H/∂p| evaluated at the corners of the local one-sided gradient box, capped by the half-extent of the
+spread set. ENO2 + Heun (B2) or WENO5 + TVD-RK3 (B5). dt = 0.4 Δx / max(α_x + α_y), with steps aligned to
+the weather-interval boundaries. Ghost cells by edge replication.
+**L3. Barriers [FirePath].** Barrier cells are frozen (φ ≥ Δx). Faces adjacent to a barrier carry zero
+flux (the ghost value is the cell's own value), and high-order stencils that touch a barrier fall back to
+first order. Without this, the front choked at one-cell gaps.
+**L4. Arrival and ignition.** The arrival is the linear interpolation of the zero crossing within a step.
+A point ignition is a disc of radius r0 (2 cells in the bake-off). Under ENO2, discs smaller than about
+one cell vanish. Mode A: φ0 = signed distance to the cell-centre raster region; inside barriers are not
+sources.
 
 **P1. Edges.** For a stencil offset δ = (dr, dc) (primitive, Chebyshev radius ≤ ρ), the edge e = (u, δ) is
 the straight segment from the centre of u to the centre of v = u + δ, of length L = Δ‖δ‖ in direction

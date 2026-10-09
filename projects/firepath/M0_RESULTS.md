@@ -5,6 +5,15 @@
 > none is assumed below. The cloud results are reported because they are real, but they describe this
 > session's egress policy, not the data providers.
 
+## Update during M1a (2026-10-09)
+
+You asked for `make probe` on the build Mac. **It was not run there.** This cloud session has no route to
+the Mac: no peer or Remote Control session was reachable (session list empty), and no SSH or other access
+was available. The probe was re-run in the cloud session and gave the same result as before: 3 of 32
+endpoints answered (HRRR ×2, PyPI), 28 were proxy 403 and 1 timed out. The duplicate JSON was not kept.
+Every statement below about the Mac therefore remains "not run". M1b stays **NO-GO** until
+`provenance/probe_build-mac.json` exists.
+
 ## How to complete M0 on the build Mac
 
 ```bash

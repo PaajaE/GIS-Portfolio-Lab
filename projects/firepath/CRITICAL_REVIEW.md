@@ -13,6 +13,19 @@
 > sha256 `37aa5694…c665ba66`, read only, not installed or copied). Agreement with it is agreement with
 > another implementation, not proof from the primary source.
 
+## Corrections after M1a (2026-10-09; details in `M1A_RESULTS.md`)
+
+- **P0-3, magnitude corrected.** The original text said that for fine fuels B ≈ 0.4–0.6, so a_w = 2 would
+  give 15–28 mi/h of effective wind. That was wrong. B = 0.02526 σ^0.54 is ≈ 1.5 for σ = 2000 ft⁻¹ (≈ 0.7
+  for σ = 500), so v1's a_w moves the effective wind by a_w^(1/B) ≈ a_w^0.65 for fine fuels
+  (`test_v1_a_w_inside_phi_w_distorts_shape`). The finding stands: the shape change is not zero, and
+  its size depends on the fuel model, so a_w had no single interpretation. The severity is lower than
+  stated.
+- **P0-2, source.** The FARSITE report (Finney 1998, RMRS-RP-4) gives the m/s form for the *effective*
+  midflame wind, capped at 8 (search excerpts of the primary document). The BehavePlus source code uses
+  1 + 0.25 U_E (mi/h). Its attribution to Rothermel (1991) in this review was not confirmed.
+- **P0-1.** The M1a bake-off ran. No candidate passed all pre-declared criteria (see M1A_RESULTS).
+
 ## Summary
 
 | Rank | ID | Finding (PLAN v1 reference) | Status after this task |

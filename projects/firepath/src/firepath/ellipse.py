@@ -1,7 +1,10 @@
 """Elliptical fire shape (METHOD.md, equation audit rows E5–E6).
 
-Published relations only; units are explicit in every name. The choice between the two length-to-breadth
-relations is an open decision (CRITICAL_REVIEW.md P0-2), so both are provided and neither is a default.
+Published relations only; units are explicit in every name (M1A_RESULTS.md, D2):
+* FARSITE form (Finney 1998, RMRS-RP-4: Anderson 1983 minus 0.397 so that LB(0) = 1, single ellipse,
+  U = effective midflame wind in m/s, capped at 8)  -> lb_anderson_ms (default)
+* BehavePlus surface form 1 + 0.25 U_E (U_E in mi/h; BehavePlus source code)  -> lb_rothermel1991_mph
+  (sensitivity; the name is kept for compatibility, the attribution to Rothermel 1991 was not confirmed).
 """
 
 from __future__ import annotations
@@ -28,7 +31,9 @@ def lb_anderson_ms(u_ms):
 
 
 def lb_rothermel1991_mph(u_mph):
-    """LB = 1 + 0.25 U (U in mi/h); attributed to Rothermel (1991). To verify at the primary source."""
+    """LB = 1 + 0.25 U_E (U_E = effective wind at the head, mi/h): BehavePlus surface relation (source code).
+    Its attribution to Rothermel (1991) was not confirmed: that report's cited equation is a crown-fire
+    relation in 20-ft wind with coefficient 0.125."""
     return 1.0 + 0.25 * np.asarray(u_mph, dtype=float)
 
 

@@ -1,0 +1,109 @@
+{
+ "grid": [
+  121,
+  121
+ ],
+ "cell_m": 30.0,
+ "source": [
+  90,
+  30
+ ],
+ "r0_cells_levelset": 2.0,
+ "angles_deg": [
+  0.0,
+  2.5,
+  5.0,
+  7.5,
+  10.0,
+  12.5,
+  15.0,
+  17.5,
+  20.0,
+  22.5,
+  25.0,
+  27.5,
+  30.0,
+  32.5,
+  35.0,
+  37.5,
+  40.0,
+  42.5,
+  45.0
+ ],
+ "lb": [
+  2.0,
+  3.0,
+  4.0,
+  8.0
+ ],
+ "min_distance_cells": 25,
+ "t_eval_min": 1500.0,
+ "parts": [
+  "m1a_bakeoff_dijkstra_r2.json",
+  "m1a_bakeoff_dijkstra_r8.json",
+  "m1a_bakeoff_levelset.json",
+  "m1a_bakeoff_levelset5.json"
+ ],
+ "summary": {
+  "dijkstra_r2": {
+   "c1_worst_fwd_err_lb_le4": 0.864206221787077,
+   "c1_worst_fwd_err_lb8": Infinity,
+   "c1_pass": false,
+   "c2_area_spread_by_lb": {
+    "2.0": 0.0563160163828411,
+    "3.0": 0.1763795771015987,
+    "4.0": 0.3290322580645162,
+    "8.0": 0.947293447293447
+   },
+   "c2_pass": false,
+   "c3_wind_change_max_abs": 1.0628498588763988,
+   "c3_pass": false,
+   "median_seconds_per_run": 0.09626768050020473
+  },
+  "dijkstra_r8": {
+   "c1_worst_fwd_err_lb_le4": 0.060665933796756555,
+   "c1_worst_fwd_err_lb8": 0.24259713802390892,
+   "c1_pass": false,
+   "c2_area_spread_by_lb": {
+    "2.0": 0.014223553080990024,
+    "3.0": 0.023248699908228754,
+    "4.0": 0.0400379306711622,
+    "8.0": 0.1702127659574468
+   },
+   "c2_pass": false,
+   "c3_wind_change_max_abs": 0.1368344001025279,
+   "c3_pass": false,
+   "median_seconds_per_run": 4.711263865499404
+  },
+  "levelset": {
+   "c1_worst_fwd_err_lb_le4": 0.054960939001019504,
+   "c1_worst_fwd_err_lb8": 0.13195704073762893,
+   "c1_pass": false,
+   "c2_area_spread_by_lb": {
+    "2.0": 0.016238685365758964,
+    "3.0": 0.041205087626751104,
+    "4.0": 0.059864966241560305,
+    "8.0": 0.10202587258969979
+   },
+   "c2_pass": false,
+   "c3_wind_change_max_abs": 0.17980888861587618,
+   "c3_pass": false,
+   "median_seconds_per_run": 4.725431756500257
+  },
+  "levelset5": {
+   "c1_worst_fwd_err_lb_le4": 0.0074420864296169675,
+   "c1_worst_fwd_err_lb8": 0.015004229781271139,
+   "c1_pass": true,
+   "c2_area_spread_by_lb": {
+    "2.0": 0.007895432737712997,
+    "3.0": 0.012900305533552143,
+    "4.0": 0.01771752385051286,
+    "8.0": 0.03467153284671536
+   },
+   "c2_pass": false,
+   "c3_wind_change_max_abs": 0.031806734900598155,
+   "c3_pass": true,
+   "median_seconds_per_run": 10.640407842000513
+  }
+ }
+}

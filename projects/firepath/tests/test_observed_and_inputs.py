@@ -88,3 +88,12 @@ def test_moisture_multiplier_scales_dead_only_and_floor():
 @pytest.mark.parametrize("herb, cured", [(30, 1.0), (20, 1.0), (60, 2 / 3), (75, 0.5), (90, 1 / 3), (120, 0.0), (150, 0.0)])
 def test_dynamic_fuel_curing(herb, cured):
     assert cured_fraction(herb) == pytest.approx(cured)
+
+
+def test_lb_relations_at_reference_speeds():
+    """D2: FARSITE form (Finney 1998: effective midflame wind, m/s, cap 8) vs BehavePlus (1 + 0.25 U mi/h)."""
+    u_ms = 10.0 / MS_TO_MPH
+    assert float(lb_anderson_ms(u_ms)) == pytest.approx(2.78, abs=0.01)
+    assert float(lb_rothermel1991_mph(10.0)) == pytest.approx(3.5)
+    assert float(lb_anderson_ms(20.0 / MS_TO_MPH)) == 8.0          # cap reached near 20 mi/h
+    assert float(lb_rothermel1991_mph(20.0)) == pytest.approx(6.0)

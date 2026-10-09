@@ -6,12 +6,12 @@ requires-python = ">=3.12,<3.14"
 dependencies = [
     "numpy>=2.1",
     "shapely>=2.0",      # independent geometric reference (distance to polygon) in fixtures; perimeter geometry later
+    "scipy>=1.14",       # distance transform (level-set init), csgraph oracle; later optimiser and metrics
 ]
 
 [dependency-groups]
 dev = [
     "pytest>=8",
-    "scipy>=1.14",       # independent graph oracle (csgraph Dijkstra) for static fixtures; convex hull for stencil-error analysis
 ]
 
 [build-system]
