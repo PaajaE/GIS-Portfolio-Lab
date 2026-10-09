@@ -1,0 +1,56 @@
+# Publish the static portfolio apps to GitHub Pages.
+# No analysis runs here: the apps serve artifacts precomputed locally and committed under
+# projects/<name>/web/ (see CLAUDE.md, "local-first computation, static delivery").
+name: Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "projects/*/web/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/configure-pages@v6
+      - name: Assemble site
+        run: |
+          mkdir -p _site/parcel-intelligence
+          cp -R projects/parcel-intelligence/web/. _site/parcel-intelligence/
+          # Root: send visitors to the first (currently only) app.
+          cat > _site/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en"><head><meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>GIS Portfolio Lab</title>
+          <meta http-equiv="refresh" content="0; url=parcel-intelligence/">
+          <link rel="canonical" href="parcel-intelligence/">
+          </head><body><p><a href="parcel-intelligence/">Parcel Intelligence — Amherst, MA</a></p></body></html>
+          EOF
+          du -sh _site
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}parcel-intelligence/
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
