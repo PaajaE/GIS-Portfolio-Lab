@@ -10,10 +10,14 @@ dependencies = [
     "geopandas>=1.0",    # vector overlay on GEOS/shapely, GeoParquet I/O
     "pyogrio>=0.10",     # fast GDAL vector I/O for geopandas
     "pyarrow>=17",       # Parquet / GeoParquet
+    "terrain-kernels",   # local Rust terrain kernels (rust/), PLAN §10
 ]
 
 [dependency-groups]
 dev = ["pytest>=8"]
+
+[tool.uv.sources]
+terrain-kernels = { path = "rust", editable = true }
 
 [build-system]
 requires = ["hatchling"]

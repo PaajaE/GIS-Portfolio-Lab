@@ -92,6 +92,7 @@ dependencies = [
     { name = "pyogrio" },
     { name = "rasterio" },
     { name = "scipy" },
+    { name = "terrain-kernels" },
 ]
 
 [package.dev-dependencies]
@@ -107,6 +108,7 @@ requires-dist = [
     { name = "pyogrio", specifier = ">=0.10" },
     { name = "rasterio", specifier = ">=1.4" },
     { name = "scipy", specifier = ">=1.14" },
+    { name = "terrain-kernels", editable = "rust" },
 ]
 
 [package.metadata.requires-dev]
@@ -402,6 +404,17 @@ sdist = { url = "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274", size = 11050, upload-time = "2024-12-04T17:35:26.475Z" },
 ]
+
+[[package]]
+name = "terrain-kernels"
+version = "0.1.0"
+source = { editable = "rust" }
+dependencies = [
+    { name = "numpy" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "numpy", specifier = ">=2.1" }]
 
 [[package]]
 name = "tzdata"

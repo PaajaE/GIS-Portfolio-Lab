@@ -435,7 +435,7 @@ temporal slice**.
   - There is no `gdaldem` in the wheels, so the 3×3 formulas are implemented from the papers.
   - They are tested on analytic surfaces: a plane gives exact slope, a paraboloid exact curvature; plus flats and
     ties.
-- **Tolerance:** min, max and relief exact; mean, sd, TPI and curvature rtol 1e-9 in f64; outputs stored as f32.
+- **Tolerance:** min, max and relief exact; mean and TPI rtol 1e-6; sd atol 1e-4; 3×3 outputs rtol/atol 1e-6 (revised in M2: float32 outputs cannot meet the planned rtol 1e-9; see METHOD).
   Windows are square, a documented simplification of circular windows.
 - **Edge and nodata semantics:** strict. Any nodata or off-grid cell in the window gives nodata, and empty input
   gives empty output. Tested on borders, holes, all-nodata, 1×1, flats and ties.
@@ -640,6 +640,7 @@ order.
 | M1 | Scaffold, harvest, data QA | `uv sync` builds; inventory snapshot frozen (GeoParquet + query date + `lastEditDate` + checksum); inventory audit table reproduces §0 counts; DEM dates recorded; MRMS GRIB read; licences of NC orthos and footprints settled; Helene lidar availability and the Watauga mapping method checked; reference products obtained or dropped |
 |  | **M1 status 2026-10-09** | **done:** snapshot frozen (2,962 positives reproduced by test); every DEM tile dated and pre-event; MRMS GRIB read; NC ortho terms read (free use, citation); footprints licence unresolved (local only); Helene lidar not public (pairing (c) shelved); Watauga 2024 mapped on Nearmap imagery; ScienceBase optional, not obtained; NCGS debris-flow model is post-event (2025-04) and query-disabled → see DATA_SOURCES. Report: `validation/M1_DATA_QA.md` |
 | M2 | Terrain kernels | reference + Rust pass fixtures including edges and nodata; full-AOI predictors; `benchmarks/terrain_kernels.json` |
+|  | **M2 status 2026-10-09** | **done:** 13 predictor layers for both regions; Rust = oracle on all fixtures and all benchmark inputs; speed-up 2.5–3.5× (windows), 1.1–2.9× (3×3); kernel time ≈ 10 % of a full run. Summed-area-table precision bug found and fixed. Hydrology (contributing area, distance to channel) moves to M3 with the slope units |
 | M3 | Stack, slope units, sampling | harmonized stack passes boundary tests; units at three thresholds; labels, negatives, modifier audit CSV, density layer |
 | M4 | Baseline + validation harness | HUC-12 folds frozen; logistic-regression spatial-CV metrics + random-split contrast; variogram check; reference comparison |
 | M5 | Advanced model | nested-tuned gradient boosting; Δ vs baseline with block-bootstrap CI; calibration diagnostic; error map; grouped importance + artefact audit |
