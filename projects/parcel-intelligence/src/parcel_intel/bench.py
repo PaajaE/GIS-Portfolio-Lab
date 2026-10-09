@@ -75,7 +75,9 @@ def main() -> None:
         row["speedup_median"] = round(row["reference_median_s"] / row["rust_median_s"], 2)
         rows.append(row)
         print(row)
-    calls = len(C.SCENARIO_ORDER) + (len(A.BITS) - 1) + 15  # scenarios + leave-one-out + sensitivity runs
+    # scenarios + leave-one-out (all categories except no_data) + one call per sensitivity row
+    n_sens = len(json.loads((C.OUT / "sensitivity.json").read_text()))
+    calls = len(C.SCENARIO_ORDER) + (len(A.BITS) - 1) + n_sens
     full = rows[-1]
     out = {
         "algorithm": (

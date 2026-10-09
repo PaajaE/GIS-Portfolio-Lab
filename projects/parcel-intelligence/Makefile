@@ -1,6 +1,9 @@
 # Parcel Intelligence — local, reproducible pipeline.
 # Requires: uv, a Rust toolchain (cargo), tippecanoe (for `make tiles`).
 PY := uv run python -m parcel_intel
+# cargo is needed by `uv sync` (builds rust/) and `make test`; add the usual rustup locations
+# (rustup's default and Homebrew's rustup) in case the shell profile does not.
+export PATH := $(PATH):$(HOME)/.cargo/bin:/opt/homebrew/opt/rustup/bin
 
 .PHONY: all setup harvest prepare analyze access validate bench tiles web test serve
 

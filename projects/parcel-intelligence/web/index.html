@@ -15,29 +15,38 @@
 
 <header class="intro">
   <p class="eyebrow">Parcel Intelligence · Amherst, Massachusetts</p>
-  <h1>Where is there still room to build — and how much of that depends on the assumptions?</h1>
+  <h1>How much of each Amherst parcel lies outside mapped constraints — and how much depends on the assumptions?</h1>
   <p class="lede">
     A spatial screen of <strong data-v="results.parcels">…</strong> parcels against flood zones, wetlands and streams,
-    protected land, steep slopes, setbacks and existing development. Each parcel gets the
-    <em>largest contiguous potentially feasible area</em> under three stated assumption sets.
-    This is potential feasibility under stated screening assumptions — not a legal development entitlement.
+    protected land, steep slopes, setbacks and existing development, under three stated assumption sets.
+    Of the <strong data-v="results.scenarios.moderate.eligible_vacant">…</strong> screened <strong>vacant</strong> parcels,
+    <strong data-v="results.scenarios.moderate.qualifying_vacant">…</strong> keep a contiguous patch of at least
+    <span data-v="patch_definition.min_patch_m2" data-fmt="int">…</span>&nbsp;m² under moderate assumptions,
+    <strong data-v="results.robustness_vacant.robust">…</strong> under all three.
+    On built parcels such a patch is mostly the yard beside an existing building.
+    Potential feasibility under stated screening assumptions — not a legal development entitlement.
   </p>
 
   <figure class="robust-bar" aria-labelledby="robust-caption">
-    <div class="bar" id="robust-bar" role="img" aria-describedby="robust-caption"></div>
+    <p class="bar-label">Vacant parcels <small>(no mapped building, or assessor vacant-land class)</small></p>
+    <div class="bar" id="robust-bar-vacant" role="img" aria-describedby="robust-caption"></div>
+    <p class="bar-label">Built parcels <small>(patch = land beside the existing building)</small></p>
+    <div class="bar" id="robust-bar-built" role="img" aria-describedby="robust-caption"></div>
     <figcaption id="robust-caption">
-      Parcels by how many scenarios leave a contiguous patch of at least
-      <span data-v="patch_definition.min_patch_m2" data-fmt="int">…</span>&nbsp;m² (a
-      <span data-v="patch_definition.open_size_m">…</span>&nbsp;m × <span data-v="patch_definition.open_size_m">…</span>&nbsp;m square must fit).
-      Darker = holds under stricter assumptions. This bar is also the map legend.
+      Parcels by how many scenarios leave a <em>qualifying patch</em>: one contiguous area of at least
+      <span data-v="patch_definition.min_patch_m2" data-fmt="int">…</span>&nbsp;m² outside all mapped hard constraints, into which a
+      <span data-v="patch_definition.open_size_m">…</span>&nbsp;m × <span data-v="patch_definition.open_size_m">…</span>&nbsp;m square fits.
+      Darker = holds under stricter assumptions. These bars are also the map legend; on the map, built parcels are faded.
     </figcaption>
+    <a class="to-map" href="#map-wrap">Explore the map ↓</a>
   </figure>
 </header>
 
 <main>
   <section class="workbench" aria-label="Interactive map and parcel report">
-    <div class="map-wrap">
+    <div class="map-wrap" id="map-wrap">
       <div id="map" role="region" aria-label="Map of Amherst parcels. Select a parcel by clicking it, or use the search in the parcel panel."></div>
+      <button type="button" class="to-report" id="to-report" hidden>View parcel report ↓</button>
       <p class="map-note">Map: precomputed results; parcel lines are assessor maps, not surveys.</p>
     </div>
 
@@ -69,6 +78,7 @@
           <li><label><input type="checkbox" data-layer="habitat"><span class="sw sw-hab"></span>Priority habitat (NHESP)</label></li>
           <li><label><input type="checkbox" data-layer="slope"><span class="sw sw-slope"></span>Slope ≥ 15 / 25 / 35 %</label></li>
           <li><label><input type="checkbox" data-layer="buildings" checked><span class="sw sw-bld"></span>Buildings</label></li>
+          <li><label><input type="checkbox" id="fade-built" checked><span class="sw sw-fade"></span>Fade built parcels</label></li>
         </ul>
       </details>
 
@@ -92,7 +102,7 @@
     <section id="why">
       <h2>Why it matters</h2>
       <p>Housing committees, land trusts and site-selection analysts need to decide which parcels deserve a closer look —
-        survey, soils tests, legal review. A screen that overstates usable land wastes that effort; one that hides how much the
+        survey, soils tests, legal review. A screen that overstates available land wastes that effort; one that hides how much the
         answer depends on a threshold invites false confidence. This screen reports the contiguous patch, not the sum of
         fragments, and shows the result under three assumption sets rather than one.</p>
     </section>
@@ -130,7 +140,8 @@
         <li><strong>Morphological opening</strong> removes slivers: a cell stays only if a <span data-v="patch_definition.open_size_m">…</span>&nbsp;m square of feasible cells of the same parcel contains it.</li>
         <li><strong>Connected components</strong> (4-connected, never across parcel lines) give the largest contiguous patch and the number of patches of at least <span data-v="patch_definition.min_patch_m2" data-fmt="int">…</span>&nbsp;m².</li>
         <li><strong>Baselines</strong>: a naive parcel-level screen (parcel-mean slope and a single point test) and the net unconstrained area (parcel minus constraints, no contiguity).</li>
-        <li><strong>Leave-one-out</strong>: each site constraint is dropped in turn to find the one whose removal enlarges the largest patch most (the binding constraint).</li>
+        <li><strong>Leave-one-out</strong>: each site constraint is dropped in turn to find the one whose removal enlarges the largest patch most (the binding constraint). The uniform lot-line setback and existing development are not site constraints and are excluded from this choice.</li>
+        <li><strong>Vacant vs built</strong>: results are split, because on a built parcel the patch is mostly yard beside the building, not a separate building site.</li>
       </ol>
       <div class="table-wrap"><table id="scenario-table">
         <caption>Scenario assumptions (hard exclusions; soft factors such as sewer service are reported, not mixed in)</caption>
@@ -159,12 +170,12 @@
     <section id="results">
       <h2>Results and sensitivity</h2>
       <div class="table-wrap"><table id="results-table">
-        <caption>Town totals over eligible parcels (hectares). Naive and net baselines vs the largest contiguous patch.</caption>
-        <thead><tr><th scope="col">Scenario</th><th scope="col" class="n">Parcels with usable patch</th><th scope="col" class="n">Naive screen</th><th scope="col" class="n">Net unconstrained</th><th scope="col" class="n">Largest contiguous patch</th></tr></thead>
+        <caption>Screened parcels with a qualifying patch, split by vacancy, and town area totals (hectares, all screened parcels): naive and net baselines vs the largest contiguous patch.</caption>
+        <thead><tr><th scope="col">Scenario</th><th scope="col" class="n">Vacant with qualifying patch</th><th scope="col" class="n">Built with qualifying patch</th><th scope="col" class="n">Naive screen</th><th scope="col" class="n">Net unconstrained</th><th scope="col" class="n">Largest patch (of which vacant)</th></tr></thead>
         <tbody></tbody>
       </table></div>
       <h3>Which assumption moves the result most?</h3>
-      <p class="muted">One assumption at a time is set to its conservative or aggressive value, everything else at moderate. Bars show the change in parcels with a usable patch.</p>
+      <p class="muted">One assumption at a time is set to its conservative or aggressive value, everything else at moderate. Bars show the change in <strong>vacant</strong> parcels with a qualifying patch.</p>
       <div id="tornado" class="tornado" role="img" aria-describedby="tornado-text"></div>
       <p id="tornado-text" class="sr-only"></p>
     </section>
@@ -180,6 +191,8 @@
         <li><strong>Road surface</strong> uses an assumed half-width by road class, not measured pavement.</li>
         <li><strong>Distances are straight-line</strong> from the patch to a road centreline — not access or travel time. Frontage is a geometric proxy, not legal frontage.</li>
         <li><strong>Tax-exempt land</strong> (municipal, state, institutional) is shown but not screened.</li>
+        <li><strong>Vacancy</strong> means no mapped building footprint or an assessor vacant-land use class; footprints are mostly from 2011 imagery and use codes can be outdated, so some parcels are misclassified.</li>
+        <li><strong>Hand checks are AI-assisted and pending human review</strong> (see Validation).</li>
       </ul>
     </section>
 

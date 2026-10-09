@@ -60,7 +60,12 @@
   "scenarios": {
    "conservative": {
     "eligible_parcels": 5462,
-    "usable_parcels": 1389,
+    "eligible_vacant": 547,
+    "eligible_built": 4915,
+    "qualifying_parcels": 1389,
+    "qualifying_vacant": 163,
+    "qualifying_built": 1226,
+    "largest_patch_vacant_ha": 114.9,
     "naive_pass_parcels": 4072,
     "naive_area_ha": 1722.5,
     "net_area_ha": 752.5,
@@ -79,7 +84,12 @@
    },
    "moderate": {
     "eligible_parcels": 5540,
-    "usable_parcels": 3024,
+    "eligible_vacant": 612,
+    "eligible_built": 4928,
+    "qualifying_parcels": 3024,
+    "qualifying_vacant": 314,
+    "qualifying_built": 2710,
+    "largest_patch_vacant_ha": 406.2,
     "naive_pass_parcels": 4891,
     "naive_area_ha": 2585.0,
     "net_area_ha": 1652.8,
@@ -98,7 +108,12 @@
    },
    "aggressive": {
     "eligible_parcels": 5540,
-    "usable_parcels": 4204,
+    "eligible_vacant": 612,
+    "eligible_built": 4928,
+    "qualifying_parcels": 4204,
+    "qualifying_vacant": 384,
+    "qualifying_built": 3820,
+    "largest_patch_vacant_ha": 541.8,
     "naive_pass_parcels": 5176,
     "naive_area_ha": 2846.6,
     "net_area_ha": 2228.0,
@@ -123,106 +138,156 @@
    "only aggressive": 1180,
    "not screened": 551
   },
+  "robustness_vacant": {
+   "not screened": 341,
+   "constrained": 228,
+   "robust": 163,
+   "assumption-dependent": 151,
+   "only aggressive": 70
+  },
+  "robustness_built": {
+   "assumption-dependent": 1484,
+   "robust": 1226,
+   "only aggressive": 1110,
+   "constrained": 1108,
+   "not screened": 210
+  },
+  "vacant_parcels": 953,
+  "vacant_definition": "no mapped building footprint cell, or assessor vacant-land class 13x/39x/44x",
   "binding_constraint_mod": {
-   "existing_development": 3521,
-   "steep_slope": 711,
-   "wetland_water": 677,
-   "none": 514,
-   "protected": 90,
-   "flood": 27
+   "none": 3075,
+   "steep_slope": 1482,
+   "wetland_water": 856,
+   "protected": 91,
+   "flood": 36
+  },
+  "binding_constraint_mod_vacant": {
+   "none": 255,
+   "steep_slope": 140,
+   "wetland_water": 136,
+   "protected": 73,
+   "flood": 8
   }
  },
  "sensitivity": [
   {
    "group": "moderate (reference)",
    "variant": "moderate",
-   "usable_parcels": 3024,
+   "qualifying_vacant": 314,
+   "qualifying_parcels": 3024,
+   "largest_patch_vacant_ha": 406.2,
    "largest_patch_total_ha": 1286.3
   },
   {
    "group": "slope threshold",
    "variant": "conservative",
-   "usable_parcels": 2581,
+   "qualifying_vacant": 281,
+   "qualifying_parcels": 2581,
+   "largest_patch_vacant_ha": 286.9,
    "largest_patch_total_ha": 980.9
   },
   {
    "group": "slope threshold",
    "variant": "aggressive",
-   "usable_parcels": 3145,
+   "qualifying_vacant": 318,
+   "qualifying_parcels": 3145,
+   "largest_patch_vacant_ha": 456.3,
    "largest_patch_total_ha": 1407.2
   },
   {
    "group": "wetland & stream setbacks",
    "variant": "conservative",
-   "usable_parcels": 2785,
+   "qualifying_vacant": 288,
+   "qualifying_parcels": 2785,
+   "largest_patch_vacant_ha": 366.5,
    "largest_patch_total_ha": 1144.8
   },
   {
    "group": "wetland & stream setbacks",
    "variant": "aggressive",
-   "usable_parcels": 3170,
+   "qualifying_vacant": 335,
+   "qualifying_parcels": 3170,
+   "largest_patch_vacant_ha": 431.7,
    "largest_patch_total_ha": 1379.7
   },
   {
    "group": "flood definition",
    "variant": "conservative",
-   "usable_parcels": 3011,
+   "qualifying_vacant": 313,
+   "qualifying_parcels": 3011,
+   "largest_patch_vacant_ha": 403.7,
    "largest_patch_total_ha": 1280.5
   },
   {
    "group": "flood definition",
    "variant": "aggressive",
-   "usable_parcels": 3034,
+   "qualifying_vacant": 317,
+   "qualifying_parcels": 3034,
+   "largest_patch_vacant_ha": 413.7,
    "largest_patch_total_ha": 1307.8
   },
   {
    "group": "open-space protection levels",
    "variant": "conservative",
-   "usable_parcels": 3024,
+   "qualifying_vacant": 314,
+   "qualifying_parcels": 3024,
+   "largest_patch_vacant_ha": 406.2,
    "largest_patch_total_ha": 1286.3
   },
   {
    "group": "priority habitat",
    "variant": "conservative",
-   "usable_parcels": 2955,
+   "qualifying_vacant": 284,
+   "qualifying_parcels": 2955,
+   "largest_patch_vacant_ha": 365.1,
    "largest_patch_total_ha": 1155.6
   },
   {
    "group": "yard setback",
    "variant": "conservative",
-   "usable_parcels": 1970,
+   "qualifying_vacant": 266,
+   "qualifying_parcels": 1970,
+   "largest_patch_vacant_ha": 364.5,
    "largest_patch_total_ha": 1020.6
   },
   {
    "group": "yard setback",
    "variant": "aggressive",
-   "usable_parcels": 3888,
+   "qualifying_vacant": 352,
+   "qualifying_parcels": 3888,
+   "largest_patch_vacant_ha": 443.2,
    "largest_patch_total_ha": 1540.1
   },
   {
    "group": "chapter 61 land",
    "variant": "conservative",
-   "usable_parcels": 2963,
+   "qualifying_vacant": 266,
+   "qualifying_parcels": 2963,
+   "largest_patch_vacant_ha": 243.0,
    "largest_patch_total_ha": 1060.8
   },
   {
    "group": "minimum patch width (opening)",
    "variant": "6 m square",
-   "usable_parcels": 3444,
+   "qualifying_vacant": 325,
+   "qualifying_parcels": 3444,
+   "largest_patch_vacant_ha": 423.0,
    "largest_patch_total_ha": 1405.2
   },
   {
    "group": "minimum patch width (opening)",
    "variant": "14 m square",
-   "usable_parcels": 2640,
+   "qualifying_vacant": 298,
+   "qualifying_parcels": 2640,
+   "largest_patch_vacant_ha": 381.4,
    "largest_patch_total_ha": 1157.5
   }
  ],
  "validation": {
   "kernel_full_town_moderate": {
    "identical_outputs": true,
-   "reference_s": 0.76,
-   "rust_s": 0.235
+   "reference_s": 0.79,
+   "rust_s": 0.237
   },
   "rasterization_vs_geos": {
    "flood": {
@@ -255,6 +320,11 @@
     "developable": 176,
     "undevelopable": 264
    },
+   "n_potentially_developable": 7,
+   "group_labels": {
+    "developable": "developable or potentially developable (130, 131, 390, 441)",
+    "undevelopable": "undevelopable (132, 392)"
+   },
    "auc": {
     "naive_con": 0.59,
     "net_con": 0.75,
@@ -281,15 +351,15 @@
      "undevelopable": 372.0
     }
    },
-   "usable_share_con": {
+   "qualifying_share_con": {
     "developable": 0.54,
     "undevelopable": 0.186
    },
-   "usable_share_mod": {
+   "qualifying_share_mod": {
     "developable": 0.841,
     "undevelopable": 0.333
    },
-   "usable_share_agg": {
+   "qualifying_share_agg": {
     "developable": 0.932,
     "undevelopable": 0.47
    },
@@ -315,52 +385,74 @@
   },
   "hand_check_sample": [
    {
-    "pid": 409,
-    "robustness": "robust"
+    "pid": 209,
+    "robustness": "robust",
+    "vacant": true
    },
    {
-    "pid": 738,
-    "robustness": "robust"
+    "pid": 850,
+    "robustness": "robust",
+    "vacant": false
    },
    {
-    "pid": 1080,
-    "robustness": "assumption-dependent"
+    "pid": 2181,
+    "robustness": "assumption-dependent",
+    "vacant": true
    },
    {
-    "pid": 6038,
-    "robustness": "assumption-dependent"
+    "pid": 6048,
+    "robustness": "assumption-dependent",
+    "vacant": false
    },
    {
-    "pid": 3424,
-    "robustness": "only aggressive"
+    "pid": 302,
+    "robustness": "only aggressive",
+    "vacant": true
    },
    {
-    "pid": 4789,
-    "robustness": "only aggressive"
+    "pid": 5868,
+    "robustness": "only aggressive",
+    "vacant": false
    },
    {
-    "pid": 4822,
-    "robustness": "constrained"
+    "pid": 5167,
+    "robustness": "constrained",
+    "vacant": true
    },
    {
-    "pid": 4869,
-    "robustness": "constrained"
+    "pid": 2020,
+    "robustness": "constrained",
+    "vacant": false
    },
    {
-    "pid": 1795,
-    "robustness": "not screened"
+    "pid": 4193,
+    "robustness": "robust",
+    "vacant": true
    },
    {
-    "pid": 644,
-    "robustness": "not screened"
+    "pid": 2755,
+    "robustness": "assumption-dependent",
+    "vacant": true
    },
    {
     "pid": 1090,
-    "robustness": "assumption-dependent"
+    "robustness": "assumption-dependent",
+    "vacant": false
+   },
+   {
+    "pid": 3424,
+    "robustness": "only aggressive",
+    "vacant": true
    },
    {
     "pid": 4907,
-    "robustness": "constrained"
+    "robustness": "constrained",
+    "vacant": true
+   },
+   {
+    "pid": 1795,
+    "robustness": "not screened",
+    "vacant": false
    }
   ]
  },
@@ -387,11 +479,11 @@
     ],
     "parcels_present": 286,
     "identical": true,
-    "reference_min_s": 0.0592,
-    "reference_median_s": 0.0599,
-    "rust_min_s": 0.0219,
-    "rust_median_s": 0.0222,
-    "speedup_median": 2.7
+    "reference_min_s": 0.0597,
+    "reference_median_s": 0.0605,
+    "rust_min_s": 0.0217,
+    "rust_median_s": 0.022,
+    "speedup_median": 2.75
    },
    {
     "cells": 6812328,
@@ -401,11 +493,11 @@
     ],
     "parcels_present": 1347,
     "identical": true,
-    "reference_min_s": 0.1835,
-    "reference_median_s": 0.1838,
-    "rust_min_s": 0.0515,
-    "rust_median_s": 0.0523,
-    "speedup_median": 3.51
+    "reference_min_s": 0.1828,
+    "reference_median_s": 0.1834,
+    "rust_min_s": 0.0522,
+    "rust_median_s": 0.0526,
+    "speedup_median": 3.49
    },
    {
     "cells": 13624656,
@@ -415,10 +507,10 @@
     ],
     "parcels_present": 3350,
     "identical": true,
-    "reference_min_s": 0.3912,
-    "reference_median_s": 0.3952,
-    "rust_min_s": 0.1085,
-    "rust_median_s": 0.1097,
+    "reference_min_s": 0.3862,
+    "reference_median_s": 0.3883,
+    "rust_min_s": 0.1073,
+    "rust_median_s": 0.1079,
     "speedup_median": 3.6
    },
    {
@@ -429,17 +521,17 @@
     ],
     "parcels_present": 6090,
     "identical": true,
-    "reference_min_s": 0.7773,
-    "reference_median_s": 0.7799,
-    "rust_min_s": 0.2278,
-    "rust_median_s": 0.2314,
-    "speedup_median": 3.37
+    "reference_min_s": 0.7689,
+    "reference_median_s": 0.7702,
+    "rust_min_s": 0.2271,
+    "rust_median_s": 0.2292,
+    "speedup_median": 3.36
    }
   ],
   "pipeline_estimate": {
-   "kernel_calls_per_full_run": 25,
-   "reference_s": 19.5,
-   "rust_s": 5.8
+   "kernel_calls_per_full_run": 24,
+   "reference_s": 18.5,
+   "rust_s": 5.5
   }
  },
  "provenance": {

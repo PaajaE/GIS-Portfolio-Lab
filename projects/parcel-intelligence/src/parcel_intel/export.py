@@ -49,9 +49,10 @@ def export_tiles(parcels: gpd.GeoDataFrame) -> None:
     p = parcels.copy()
     p["rob"] = p["robustness"].map(ROBUSTNESS_CODES).astype(int)
     p["lm"] = p["largest_m2_mod"].round().astype(int)
+    p["v"] = p["vacant"].astype(int)
     tippecanoe(
         C.WEB_DATA / "parcels.pmtiles",
-        {"parcels": to_geojson(p, "parcels", ["pid", "rob", "lm"])},
+        {"parcels": to_geojson(p, "parcels", ["pid", "rob", "lm", "v"])},
         9,
         16,
         ["--no-feature-limit", "--no-tile-size-limit", "--detect-shared-borders", "--simplification=2"],
@@ -174,8 +175,12 @@ def export_details(parcels: gpd.GeoDataFrame) -> None:
         "rob": p["robustness"],
         "yb": p["year_built"].fillna(0).astype(int),
         "condo": p["is_condo"].astype(int),
-        "slope": p["slope_mean_pct"].round(1),
-        "slope90": p["slope_p90_pct"].round(1),
+        # cast before rounding: float32 values otherwise serialize as 4.400000095367432
+        "slope": p["slope_mean_pct"].astype("float64").round(1),
+        "slope90": p["slope_p90_pct"].astype("float64").round(1),
+        "vac": p["vacant"].astype(int),
+        "vcode": p["vacant_land_code"].astype(int),
+        "bld": p["has_building"].astype(int),
         "front": p["frontage_public_m"].round(),
         "rdist": p["patch_road_dist_m_mod"].round().fillna(-1),
         "road": p["nearest_road_name"].fillna(""),

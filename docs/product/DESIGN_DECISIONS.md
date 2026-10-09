@@ -14,10 +14,12 @@ guardrail ("potential feasibility … not entitlement"), and the headline result
 *Reason:* spec §13 — the first screen answers "what problem did I solve", not "which technologies";
 methodology and limitations stay reachable without a second page. · PI
 
-**D2. Headline result doubles as the legend.**
-The robustness distribution is a labelled stacked bar with counts; its colours are the map's parcel
-colours, and it is stated as the legend. On phones the in-bar labels are replaced by a key list.
-*Reason:* avoids KPI tiles (web-ux §6) and puts the main number next to its encoding; one legend, not two. · PI
+**D2. Headline result doubles as the legend, split by the population that matters.**
+The robustness distribution is shown as labelled stacked bars with counts — PI: one bar for vacant and one
+for built parcels, vacant first; its colours are the map's parcel colours, and it is stated as the legend.
+On phones the in-bar labels are replaced by a key list.
+*Reason:* avoids KPI tiles (web-ux §6) and puts the main number next to its encoding; the quality gate
+showed that a single total mixed two different meanings (new site vs yard). · PI
 
 **D3. Workbench layout: map left, panel right (≥ 900 px); stacked map → panel below (< 900 px).**
 Panel order: search → view mode → layer toggles → report. The map is sticky on desktop.
@@ -86,3 +88,14 @@ different construct and is never called validation; honest negatives (e.g. no de
 baseline, small Rust speed-up) are stated in the same place as positives. · PI
 
 **D15. Limitations section is titled "what this screen cannot tell you" and sits before downloads.** · PI
+
+**D16. De-emphasize, don't hide, the less relevant population.** PI fades built parcels on the map
+(opacity, with a toggle) instead of filtering them out; the report states what the result means for that
+parcel type. *Reason:* keeps context while the visual weight follows the decision question. · PI
+
+**D17. On phones, a map tap offers a jump to the report.** A floating "View report: <address> ↓" button
+appears over the map after a tap; it scrolls to the report and moves focus to its heading. Desktop needs
+none (report is beside the map). *Reason:* quality gate found no visible feedback after a tap at 320 px. · PI
+
+**D18. Validation that has not been reviewed by a person says so wherever it is cited**
+("AI-assisted, pending human review"), with a review sheet in the repository. · PI

@@ -4,10 +4,10 @@ import * as maplibregl from "https://cdn.jsdelivr.net/npm/maplibre-gl@6.11.1/dis
 // vocabulary (single source for labels, colours and order)
 // ---------------------------------------------------------------------------
 const ROB = [
-  { key: "robust", code: 3, color: "#0f4c5c", dark: true, label: "Robust", long: "usable patch in all three scenarios" },
-  { key: "assumption-dependent", code: 2, color: "#2f8a8a", dark: true, label: "Assumption-dependent", long: "usable under moderate and aggressive assumptions only" },
-  { key: "only aggressive", code: 1, color: "#9cd2c4", label: "Only aggressive", long: "usable only under the aggressive assumptions" },
-  { key: "constrained", code: 0, color: "#ebe6da", label: "Constrained", long: "no usable patch in any scenario" },
+  { key: "robust", code: 3, color: "#0f4c5c", dark: true, label: "Robust", long: "qualifying patch in all three scenarios" },
+  { key: "assumption-dependent", code: 2, color: "#2f8a8a", dark: true, label: "Assumption-dependent", long: "qualifying patch under moderate and aggressive assumptions only" },
+  { key: "only aggressive", code: 1, color: "#9cd2c4", label: "Only aggressive", long: "qualifying patch only under the aggressive assumptions" },
+  { key: "constrained", code: 0, color: "#ebe6da", label: "Constrained", long: "no qualifying patch in any scenario" },
   { key: "not screened", code: -1, color: "#b9b4a9", label: "Not screened", long: "tax-exempt public or institutional land (shown, not screened)" },
 ];
 const ROB_BY_KEY = Object.fromEntries(ROB.map((r) => [r.key, r]));
@@ -50,15 +50,19 @@ function fillValues() {
 }
 
 function robustBar() {
-  const counts = S.results.robustness;
-  const total = Object.values(counts).reduce((a, b) => a + b, 0);
-  const bar = document.getElementById("robust-bar");
-  bar.innerHTML = ROB.map((r) => {
-    const n = counts[r.key] || 0;
-    return `<div class="seg-b${r.dark ? " on-dark" : ""}" style="flex:${n} 1 0;background:${r.color}" title="${esc(r.label)}: ${nf.format(n)}">
-      <b>${nf.format(n)}</b><span>${esc(r.label)}</span></div>`;
-  }).join("");
-  bar.setAttribute("aria-label", ROB.map((r) => `${r.label}: ${nf.format(counts[r.key] || 0)} parcels (${r.long})`).join("; ") + `. Total ${nf.format(total)}.`);
+  const fill = (id, counts, what) => {
+    const total = Object.values(counts).reduce((a, b) => a + b, 0);
+    const bar = document.getElementById(id);
+    bar.innerHTML = ROB.map((r) => {
+      const n = counts[r.key] || 0;
+      return `<div class="seg-b${r.dark ? " on-dark" : ""}" style="flex:${n} 1 0;background:${r.color}" title="${esc(r.label)}: ${nf.format(n)}">
+        <b>${nf.format(n)}</b><span>${esc(r.label)}</span></div>`;
+    }).join("");
+    bar.setAttribute("aria-label", `${what}, ${nf.format(total)} parcels: ` + ROB.map((r) => `${r.label}: ${nf.format(counts[r.key] || 0)} (${r.long})`).join("; ") + ".");
+    return bar;
+  };
+  fill("robust-bar-vacant", S.results.robustness_vacant, "Vacant parcels");
+  const bar = fill("robust-bar-built", S.results.robustness_built, "Built parcels");
   const keys = document.createElement("ul");
   keys.className = "robust-keys";
   keys.innerHTML = ROB.map((r) => `<li><i style="background:${r.color}"></i>${esc(r.label)}</li>`).join("");
@@ -85,8 +89,9 @@ function scenarioTable() {
 function resultsTable() {
   document.querySelector("#results-table tbody").innerHTML = SCEN.map((s) => {
     const r = S.results.scenarios[s];
-    return `<tr><th scope="row">${s[0].toUpperCase() + s.slice(1)}</th><td class="n">${nf.format(r.usable_parcels)} of ${nf.format(r.eligible_parcels)}</td>
-      <td class="n">${ha(r.naive_area_ha)}</td><td class="n">${ha(r.net_area_ha)}</td><td class="n"><strong>${ha(r.largest_patch_area_ha)}</strong></td></tr>`;
+    return `<tr><th scope="row">${s[0].toUpperCase() + s.slice(1)}</th><td class="n"><strong>${nf.format(r.qualifying_vacant)}</strong> of ${nf.format(r.eligible_vacant)}</td>
+      <td class="n">${nf.format(r.qualifying_built)} of ${nf.format(r.eligible_built)}</td>
+      <td class="n">${ha(r.naive_area_ha)}</td><td class="n">${ha(r.net_area_ha)}</td><td class="n"><strong>${ha(r.largest_patch_area_ha)}</strong> (${ha(r.largest_patch_vacant_ha)})</td></tr>`;
   }).join("");
 }
 
@@ -109,11 +114,11 @@ function validationList() {
   const a = v.assessor_comparison;
   const b = v.post2000_buildings;
   const items = [
-    ["ok", "Kernel correctness", `Rust and the SciPy reference give identical patch statistics for all ${nf.format(S.results.parcels)} parcels (moderate scenario), plus 72 randomized fixtures and hand-computed edge cases (borders, ties, empty input, parcels narrower than the opening).`],
+    ["ok", "Kernel correctness", `Rust and the SciPy reference give identical patch statistics for every parcel in the full-town moderate run (${nf.format(S.results.parcels)} parcels; one 14 m² parcel has no cell centre), plus 72 randomized fixtures and hand-computed edge cases (borders, ties, empty input, parcels narrower than the opening).`],
     ["ok", "Rasterization vs exact overlay", `Per-parcel constraint area from the 2 m grid vs GEOS polygon overlay: wetland/water setbacks ${ras.wetland_water.total_raster_ha} vs ${ras.wetland_water.total_vector_ha} ha town-wide; 95th percentile absolute error ${pct1(ras.wetland_water.abs_error_share_of_parcel_p95)} of parcel area (flood ${pct1(ras.flood.abs_error_share_of_parcel_p95)}, protected ${pct1(ras.protected.abs_error_share_of_parcel_p95)}).`],
-    ["cmp", "Assessor land classes (comparison, not ground truth)", `The assessor classes some vacant land as developable (${a.n.developable} parcels) or undevelopable (${a.n.undevelopable}). Ranking by the largest contiguous patch separates them with AUC ${a.auc.largest_mod.toFixed(2)} (moderate), the net-area baseline ${a.auc.net_mod.toFixed(2)}, the naive screen ${a.auc.naive_mod.toFixed(2)}, parcel size alone ${a.auc.parcel_area_only.toFixed(2)}. The gain over the naive screen is clear (95% CI ${a.auc_difference_95ci.largest_minus_naive_mod.join(" to ")}); over net area it is not detectable (${a.auc_difference_95ci.largest_minus_net_mod.join(" to ")}). Usable patch under moderate assumptions: ${pct(a.usable_share_mod.developable)} of “developable” vs ${pct(a.usable_share_mod.undevelopable)} of “undevelopable” parcels.`],
+    ["cmp", "Assessor land classes (comparison, not ground truth)", `The assessor classes some vacant land as developable or potentially developable (${a.n.developable} parcels, of which ${a.n_potentially_developable} “potentially”) or undevelopable (${a.n.undevelopable}). Ranking by the largest contiguous patch separates them with AUC ${a.auc.largest_mod.toFixed(2)} (moderate), the net-area baseline ${a.auc.net_mod.toFixed(2)}, the naive screen ${a.auc.naive_mod.toFixed(2)}, parcel size alone ${a.auc.parcel_area_only.toFixed(2)}. The gain over the naive screen is clear (95% CI ${a.auc_difference_95ci.largest_minus_naive_mod.join(" to ")}); over net area it is not detectable (${a.auc_difference_95ci.largest_minus_net_mod.join(" to ")}). Qualifying patch under moderate assumptions: ${pct(a.qualifying_share_mod.developable)} of the first group vs ${pct(a.qualifying_share_mod.undevelopable)} of “undevelopable” parcels.`],
     ["cmp", "Where recent houses stand", `Of building footprints on ${nf.format(b.parcels)} parcels built in 2000 or later, ${pct1(b.share_in_flood)} lie in the 1% flood zone, ${(b.share_in_wetland_water * 100).toFixed(1)}% in the moderate wetland/water setback, ${(b.share_in_steep_slope * 100).toFixed(1)}% on slopes ≥ 25% (biased low: lidar is post-construction).`],
-    ["lim", "Hand checks", `${v.hand_check_sample.length} parcels (stratified by class, plus the largest naive overstatements) were inspected against hillshade and constraint layers. They exposed two defects that were fixed: mixed assessor records on multi-record parcels, and private-way pavement counted as feasible. Figures are in the repository (validation/figures).`],
+    ["lim", "Hand checks — AI-assisted, pending human review", `${v.hand_check_sample.length} parcels (one vacant and one built per class, the screened parcels the naive screen overstates most, and documented cases) were checked visually by the AI coding assistant against hillshade and the same constraint layers — not independent, and not yet reviewed by a person. The checks exposed two defects that were fixed (mixed assessor records on multi-record parcels; private-way pavement counted as feasible). Figures and the review sheet: validation/HAND_CHECKS.md in the repository.`],
   ];
   document.getElementById("validation-list").innerHTML = items
     .map(([t, h, txt]) => `<li><span class="tag ${t}">${{ ok: "verified", cmp: "comparison", lim: "manual" }[t]}</span><strong>${h}.</strong> ${esc(txt)}</li>`)
@@ -122,28 +127,28 @@ function validationList() {
 
 function tornado() {
   const rows = S.sensitivity;
-  const ref = rows.find((r) => r.variant === "moderate").usable_parcels;
+  const ref = rows.find((r) => r.variant === "moderate").qualifying_vacant;
   const groups = [...new Set(rows.filter((r) => r.variant !== "moderate").map((r) => r.group))];
   const stricter = (v) => v === "conservative" || v === "14 m square";
   const data = groups.map((g) => {
     const rs = rows.filter((r) => r.group === g);
     const lo = rs.find((r) => stricter(r.variant));
     const hi = rs.find((r) => !stricter(r.variant));
-    return { g, lo: lo ? lo.usable_parcels - ref : 0, hi: hi ? hi.usable_parcels - ref : 0, loV: lo?.variant, hiV: hi?.variant };
+    return { g, lo: lo ? lo.qualifying_vacant - ref : 0, hi: hi ? hi.qualifying_vacant - ref : 0, loV: lo?.variant, hiV: hi?.variant };
   }).sort((a, b) => b.hi - b.lo - (a.hi - a.lo));
   const max = Math.max(...data.map((d) => Math.max(Math.abs(d.lo), Math.abs(d.hi)))) || 1;
-  const w = (v) => (Math.abs(v) / max) * 40; // leave room for value labels
+  const w = (v) => (Math.abs(v) / max) * 34; // leave room for value labels
   const el = document.getElementById("tornado");
   el.innerHTML =
     data.map((d) => `<div class="lab">${esc(d.g)}</div><div class="row">
       ${d.lo ? `<span class="neg" style="right:50%;width:${w(d.lo)}%"></span><span class="t" style="right:calc(50% + ${w(d.lo)}% + 4px)">${nf.format(d.lo)}</span>` : ""}
       ${d.hi ? `<span class="pos" style="left:50%;width:${w(d.hi)}%"></span><span class="t" style="left:calc(50% + ${w(d.hi)}% + 4px)">+${nf.format(d.hi)}</span>` : ""}
     </div>`).join("") +
-    `<div class="axis"><span>stricter value</span><span>moderate: ${nf.format(ref)} parcels</span><span>looser value</span></div>`;
+    `<div class="axis"><span>stricter value</span><span>moderate: ${nf.format(ref)} vacant parcels</span><span>looser value</span></div>`;
   document.getElementById("tornado-text").textContent =
-    `Change in parcels with a usable patch relative to ${nf.format(ref)} under moderate assumptions: ` +
-    data.map((d) => `${d.g}: ${d.lo} (stricter), +${d.hi} (looser)`).join("; ") + ".";
-  el.setAttribute("aria-label", "Sensitivity of the number of parcels with a usable patch to each assumption");
+    `Change in vacant parcels with a qualifying patch relative to ${nf.format(ref)} under moderate assumptions: ` +
+    data.map((d) => `${d.g}: ` + [d.loV ? `${d.lo} (stricter)` : null, d.hiV ? `+${d.hi} (looser)` : null].filter(Boolean).join(", ")).join("; ") + ".";
+  el.setAttribute("aria-label", "Sensitivity of the number of vacant parcels with a qualifying patch to each assumption");
 }
 
 // ---------------------------------------------------------------------------
@@ -165,6 +170,15 @@ function hatch() {
   return g.getImageData(0, 0, 8, 8);
 }
 
+// Built parcels (v = 0) are faded so that vacant parcels carry the visual weight.
+function robOpacity() {
+  const fade = document.getElementById("fade-built")?.checked ?? true;
+  // MapLibre allows one zoom interpolation per expression, so the vacancy case sits inside the stops
+  const vac = ["==", ["get", "v"], 1];
+  const at = (full, faded) => (fade ? ["case", vac, full, faded] : full);
+  return ["interpolate", ["linear"], ["zoom"], 12, at(0.82, 0.3), 17, at(0.5, 0.22)];
+}
+
 function style() {
   const ov = S.overlays.coordinates;
   const robColor = ["match", ["get", "rob"], ...ROB.flatMap((r) => [r.code, r.color]), "#ffffff"];
@@ -181,7 +195,7 @@ function style() {
       { id: "bg", type: "background", paint: { "background-color": "#efece4" } },
       { id: "hillshade", type: "raster", source: "hs", paint: { "raster-opacity": 0.55, "raster-fade-duration": 0 } },
       { id: "water", type: "fill", source: "ctx", "source-layer": "wetlands", filter: ["==", ["get", "t"], "water"], paint: { "fill-color": "#9cc3e0" } },
-      { id: "parcels-fill", type: "fill", source: "parcels", "source-layer": "parcels", filter: ["!=", ["get", "rob"], -1], paint: { "fill-color": robColor, "fill-opacity": ["interpolate", ["linear"], ["zoom"], 12, 0.8, 17, 0.5] } },
+      { id: "parcels-fill", type: "fill", source: "parcels", "source-layer": "parcels", filter: ["!=", ["get", "rob"], -1], paint: { "fill-color": robColor, "fill-opacity": robOpacity() } },
       { id: "parcels-ns", type: "fill", source: "parcels", "source-layer": "parcels", filter: ["==", ["get", "rob"], -1], paint: { "fill-pattern": "hatch", "fill-opacity": 0.85 } },
       { id: "patches", type: "fill", source: "patches", "source-layer": "patches", filter: ["==", ["get", "s"], 1], layout: { visibility: "none" }, paint: { "fill-color": "#f59e0b", "fill-opacity": 0.85 } },
       { id: "patches-line", type: "line", source: "patches", "source-layer": "patches", filter: ["==", ["get", "s"], 1], layout: { visibility: "none" }, paint: { "line-color": "#92400e", "line-width": ["interpolate", ["linear"], ["zoom"], 13, 0.3, 17, 1.2] } },
@@ -209,11 +223,11 @@ function setMode(m) {
   const help = document.getElementById("mode-help");
   if (m === "robustness") {
     map.setPaintProperty("parcels-fill", "fill-color", ["match", ["get", "rob"], ...ROB.flatMap((r) => [r.code, r.color]), "#ffffff"]);
-    map.setPaintProperty("parcels-fill", "fill-opacity", ["interpolate", ["linear"], ["zoom"], 12, 0.8, 17, 0.5]);
+    map.setPaintProperty("parcels-fill", "fill-opacity", robOpacity());
     ["patches", "patches-line"].forEach((l) => map.setLayoutProperty(l, "visibility", "none"));
-    help.textContent = "Parcel colour = in how many scenarios a usable contiguous patch remains (legend: the bar above the map).";
+    help.textContent = "Parcel colour = in how many scenarios a qualifying patch remains (legend: the bars above the map). Built parcels are faded.";
   } else {
-    // nesting: usable(conservative) => rob 3; usable(moderate) => rob >= 2; usable(aggressive) => rob >= 1
+    // nesting: qualifying(conservative) => rob 3; (moderate) => rob >= 2; (aggressive) => rob >= 1
     const minRob = 3 - sIdx;
     map.setPaintProperty("parcels-fill", "fill-color", ["case", [">=", ["get", "rob"], minRob], "#cfe8e0", "#f3f0e9"]);
     map.setPaintProperty("parcels-fill", "fill-opacity", 0.55);
@@ -221,7 +235,7 @@ function setMode(m) {
       map.setFilter(l, ["==", ["get", "s"], sIdx]);
       map.setLayoutProperty(l, "visibility", "visible");
     });
-    help.innerHTML = `<span class="sw" style="display:inline-block;background:#f59e0b;vertical-align:-1px"></span> Largest contiguous potentially feasible patch per parcel under <strong>${m}</strong> assumptions. Light green parcels have a usable patch (≥ ${nf.format(S.patch_definition.min_patch_m2)} m²).`;
+    help.innerHTML = `<span class="sw" style="display:inline-block;background:#f59e0b;vertical-align:-1px"></span> Largest contiguous potentially feasible patch per parcel under <strong>${m}</strong> assumptions. Light green parcels have a qualifying patch (≥ ${nf.format(S.patch_definition.min_patch_m2)} m²).`;
   }
   if (selected) renderReport(selected);
 }
@@ -259,7 +273,7 @@ function initMap() {
   for (const l of ["parcels-fill", "parcels-ns"]) {
     map.on("click", l, (e) => {
       const pid = e.features?.[0]?.properties?.pid;
-      if (pid) select(pid, { fly: false });
+      if (pid) select(pid, { fly: false }).then(() => offerReport());
     });
     map.on("mouseenter", l, () => (map.getCanvas().style.cursor = "pointer"));
     map.on("mouseleave", l, () => (map.getCanvas().style.cursor = ""));
@@ -283,6 +297,14 @@ function applyLayer(cb) {
   }
   if (cb.dataset.layer === "slope" && !map.getLayer("slope")) return;
   for (const l of LAYER_GROUPS[cb.dataset.layer]) map.setLayoutProperty(l, "visibility", cb.checked ? "visible" : "none");
+}
+
+// On narrow screens the report is below the map: after a tap, offer a jump to it.
+function offerReport() {
+  const btn = document.getElementById("to-report");
+  if (!matchMedia("(max-width: 900px)").matches || selected == null) return;
+  btn.textContent = `View report: ${D.addr[selected - 1] || "selected parcel"} ↓`;
+  btn.hidden = false;
 }
 
 function highlight(pid) {
@@ -322,12 +344,12 @@ function renderReport(pid) {
   const scenBars = SCEN.map((s) => {
     const k = SCEN_SHORT[s];
     const lg = r(`lg_${k}`), nt = r(`nt_${k}`);
-    const usable = lg >= S.patch_definition.min_patch_m2 && r(`el_${k}`);
+    const ok = lg >= S.patch_definition.min_patch_m2 && r(`el_${k}`);
     return `<span>${s[0].toUpperCase() + s.slice(1)}${mode === s ? " ◂" : ""}</span>
-      <div class="track" role="img" aria-label="${s}: largest contiguous patch ${m2(lg)}, net unconstrained ${m2(nt)}, of ${m2(area)} parcel area${usable ? ", usable" : ", not usable"}">
+      <div class="track" role="img" aria-label="${s}: largest contiguous patch ${m2(lg)}, net unconstrained ${m2(nt)}, of ${m2(area)} parcel area${ok ? ", qualifies" : ", does not qualify"}">
         <div class="net" style="width:${Math.min(100, (nt / area) * 100)}%"></div>
         <div class="lg" style="width:${Math.min(100, (lg / area) * 100)}%"></div>
-        <span class="val">${m2(lg)}${usable ? "" : " · not usable"}</span>
+        <span class="val">${m2(lg)}${ok ? "" : " · does not qualify"}</span>
       </div>`;
   }).join("");
   const cons = Object.entries(CONS).map(([c, lab]) => [c, lab, r(`c_${c}`)]).filter((x) => x[2] > 0).sort((a, b) => b[2] - a[2]);
@@ -341,16 +363,17 @@ function renderReport(pid) {
     <p class="meta">${esc(r("use"))} · zoning ${esc(r("zone") || "n/a")} · ${m2(area)} (${(area / 4046.86).toFixed(2)} ac) · ID ${esc(r("loc"))}</p>
     <span class="badge"><i style="background:${rob.color}"></i>${esc(rob.label)}</span>
     <p class="claim">${esc(rob.long[0].toUpperCase() + rob.long.slice(1))}.${screened ? "" : " Physical results below are shown for context only."}</p>
+    <p class="claim">${r("vac") ? `<strong>Vacant</strong> ${r("bld") ? "by assessor use code (a mapped building footprint exists — check)" : "(no mapped building)"}.` : `<strong>Built</strong>: the patch is unconstrained land beside the existing building (for example a yard), not a separate building site.`}</p>
 
     <h3>Largest contiguous potentially feasible patch</h3>
     <div class="bars">${scenBars}</div>
     <div class="bar-key"><span><i style="background:#f59e0b"></i>largest patch</span><span><i style="background:repeating-linear-gradient(90deg,#d7d2c6 0 2px,#fff 2px 5px)"></i>net unconstrained (baseline)</span><span>bar = whole parcel</span></div>
-    <p class="muted">Usable = at least ${nf.format(S.patch_definition.min_patch_m2)} m² in one piece. A parcel-average screen (naive baseline, moderate) would count ${m2(r("nv_mod"))}. Patches ≥ ${nf.format(S.patch_definition.min_patch_m2)} m² under moderate assumptions: ${r("np_mod")}.</p>
+    <p class="muted">Qualifies = at least ${nf.format(S.patch_definition.min_patch_m2)} m² in one piece outside all mapped hard constraints. A parcel-average screen (naive baseline, moderate) would count ${m2(r("nv_mod"))}. Patches ≥ ${nf.format(S.patch_definition.min_patch_m2)} m² under moderate assumptions: ${r("np_mod")}.</p>
 
     <h3>What constrains it (moderate)</h3>
     ${cons.length ? `<ul class="cons">${cons.map(([c, lab, a]) => `<li><span>${esc(lab)}</span><span class="mini" aria-hidden="true"><b style="width:${Math.min(100, (a / area) * 100)}%"></b></span><span class="num">${pct(a / area)}</span></li>`).join("")}</ul>
     <p class="muted">Share of parcel area; categories overlap, so shares can add up to more than 100%.</p>` : `<p class="muted">No hard constraint touches this parcel.</p>`}
-    <p class="claim">${bind !== "none" && relief > 0 ? `Binding constraint: <strong>${esc(CONS[bind].toLowerCase())}</strong> — dropping it alone would enlarge the largest patch by ${m2(relief)}.` : "No single site constraint, if dropped, enlarges the largest patch."} Removing the lot-line setback would add ${m2(yardRelief)}.</p>
+    <p class="claim">${bind !== "none" && relief > 0 ? `Binding site constraint: <strong>${esc(CONS[bind].toLowerCase())}</strong> — dropping it alone would enlarge the largest patch by ${m2(relief)}.` : "No single site constraint, if dropped alone, enlarges the largest patch."} Dropping the lot-line setback (an assumption, not a site constraint) would add ${m2(yardRelief)}; existing buildings and roads are not treated as removable.</p>
 
     <h3>Access and servicing</h3>
     <dl class="kv">
@@ -358,7 +381,7 @@ function renderReport(pid) {
       <dt>Straight-line distance, patch to road</dt><dd>${r("rdist") >= 0 ? `${nf.format(r("rdist"))} m` : "no patch"}</dd>
       <dt>Nearest road</dt><dd>${esc(r("road") || "—")}</dd>
       <dt>In Amherst sewer service area</dt><dd>${pct(r("sewer"))} of area</dd>
-      <dt>Mean / 90th percentile slope</dt><dd>${r("slope")}% / ${r("slope90")}%</dd>
+      <dt>Mean / 90th percentile slope</dt><dd>${r("slope") == null ? "n/a" : `${(+r("slope")).toFixed(1)}% / ${(+r("slope90")).toFixed(1)}%`}</dd>
       ${r("yb") ? `<dt>Year built (assessor)</dt><dd>${r("yb")}</dd>` : ""}
     </dl>
     <p class="caveat">Screening under stated assumptions — not a legal determination, survey or wetland delineation. Zoning dimensional rules, soils and septic suitability are not modelled.</p>`;
@@ -419,6 +442,16 @@ async function main() {
   initSearch();
   document.querySelectorAll('input[name="mode"]').forEach((r) => r.addEventListener("change", () => setMode(r.value)));
   document.querySelectorAll("[data-layer]").forEach((cb) => cb.addEventListener("change", () => applyLayer(cb)));
+  document.getElementById("fade-built").addEventListener("change", () => {
+    if (ready && mode === "robustness") map.setPaintProperty("parcels-fill", "fill-opacity", robOpacity());
+  });
+  document.getElementById("to-report").addEventListener("click", (e) => {
+    e.currentTarget.hidden = true;
+    const rep = document.getElementById("report");
+    rep.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    rep.querySelector(".addr")?.setAttribute("tabindex", "-1");
+    rep.querySelector(".addr")?.focus({ preventScroll: true });
+  });
   await new Promise((res) => (window.pmtiles ? res() : window.addEventListener("load", res, { once: true })));
   initMap();
   const m = location.hash.match(/parcel=([^&]+)/);

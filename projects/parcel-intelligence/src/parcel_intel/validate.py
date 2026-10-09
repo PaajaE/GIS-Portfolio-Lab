@@ -92,8 +92,15 @@ def auc(pos, neg) -> float:
 def check_assessor(m: pd.DataFrame) -> dict:
     p = A.parcels().set_index("pid")
     code = p["use_code"].fillna("").str[:3]
+    # "developable" includes the assessor's "potentially developable" codes (131, 441)
     groups = {"developable": code.isin(["130", "131", "390", "441"]), "undevelopable": code.isin(["132", "392"])}
-    out = {"n": {k: int(v.sum()) for k, v in groups.items()}, "auc": {}, "median_m2": {}}
+    out = {
+        "n": {k: int(v.sum()) for k, v in groups.items()},
+        "n_potentially_developable": int(code.isin(["131", "441"]).sum()),
+        "group_labels": {"developable": "developable or potentially developable (130, 131, 390, 441)", "undevelopable": "undevelopable (132, 392)"},
+        "auc": {},
+        "median_m2": {},
+    }
     pos, neg = groups["developable"], groups["undevelopable"]
     for k in ("con", "mod", "agg"):
         for metric in ("naive", "net", "largest"):
@@ -103,9 +110,9 @@ def check_assessor(m: pd.DataFrame) -> dict:
             "developable": float(m.loc[pos, f"largest_m2_{k}"].median()),
             "undevelopable": float(m.loc[neg, f"largest_m2_{k}"].median()),
         }
-        out[f"usable_share_{k}"] = {
-            "developable": round(float(m.loc[pos, f"usable_{k}"].mean()), 3),
-            "undevelopable": round(float(m.loc[neg, f"usable_{k}"].mean()), 3),
+        out[f"qualifying_share_{k}"] = {
+            "developable": round(float(m.loc[pos, f"qualifying_{k}"].mean()), 3),
+            "undevelopable": round(float(m.loc[neg, f"qualifying_{k}"].mean()), 3),
         }
     # paired bootstrap (resample parcels within each class) for AUC differences
     rng = np.random.default_rng(20261008)
@@ -139,14 +146,18 @@ def check_buildings(bits_mod) -> dict:
     return out
 
 
-def sample_parcels(m: pd.DataFrame, per_class: int = 2, seed: int = 20261008) -> list[int]:
+def sample_parcels(m: pd.DataFrame, seed: int = 20261008) -> list[int]:
+    """One vacant and one built parcel (> 4,000 m2) per screened robustness class."""
     rng = np.random.default_rng(seed)
     picks = []
+    big = A.parcels().set_index("pid")["area_m2"] > 4000
     for cls in ("robust", "assumption-dependent", "only aggressive", "constrained"):
-        ids = m.index[(m["robustness"] == cls) & (A.parcels().set_index("pid")["area_m2"] > 4000)]
-        picks += sorted(rng.choice(ids, size=min(per_class, len(ids)), replace=False).tolist())
-    # plus the parcels where naive vs patch disagree most (largest overstatement)
-    over = (m["naive_m2_mod"] - m["largest_m2_mod"]).sort_values(ascending=False)
+        for vac in (True, False):
+            ids = m.index[(m["robustness"] == cls) & (m["vacant"] == vac) & big]
+            if len(ids):
+                picks.append(int(rng.choice(ids)))
+    # plus the screened parcels where naive vs patch disagree most (largest overstatement)
+    over = (m["naive_m2_mod"] - m["largest_m2_mod"])[m["eligible_mod"]].sort_values(ascending=False)
     picks += [int(i) for i in over.index[:2] if i not in picks]
     picks += [p for p in DOCUMENTED if p not in picks]
     return picks
@@ -190,30 +201,40 @@ def figures(picks: list[int], m: pd.DataFrame) -> list[dict]:
         for i, name in reversed(list(enumerate(order, start=1))):
             cat[(b & A.BITS[name]) != 0] = i
         cat[~inp] = 0
-        fig, axes = plt.subplots(1, 2, figsize=(11, 5.2), constrained_layout=True)
+        fig, axes = plt.subplots(1, 2, figsize=(11, 6.0), constrained_layout=True)
         for ax in axes:
             ax.imshow(hs, cmap="gray", extent=ext, vmin=0, vmax=1)
             gpd.GeoSeries([geom]).boundary.plot(ax=ax, color="black", linewidth=1.2)
             ax.set_xticks([])
             ax.set_yticks([])
         axes[0].imshow(np.ma.masked_equal(cat, 0), cmap=ListedColormap(colors), vmin=1, vmax=len(order), extent=ext, alpha=0.75, interpolation="nearest")
-        axes[0].set_title("moderate constraints: " + ", ".join(f"{n}" for n, c in zip(order, colors)), fontsize=7)
+        axes[0].set_title("hard constraints, moderate scenario (black line = parcel)", fontsize=8)
         lay = np.zeros(b.shape, dtype=int)
         for i, s in enumerate(reversed(C.SCENARIO_ORDER), start=1):
             lay[(masks[s][r0:r1, c0:c1] > 0) & inp] = i
         axes[1].imshow(np.ma.masked_equal(lay, 0), cmap=ListedColormap(["#fde68a", "#f59e0b", "#b45309"]), vmin=1, vmax=3, extent=ext, alpha=0.8, interpolation="nearest")
-        axes[1].set_title("feasible after cleanup: aggressive (light) / moderate / conservative (dark)", fontsize=7)
+        axes[1].set_title("feasible after cleanup, by scenario (nested)", fontsize=8)
+        from matplotlib.patches import Patch
+
+        axes[0].legend(
+            handles=[Patch(color=c, alpha=0.75, label=n.replace("_", " ")) for n, c in zip(order, colors)],
+            loc="upper left", bbox_to_anchor=(0, -0.01), ncol=3, fontsize=7, frameon=False,
+        )
+        axes[1].legend(
+            handles=[Patch(color=c, alpha=0.8, label=f"{s} (largest patch + other feasible)") for s, c in zip(("aggressive", "moderate", "conservative"), ("#fde68a", "#f59e0b", "#b45309"))],
+            loc="upper left", bbox_to_anchor=(0, -0.01), ncol=1, fontsize=7, frameon=False,
+        )
         r = m.loc[pid]
         fig.suptitle(
             f"pid {pid} | {p.loc[pid, 'site_addr']} | {p.loc[pid, 'use_desc']} | {p.loc[pid, 'area_m2']:.0f} m2 | "
             f"largest con/mod/agg {r['largest_m2_con']:.0f}/{r['largest_m2_mod']:.0f}/{r['largest_m2_agg']:.0f} m2 | "
-            f"naive mod {r['naive_m2_mod']:.0f} | {r['robustness']}",
+            f"naive mod {r['naive_m2_mod']:.0f} | {r['robustness']} | {'vacant' if r['vacant'] else 'built'}",
             fontsize=7,
         )
         path = FIG / f"parcel_{pid}.png"
         fig.savefig(path, dpi=110)
         plt.close(fig)
-        notes.append({"pid": int(pid), "figure": str(path.relative_to(C.ROOT)), "robustness": r["robustness"]})
+        notes.append({"pid": int(pid), "figure": str(path.relative_to(C.ROOT)), "robustness": r["robustness"], "vacant": bool(r["vacant"])})
     return notes
 
 

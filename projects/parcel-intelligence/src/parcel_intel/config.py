@@ -125,4 +125,6 @@ SCENARIO_ORDER = ("conservative", "moderate", "aggressive")
 # Morphology / patch definition (constant across scenarios, varied in sensitivity runs)
 OPEN_SIZE_CELLS = 5  # 5 x 5 cells at 2 m = a 10 m x 10 m square must fit
 CONNECTIVITY = 4
-MIN_PATCH_M2 = 500.0  # a patch smaller than this is not counted as a usable patch
+MIN_PATCH_M2 = 500.0  # a patch smaller than this does not qualify (and is not counted as a patch)
+# Assessor vacant-land use classes (first two digits): 13x residential, 39x commercial, 44x industrial
+VACANT_LAND_CLASSES = ("13", "39", "44")

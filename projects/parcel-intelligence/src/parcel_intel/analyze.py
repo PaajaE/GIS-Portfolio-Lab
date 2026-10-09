@@ -36,7 +36,8 @@ BITS = {
     "existing_development": 64,
     "no_data": 128,
 }
-CHAPTER_LAND = ("6", "7", "8")  # Chapter 61 / 61A / 61B use classes (first digit)
+CHAPTER_LAND = ("6", "7", "8")
+NOT_SITE_RELIEF = ("relief_yard_setback_m2", "relief_existing_development_m2")  # Chapter 61 / 61A / 61B use classes (first digit)
 
 
 # ---------------------------------------------------------------------------
@@ -239,7 +240,7 @@ def run_scenario(name: str, params: dict, write: bool = True) -> pd.DataFrame:
     df["cleaned_m2" + k] = fc[1:] * cell_a
     df["largest_m2" + k] = lc[1:] * cell_a
     df["n_patches" + k] = npch[1:]
-    df["usable" + k] = elig[1:] & (lc[1:] * cell_a >= C.MIN_PATCH_M2)
+    df["qualifying" + k] = elig[1:] & (lc[1:] * cell_a >= C.MIN_PATCH_M2)
     for cat, b in BITS.items():
         df[f"c_{cat}_m2{k}"] = per_parcel_sum(inside & ((bits & b) != 0))[1:] * cell_a
     df["cells_in_raster"] = total[1:]
@@ -271,6 +272,20 @@ def slope_stats() -> pd.DataFrame:
     return pd.DataFrame({"slope_mean_pct": g.mean(), "slope_p90_pct": g.quantile(0.9), "slope_max_pct": g.max()})
 
 
+@cache
+def vacancy() -> pd.DataFrame:
+    """Vacant = no mapped building footprint cell in the parcel, or an assessor vacant-land
+    use class. Built parcels' patches are mostly yards beside an existing building."""
+    p = parcels()
+    cells = per_parcel_sum((pidx() > 0) & building_mask())[1:]
+    code = p["use_code"].fillna("").str[:2].isin(C.VACANT_LAND_CLASSES).to_numpy()
+    has_building = cells > 0
+    return pd.DataFrame(
+        {"has_building": has_building, "vacant_land_code": code, "vacant": ~has_building | code},
+        index=pd.RangeIndex(1, n_parcels() + 1, name="pid"),
+    )
+
+
 def sensitivity() -> list[dict]:
     """One-at-a-time: from the moderate scenario, swap one parameter group to its
     conservative / aggressive value. Morphology size varied separately."""
@@ -291,8 +306,12 @@ def sensitivity() -> list[dict]:
         _, lc, _, _ = patches(bits, open_size=open_size)
         elig = eligible(params)[1:]
         area = lc[1:] * cell_a
+        vac = vacancy()["vacant"].to_numpy()
+        q = elig & (area >= C.MIN_PATCH_M2)
         return {
-            "usable_parcels": int((elig & (area >= C.MIN_PATCH_M2)).sum()),
+            "qualifying_vacant": int((q & vac).sum()),
+            "qualifying_parcels": int(q.sum()),
+            "largest_patch_vacant_ha": round(float(area[elig & vac].sum()) / 1e4, 1),
             "largest_patch_total_ha": round(float(area[elig].sum()) / 1e4, 1),
         }
 
@@ -311,7 +330,7 @@ def sensitivity() -> list[dict]:
 
 
 def robustness(df: pd.DataFrame) -> pd.Series:
-    con, mod, agg = df["usable_con"], df["usable_mod"], df["usable_agg"]
+    con, mod, agg = df["qualifying_con"], df["qualifying_mod"], df["qualifying_agg"]
     cls = np.select(
         [~df["eligible_agg"], con & mod & agg, mod & agg, agg],
         ["not screened", "robust", "assumption-dependent", "only aggressive"],
@@ -327,7 +346,7 @@ def main() -> None:
         df, bits = run_scenario(name, C.SCENARIOS[name])
         frames.append(df.drop(columns="cells_in_raster") if frames else df)
         bits_by[name] = bits
-        print(f"{name:12s} usable parcels {int(df[f'usable_{name[:3]}'].sum()):5d}")
+        print(f"{name:12s} qualifying parcels {int(df[f'qualifying_{name[:3]}'].sum()):5d}")
     m = pd.concat(frames, axis=1)
 
     # nesting check: conservative <= moderate <= aggressive (monotone constraints + opening)
@@ -338,9 +357,10 @@ def main() -> None:
 
     loo = leave_one_out(C.SCENARIOS["moderate"], bits_by["moderate"], m["largest_m2_mod"].to_numpy())
     m = m.join(loo)
-    # The uniform yard setback always "binds" (dropping it always adds a ring of cells),
-    # so the binding constraint is chosen among site-specific categories only.
-    relief_cols = [c for c in loo.columns if c != "relief_yard_setback_m2"]
+    # The uniform yard setback always "binds" (dropping it always adds a ring of cells) and
+    # removing existing development means demolition, so neither is a site constraint here;
+    # the binding constraint is chosen among site-specific categories only (both reported).
+    relief_cols = [c for c in loo.columns if c not in NOT_SITE_RELIEF]
     best = loo[relief_cols].to_numpy().argmax(axis=1)
     has = loo[relief_cols].to_numpy().max(axis=1) > 0
     names = np.array([c.removeprefix("relief_").removesuffix("_m2") for c in relief_cols])
@@ -351,7 +371,7 @@ def main() -> None:
         dom.max(axis=1) > 0, np.array([c.removeprefix("c_").removesuffix("_m2_mod") for c in area_cols])[dom.argmax(axis=1)], "none"
     )
     m["robustness"] = robustness(m)
-    m = m.join(slope_stats())
+    m = m.join(vacancy()).join(slope_stats())
     m.reset_index().to_parquet(C.OUT / "parcel_metrics.parquet")
 
     sens = sensitivity()
@@ -362,9 +382,15 @@ def main() -> None:
     for name in C.SCENARIO_ORDER:
         k = name[:3]
         e = m[f"eligible_{k}"]
+        q = m[f"qualifying_{k}"]
         summary["scenarios"][name] = {
             "eligible_parcels": int(e.sum()),
-            "usable_parcels": int(m[f"usable_{k}"].sum()),
+            "eligible_vacant": int((e & m["vacant"]).sum()),
+            "eligible_built": int((e & ~m["vacant"]).sum()),
+            "qualifying_parcels": int(q.sum()),
+            "qualifying_vacant": int((q & m["vacant"]).sum()),
+            "qualifying_built": int((q & ~m["vacant"]).sum()),
+            "largest_patch_vacant_ha": round(float(m.loc[e & m["vacant"], f"largest_m2_{k}"].sum()) / 1e4, 1),
             "naive_pass_parcels": int((e & (m[f"naive_m2_{k}"] > 0)).sum()),
             "naive_area_ha": round(float(m.loc[e, f"naive_m2_{k}"].sum()) / 1e4, 1),
             "net_area_ha": round(float(m.loc[e, f"net_m2_{k}"].sum()) / 1e4, 1),
@@ -376,7 +402,13 @@ def main() -> None:
             },
         }
     summary["robustness"] = m["robustness"].value_counts().to_dict()
-    summary["binding_constraint_mod"] = m.loc[m["eligible_mod"], "binding_constraint_mod"].value_counts().to_dict()
+    summary["robustness_vacant"] = m.loc[m["vacant"], "robustness"].value_counts().to_dict()
+    summary["robustness_built"] = m.loc[~m["vacant"], "robustness"].value_counts().to_dict()
+    summary["vacant_parcels"] = int(m["vacant"].sum())
+    summary["vacant_definition"] = "no mapped building footprint cell, or assessor vacant-land class 13x/39x/44x"
+    em = m["eligible_mod"]
+    summary["binding_constraint_mod"] = m.loc[em, "binding_constraint_mod"].value_counts().to_dict()
+    summary["binding_constraint_mod_vacant"] = m.loc[em & m["vacant"], "binding_constraint_mod"].value_counts().to_dict()
     (C.OUT / "summary.json").write_text(json.dumps(summary, indent=2))
     print(json.dumps(summary, indent=2))
     print(pd.DataFrame(sens).to_string(index=False))

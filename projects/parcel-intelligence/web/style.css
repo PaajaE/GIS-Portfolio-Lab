@@ -53,6 +53,12 @@ h1 { font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.3rem); line-height: 1.2; margin:
 .robust-bar .seg-b b { font-size: 1rem; }
 .robust-bar .seg-b span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .robust-bar .on-dark { color: #fff; }
+.bar-label { margin: 10px 0 4px; font-weight: 600; font-size: 0.92rem; }
+.bar-label small { font-weight: 400; color: var(--ink-2); }
+.to-map { display: none; }
+.to-report { position: absolute; left: 50%; bottom: 44px; transform: translateX(-50%); z-index: 3; font: inherit; font-weight: 600;
+  background: var(--ink); color: #fff; border: 0; border-radius: 999px; padding: 10px 18px; min-height: 44px; max-width: calc(100% - 32px);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer; }
 .robust-bar figcaption { margin-top: 6px; font-size: 0.86rem; color: var(--ink-2); max-width: 90ch; }
 .robust-keys { display: none; }
 
@@ -99,6 +105,7 @@ h1 { font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.3rem); line-height: 1.2; margin:
 .sw-hab { background: transparent; border: 2px dashed var(--hab); }
 .sw-slope { background: linear-gradient(90deg, #fde047 33%, #ea8c1e 33% 66%, #9a3412 66%); }
 .sw-bld { background: #6b6b6b; }
+.sw-fade { background: linear-gradient(90deg, #2f8a8a 50%, rgba(47,138,138,.3) 50%); }
 
 /* ---------- report ---------- */
 .report h2 { font-size: 1.1rem; margin: 0 0 6px; }
@@ -160,11 +167,21 @@ td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
 
 @media (max-width: 900px) {
   .workbench { grid-template-columns: 1fr; }
-  .map-wrap { position: static; }
+  .map-wrap { position: relative; top: auto; }
+  .to-map { display: inline-block; margin-top: 8px; font-weight: 600; min-height: 44px; padding: 10px 0; }
+  .intro { padding-top: 16px; }
+  .lede { font-size: 0.95rem; }
   #map { height: 62vh; min-height: 340px; }
   .robust-bar .seg-b span { display: none; }
   .robust-keys { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; margin: 6px 0 0; padding: 0; list-style: none; font-size: 0.82rem; }
   .robust-keys i { display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -2px; border: 1px solid rgba(0,0,0,.2); border-radius: 2px; }
+}
+@media (max-width: 600px) {
+  .tornado { grid-template-columns: minmax(90px, 130px) 1fr; font-size: 0.8rem; }
+  .tornado .axis { font-size: 0.7rem; }
+  .tornado .axis span { max-width: 33%; }
+  .tornado .axis span:nth-child(2) { text-align: center; }
+  .tornado .axis span:last-child { text-align: right; }
 }
 @media (max-width: 440px) {
   .seg { grid-template-columns: repeat(2, minmax(0, 1fr)); }

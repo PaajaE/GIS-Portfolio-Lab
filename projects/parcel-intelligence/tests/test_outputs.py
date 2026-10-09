@@ -46,8 +46,8 @@ def test_scenarios_nested(parcels):
 def test_robustness_consistent(parcels):
     r = parcels.robustness
     assert set(r) <= {"robust", "assumption-dependent", "only aggressive", "constrained", "not screened"}
-    assert (parcels.loc[r == "robust", "usable_con"]).all()
-    assert not parcels.loc[r == "constrained", "usable_agg"].any()
+    assert (parcels.loc[r == "robust", "qualifying_con"]).all()
+    assert not parcels.loc[r == "constrained", "qualifying_agg"].any()
     assert not parcels.loc[r == "not screened", "eligible_agg"].any()
 
 
@@ -76,3 +76,19 @@ def test_validation_kernel_identical():
 
 def test_no_owner_fields(parcels):
     assert not any(c.upper().startswith("OWN") for c in parcels.columns)
+
+
+def test_vacancy_and_binding(parcels):
+    # vacant = no mapped building or a vacant-land use code; built parcels must have a building
+    assert (parcels.loc[~parcels.vacant, "has_building"]).all()
+    assert parcels.loc[parcels.vacant & parcels.has_building, "vacant_land_code"].all()
+    # neither the uniform setback nor existing development may be reported as a binding site constraint
+    assert not parcels.binding_constraint_mod.isin(["yard_setback", "existing_development"]).any()
+
+
+def test_summary_split_adds_up():
+    s = json.loads((C.OUT / "summary.json").read_text())
+    for sc in s["scenarios"].values():
+        assert sc["qualifying_vacant"] + sc["qualifying_built"] == sc["qualifying_parcels"]
+        assert sc["eligible_vacant"] + sc["eligible_built"] == sc["eligible_parcels"]
+    assert sum(s["robustness_vacant"].values()) + sum(s["robustness_built"].values()) == s["parcels"]
