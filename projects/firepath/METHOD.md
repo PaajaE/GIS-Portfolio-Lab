@@ -115,7 +115,11 @@ non-burnable fuel (NB 91/92/93/98/99), missing fuel, missing DEM, or R0 = 0 at i
 Barriers are time-invariant, because moisture is static and wind never makes a burnable cell's speed zero
 (R_head ≥ R0·k·g > 0 and e < 1).
 
-**D1 is open after the M1a bake-off** (`M1A_RESULTS.md`): no candidate passed all pre-declared criteria.
+**D1 is open after the revised verification (M1a-3, `M1A_RESULTS.md`)**: no scheme meets the
+pre-registered criteria at 30 m. The level set (with L5) is the only scheme that converges at a
+consistent order and passes every exact case at 15 m. The graph schemes are exact at barriers but carry
+a non-convergent angular error. Earlier status (M1a bake-off): no candidate passed all pre-declared
+criteria.
 Both candidates are implemented and specified, and neither is adopted.
 - **Label-setting** (P1–P4 below, `firepath.reference`). Exact on its graph and on barriers. Its
   angular error is exactly predictable (`firepath.stencil_table`). At radius 8 it fails the accuracy,
@@ -140,6 +144,24 @@ first order. Without this, the front choked at one-cell gaps.
 A point ignition is a disc of radius r0 (2 cells in the bake-off). Under ENO2, discs smaller than about
 one cell vanish. Mode A: φ0 = signed distance to the cell-centre raster region; inside barriers are not
 sources.
+
+**L5. Narrow band, reinitialization and extension velocities (M1a-3, state of practice).**
+- *Narrow band:* only cells with |φ| < (8 − 0.5) cells evolve; the rest are clamped at ±8 cells.
+- *Reinitialization:* every 10 steps, geometric. φ ← ±(distance from each cell centre to the zero
+  crossings), where the crossings are interpolated linearly on grid edges and densified along the chord
+  inside each grid square, using a KD-tree. Interface-adjacent cells are redistanced too, which kept the
+  crossing positions and measured more accurately than keeping their old values.
+- *Extension velocities:* every step, each cell takes the spread parameters (a, e, ŵ) of the cell that
+  contains its nearest interface point (Adalsteinsson & Sethian 1999).
+
+Why: without the band and reinitialization, the field far ahead of the front distorted in heterogeneous
+fuel until spurious zero crossings appeared. 537 cells in the isotropic mosaic burned before
+distance / max speed allowed (regression test `tests/test_levelset_regression.py`). Without extension
+velocities, reinitialized fronts arrived *early* when passing from fast into slow fuel.
+
+**Remaining known error [verified]:** first-order behaviour at fuel-speed discontinuities. For example,
+the 1-D strip is −11 % at the first slow cell, and the contrast case is −1.1 % at 30 m. These errors are
+quantified by grid convergence in M1A_RESULTS.
 
 **P1. Edges.** For a stencil offset δ = (dr, dc) (primitive, Chebyshev radius ≤ ρ), the edge e = (u, δ) is
 the straight segment from the centre of u to the centre of v = u + δ, of length L = Δ‖δ‖ in direction

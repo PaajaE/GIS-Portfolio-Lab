@@ -118,3 +118,23 @@ confirm that Arizona 2022 fires are a recognised test bed. To check: read the re
 - Cruz & Alexander (2013), EMS 47:16–28: https://d10.nrfirescience.org/sites/default/files/2023-07/09-S-03-1_CruzAlexander_2013_EMS_UncerModeledROS.pdf
 - USGS SIR 2025-5053: https://pubs.usgs.gov/publication/sir20255053
 - Practitioner log (not peer reviewed): https://github.com/Tphambolio/wildfire-simulator/pull/1
+
+
+## 7. Status after the approved revision (M1a-3)
+
+The revision in §6 was carried out (`M1A_RESULTS.md`, "M1a-3"; pre-registration
+`validation/M1A3_PREREGISTRATION.md`).
+
+- **G1, done.** Level set with narrow band, reinitialization and extension velocities. The phantom-arrival
+  defect is fixed and guarded by a regression test (568 → 0 violations).
+- **G2, done.** Observed order of accuracy per scheme on 17 exact cases (30 / 15 / 7.5 m).
+- **G3, done.** Same-scheme 3-grid solution verification on the mosaic. Richardson/GCI turned out **not
+  applicable** (15–76 % monotone cells), and this is reported as such. The graph upper-bound comparison is
+  labelled a code-to-code comparison.
+- **G4.** Confirmed: graph schemes do not converge on elongated or changing-wind cases.
+- **G5, partly done.** Circle, ellipse, wind change, half-plane refraction (incl. head waves) and merging
+  fronts are in. Slope and the four-fuel quadrant are not yet.
+- **G6, done.** Thresholds are labelled FirePath criteria; medians and tails are reported.
+- **G7, open.** Validation indices are for M4, and PLAN §9 is to be extended.
+
+Outcome: no scheme meets the criteria at 30 m. The trade-off is summarized for the owner.

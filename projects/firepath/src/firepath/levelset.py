@@ -131,9 +131,94 @@ def _first_order_neumann(ph, dx, barrier):
     return xm, xp, ym, yp
 
 
+def _interface_points(phi, barrier):
+    """Zero crossings of phi on grid edges (linear interpolation), densified inside each grid square.
+
+    Coordinates in cell units (row, col) of cell centres. Pairs touching a barrier cell are ignored.
+    Returns (points[N, 2], mask of cells adjacent to a crossing).
+    """
+    neg = phi <= 0
+    adj = np.zeros(phi.shape, bool)
+    pts = []
+    # horizontal edges (r, c)-(r, c+1)
+    a, b = phi[:, :-1], phi[:, 1:]
+    ok = (neg[:, :-1] != neg[:, 1:]) & ~barrier[:, :-1] & ~barrier[:, 1:]
+    hx = np.where(ok, a / np.where(ok, a - b, 1.0), np.nan)
+    # vertical edges (r, c)-(r+1, c)
+    a2, b2 = phi[:-1, :], phi[1:, :]
+    ok2 = (neg[:-1, :] != neg[1:, :]) & ~barrier[:-1, :] & ~barrier[1:, :]
+    vy = np.where(ok2, a2 / np.where(ok2, a2 - b2, 1.0), np.nan)
+    r, c = np.nonzero(ok)
+    pts.append(np.stack([r, c + hx[r, c]], 1))
+    adj[r, c] = adj[r, c + 1] = True
+    r2, c2 = np.nonzero(ok2)
+    pts.append(np.stack([r2 + vy[r2, c2], c2], 1))
+    adj[r2, c2] = adj[r2 + 1, c2] = True
+    # densify: in each grid square with exactly two crossings, add 3 points on the chord between them
+    top, bot = hx[:-1, :], hx[1:, :]          # square (r, c): top edge row r, bottom edge row r+1
+    lef, rig = vy[:, :-1], vy[:, 1:]          # left edge col c, right edge col c+1
+    rr, cc = np.mgrid[0:phi.shape[0] - 1, 0:phi.shape[1] - 1]
+    cand = [(rr, cc + top), (rr + 1, cc + bot), (rr + lef, cc), (rr + rig, cc + 1)]
+    have = np.stack([np.isfinite(top), np.isfinite(bot), np.isfinite(lef), np.isfinite(rig)])
+    two = have.sum(0) == 2
+    if two.any():
+        ys = np.stack([q[0] for q in cand])
+        xs = np.stack([q[1] for q in cand])
+        order_ = np.argsort(~have, axis=0, kind="stable")[:2]   # indices of the two crossings
+        sel = two
+        y0 = np.take_along_axis(ys, order_[:1], 0)[0][sel]
+        x0 = np.take_along_axis(xs, order_[:1], 0)[0][sel]
+        y1 = np.take_along_axis(ys, order_[1:2], 0)[0][sel]
+        x1 = np.take_along_axis(xs, order_[1:2], 0)[0][sel]
+        for w in (0.25, 0.5, 0.75):
+            pts.append(np.stack([y0 + w * (y1 - y0), x0 + w * (x1 - x0)], 1))
+    return np.concatenate(pts) if pts else np.zeros((0, 2)), adj
+
+
+def _redistance(phi, dx, barrier, band):
+    """Geometric reinitialization to a signed distance (clamped at +-band cells).
+
+    Distance from every cell centre (including cells adjacent to the interface) to the densified zero
+    crossings (KD-tree), signed by the current phi. Using the distance for the adjacent cells too keeps the
+    crossing positions to first order (straight interface: both neighbours scale alike) and avoids the
+    gradient jump of the keep-adjacent variant, which was measured to be less accurate (M1a-3).
+    """
+    from scipy.spatial import cKDTree
+
+    pts, adj = _interface_points(phi, barrier)
+    if len(pts) == 0:
+        return np.clip(phi, -band * dx, band * dx)
+    nr, nc = phi.shape
+    rr, cc = np.mgrid[0:nr, 0:nc]
+    d, _ = cKDTree(pts).query(np.stack([rr.ravel(), cc.ravel()], 1), distance_upper_bound=band + 1)
+    d = np.minimum(d.reshape(nr, nc), band) * dx
+    new = np.where(phi <= 0, -d, d)
+    new = np.where(barrier, phi, new)
+    return np.clip(new, -band * dx, np.maximum(band * dx, phi * barrier))
+
+
+def _extension_index(phi, barrier):
+    """Flat index of the cell containing each cell's nearest interface point (extension velocities,
+    Adalsteinsson & Sethian 1999): spread parameters are taken from the front's own location, so the
+    field away from the front does not see the speed jumps of cells the front has not reached."""
+    from scipy.spatial import cKDTree
+
+    nr, nc = phi.shape
+    pts, _ = _interface_points(phi, barrier)
+    if len(pts) == 0:
+        return np.arange(nr * nc).reshape(nr, nc)
+    rr, cc = np.mgrid[0:nr, 0:nc]
+    _, j = cKDTree(pts).query(np.stack([rr.ravel(), cc.ravel()], 1))
+    cell_r = np.clip(np.rint(pts[j, 0]).astype(int), 0, nr - 1)
+    cell_c = np.clip(np.rint(pts[j, 1]).astype(int), 0, nc - 1)
+    idx = (cell_r * nc + cell_c).reshape(nr, nc)
+    return np.where(barrier, np.arange(nr * nc).reshape(nr, nc), idx)
+
+
 def propagate_levelset(f: SpreadField, *, points=(), inside=None, t0=0.0, t_stop=inf,
                        r0_cells=2.0, cfl=0.4, first_order=False, dissipation="local",
-                       order: int = 2) -> Result:
+                       order: int = 2, reinit_every: int = 10, band_cells: float = 8.0,
+                       extension: bool = True) -> Result:
     """Level-set propagation on the same inputs as `reference.propagate`.
 
     points: (r, c, t) point ignitions, represented by a disc of radius r0_cells at time t (all points must
@@ -165,6 +250,9 @@ def propagate_levelset(f: SpreadField, *, points=(), inside=None, t0=0.0, t_stop
     arrival[init] = t_start
     phi = np.where(barrier, np.maximum(phi, dx), phi)  # barriers never burn
     frozen = barrier
+    if reinit_every:  # narrow band + periodic reinitialization (state of practice; M1a-2 fix)
+        phi = _redistance(phi, dx, barrier, band_cells)
+    step = 0
 
     radius = {5: 3}.get(order, 2)
     near_x = _near(barrier, 1, radius)
@@ -175,6 +263,10 @@ def propagate_levelset(f: SpreadField, *, points=(), inside=None, t0=0.0, t_stop
         a = f.r_head[h] / (1.0 + f.ecc[h])
         e = f.ecc[h]
         wx, wy = np.cos(f.theta[h]), np.sin(f.theta[h])
+        if extension:
+            ix = _extension_index(phi, barrier)
+            a, e = a.ravel()[ix], e.ravel()[ix]
+            wx, wy = wx.ravel()[ix], wy.ravel()[ix]
         # direction-specific LF bounds: half-extent of the unit-time spread set E along x and y,
         # measured from the focus: |a e w_i| + sqrt(a^2 w_i^2 + b^2 w_perp_i^2)  (<= R_head)
         b2 = (a * a) * (1.0 - e * e)
@@ -194,6 +286,12 @@ def propagate_levelset(f: SpreadField, *, points=(), inside=None, t0=0.0, t_stop
         if dt <= 0:
             t = end
             continue
+
+        if reinit_every:
+            active = np.abs(phi) < (band_cells - 0.5) * dx
+            frozen = barrier | ~active
+        else:
+            frozen = barrier
 
         def rhs(ph):
             fm = _first_order_neumann(ph, dx, barrier)
@@ -235,6 +333,9 @@ def propagate_levelset(f: SpreadField, *, points=(), inside=None, t0=0.0, t_stop
         arrival[cross] = t + dt * frac[cross]
         phi = new
         t += dt
+        step += 1
+        if reinit_every and step % reinit_every == 0:
+            phi = _redistance(phi, dx, barrier, band_cells)
 
     status = np.where(barrier, BARRIER, NOT_REACHED).astype(np.uint8)
     status[init] = INITIAL

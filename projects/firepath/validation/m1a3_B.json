@@ -1,0 +1,122 @@
+{
+ "G8": {
+  "gap_ref_disc": {
+   "no_early": false,
+   "within_upper": true,
+   "worst_rel_late": 0.013633838224871297,
+   "most_early": -0.021875108951108002,
+   "seconds": 0.4554396590001488
+  },
+  "gap_ref_raster": {
+   "no_early": true,
+   "within_upper": true,
+   "worst_rel_late": 0.03777018083786099,
+   "most_early": 0.000857630176254176,
+   "seconds": 0.4554396590001488
+  },
+  "gap": {
+   "no_early": true,
+   "within_upper": true,
+   "worst_rel_late": 0.03777018083786099,
+   "most_early": 0.000857630176254176,
+   "seconds": 0.4554396590001488
+  },
+  "lake": {
+   "value_min": 298.2842712474619,
+   "geodesic_min": 290.2379604162864,
+   "pass": true
+  },
+  "thin_wall_leaks": 0,
+  "pass": true
+ },
+ "G16": {
+  "gap_ref_disc": {
+   "no_early": false,
+   "within_upper": true,
+   "worst_rel_late": 0.013633838224871297,
+   "most_early": -0.021875108951108002,
+   "seconds": 1.0414136089998465
+  },
+  "gap_ref_raster": {
+   "no_early": true,
+   "within_upper": true,
+   "worst_rel_late": 0.03777018083786099,
+   "most_early": 0.000857630176254176,
+   "seconds": 1.0414136089998465
+  },
+  "gap": {
+   "no_early": true,
+   "within_upper": true,
+   "worst_rel_late": 0.03777018083786099,
+   "most_early": 0.000857630176254176,
+   "seconds": 1.0414136089998465
+  },
+  "lake": {
+   "value_min": 298.2842712474619,
+   "geodesic_min": 290.2379604162864,
+   "pass": true
+  },
+  "thin_wall_leaks": 0,
+  "pass": true
+ },
+ "LS": {
+  "gap_ref_disc": {
+   "no_early": true,
+   "within_upper": true,
+   "worst_rel_late": 0.14340008280728989,
+   "most_early": 0.05348621134393294,
+   "seconds": 0.9107534059999125
+  },
+  "gap_ref_raster": {
+   "no_early": true,
+   "within_upper": false,
+   "worst_rel_late": 0.17207259376874195,
+   "most_early": 0.068924976790393,
+   "seconds": 0.9107534059999125
+  },
+  "gap": {
+   "no_early": true,
+   "within_upper": false,
+   "worst_rel_late": 0.17207259376874195,
+   "most_early": 0.068924976790393,
+   "seconds": 0.9107534059999125
+  },
+  "lake": {
+   "value_min": 319.2203679681024,
+   "geodesic_min": 290.2379604162864,
+   "pass": true
+  },
+  "thin_wall_leaks": 0,
+  "pass": false
+ },
+ "HY": {
+  "gap_ref_disc": {
+   "no_early": false,
+   "within_upper": true,
+   "worst_rel_late": 0.013633838224871297,
+   "most_early": -0.021875108951108002,
+   "seconds": 0.90439543399998
+  },
+  "gap_ref_raster": {
+   "no_early": true,
+   "within_upper": true,
+   "worst_rel_late": 0.03777018083786099,
+   "most_early": 0.000857630176254176,
+   "seconds": 0.90439543399998
+  },
+  "gap": {
+   "no_early": true,
+   "within_upper": true,
+   "worst_rel_late": 0.03777018083786099,
+   "most_early": 0.000857630176254176,
+   "seconds": 0.90439543399998
+  },
+  "lake": {
+   "value_min": 298.2835465933275,
+   "geodesic_min": 290.2379604162864,
+   "pass": true
+  },
+  "thin_wall_leaks": 0,
+  "pass": true
+ }
+}

@@ -10,7 +10,7 @@
 
 | Decision | Outcome |
 |---|---|
-| **D1 propagation scheme** | **Not decided: no candidate passed all pre-declared criteria.** Under the rule fixed in CRITICAL_REVIEW, the decision returns to the owner and M1b does not start. The WENO5 level set came closest (it passes criteria 1 and 3, misses criterion 2 at LB 8 by 0.5 pp, and fails the barrier fixtures). Radius-8 label-setting fails criteria 1–3 and passes the barriers |
+| **D1 propagation scheme (status after M1a-3)** | **Still undecided: no scheme meets the pre-registered V&V criteria at 30 m (see "M1a-3").** The level set is the only convergent scheme and passes all exact cases at 15 m; the hybrid has the best 30 m record. The decision goes back to the owner. *Earlier status (M1a bake-off):* Not decided: no candidate passed all pre-declared criteria.** Under the rule fixed in CRITICAL_REVIEW, the decision returns to the owner and M1b does not start. The WENO5 level set came closest (it passes criteria 1 and 3, misses criterion 2 at LB 8 by 0.5 pp, and fails the barrier fixtures). Radius-8 label-setting fails criteria 1–3 and passes the barriers. |
 | **D2 LB relation** | **Decided:** FARSITE form (Finney 1998: Anderson 1983 − 0.397, *effective midflame* wind in **m/s**, cap 8) as the default; BehavePlus 1 + 0.25 U_E (mi/h) as a sensitivity. Units are verified algebraically. The source wording was read in excerpts of the primary document, not in the full text |
 | **D3 wind multiplier** | **Adopted provisionally:** `a_u` on the 20 ft wind speed (systematic correction), plus a separate scenario factor λ for input uncertainty. The model cannot distinguish them (tested), so they are kept apart by design |
 | M0 on the Mac | **Not run.** This session cannot reach the Mac (`M0_RESULTS.md`). M1b stays NO-GO |
@@ -167,6 +167,163 @@ What this does **not** establish: that a single `a_u` transfers between fires or
 and that the HRRR error is stationary. The illustrative fuel bed is not an SB40 model; the full fuel table
 (E1) is still M1a work.
 
+## M1a-2 (exploratory, superseded for scheme selection)
+
+> All level-set numbers in the D1 bake-off section above and in this M1a-2 section came from the level
+> set **before** the narrow band, reinitialization and extension velocities (METHOD L5). The code now
+> defaults to the fixed version, so re-running `make bakeoff` or `firepath.mosaic` gives different values.
+> The committed JSON files are the historical record.
+
+Pre-registered in `validation/M1A2_PREREGISTRATION.md` (commit `379068e`). Raw results are in
+`validation/m1a2_*.json` and `m1a_bakeoff_hybrid.json`.
+
+- **E2, radius-16 graph under a 90° wind change: failed.** Max error 3.3 % at LB 2, 13.6 % at LB 4 (limit
+  5 %), no better than radius 8 (13.7 %). Long edges cannot turn mid-edge, so a bigger stencil does not help.
+- **E3, level-set barrier treatment:**
+  - zero-flux barrier faces let the front through a one-cell gap (it had been blocked completely);
+  - a **hybrid** (level set, then label-setting seeded with the level-set arrivals) passed the gap and
+    lake fixtures;
+  - on the bake-off fixture the hybrid passed criteria 1 and 3, but criterion 2 at LB 8 came out at
+    3.2 % (limit 3 %).
+- **E1, mosaic vs refined references: inconclusive.** The two fine-grid references (radius-16 graph,
+  level set) disagreed (LB 4: median 2.8 %, p95 10.5 %), so by the rule candidates had to pass against
+  both, and none did.
+  - Deviation: cells beyond the solver horizon had first counted as infinite error. The solvers were then
+    run to 6,000 min and scored on reference arrivals ≤ 4,000 min.
+- **Defect found: level-set phantom arrivals.** In the isotropic mosaic, the level set burned 537–568 cells
+  before their hard physical lower bound (distance from the initial raster region ÷ maximum speed),
+  e.g. 679 min where ≥ 1,308 min is possible. Cause: no narrow band or reinitialization (see M1a-3).
+- **Practice review.** After these results, the owner asked for the approach to be checked against
+  established practice (`PRACTICE_REVIEW.md`). The bake-off and E1 had mixed code verification, solution
+  verification and code-to-code comparison, and had judged a level set without reinitialization. The
+  approved revision is M1a-3.
+
+## M1a-3: revised verification (V&V-based), the basis for D1
+
+Pre-registered in `validation/M1A3_PREREGISTRATION.md` (commit `e4d981a`) before the runs. This is
+**numerical verification only**: it shows how well each scheme solves the *model's* equations. It says
+nothing about agreement with real fires (validation, PLAN §8–9, separate).
+
+**The 5 % / 10 % thresholds are FirePath acceptance criteria, not industry standards.** For context:
+Muñoz-Esparza et al. (2018) report < 1 % ROS error for a state-of-practice level set on analytic cases.
+Every result is reported as a median (typical error) **and** a 95th percentile (tail).
+
+### Fixes made before the runs (reported as deviations from the v2 wording)
+
+1. **Level set, state of practice:** narrow band (8 cells) and geometric reinitialization every 10 steps
+   (as pre-registered), plus two refinements chosen on 30 m smoke tests *before* the runs:
+   - redistancing interface-adjacent cells too, which was more accurate than keeping them;
+   - **extension velocities** (Adalsteinsson & Sethian 1999), because reinitialized fronts otherwise
+     arrived *early* when entering slower fuel (−2.6 % at a 4× contrast; the strip was 10 min early).
+2. **Regression test** `tests/test_levelset_regression.py`: no cell may burn before distance-from-raster ÷
+   max speed (no slack). The pre-fix code fails it with 568 violations; the fixed code has 0 in all three
+   mosaic cases. Graph arrivals also have 0.
+3. **Barrier reference (B):** the geodesic is measured from the **raster** initial region (the cells all
+   schemes start from), not from the ideal disc. The disc reference made every graph scheme look 2 % early,
+   which is an initial-condition mismatch, not a physics violation. This choice was made after seeing the
+   disc-reference results, so both are reported.
+
+### A. Code verification (exact solutions; Δ = 30 / 15 / 7.5 m)
+
+Median / p95 relative arrival error (%) at 30 m; observed order p from the medians (30→15, 15→7.5); cases
+failing at 30 m are listed. Full tables: `validation/m1a3_A_<scheme>.json`.
+
+| Scheme | Cases passing at 30 m (of 17) | Failures at 30 m (median / p95 %) | Converges? | Errors at 7.5 m (median, worst p95) |
+|---|---|---|---|---|
+| **LS** (level set) | 14 | LB 8 at 22.5°: 5.36 / 6.96; LB 8 at 45°: 7.93 / 17.1; wind change LB 4: 1.25 / 11.5 | **yes**, p ≈ 1.3–2.3 on almost all cases (the circle: 1.41 → 0.29 → 0.12 %) | ≤ 0.63 %, ≤ 1.21 % |
+| **G8** (radius-8 graph) | 14 | the three LB 8 ellipses: p95 20.0–29.4 % (medians 1.5–3.9 %) | **no**: erratic p (−2 to 2.3); the LB 8 tail stays ≈ 17 % at 7.5 m (fixed-stencil angular error) | ≤ 1.31 %, ≤ 17.7 % |
+| **HY** (hybrid) | 16 | LB 8 at 45°: 2.07 / 16.1 | partly: inherits the graph's raster-start bias (circle 1.23 % *early* at 30 and 15 m) | ≤ 0.82 %, ≤ 1.73 % |
+| **G16** (radius-16 graph) | 14 | the three LB 8 ellipses: p95 16.9–21.0 % (medians 1.2–2.6 %) | **no clean order** (p −2.1 to 2.2). The LB 8 tail shrinks with refinement (p95 2.7–4.3 % at 15 m) | ≤ 0.91 %, ≤ 3.87 % |
+
+Run time for all 17 cases (pure Python/NumPy, cloud container, 4 vCPU shared by 3–4 jobs), at 30 / 15 / 7.5 m: LS 16 / 84 / 777 s · G8 21 / 86 / 359 s · HY 34 / 160 / 1,058 s · G16 93 / 459 / 1,816 s. These times are relative indications only, not Rust estimates.
+
+Reading: the level set behaves like a consistent scheme, with errors that shrink at about second order
+under refinement. At 30 m its error near the small initial disc and for very elongated fires is still
+above the FirePath limits. The graph's error does not shrink with refinement, because its angular bias
+is built into the stencil. In the LB 8 tail that bias is large.
+
+### B. Barriers (geodesic references, 30 m)
+
+| Scheme | Gap: never early / within the upper tolerance / worst late (raster ref) | Same, disc ref | Lake | Thin-wall leaks | **Pass** |
+|---|---|---|---|---|---|
+| G8 | ✓ / ✓ / 3.8 % | ✗ (−2.2 % early) / ✓ | ✓ | 0 | **✓** |
+| G16 | ✓ / ✓ / 3.8 % | ✗ / ✓ | ✓ | 0 | **✓** |
+| LS | ✓ / **✗** / 17.2 % | ✓ / ✓ / 14.3 % | ✓ (319 vs geodesic 290 min) | 0 | **✗** |
+| HY | ✓ / ✓ / 3.8 % | ✗ / ✓ | ✓ | 0 | **✓** |
+
+### C. Solution verification on the random two-fuel mosaic (no exact solution)
+
+Each scheme on its own 30 / 15 / 7.5 m sequence. Richardson is used only where its assumptions hold
+(monotone convergence, 0.5 ≤ p ≤ 3). If fewer than 80 % of scored cells qualify, no acceptance claim is
+made and only the raw 30 m vs 7.5 m difference is reported.
+
+| Scheme / case | Richardson-applicable share | Raw \|f30 − f7.5\|/f7.5 median / p95 | Est. 30 m error median / p95 (applicable cells only) | Lower-bound violations | Pass |
+|---|---|---|---|---|---|
+| G8 iso | 15 % | 2.7 % / 9.4 % | (2.0 % / 5.9 %, not claimable) | 0 | ✗ (not applicable) |
+| G8 LB 2 | 67 % | 2.6 % / 10.5 % | (4.7 % / 13.6 %) | 0 | ✗ (not applicable) |
+| G8 LB 4 | 53 % | 2.2 % / 15.2 % | (5.5 % / 21.2 %) | 0 | ✗ (not applicable) |
+| LS iso | 76 % | 4.7 % / 8.7 % | (6.1 % / 12.1 %) | 0 | ✗ (not applicable) |
+| LS LB 2 | 68 % | 4.0 % / 9.0 % | (6.6 % / 12.8 %) | 0 | ✗ (not applicable) |
+| LS LB 4 | 62 % | 2.8 % / 8.2 % | (3.9 % / 12.3 %) | 0 | ✗ (not applicable) |
+| HY iso | 15 % | 2.7 % / 9.4 % | (2.0 % / 5.9 %) | 0 | ✗ (not applicable) |
+| HY LB 2 | 68 % | 2.6 % / 10.4 % | (4.7 % / 13.1 %) | 0 | ✗ (not applicable) |
+| HY LB 4 | 42 % | 2.0 % / 14.3 % | (4.3 % / 20.1 %) | 0 | ✗ (not applicable) |
+
+G16 was not run on the mosaic (pre-registered: code-verification cases only, because of its cost).
+
+**Richardson/GCI was not applicable in any case.** Fewer than 80 % of cells converged monotonically
+within the 0.5 ≤ p ≤ 3 window (15–76 %). Two reasons: speed discontinuities at fuel edges make
+convergence non-monotone, and for the graph schemes the fixed-stencil angular error does not vanish
+under refinement. So no scheme can claim an acceptable mosaic error from solution verification.
+
+**Code-to-code cross-check (a comparison, not a verification).** Graph arrival times are upper bounds on
+the model's exact solution (each graph path is a physical path with exactly integrated travel time).
+So wherever the level set is later than G8, its own error is **at least** that difference.
+(LS − G8)/G8 on the mosaic, median [p5, p95]:
+- isotropic: **10.5 % [6.4, 24.8]** at 30 m → 3.3 % [1.2, 8.6] at 15 m;
+- LB 4: **7.2 % [0.1, 23.6]** at 30 m → 3.5 % [0.4, 12.0] at 15 m.
+
+In a 4× contrast mosaic, the level set's 30 m error is therefore ≥ ~7–10 % in median, larger than its own
+30 vs 7.5 m difference suggests (pre-asymptotic). At 15 m the bound falls to ~3.5 %.
+
+### Verdict under the pre-registered rule
+
+**No scheme meets the pre-registered acceptance criteria at 30 m.**
+
+| Scheme | A: code verification at 30 m | B: barriers | C: mosaic | Lower bound | Acceptable |
+|---|---|---|---|---|---|
+| LS | ✗ 14/17 (LB 8 elongation, wind-change tail) | ✗ (gap: 17 % late vs raster geodesic) | ✗ not applicable; ≥ 7–10 % median late vs the G8 upper bound | ✓ 0 | **no** |
+| G8 | ✗ 14/17 (LB 8 tails 20–29 %) | ✓ | ✗ not applicable | ✓ 0 | **no** |
+| G16 | ✗ 14/17 (LB 8 tails 17–21 %) | ✓ | not run | — | **no** |
+| HY | ✗ 16/17 (LB 8 at 45°: p95 16.1 %) | ✓ | ✗ not applicable | ✓ 0 | **no** |
+
+**What the evidence does establish**
+- **Level set:** the only scheme that converges at a consistent order (p ≈ 1.3–2.3) on the exact cases.
+  At **15 m** it passes every code-verification case with a wide margin (worst median 1.67 %, worst p95
+  4.0 %), and its mosaic error bound falls to ≈ 3.5 %. Its weaknesses are concentrated at 30 m:
+  - very elongated fires;
+  - one-cell gaps (late behind the gap);
+  - fuel-speed contrasts (first-order).
+- **Graph schemes:** exact at barriers and never early, but their error does not converge. The
+  LB 8 tail error is built into the stencil (it does not shrink at radius 8), and graph paths cannot turn
+  mid-edge under changing wind.
+- **Hybrid:** the best 30 m code-verification record (16/17, failing only the LB 8 / 45° tail) and
+  passes barriers. Its cost is a level-set run plus a graph run, and it inherits the graph's
+  initial-raster bias.
+
+**Remaining trade-off, for the owner (D1 stays open).** These options are not recommendations, because
+none meets the criteria as registered:
+1. **Level set at 15 m** (30 m inputs resampled to 15 m; the finer grid adds no data, only numerical
+   accuracy). Strongest verification evidence (convergent; passes A at 15 m). Costs ~5× a 30 m run
+   (measured 84 s vs 16 s for the 17 cases). Barriers at 15 m and the mosaic at 15 m against the
+   upper bound (~3.5 %) still need a formal check under the same criteria.
+2. **Hybrid at 30 m**, accepting the documented LB 8 tail (16 % p95 at 45°; LB 8 corresponds to an
+   effective midflame wind of ≥ 20 mi/h). This needs an explicit owner decision to relax a
+   pre-registered criterion for LB 8 only. It would not be a finding of this verification.
+3. Changing the physics to suit the numerics (e.g. capping LB lower) is **not** advised.
+
+Both 1 and 2 would need a short pre-registered confirmation run before M1b.
+
 ## M0 on the build Mac
 
 Not run: there is no route from this session to the Mac. The cloud re-run was identical (3/32
@@ -183,10 +340,16 @@ outputs are committed under `validation/`.
 
 ## Still open (M1a not complete)
 
-- **D1:** owner decision after the two experiments above. M1b and the Rust kernel depend on it.
-- Full Rothermel/SB40 fuel table (E1, E9–E11) with tests against pyretechnics and GTR-153 values. Not
-  started in this session.
-- WAF crown-fill definition (E11) and full-text checks of Finney 1998 / Anderson 1983 / Andrews 2013:
-  blocked here, to do on the Mac.
-- Inclined-plane (slope-plane geometry) fixture.
-- **M0 on the Mac** (`make probe`), which gates M1b.
+- **D1 (owner):** choose between the options in "M1a-3 → Verdict", or ask for more work. Either option
+  needs a short pre-registered confirmation run (barriers and mosaic at the chosen resolution) before M1b.
+- Level-set barrier accuracy at one-cell gaps (17 % late at 30 m) and first-order error at fuel contrasts:
+  known, quantified, not solved. A cut-cell or sub-cell barrier treatment would be the next step if the
+  level set is chosen at 30 m.
+- Standard cases not yet run: slope ("Valley"; needs the slope-plane geometry) and a four-fuel quadrant
+  (no independent exact solution implemented; the half-plane refraction case covers the single-interface
+  physics).
+- Full Rothermel/SB40 fuel table (E1, E9–E11) with tests against pyretechnics and GTR-153 values.
+- WAF crown-fill definition (E11): secondary sources give f = CC·CR/3, which needs CBH. Primary GTR-266
+  check pending.
+- Full-text checks of Finney 1998 / Anderson 1983 / Andrews 2013 (blocked from this session).
+- **M0 on the Mac** (`make probe`): gates M1b.
