@@ -44,16 +44,25 @@ def normalise(df: pd.DataFrame) -> pd.DataFrame:
     ft = out["FeatureType"].fillna("")
     out["is_source"] = ft.str.startswith("Source Area")
     out["natural"] = out["SlopeModifier"].eq("None Apparent")
+    # Road / trail / terrace runoff or agricultural activity concentrating water onto the slope: an
+    # anthropogenic trigger even where the slope itself was not cut or filled (99 % of "Road Embankment"
+    # source areas carry "Road Runoff"; METHOD decisions log 2026-10-09)
+    runoff = out["RunoffModifier"] if "RunoffModifier" in out else pd.Series(None, index=out.index, dtype=object)
+    out["natural_runoff"] = runoff.isna() | runoff.eq("None Apparent")
     return out
 
 
-def positive_mask(df: pd.DataFrame, event: str = "helene", confs=("High", "Moderate")) -> pd.Series:
-    """Primary positive definition: natural source areas of the event with existence AND location
-    confidence in `confs` (PLAN §6). Transport zones and deposits are never positives."""
-    return (
+def positive_mask(df: pd.DataFrame, event: str = "helene", confs=("High", "Moderate"),
+                  require_natural_runoff: bool = True) -> pd.Series:
+    """Primary positive definition: source areas of the event with no apparent slope modifier and (by
+    default) no runoff modifier, existence AND location confidence in `confs` (PLAN §6).
+    `require_natural_runoff=False` gives the slope-modifier-only variant used in the feasibility check.
+    Transport zones and deposits are never positives."""
+    m = (
         df["event"].eq(event)
         & df["is_source"]
         & df["natural"]
         & df["exist_conf"].isin(confs)
         & df["loc_conf"].isin(confs)
     )
+    return m & df["natural_runoff"] if require_natural_runoff else m

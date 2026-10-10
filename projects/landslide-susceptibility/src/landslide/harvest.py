@@ -256,7 +256,25 @@ def harvest_roads(m):
             _record(m, f"roads_{fips}", zf, url=url)
 
 
-SMALL_STEPS = ("counties", "wbd", "inventory", "mrms", "geology", "mrlc", "ssurgo", "roads", "buildings")
+def harvest_osm_roads(m):
+    """All OSM `highway` lines in the buffered AOI (incl. service roads, driveways, tracks); pbf deleted after."""
+    import pyogrio
+
+    pbf = C.RAW / "osm_nc.osm.pbf"
+    sha = _download(C.OSM_PBF, pbf)
+    bb = tuple(gpd.GeoSeries([box(*region_bounds()["aoi"])], crs=C.CRS).to_crs(4326).total_bounds)
+    g = pyogrio.read_dataframe(pbf, layer="lines", bbox=bb, where="highway IS NOT NULL",
+                               columns=["osm_id", "name", "highway", "other_tags"])
+    p = C.RAW / "osm_roads.parquet"
+    g.to_parquet(p)
+    nbytes = pbf.stat().st_size
+    pbf.unlink()
+    _record(m, "osm_roads", p, url=C.OSM_PBF, pbf_sha256=sha, pbf_bytes=nbytes, n=len(g),
+            licence="ODbL; local audit only, never published")
+
+
+SMALL_STEPS = ("counties", "wbd", "inventory", "mrms", "geology", "mrlc", "ssurgo", "roads", "buildings",
+               "osm_roads")
 
 
 def small(only: list[str] | None = None):

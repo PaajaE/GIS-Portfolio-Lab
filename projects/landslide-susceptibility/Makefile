@@ -4,7 +4,7 @@ PY := uv run python -m landslide
 # cargo is needed by `uv sync` (builds rust/) and `make test`; add the usual rustup locations.
 export PATH := $(PATH):$(HOME)/.cargo/bin:/opt/homebrew/opt/rustup/bin
 
-.PHONY: setup harvest harvest-small harvest-dem feasibility qa terrain bench test
+.PHONY: setup harvest harvest-small harvest-dem feasibility qa terrain stack hydro units labels aggregate prepare bench test
 
 setup:
 	uv sync
@@ -26,6 +26,23 @@ qa:                 ## data QA report -> validation/M1_DATA_QA.md
 
 terrain:            ## Rust terrain kernels on the 5 m DEM mosaics -> data/interim/terrain_<region>/*.tif
 	$(PY).terrain
+
+stack:              ## NLCD, canopy, rainfall, geology, soils onto the 5 m grid -> data/interim/stack_<region>
+	$(PY).stack
+
+hydro:              ## 10 m D8, contributing area, HAND, distance to channel -> data/interim/hydro_<region>
+	$(PY).hydro
+
+units:              ## half-basin slope units at 0.05 / 0.1 / 0.2 km2 -> data/interim/units_aoi
+	$(PY).units
+
+labels:             ## positives, exclusions, domain, sample tables, modifier audit, density -> data/interim/labels_aoi
+	$(PY).labels
+
+aggregate:          ## slope-unit predictor tables -> data/out/units_<A>.parquet
+	$(PY).aggregate
+
+prepare: terrain stack hydro units labels aggregate   ## M2-M3 stages in order
 
 bench:              ## Rust vs reference timing at several sizes -> benchmarks/terrain_kernels.json
 	$(PY).bench

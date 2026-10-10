@@ -171,3 +171,17 @@ Size of natural Helene source polygons (n = 4,752): median 84 m², IQR 45–152 
 The Helene "Priority 1" lidar (2025) is named in the post-event imagery description. It was not found in the TNM
 API on 2026-10-08 and again on 2026-10-09 (only NC_Phase5_2018_A18 and legacy point clouds over Yancey). The pre/post lidar
 swipe is therefore shelved until a public release exists.
+
+## OpenStreetMap roads (audit and road corridor only)
+
+| Field | Value |
+|---|---|
+| Provider | OpenStreetMap contributors, via Geofabrik (North Carolina extract) |
+| Official source URL | https://download.geofabrik.de/north-america/us/north-carolina-latest.osm.pbf (resolved to north-carolina-261008.osm.pbf) |
+| Dataset / version / vintage | extract dated 2026-10-08; `highway` lines in the buffered AOI bbox (80,072 segments; 72,843 vehicle) |
+| Acquisition date | 2026-10-09; pbf (429 MB) deleted after extraction, its SHA-256 is in the manifest |
+| License | **ODbL 1.0** — used locally for the road corridor and the modifier audit; no OSM-derived data are published |
+| Source CRS → target CRS | EPSG:4326 → EPSG:26917 |
+| Preprocessing | non-vehicle classes dropped (footway, path, steps, bridleway, cycleway, pedestrian, …); united with TIGER S1xxx; buffered 15 m |
+| Output format / path | `data/raw/osm_roads.parquet` |
+| Known limitations / biases | volunteered; completeness of private drives and forest roads unknown but far above TIGER |

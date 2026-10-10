@@ -1981,6 +1981,17 @@
    "sha256": "c90f7976be6d1320d2fc2b320ee262869ef0e6b1841d88668195d7ef3fbec683",
    "url": "https://www.mrlc.gov/geoserver/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=mrlc_download__NLCD_2021_Land_Cover_L48&format=image%2Fgeotiff&subset=X(1244625,1294695)&subset=Y(1541745,1583745)"
   },
+  "osm_roads": {
+   "acquired_utc": "2026-10-10T01:23:39+00:00",
+   "bytes": 20231527,
+   "licence": "ODbL; local audit only, never published",
+   "n": 80072,
+   "path": "data/raw/osm_roads.parquet",
+   "pbf_bytes": 429458441,
+   "pbf_sha256": "3c8b9469e0ac93d0b0a6cfe3624dde96982349d64341ac7b54e0f33aa0547a6e",
+   "sha256": "0a9bbec472a6b2331bc885367738475e8d0dc950144da464840d91bf204263dc",
+   "url": "https://download.geofabrik.de/north-america/us/north-carolina-latest.osm.pbf"
+  },
   "roads_021": {
    "acquired_utc": "2026-10-09T05:36:11+00:00",
    "bytes": 5041489,
@@ -2055,5 +2066,5 @@
    "url": "https://www.mrlc.gov/geoserver/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=mrlc_download__nlcd_tcc_conus_2021_v2021-4&format=image%2Fgeotiff&subset=X(1244625,1294695)&subset=Y(1541745,1583745)"
   }
  },
- "updated_utc": "2026-10-09T16:45:46+00:00"
+ "updated_utc": "2026-10-10T01:26:01+00:00"
 }

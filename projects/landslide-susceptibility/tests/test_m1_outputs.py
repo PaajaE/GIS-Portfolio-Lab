@@ -40,10 +40,11 @@ def test_inventory_snapshot_positive_counts():
     inv = normalise(gpd.read_parquet(C.RAW / "ncgs_features.parquet")).to_crs(C.CRS)
     cty = gpd.read_parquet(C.RAW / "counties.parquet").to_crs(C.CRS)
     aoi = cty[cty["NAME"].isin(C.REGIONS["aoi"])].union_all()
-    pos = inv[positive_mask(inv)]
-    n = int(pos.geometry.representative_point().within(aoi).sum())
-    assert n == 2962  # frozen snapshot 2026-10-08 (PLAN §0b); a change means the service was re-queried
-    assert pos.is_valid.all()
+    within = inv.geometry.representative_point().within(aoi)
+    # frozen snapshot 2026-10-08 (PLAN §0b); a change means the service was re-queried
+    assert int((positive_mask(inv, require_natural_runoff=False) & within).sum()) == 2962  # feasibility rule
+    assert int((positive_mask(inv) & within).sum()) == 2582  # primary rule (no slope or runoff modifier)
+    assert inv[positive_mask(inv)].is_valid.all()
 
 
 def test_huc12_cover_aoi():

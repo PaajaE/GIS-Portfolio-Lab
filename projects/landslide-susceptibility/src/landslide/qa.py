@@ -36,7 +36,7 @@ def check_inventory(rep: dict):
     j = gpd.sjoin(pts, cty[["NAME", "geometry"]], predicate="within", how="left")
     j = j[~j.index.duplicated()]
     inv["county"] = j["NAME"]
-    pos = positive_mask(inv)
+    pos = positive_mask(inv, require_natural_runoff=False)  # rule as of M1 (feasibility counts)
     geom_hash = raw.geometry.to_wkb().map(lambda b: hashlib.sha1(b).hexdigest())
     r = {
         "n_features_bbox": len(inv),

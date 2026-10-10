@@ -27,19 +27,22 @@ def test_conf_level():
 
 
 def test_positive_mask():
-    rows = [  # (storm, type, modifier, exist, loc, expected)
-        ("2024/09/27 Helene", "Source Area", "None Apparent", H, H, True),
-        ("Helene 09/27/2024", "Source Area (Reactivated)", "None Apparent", M, M, True),
-        ("2024/09/27 Helene", "Source Area", "Road Cut", H, H, False),        # road-related
-        ("2024/09/27 Helene", "Source Area", None, H, H, False),             # modifier not assessed
-        ("2024/09/27 Helene", "Deposit", "None Apparent", H, H, False),       # never a positive
-        ("2024/09/27 Helene", "Transport Zone", "None Apparent", H, H, False),
-        ("2024/09/27 Helene", "Source Area", "None Apparent", L, H, False),   # low existence confidence
-        ("2024/09/27 Helene", "Source Area", "None Apparent", H, L, False),   # low location confidence
-        ("1940/08/13-14", "Source Area", "None Apparent", H, H, False),       # other event
-        (None, "Source Area", "None Apparent", H, H, False),                  # undated
+    NA = "None Apparent"
+    rows = [  # storm, type, slope modifier, existence, location, runoff modifier, primary, slope-only variant
+        ("2024/09/27 Helene", "Source Area", NA, H, H, NA, True, True),
+        ("Helene 09/27/2024", "Source Area (Reactivated)", NA, M, M, None, True, True),  # runoff not assessed
+        ("2024/09/27 Helene", "Source Area", NA, H, H, "Road Runoff", False, True),     # road drainage trigger
+        ("2024/09/27 Helene", "Source Area", "Road Cut", H, H, NA, False, False),       # road cut
+        ("2024/09/27 Helene", "Source Area", None, H, H, NA, False, False),             # modifier not assessed
+        ("2024/09/27 Helene", "Deposit", NA, H, H, NA, False, False),                   # never a positive
+        ("2024/09/27 Helene", "Transport Zone", NA, H, H, NA, False, False),
+        ("2024/09/27 Helene", "Source Area", NA, L, H, NA, False, False),               # low existence conf.
+        ("2024/09/27 Helene", "Source Area", NA, H, L, NA, False, False),               # low location conf.
+        ("1940/08/13-14", "Source Area", NA, H, H, NA, False, False),                   # other event
+        (None, "Source Area", NA, H, H, NA, False, False),                              # undated
     ]
     df = pd.DataFrame(rows, columns=["AssociatedStorm", "FeatureType", "SlopeModifier", "ExistenceConfidence",
-                                     "LocationConfidence", "expected"])
-    got = positive_mask(normalise(df))
-    assert got.tolist() == df["expected"].tolist()
+                                     "LocationConfidence", "RunoffModifier", "primary", "variant"])
+    n = normalise(df)
+    assert positive_mask(n).tolist() == df["primary"].tolist()
+    assert positive_mask(n, require_natural_runoff=False).tolist() == df["variant"].tolist()

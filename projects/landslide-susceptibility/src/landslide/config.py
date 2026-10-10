@@ -52,6 +52,9 @@ MRLC_COVERAGES = {
 }
 SDA = "https://sdmdataaccess.sc.egov.usda.gov/Tabular/post.rest"
 TIGER_ROADS = "https://www2.census.gov/geo/tiger/TIGER2024/ROADS/tl_2024_{state}{county}_roads.zip"
+# OpenStreetMap (ODbL): roads for the independent audit of the NCGS road/natural coding and the road corridor
+# (TIGER misses most private drives and forest roads). Local analysis only; never published.
+OSM_PBF = "https://download.geofabrik.de/north-america/us/north-carolina-latest.osm.pbf"
 TNM_API = "https://tnmaccess.nationalmap.gov/api/v1/products"
 DEM_DATASET = "Digital Elevation Model (DEM) 1 meter"
 DEM_NODATA = -999999.0

@@ -55,7 +55,9 @@ def run() -> dict:
     inv = load_inventory()
     pts = inv.set_geometry("pt")
     in_aoi = pts.within(aoi_u)
-    pos = pts[positive_mask(inv) & in_aoi].copy()
+    # slope-modifier-only definition, as executed on 2026-10-08 (PLAN §0b); the primary rule now also
+    # excludes runoff-modified source areas (2,962 -> 2,582)
+    pos = pts[positive_mask(inv, require_natural_runoff=False) & in_aoi].copy()
     pos = gpd.sjoin(pos, aoi[["NAME", "geometry"]], predicate="within").drop(columns="index_right")
     out["positives"] = {"n": len(pos), "by_county": pos["NAME"].value_counts().to_dict(),
                         "road_related_helene_sources_in_aoi": int(

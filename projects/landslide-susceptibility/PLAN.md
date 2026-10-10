@@ -642,6 +642,7 @@ order.
 | M2 | Terrain kernels | reference + Rust pass fixtures including edges and nodata; full-AOI predictors; `benchmarks/terrain_kernels.json` |
 |  | **M2 status 2026-10-09** | **done:** 13 predictor layers for both regions; Rust = oracle on all fixtures and all benchmark inputs; speed-up 2.5–3.5× (windows), 1.1–2.9× (3×3); kernel time ≈ 10 % of a full run. Summed-area-table precision bug found and fixed. Hydrology (contributing area, distance to channel) moves to M3 with the slope units |
 | M3 | Stack, slope units, sampling | harmonized stack passes boundary tests; units at three thresholds; labels, negatives, modifier audit CSV, density layer |
+|  | **M3 status 2026-10-09** | **done:** stack + hydrology on the 5 m grid; half-basin units (A = 0.1: 22,569 units, 5.5 % positive); domain 1,793 km²; 2,582 primary positives (rule tightened: no runoff modifier); negatives pool 400 k; modifier audit (road-related class = road-drainage triggered; distance not diagnostic); density layer. Details: METHOD §Sampling |
 | M4 | Baseline + validation harness | HUC-12 folds frozen; logistic-regression spatial-CV metrics + random-split contrast; variogram check; reference comparison |
 | M5 | Advanced model | nested-tuned gradient boosting; Δ vs baseline with block-bootstrap CI; calibration diagnostic; error map; grouped importance + artefact audit |
 | M6 | Uncertainty, transfer, sensitivity | bootstrap ensemble; area of applicability; sensitivity table; leave-one-county-out; rainfall strata; distance decay; Watauga 1940 → 2024 |

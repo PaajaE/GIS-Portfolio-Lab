@@ -1,6 +1,6 @@
 # Landslide Susceptibility — Method
 
-> Status: **draft** — M1 (harvest + QA) and M2 (terrain kernels) done (2026-10-09); no model yet. Spec section: §6.
+> Status: **draft** — M1 (harvest + QA), M2 (terrain kernels) and M3 (stack, slope units, sampling) done (2026-10-09); no model yet. Spec section: §6.
 > Each statement is tagged **[verified]** (checked against a primary source or live service on 2026-10-08),
 > **[planned]** (design, see [`PLAN.md`](PLAN.md)) or **[assumption]** (to be tested). Results will replace the
 > planned items as milestones complete.
@@ -60,12 +60,37 @@ Excluded predictors [planned]:
 Full provenance: [`DATA_SOURCES.md`](DATA_SOURCES.md).
 
 ## Harmonization
-[planned]
-- EPSG:26917 (native CRS of the DEM tiles [verified]), NAVD88 m.
-- 5 m grid on the UTM lattice; AOI + 2 km buffer.
-- DEM `average`; continuous layers `bilinear`; categorical layers `nearest` or cell-centre rasterization.
-- Strict nodata in kernels; water excluded.
-- All predictors pre-event. Post-event imagery and lidar are used only as NCGS's mapping basis and for display.
+**Implemented in M3, 2026-10-09.**
+
+**Grid:** every layer is on the 5 m DEM grid (EPSG:26917, NAVD88 m), asserted by tests.
+
+**Inputs:**
+- NLCD 2021: nearest, grouped into forest / developed open / developed / open-agricultural / wetland /
+  water.
+- Tree canopy 2021: bilinear. Its 254 flag is nodata; 0 % stays valid.
+- MRMS: the cell-wise maximum of the two 72 h windows, bilinear from ~1 km.
+- Geology (NCGS 1985, 1:500 k): rasterized by cell centre into 4 lithology groups. Inside the AOI every unit is
+  grouped: metasedimentary/metavolcanic 53 %, basement orthogneiss 28 %, granitoid 8 %, mafic/ultramafic 2 % of
+  the grid; the rest is Tennessee buffer.
+- SSURGO (`muaggatt`): hydrologic soil group (dual groups → D) and minimum depth to bedrock. A null depth is
+  coded as 250 cm plus a `bedrock_recorded = 0` flag, because SSURGO null means "no bedrock within the described
+  profile", not missing data. Clay % was not harvested, because HSG carries the infiltration rationale.
+
+**Hydrology** (10 m = exact 2×2 mean of the 5 m DEM; pysheds fill pits → depressions → flats → D8 → accumulation):
+- log10 contributing area
+- HAND on the conditioned DEM
+- straight-line distance to the drainage cell, with channels at 0.1 km²
+- Values are repeated 2×2 onto the 5 m grid. Inside the counties 0.07 % of cells reach no channel.
+- Contributing area of large rivers entering from outside the 2 km buffer is truncated; this affects valley
+  floors, not hillslopes.
+
+**Domain** (Buncombe + Yancey, MRMS ≥ 250 mm, every predictor valid, no open water):
+- 1793 km² (71,700,466 cells).
+- Hillslope domain: slope ≥ 20.9° (1st percentile of positive cells),
+  730 km².
+
+**Time:** all predictors are pre-event (lidar 2016–17, NLCD and canopy 2021, footprints 2022/23); rainfall is the
+event trigger.
 
 ## Baseline
 L2 logistic regression on a VIF-pruned predictor set, fitted inside spatial CV folds. [planned]
@@ -73,6 +98,51 @@ L2 logistic regression on a VIF-pruned predictor set, fitted inside spatial CV f
 ## Advanced method
 HistGradientBoosting with native categoricals, tuned only inside training folds; pixel and slope-unit variants.
 Out-of-fold ranks drive all validation views; a final all-data model gives the product map. [planned]
+
+
+## Sampling (implemented in M3)
+**Positives (primary rule):**
+- Helene source areas with no slope modifier **and** no runoff modifier, existence and location confidence
+  High/Moderate.
+- Count: **2,582 polygons → 16,421 cells** in the domain.
+- 95 polygons contain no cell centre and burn the cell of their
+  representative point.
+- **Variants:** slope-modifier only (2,962 polygons, the feasibility rule), and all source areas including
+  road-related ones.
+
+**Exclusions (never negatives):**
+- every mapped polygon of any event, phase or confidence (+30 m)
+- TIGER ∪ OSM vehicle roads (+15 m)
+- open water
+- Together they cover 16.5 % of the domain; the road corridor alone is
+  13.7 %.
+
+**Negatives:** a seeded pool of 400,000 cells from 59,889,389 eligible cells (weight
+149.7). Per-fold subsamples are drawn from it in M4.
+
+**Slope units** (half-basins; `data/out/units_<A>.parquet`, units with ≥ 50 % domain):
+
+| A (km²) | Units in model domain | Positive units | Share |
+|---|---|---|---|
+| 0.05 | 38,830 | 1,440 | 3.7 % |
+| 0.1 | 22,569 | 1,238 | 5.5 % |
+| 0.2 | 12,483 | 991 | 7.9 % |
+
+2,565 of 2,582 sources lie in model-domain units at
+A = 0.1 km². The others are in units that are mostly below the rainfall threshold.
+
+**Natural/road coding audit** (`validation/modifier_conflicts.csv`):
+- Primary positives: 2.3 % within 20 m of a road.
+- Road / cut / fill source areas: 27.4 % within 20 m of a road,
+  and 49.5 % more than 100 m away, even with OSM roads.
+- 99.5 % of "Road Embankment" source areas carry
+  "Road Runoff". The road-related class therefore mostly marks failures *triggered by road drainage downslope of
+  the road*, so distance to a road cannot verify it.
+- 90 primary positives within 20 m of a
+  road or building are listed for human review.
+
+**Training-data density:** Gaussian kernel (σ = 2 km) of all 21,209 mapped features in the
+AOI grid, on a 100 m grid (`labels_aoi/density_100m.tif`).
 
 ## Validation
 [planned]
@@ -201,3 +271,11 @@ Known before analysis:
 | 2026-10-09 | Window sums by sliding sums, not summed-area tables | summed-area tables | SAT sd drifted 3.7e-3 m on 8192² grids (found by benchmark agreement check); sliding sums accurate to 1e-5 |
 | 2026-10-09 | Tolerances set for float32 outputs (exact / rtol 1e-6 / atol 1e-4) | rtol 1e-9 (plan) | float32 storage cannot meet 1e-9; both sides compute in f64 and round once |
 | 2026-10-09 | Benchmark reference for the 3×3 pass runs in 1024-row bands | unchunked NumPy | unchunked needs ~16 GB at 8192² and swaps (12× slower), which would fake a speed-up |
+| 2026-10-09 | Primary positives also require no runoff modifier (2,962 → 2,582) | slope modifier only | 99.5 % of "Road Embankment" sources carry "Road Runoff", i.e. road drainage is an anthropogenic trigger even on unmodified slopes; slope-only kept as variant |
+| 2026-10-09 | Road corridor from TIGER ∪ OSM (ODbL, local only) | TIGER only | TIGER lacks private drives and service/forest roads (46,584 OSM `service` segments in the AOI) |
+| 2026-10-09 | Modifier audit flags only primary positives near roads/buildings | flag road-coded far from roads | road-runoff failures start downslope of the road; distance is not diagnostic |
+| 2026-10-09 | Hillslope domain = slope threshold only (20.9°); developed land split in reporting, not excluded | also exclude NLCD 24 | NLCD groups 22–24 together; the population split is done in reporting (forest vs developed) |
+| 2026-10-09 | Lithology: 4 groups from NCGS 1985 unit descriptions | unit-level categories | 1:500 k units, many rare; groups follow weathering behaviour; all groups ≥ 2 % of the AOI |
+| 2026-10-09 | SSURGO null bedrock depth = 250 cm + flag; clay not used | treat null as missing | null means no bedrock in the described profile; HSG covers infiltration |
+| 2026-10-09 | pysheds 0.5 with an `np.in1d` shim (NumPy 2.5) | pin NumPy < 2.4; own D8 code | one-line documented shim; mature routing kept |
+| 2026-10-09 | Unit labels from representative points of in-county positives; units kept if ≥ 50 % in the triggered domain | any positive cell | one source = one unit; low-rain units are not tested by Helene |
