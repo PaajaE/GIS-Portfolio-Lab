@@ -14,7 +14,8 @@
 <a class="skip" href="#controls">Skip to the ranking controls</a>
 
 <p class="prelim" role="note"><strong>Preliminary prototype.</strong> Uncertainty and area-of-applicability layers are
-computed but not shown yet, and a geology confound found in the transfer checks is under review; the ranking may change.</p>
+computed but not shown yet. The ranking is a local experiment: it does not transfer beyond the two counties, and
+it is distorted across rock-type boundaries (see the limitations below).</p>
 
 <header class="intro">
   <p class="eyebrow">Landslide Susceptibility · Buncombe &amp; Yancey counties, North Carolina</p>
@@ -113,8 +114,10 @@ computed but not shown yet, and a geology confound found in the transfer checks 
       other worse than slope alone, and in neighbouring Watauga County it ranked Helene initiation sites no better
       than chance. Treat it as a local ranking.</li>
     <li><strong>Whether rock type matters.</strong> The model's geology terms largely mirror the rainfall gradient: the
-      rock types that received the least rain have no mapped natural initiations. Rankings across geology boundaries
-      are therefore uncertain; this is being reviewed.</li>
+      rock types that received the least rain have no mapped natural initiations, so the wettest rock type is
+      over-represented among flagged slopes and the driest is never flagged. A version without geology was tested
+      against a rule fixed in advance and was not shown to be better overall, so this ranking is kept as a local
+      experiment; compare across geology boundaries with caution.</li>
     <li><strong>Fine detail at the finest zoom.</strong> The map shows the 5&nbsp;m ranking generalised to about 8&nbsp;m pixels.</li>
   </ul>
 

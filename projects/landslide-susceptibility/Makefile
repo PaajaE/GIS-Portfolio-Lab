@@ -4,7 +4,7 @@ PY := uv run python -m landslide
 # cargo is needed by `uv sync` (builds rust/) and `make test`; add the usual rustup locations.
 export PATH := $(PATH):$(HOME)/.cargo/bin:/opt/homebrew/opt/rustup/bin
 
-.PHONY: setup harvest harvest-small harvest-dem feasibility qa terrain stack hydro units labels aggregate samples prepare baseline advanced product m6 web serve bench test
+.PHONY: setup harvest harvest-small harvest-dem feasibility qa terrain stack hydro units labels aggregate samples prepare baseline advanced product m6 nogeo web serve bench test
 
 setup:
 	uv sync
@@ -63,6 +63,9 @@ m6:                 ## M6: trigger intensity, sensitivity, ensemble + area of ap
 	$(PY).watauga
 	$(PY).watauga diagnostics
 	$(PY).report_m6
+
+nogeo:              ## pre-registered test of the 5 m LR without geology -> validation/NOGEO_TEST.md (~13 min)
+	$(PY).nogeo
 
 web:                ## web/data: susceptibility + hillshade PMTiles, overlays, summary.json (preliminary prototype)
 	$(PY).web_data

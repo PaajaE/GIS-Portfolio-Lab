@@ -396,6 +396,21 @@ kept as a local experiment and the transfer problem is reported as unresolved.
 - The 1940 outlines are almost all location confidence "Low", which affects only the descriptive temporal model.
 - With about 10 informative watersheds, intervals are wide; a null result is likely and acceptable.
 
+**Result (2026-10-10; [`validation/NOGEO_TEST.md`](validation/NOGEO_TEST.md)): no replacement. The current
+model stays as a local experiment, and the transfer problem is not resolved.**
+- **R1 fails.** In the AOI the no-geology model loses on the rainfall-stratified AUC: −0.012 (CI −0.023 to
+  +0.004). It is equal within watersheds: +0.000 (−0.012 to +0.009).
+- **R2a fails.** Leave-one-county-out: +0.119 (CI −0.020 to +0.214). Without geology the model is about equal to
+  slope alone there (−0.011, CI −0.056 to +0.042); the current model is worse than slope (point −0.130).
+- **R2b passes.** Watauga: +0.179 (CI +0.133 to +0.214), and +0.132 over slope. It is not independent of the
+  hypothesis.
+- **Ranking:**
+  - Spearman 0.85; 86 % of the current top 10 % is also in the no-geology top 10 %.
+  - The current top 10 % over-represents geology group 3 (20 % vs 7 % of hillslopes) and contains no group-2
+    cells (6 % of hillslopes). Without geology the shares match the area (8 % and 6 %).
+- **Stability:** without geology, 2.3 % instead of 6.3 % of top-10 % cells fall below the top 20 % in their worst
+  refits.
+
 ## Decision metric
 Held-out capture of mapped Helene initiation sites in the top *k* % of hillslope area (*k* = 5/10/20 % scenarios),
 with uncertainty and out-of-domain flags per unit. [planned]
@@ -529,3 +544,4 @@ Known before analysis:
 | 2026-10-10 | Geology confound reported, not fixed | drop geology terms now | found post hoc; changing the product model is an owner decision; a pre-registered re-test is proposed |
 | 2026-10-10 | VIF selection skips constant columns | crash | a class absent from a subdomain (geology 2 above 300 mm) gave an undefined correlation |
 | 2026-10-10 | No-geology test and decision rule (R1 non-inferiority ≥ −0.01 lower bound; R2 leave-one-county-out and Watauga lower bounds > 0) fixed before computation | judge on point estimates | owner instruction: intervals, not points |
+| 2026-10-10 | No-geology test: rule not met (R1, R2a fail; R2b passes) → current model kept as a local experiment; geology distortion of the ranking documented | replace on the Watauga gain or the point estimates | pre-registered rule; Watauga not independent |
