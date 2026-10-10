@@ -360,6 +360,42 @@ Results: §Uncertainty and sensitivity and [`validation/M6_UNCERTAINTY_TRANSFER.
   - → No "meaningful benefit" by the pre-registered rule. It is relevant to the open question of watersheds with
     heavy rain but almost no mapped failures.
 
+### Test: 5 m LR without geology predictors (owner approval 2026-10-10; fixed before computation)
+**Question:** does removing the geology terms (which M6 showed to encode the rainfall gradient) make the model
+transferable without losing skill inside the AOI?
+
+**Models compared:**
+- *current* = 5 m LR as in M4–M6.
+- *no-geology* = identical, except that the one-hot geology columns are removed.
+
+Same predictors otherwise, same forward VIF order, rainfall covariate at the reference, same 1:10 thinning
+seeds, same folds and buffer, same metrics. Every comparison is paired, using the same bootstrap resamples.
+
+**Decision rule.** No-geology replaces current **only if R1 and R2 both hold**; otherwise the current model is
+kept as a local experiment and the transfer problem is reported as unresolved.
+- **R1, AOI non-inferiority** (leave-one-HUC-12-out, 500 m buffer, 5 m hillslope cells): Δ(no-geology − current)
+  with a HUC-12 block-bootstrap 95 % **lower bound ≥ −0.01**, for both the rainfall-stratified AUC and the
+  within-watershed AUC.
+- **R2, meaningful transfer improvement, both of:**
+  - (a) leave-one-county-out: Δ rainfall-stratified AUC with a HUC-12 block-bootstrap lower bound > 0;
+  - (b) Watauga transfer of the final AOI model: Δ AUC with a lower bound > 0 (bootstrap over test outlines as
+    clusters and negative cells, as in M6).
+
+**Reported without a gate:**
+- each model vs slope alone (AOI, leave-one-county-out, Watauga)
+- the Watauga 1940-trained model with and without geology
+- ranking differences: Spearman between final scores, overlap of the top-10 % sets, top-10 % share by geology
+  group, on the hillslope part of the uniform domain sample
+- stability: share of the top-10 % sample cells that stay in the top 10 % in ≥ 90 % of 30 HUC-12 bootstrap
+  refits, for both models, computed the same way
+
+**Known limits, stated before the result:**
+- The no-geology idea came from the M6 Watauga diagnosis, so Watauga is not an independent test of it.
+  Leave-one-county-out is the cleaner test, which is why both are required.
+- The Watauga test positives are Nearmap-imagery outlines (a different mapping method).
+- The 1940 outlines are almost all location confidence "Low", which affects only the descriptive temporal model.
+- With about 10 informative watersheds, intervals are wide; a null result is likely and acceptable.
+
 ## Decision metric
 Held-out capture of mapped Helene initiation sites in the top *k* % of hillslope area (*k* = 5/10/20 % scenarios),
 with uncertainty and out-of-domain flags per unit. [planned]
@@ -492,3 +528,5 @@ Known before analysis:
 | 2026-10-10 | Watauga roads from a separate OSM extract of the same snapshot (sha checked) | re-extract the AOI file | keeps the AOI road corridor reproducible |
 | 2026-10-10 | Geology confound reported, not fixed | drop geology terms now | found post hoc; changing the product model is an owner decision; a pre-registered re-test is proposed |
 | 2026-10-10 | VIF selection skips constant columns | crash | a class absent from a subdomain (geology 2 above 300 mm) gave an undefined correlation |
+
+| 2026-10-10 | No-geology test and decision rule (R1 non-inferiority ≥ −0.01 lower bound; R2 leave-one-county-out and Watauga lower bounds > 0) fixed before computation | judge on point estimates | owner instruction: intervals, not points |
