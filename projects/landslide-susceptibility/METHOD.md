@@ -277,7 +277,49 @@ hillslope threshold contributing 0. It is a per-area intensity, so flat units ra
   - Selecting among four candidates on the same out-of-fold results is mildly optimistic; this is stated with
     the result.
 
-[planned for M6]
+**Owner decision 2026-10-10 (after M5):**
+- The product is the **5 m logistic regression** ranking.
+- 5 m gradient boosting and slope alone stay as comparison models.
+- Slope units (A = 0.1 km², aggregated 5 m score) are the summary layer.
+- The M4/M5 validation split and criteria are unchanged.
+
+**M6 design, fixed 2026-10-10 before any M6 computation.** Nothing here is tuned after seeing results, and none
+of it changes the product.
+1. **Prediction uncertainty:**
+   - 30 refits of the 5 m LR, each on a HUC-12 block-bootstrap resample of the training data.
+   - Per cell: the p10–p90 range of the area percentile across refits.
+2. **Area of applicability** (Meyer & Pebesma 2021):
+   - Dissimilarity index on the standardized predictors, weighted by |standardized coefficient| of the final LR.
+   - Threshold = upper whisker (Q3 + 1.5 IQR) of the leave-one-HUC-12-out dissimilarity of training cells.
+   - Mapped on a 50 m lattice.
+3. **Sensitivity** (one at a time; LOHO 500 m; 5 m LR; reported as Δ vs primary, no gate):
+   - negative ratio 1:5 and 1:20
+   - positives from polygons ≥ 50 m² only
+   - registration tolerance (score = 3×3 maximum for every evaluated cell)
+   - domain ≥ 300 mm
+   - terrain-only model
+   - leave-one-county-out
+   - distance decay (training cells removed within 0.5 / 2 / 5 / 10 km of the held-out watershed)
+   - unit threshold A = 0.05 / 0.2 for the summary layer
+
+   The conclusion "the 5 m model ranks better than slope alone" is restated for each variant, using the
+   within-watershed point Δ.
+4. **Trigger intensity check** (one check, no tuning):
+   - Maximum 1 h and maximum 6 h MRMS rainfall (25 Sep 00Z – 28 Sep 12Z) vs the 72 h total. The triggered domain
+     (72 h ≥ 250 mm) is unchanged.
+   - **T1:** unit-level pooled AUC of the trigger alone; Δ(intensity − 72 h) block-bootstrap lower bound > 0.
+   - **T2:** 5 m LR with the intensity covariate instead of the 72 h total; within-watershed Δ lower bound > 0.
+   - "Meaningful benefit" = T1 **and** T2. The result is reported; adopting it is an owner decision.
+5. **Watauga (indicative, never in the headline):**
+   - **Test positives:** Helene outlines with SlopeModifier "None Apparent" or not assessed, existence + location
+     High/Moderate, > 30 m from TIGER ∪ OSM roads. The initiation proxy is the top 20 % of each outline by
+     elevation.
+   - **(i) Transfer:** the final AOI model applied to Watauga.
+   - **(ii) Temporal:** a 5 m LR trained on the 1940 outlines' initiation proxies, with predictors smoothed to
+     15 m (3 × 3 mean). Recurrence baseline = distance to the nearest 1940 outline.
+   - **Reported:** AUC vs eligible domain cells, with intervals from a bootstrap over outlines (clusters).
+
+[results below as they are produced]
 - **Primary:** leave-one-HUC-12-out inside the triggered domain (500 m buffer), rainfall-stratified metrics, per-watershed replicates; plus leave-one-county-out, HUC-10 grouping and distance decay.
 - **Temporal:** Watauga 1940 → Helene 2024.
 - **Strata and contrast:** rainfall-stratified evaluation; random split as a contrast only.
