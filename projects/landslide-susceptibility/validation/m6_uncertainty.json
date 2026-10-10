@@ -1,0 +1,59 @@
+{
+ "ensemble": {
+  "refits": 30,
+  "final_top5_stays_in_top5_in_90pct_of_refits": 0.5099185314848144,
+  "final_top5_p90_class_beyond_10": 0.12013318759947295,
+  "final_top10_stays_in_top10_in_90pct_of_refits": 0.584192464573249,
+  "final_top10_p90_class_beyond_20": 0.06573706543505119,
+  "final_top20_stays_in_top20_in_90pct_of_refits": 0.6689865607082884,
+  "final_top20_p90_class_beyond_40": 0.022366860339296916,
+  "cells": 29203921
+ },
+ "area_of_applicability": {
+  "threshold_di": 0.26316885324207334,
+  "mean_training_distance": 2.538845506980345,
+  "training_cells_used": 20000,
+  "predictors": [
+   "slope_deg",
+   "planc_15",
+   "profc_15",
+   "planc_5",
+   "profc_5",
+   "tpi_50",
+   "tpi_250",
+   "relief_50",
+   "relief_250",
+   "rough_25",
+   "log_area",
+   "hand",
+   "dist_channel",
+   "northness",
+   "eastness",
+   "canopy",
+   "bedrock_cm",
+   "bedrock_recorded",
+   "lc_group_2",
+   "lc_group_3",
+   "lc_group_4",
+   "lc_group_5",
+   "geology_2",
+   "geology_3",
+   "geology_4",
+   "hsg_0",
+   "hsg_3",
+   "hsg_4"
+  ],
+  "lattice_cells": 292050,
+  "share_outside_aoa": 0.04470124978599555,
+  "training_di_quartiles": [
+   0.09828871258146589,
+   0.12335376577681668,
+   0.16424076884570887
+  ],
+  "domain_di_p50_p90_p99": [
+   0.1210565237105984,
+   0.20999438524297484,
+   0.4001037063586321
+  ]
+ }
+}

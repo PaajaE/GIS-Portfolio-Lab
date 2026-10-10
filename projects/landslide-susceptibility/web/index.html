@@ -13,8 +13,8 @@
 <body>
 <a class="skip" href="#controls">Skip to the ranking controls</a>
 
-<p class="prelim" role="note"><strong>Preliminary prototype.</strong> Uncertainty, area-of-applicability and
-transfer checks are still being computed; numbers and layers may change.</p>
+<p class="prelim" role="note"><strong>Preliminary prototype.</strong> Uncertainty and area-of-applicability layers are
+computed but not shown yet, and a geology confound found in the transfer checks is under review; the ranking may change.</p>
 
 <header class="intro">
   <p class="eyebrow">Landslide Susceptibility · Buncombe &amp; Yancey counties, North Carolina</p>
@@ -109,7 +109,12 @@ transfer checks are still being computed; numbers and layers may change.</p>
       every failure was mapped. Some well-watered watersheds have almost no mapped failures of any kind; whether that
       reflects lower rainfall intensity or unmapped terrain cannot be told from these data.</li>
     <li><strong>Other places, storms or terrain changes.</strong> It was built and checked inside one storm footprint in
-      two counties; terrain graded after 2017 is not represented.</li>
+      two counties; terrain graded after 2017 is not represented. Trained on one of the two counties it ranks the
+      other worse than slope alone, and in neighbouring Watauga County it ranked Helene initiation sites no better
+      than chance. Treat it as a local ranking.</li>
+    <li><strong>Whether rock type matters.</strong> The model's geology terms largely mirror the rainfall gradient: the
+      rock types that received the least rain have no mapped natural initiations. Rankings across geology boundaries
+      are therefore uncertain; this is being reviewed.</li>
     <li><strong>Fine detail at the finest zoom.</strong> The map shows the 5&nbsp;m ranking generalised to about 8&nbsp;m pixels.</li>
   </ul>
 

@@ -1906,6 +1906,594 @@
    "sha256": "741887c559d4d61471adcb2239824107f16a538805701cfe1d94b9de8ecaf389",
    "url": "https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer/6"
   },
+  "mrms01h_20240925-010000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 622311,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-010000.grib2.gz",
+   "sha256": "0c4c6b0e7c0b5b98afc541b3044008ab6d9e5073c5b32962037465919dfd3649",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-010000.grib2.gz"
+  },
+  "mrms01h_20240925-020000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 619080,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-020000.grib2.gz",
+   "sha256": "10c3f45da37aab2e1f9cf9d2bc367b00befb91fb6d97daabdedc2ed53c18f5db",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-020000.grib2.gz"
+  },
+  "mrms01h_20240925-030000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 612958,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-030000.grib2.gz",
+   "sha256": "d9dc84127f4f27b2bdf1a5c3ea868477791924953f51e52b9fb2ad5d36bcb93b",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-030000.grib2.gz"
+  },
+  "mrms01h_20240925-040000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 612896,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-040000.grib2.gz",
+   "sha256": "d9869f5d7db3e6012a362ab26c1d68d974eac436977fb2cd5a3f65b394655b1a",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-040000.grib2.gz"
+  },
+  "mrms01h_20240925-050000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 659299,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-050000.grib2.gz",
+   "sha256": "bb67a06dbf6d588da7dc12c4da396bbef1e271bd87ff22caa9e5eff85f2e9bda",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-050000.grib2.gz"
+  },
+  "mrms01h_20240925-060000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 654316,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-060000.grib2.gz",
+   "sha256": "cd3be3683bf48ffdc530ac992ab9491e8b195c4bcc7974e57fc739a6ac9a88f2",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-060000.grib2.gz"
+  },
+  "mrms01h_20240925-070000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 721347,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-070000.grib2.gz",
+   "sha256": "325bceedd68260d64199534081da7efe2e3260846e9093b8d7103b857fc5c77a",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-070000.grib2.gz"
+  },
+  "mrms01h_20240925-080000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 750539,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-080000.grib2.gz",
+   "sha256": "ddc558882b0c0ad0edd3f44326cbc9add5cdf0da14c7eafed5e18d3ee515c17f",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-080000.grib2.gz"
+  },
+  "mrms01h_20240925-090000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 750035,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-090000.grib2.gz",
+   "sha256": "56edeeab573dafa0d56ac66192987f1c170cc8048d7949b85d73979c1f3d5190",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-090000.grib2.gz"
+  },
+  "mrms01h_20240925-100000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 768037,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-100000.grib2.gz",
+   "sha256": "72f8e516b3733e5a9ed9a080e484f196a84e820225b8a0c0fcd589d250e35adb",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-100000.grib2.gz"
+  },
+  "mrms01h_20240925-110000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 821452,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-110000.grib2.gz",
+   "sha256": "1ab33fc9cefb3e6cda7d0fa484a75797ba55a44a96dc157dab54c9f462aba359",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-110000.grib2.gz"
+  },
+  "mrms01h_20240925-120000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 896813,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-120000.grib2.gz",
+   "sha256": "17f8e0f1c8bdf67d76d4d5aba98636a28887cdbdbae154f68c441950331cf98d",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-120000.grib2.gz"
+  },
+  "mrms01h_20240925-130000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 964954,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-130000.grib2.gz",
+   "sha256": "be53393bdfc6e067b54f6e0d336331596c68569e5e989b5d7d0d65a4984f4c42",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-130000.grib2.gz"
+  },
+  "mrms01h_20240925-140000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 956374,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-140000.grib2.gz",
+   "sha256": "def41e36adef1b2568ace3e0c144892d509493b4705b812d95335c22f00dd589",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-140000.grib2.gz"
+  },
+  "mrms01h_20240925-150000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 917529,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-150000.grib2.gz",
+   "sha256": "b0f891892b370462ecf2a7e7249acef2f2796974296358c7131ced5134991255",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-150000.grib2.gz"
+  },
+  "mrms01h_20240925-160000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 916361,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-160000.grib2.gz",
+   "sha256": "dad9d8b001a5c295cad695c0bd51cdc18566853275fd2b60778387d5ee811449",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-160000.grib2.gz"
+  },
+  "mrms01h_20240925-170000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 911540,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-170000.grib2.gz",
+   "sha256": "9c823eb529ed2987898fd95094df663ee0308265d62447125e2dfbeb0aeee8a8",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-170000.grib2.gz"
+  },
+  "mrms01h_20240925-180000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 972208,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-180000.grib2.gz",
+   "sha256": "443b4f8a9f47a55d16e9fe611e000ef9ff2ff2c5f35bea73ae615f78adaa16a6",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-180000.grib2.gz"
+  },
+  "mrms01h_20240925-190000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1004066,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-190000.grib2.gz",
+   "sha256": "e147ef0226dfd54699cc3a0707962c5074e1a4d757308633f7f981beed674ec5",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-190000.grib2.gz"
+  },
+  "mrms01h_20240925-200000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1055585,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-200000.grib2.gz",
+   "sha256": "e3b44481dfdc4969ae03d003912b46846b559cd721dbb662564f01aab8f1e237",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-200000.grib2.gz"
+  },
+  "mrms01h_20240925-210000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1097979,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-210000.grib2.gz",
+   "sha256": "805ec0822023f3205c0ac58d40b5ba6ede20deefbf933c1a11d66a9e578826ad",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-210000.grib2.gz"
+  },
+  "mrms01h_20240925-220000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1087508,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-220000.grib2.gz",
+   "sha256": "16408ad462c2107577bb4572b22f340fe396a2a99f5652ddf059c6a50e9256d8",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-220000.grib2.gz"
+  },
+  "mrms01h_20240925-230000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1069855,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-230000.grib2.gz",
+   "sha256": "81bc28ec272e2eaa75d844c44da7a40c8c40d8faa052c39351a7e9743d78f953",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-230000.grib2.gz"
+  },
+  "mrms01h_20240926-000000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1068409,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-000000.grib2.gz",
+   "sha256": "5dbd3bf7a95ff8c13c7e2aef2b961a4b427bbec254fe5e7f3a7da5143daa8f11",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-000000.grib2.gz"
+  },
+  "mrms01h_20240926-010000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1061547,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-010000.grib2.gz",
+   "sha256": "dcf8925d8cd4f0bed637a09f5eba24df7137281247b69b41fc1a9ef6bd397198",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-010000.grib2.gz"
+  },
+  "mrms01h_20240926-020000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 973259,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-020000.grib2.gz",
+   "sha256": "b1e942a5e106afc07b86e0eb47f279bb80373cdeffbbcf9c8a4f37d11a24995a",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-020000.grib2.gz"
+  },
+  "mrms01h_20240926-030000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 917218,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-030000.grib2.gz",
+   "sha256": "5e3db8bc6703040c2e4d645f2129a2ee565965cf6e034ac97e68fb36fbd9a13e",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-030000.grib2.gz"
+  },
+  "mrms01h_20240926-040000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 921464,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-040000.grib2.gz",
+   "sha256": "a6390d2fdf805307646caf65e486608772a82f0013b49da1dd7882f1b9ca8eb6",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-040000.grib2.gz"
+  },
+  "mrms01h_20240926-050000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 911512,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-050000.grib2.gz",
+   "sha256": "5b3bc8324a9b57f64a3309d8e4e23dd3eea88688414494294b93d25e3c0d3af1",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-050000.grib2.gz"
+  },
+  "mrms01h_20240926-060000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 905846,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-060000.grib2.gz",
+   "sha256": "151f917ab75e5e79629ec4a35fb437eda5b572bc7fbfb3c0b6693c72a2747b37",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-060000.grib2.gz"
+  },
+  "mrms01h_20240926-070000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 933469,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-070000.grib2.gz",
+   "sha256": "2cff03f960ca6083cd12357dddfe016df2424f1c35e9c562c0371ce5e8eabd68",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-070000.grib2.gz"
+  },
+  "mrms01h_20240926-080000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 936597,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-080000.grib2.gz",
+   "sha256": "3a41ac8ccd6f04e46324caf7b9c695c237b6024c0c6f7ac5081d819a51a39f9b",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-080000.grib2.gz"
+  },
+  "mrms01h_20240926-090000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 946930,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-090000.grib2.gz",
+   "sha256": "d2b82ab26ff8f2127f11a3c678de95b18aa2c4f4f110a3ee34064b592b80e1a2",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-090000.grib2.gz"
+  },
+  "mrms01h_20240926-100000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 938115,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-100000.grib2.gz",
+   "sha256": "f0e8e4b8e098341f296dc547af4fe8bc6702580d8ea58b07ecbce117794116c1",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-100000.grib2.gz"
+  },
+  "mrms01h_20240926-110000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 923958,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-110000.grib2.gz",
+   "sha256": "458f4d03bd77fe00de87e914e3f6775eeee786bcbc176b5a59e256129fb825c3",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-110000.grib2.gz"
+  },
+  "mrms01h_20240926-120000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 955480,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-120000.grib2.gz",
+   "sha256": "7e926120548c20513468a5eb7965b3a747b1ea35c6dffb925eac18c45ac6e5e6",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-120000.grib2.gz"
+  },
+  "mrms01h_20240926-130000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 950732,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-130000.grib2.gz",
+   "sha256": "48bac9aa97ba346c6143ef0d01e8b947c46c31956cc47de99dfe0659a91da6ab",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-130000.grib2.gz"
+  },
+  "mrms01h_20240926-140000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 931063,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-140000.grib2.gz",
+   "sha256": "4050f626bfe9cc29aab96df1b1546729b43e5b9cd71d744e89d67ec7efe481db",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-140000.grib2.gz"
+  },
+  "mrms01h_20240926-150000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 899249,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-150000.grib2.gz",
+   "sha256": "da49ba1622148e953784192da42ec273451449195de4582b2a27bcaa5481fdc1",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-150000.grib2.gz"
+  },
+  "mrms01h_20240926-160000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 889842,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-160000.grib2.gz",
+   "sha256": "52f519a2ead1d88f6fb9af8fc949679b50f6b9510e635319ca9067537b6d7012",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-160000.grib2.gz"
+  },
+  "mrms01h_20240926-170000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 887012,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-170000.grib2.gz",
+   "sha256": "68388656d5e142e6dbb5953e4ba2e3518c0ac442a6c9ad427ec03ea2a1822efc",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-170000.grib2.gz"
+  },
+  "mrms01h_20240926-180000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 925150,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-180000.grib2.gz",
+   "sha256": "620c41ef38a1f00999f7be048e9423a0da2df9439bc9a53e06de9a94eb07431f",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-180000.grib2.gz"
+  },
+  "mrms01h_20240926-190000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 946797,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-190000.grib2.gz",
+   "sha256": "76c2586e81ec91b2d1ec4afbdbd8727eb2a54a49fc4acefe50f1083943b943d6",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-190000.grib2.gz"
+  },
+  "mrms01h_20240926-200000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 953677,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-200000.grib2.gz",
+   "sha256": "a41224d46acc8e107a8bebcd61072b6a3ae7f2d4ae494891419645daf401a61b",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-200000.grib2.gz"
+  },
+  "mrms01h_20240926-210000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 970192,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-210000.grib2.gz",
+   "sha256": "bb639fb22a15c7b8bac48ae3eeb4866378579ba4856f1d655c3428e0b72561ca",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-210000.grib2.gz"
+  },
+  "mrms01h_20240926-220000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 986516,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-220000.grib2.gz",
+   "sha256": "c25a24769c00464da47d7f7c785ded5f1ed3364079631982e0dee785225491dd",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-220000.grib2.gz"
+  },
+  "mrms01h_20240926-230000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1005229,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-230000.grib2.gz",
+   "sha256": "e71eb8516ae6fd8c9b88fbe149381056ae27e367734c234bb9b90e7c8562836b",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-230000.grib2.gz"
+  },
+  "mrms01h_20240927-000000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1039298,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-000000.grib2.gz",
+   "sha256": "1a5ba0c55fbabc2787dfe7838222fcc077b78d9e2555ec48ed1a445237b33d3f",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-000000.grib2.gz"
+  },
+  "mrms01h_20240927-010000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1003076,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-010000.grib2.gz",
+   "sha256": "ec7ddd74a8d79d5a8f3e9e7e4342337a09a56260dc8c7c8c4c458c0eef081a0b",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-010000.grib2.gz"
+  },
+  "mrms01h_20240927-020000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1000974,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-020000.grib2.gz",
+   "sha256": "5eb6fe6124899c6cdbdfb85e65c85f99104c1fad539e48710ad52a37ffc98b42",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-020000.grib2.gz"
+  },
+  "mrms01h_20240927-030000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 940008,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-030000.grib2.gz",
+   "sha256": "72db2be7cfbc1c3d5704d719107c8bc621ec4abcce791d9a85bbe56482c36cc0",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-030000.grib2.gz"
+  },
+  "mrms01h_20240927-040000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 925207,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-040000.grib2.gz",
+   "sha256": "efa6718a632626da47d7090ba34d76d4639ed4ec7ecef7c61319993554c1eb23",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-040000.grib2.gz"
+  },
+  "mrms01h_20240927-050000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 918607,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-050000.grib2.gz",
+   "sha256": "4600399eae6575096d6e877d4428d95688f3e3a07cb9e7066cb843b567a3389a",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-050000.grib2.gz"
+  },
+  "mrms01h_20240927-060000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 900192,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-060000.grib2.gz",
+   "sha256": "128171f5c168bd1e72566dd4af21a1d1a6cf324349b699adaa54c324984f7915",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-060000.grib2.gz"
+  },
+  "mrms01h_20240927-070000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 880703,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-070000.grib2.gz",
+   "sha256": "a516e5353230c9878ebe06a78fc8155204f61af574e63001f4b8262e7bf5a16f",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-070000.grib2.gz"
+  },
+  "mrms01h_20240927-080000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 852086,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-080000.grib2.gz",
+   "sha256": "cb8ccf8cf6ec95c3996bd42add68e19040dd380738c010b7177353fd584a95f5",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-080000.grib2.gz"
+  },
+  "mrms01h_20240927-090000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 826012,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-090000.grib2.gz",
+   "sha256": "7aa849854375575938b11f2084d7b000c9b6410dd0e4be5700e28ade3b9087f9",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-090000.grib2.gz"
+  },
+  "mrms01h_20240927-100000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 782268,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-100000.grib2.gz",
+   "sha256": "8542523a316d02e9e2f3cd8739adcf070570d4b96f8bc489eeb58de8ed033c0e",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-100000.grib2.gz"
+  },
+  "mrms01h_20240927-110000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 782988,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-110000.grib2.gz",
+   "sha256": "ae6a1d6da5276abf0edf3986fda5f24c8e29c9cc7add333989070e2cf26c35dd",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-110000.grib2.gz"
+  },
+  "mrms01h_20240927-120000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 768079,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-120000.grib2.gz",
+   "sha256": "12b64c75a25ed2f87919ae0ff8528c51e3dcba975c1e1ae40354c8d009bdfcaf",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-120000.grib2.gz"
+  },
+  "mrms01h_20240927-130000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 726822,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-130000.grib2.gz",
+   "sha256": "2f2ac9ab18a525acf5b49823faeb3d82ff4b834e9a178982c1f51afe1f4c73f5",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-130000.grib2.gz"
+  },
+  "mrms01h_20240927-140000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 695661,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-140000.grib2.gz",
+   "sha256": "34f7895174fe2eb214cd5c878ea1cc74ac60e90e959d20d926ec8ffba10ca642",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-140000.grib2.gz"
+  },
+  "mrms01h_20240927-150000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 662671,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-150000.grib2.gz",
+   "sha256": "0595c2437acc51b9a019d93868b266af65334af05753297f4548a716f2111f47",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-150000.grib2.gz"
+  },
+  "mrms01h_20240927-160000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 656094,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-160000.grib2.gz",
+   "sha256": "db226e1e49b3d2e4d3d52b0a2335c93ab11e17114da7153b668af33fce3d1bf7",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-160000.grib2.gz"
+  },
+  "mrms01h_20240927-170000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 619186,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-170000.grib2.gz",
+   "sha256": "2d05b54c3b5e41c20d65f88c59f536aec607f0830898ecf48ef2e1bca119fc04",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-170000.grib2.gz"
+  },
+  "mrms01h_20240927-180000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 614019,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-180000.grib2.gz",
+   "sha256": "303967582e429cfe173374eaeea5ce14cf9e1f51f6e4a2d1c0369b4674a43e8d",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-180000.grib2.gz"
+  },
+  "mrms01h_20240927-190000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 593476,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-190000.grib2.gz",
+   "sha256": "ae990aeb92e327afb738afb969caf546d7497de60c5244ff4fff6277babc2dd7",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-190000.grib2.gz"
+  },
+  "mrms01h_20240927-200000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 596620,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-200000.grib2.gz",
+   "sha256": "bd2ecd6d568b847a3e21a5673fd5cea79344cce0b78a7c44c3f0926601b1ec12",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-200000.grib2.gz"
+  },
+  "mrms01h_20240927-210000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 608193,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-210000.grib2.gz",
+   "sha256": "b564b5add640877e822ae69053c6171c7ab45868088afbcea8b28787272d04b8",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-210000.grib2.gz"
+  },
+  "mrms01h_20240927-220000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 574670,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-220000.grib2.gz",
+   "sha256": "a2d9e65e0d141b0ae3d65e379253b6aa8efec23b9b95b14cd7c4cd06b5870dfe",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-220000.grib2.gz"
+  },
+  "mrms01h_20240927-230000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 540121,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-230000.grib2.gz",
+   "sha256": "a2f6df1713481f6bb0486b2fa3a44eac45ef332e7467304a9c1c7259b947cba7",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-230000.grib2.gz"
+  },
+  "mrms01h_20240928-000000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 506862,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-000000.grib2.gz",
+   "sha256": "ddfbbfd99172fa47935f11d1cc1e3d2e89769c2e9ea458baf57db0ed3fa64a7a",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-000000.grib2.gz"
+  },
+  "mrms01h_20240928-010000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 462832,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-010000.grib2.gz",
+   "sha256": "e4febb47a7dfebb812001bd745de80d822b99d245c64e3943abff855a9adc0b5",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-010000.grib2.gz"
+  },
+  "mrms01h_20240928-020000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 414363,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-020000.grib2.gz",
+   "sha256": "fa355fde00ff564ed1f778ead9fa25c75261889de9cc205755cd91295f07c2bf",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-020000.grib2.gz"
+  },
+  "mrms01h_20240928-030000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 365272,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-030000.grib2.gz",
+   "sha256": "e82b2eda7d8f3b37659f9c3f02803e1971c5faba521753f347f3dc261ea8452f",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-030000.grib2.gz"
+  },
+  "mrms01h_20240928-040000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 325998,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-040000.grib2.gz",
+   "sha256": "4a37cf09581453ce6b2934d786324968aaa7f2d98bff39c0a57073b8bf6d7cb2",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-040000.grib2.gz"
+  },
+  "mrms01h_20240928-050000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 292913,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-050000.grib2.gz",
+   "sha256": "5dd62ad9afc78a5b102dfc1f027f0132006be5a7f7d5b9388645793693bae2a2",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-050000.grib2.gz"
+  },
+  "mrms01h_20240928-060000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 287328,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-060000.grib2.gz",
+   "sha256": "6b9b56ad738e9c14a612188ccc721b9d6879b1c88d4b404f1ce0243ccd308e94",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-060000.grib2.gz"
+  },
+  "mrms01h_20240928-070000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 309174,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-070000.grib2.gz",
+   "sha256": "05755ed7bc0884411389fb3cb1cf1369aa8142835057cfb31baf3bf2a58b827b",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-070000.grib2.gz"
+  },
+  "mrms01h_20240928-080000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 319545,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-080000.grib2.gz",
+   "sha256": "a898f8b732faa6851fc22c4e45ebd92caa68f002d724928f5579c5012d71e05a",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-080000.grib2.gz"
+  },
+  "mrms01h_20240928-090000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 317882,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-090000.grib2.gz",
+   "sha256": "513b0373c989fe90a5b66d4fb24af615e4f29247194bb1464b6d5701861ae6f3",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-090000.grib2.gz"
+  },
+  "mrms01h_20240928-100000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 305335,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-100000.grib2.gz",
+   "sha256": "1172ad229911a3d66847433b30706de53ef195faca63a8ce7e4ca2d265bf154d",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-100000.grib2.gz"
+  },
+  "mrms01h_20240928-110000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 315373,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-110000.grib2.gz",
+   "sha256": "3073c9b4d81193d63d9a550ebedfe0e0d5822fc67aaf6330de28dc76418015d7",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-110000.grib2.gz"
+  },
+  "mrms01h_20240928-120000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 322567,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-120000.grib2.gz",
+   "sha256": "b2a40eb6a460fbe3a67363ea27998b7759c6b3e6efd553303e921276e4825d32",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-120000.grib2.gz"
+  },
   "mrms_20240928-000000": {
    "acquired_utc": "2026-10-09T05:30:19+00:00",
    "bytes": 8073664,
@@ -1992,6 +2580,18 @@
    "sha256": "0a9bbec472a6b2331bc885367738475e8d0dc950144da464840d91bf204263dc",
    "url": "https://download.geofabrik.de/north-america/us/north-carolina-latest.osm.pbf"
   },
+  "osm_roads_watauga": {
+   "acquired_utc": "2026-10-10T19:18:30+00:00",
+   "bytes": 7688513,
+   "licence": "ODbL; local analysis only, never published",
+   "n": 25705,
+   "path": "data/raw/osm_roads_watauga.parquet",
+   "pbf_bytes": 429458441,
+   "pbf_sha256": "3c8b9469e0ac93d0b0a6cfe3624dde96982349d64341ac7b54e0f33aa0547a6e",
+   "same_snapshot_as_aoi": true,
+   "sha256": "8c32d9f03b532ceebf359cbd3cf6c1a719bd48eec1efee4e70bb39a40c723c9e",
+   "url": "https://download.geofabrik.de/north-america/us/north-carolina-latest.osm.pbf"
+  },
   "roads_021": {
    "acquired_utc": "2026-10-09T05:36:11+00:00",
    "bytes": 5041489,
@@ -2066,5 +2666,5 @@
    "url": "https://www.mrlc.gov/geoserver/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=mrlc_download__nlcd_tcc_conus_2021_v2021-4&format=image%2Fgeotiff&subset=X(1244625,1294695)&subset=Y(1541745,1583745)"
   }
  },
- "updated_utc": "2026-10-10T01:26:01+00:00"
+ "updated_utc": "2026-10-10T19:20:58+00:00"
 }

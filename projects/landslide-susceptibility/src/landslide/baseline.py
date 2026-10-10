@@ -75,6 +75,8 @@ def vif_prune(X: np.ndarray, names: list[str], protected) -> list[int]:
     order = [i for i, n in enumerate(names) if n in protected] + [i for i, n in enumerate(names) if n not in protected]
     keep: list[int] = []
     for i in order:
+        if X[:, i].std() == 0:  # constant in this training set (e.g. a class absent from a subdomain)
+            continue
         cand = keep + [i]
         if len(cand) > 1 and np.diag(np.linalg.pinv(np.corrcoef(X[:, cand], rowvar=False))).max() > VIF_MAX:
             continue

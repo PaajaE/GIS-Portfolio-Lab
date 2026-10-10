@@ -1,0 +1,139 @@
+{
+ "primary": {
+  "auc_rain_stratified": 0.8668156888731936,
+  "auc_within_huc": 0.8683254383608754,
+  "slope_auc_within_huc": 0.8138754607423404,
+  "positives": 16256,
+  "model_minus_slope_within_huc": 0.054449977618534984
+ },
+ "negative_ratio_1to5": {
+  "auc_rain_stratified": 0.8691830786454698,
+  "auc_within_huc": 0.8706027940602239,
+  "slope_auc_within_huc": 0.8138754607423404,
+  "positives": 16256,
+  "model_minus_slope_within_huc": 0.05672733331788349,
+  "delta_vs_primary_rain_stratified": 0.0023673897722762405,
+  "delta_vs_primary_within_huc": 0.0022773556993485045
+ },
+ "negative_ratio_1to20": {
+  "auc_rain_stratified": 0.8598340857782196,
+  "auc_within_huc": 0.8677631006584056,
+  "slope_auc_within_huc": 0.8138754607423404,
+  "positives": 16256,
+  "model_minus_slope_within_huc": 0.053887639916065155,
+  "delta_vs_primary_rain_stratified": -0.006981603094973976,
+  "delta_vs_primary_within_huc": -0.0005623377024698284
+ },
+ "positives_ge_50m2": {
+  "auc_rain_stratified": 0.8677344464502862,
+  "auc_within_huc": 0.8684649744836104,
+  "slope_auc_within_huc": 0.8151914132388631,
+  "positives": 15518,
+  "model_minus_slope_within_huc": 0.05327356124474725,
+  "positives_dropped": 738,
+  "delta_vs_primary_rain_stratified": 0.0009187575770925882,
+  "delta_vs_primary_within_huc": 0.0001395361227349845
+ },
+ "registration_tolerance_3x3": {
+  "auc_rain_stratified": 0.8613908951738648,
+  "auc_within_huc": 0.8633550949948358,
+  "slope_auc_within_huc": 0.8082049753213668,
+  "positives": 16256,
+  "model_minus_slope_within_huc": 0.055150119673468945,
+  "note": "M5 OOF raster; reference without tolerance: 0.8672 (stratified)",
+  "delta_vs_primary_rain_stratified": -0.0054247936993288,
+  "delta_vs_primary_within_huc": -0.004970343366039631
+ },
+ "domain_ge_300mm": {
+  "auc_rain_stratified": 0.8551503223699041,
+  "auc_within_huc": 0.865480081561567,
+  "slope_auc_within_huc": 0.8108019865247506,
+  "positives": 14878,
+  "model_minus_slope_within_huc": 0.05467809503681642,
+  "delta_vs_primary_rain_stratified": -0.011665366503289532,
+  "delta_vs_primary_within_huc": -0.0028453567993084183
+ },
+ "terrain_only": {
+  "auc_rain_stratified": 0.8671261859861518,
+  "auc_within_huc": 0.8684630018421245,
+  "slope_auc_within_huc": 0.8138754607423404,
+  "positives": 16256,
+  "model_minus_slope_within_huc": 0.05458754109978414,
+  "delta_vs_primary_rain_stratified": 0.0003104971129581635,
+  "delta_vs_primary_within_huc": 0.00013756348124915885
+ },
+ "leave_one_county_out": {
+  "auc_rain_stratified": 0.6760100404673125,
+  "auc_within_huc": 0.7624028733223711,
+  "slope_auc_within_huc": 0.8138754607423404,
+  "positives": 16256,
+  "model_minus_slope_within_huc": -0.051472587419969296,
+  "by_county": {
+   "1": 0.8542320146714648,
+   "2": 0.6945167759563899
+  },
+  "delta_vs_primary_rain_stratified": -0.1908056484058811,
+  "delta_vs_primary_within_huc": -0.10592256503850428
+ },
+ "distance_decay": {
+  "2km": {
+   "auc_rain_stratified": 0.8615412693498994,
+   "auc_within_huc": 0.8630426074716826,
+   "slope_auc_within_huc": 0.8138754607423404,
+   "positives": 16256,
+   "model_minus_slope_within_huc": 0.04916714672934219,
+   "delta_vs_primary_rain_stratified": -0.005274419523294216,
+   "delta_vs_primary_within_huc": -0.005282830889192791
+  },
+  "5km": {
+   "auc_rain_stratified": 0.8479896005218163,
+   "auc_within_huc": 0.8551662841081195,
+   "slope_auc_within_huc": 0.8138754607423404,
+   "positives": 16256,
+   "model_minus_slope_within_huc": 0.04129082336577905,
+   "delta_vs_primary_rain_stratified": -0.018826088351377335,
+   "delta_vs_primary_within_huc": -0.013159154252755934
+  },
+  "10km": {
+   "auc_rain_stratified": 0.6842984264821703,
+   "auc_within_huc": 0.772847820057273,
+   "slope_auc_within_huc": 0.8138754607423404,
+   "positives": 16256,
+   "model_minus_slope_within_huc": -0.04102764068506737,
+   "delta_vs_primary_rain_stratified": -0.18251726239102328,
+   "delta_vs_primary_within_huc": -0.09547761830360235
+  }
+ },
+ "summary_layer_unit_threshold": {
+  "0.05": {
+   "units": 38830,
+   "positive_units": 1440,
+   "auc_rain_stratified": 0.8056905817524213,
+   "auc_within_huc": 0.7848775677900395,
+   "slope_p90_auc_rain_stratified": 0.7802626280607459,
+   "slope_p90_auc_within_huc": 0.7753793380381255,
+   "model_minus_slope_within_huc": 0.009498229751913945,
+   "model_minus_slope_rain_stratified": 0.025427953691675387
+  },
+  "0.1": {
+   "units": 22569,
+   "positive_units": 1238,
+   "auc_rain_stratified": 0.7968160739630636,
+   "auc_within_huc": 0.7719147065587362,
+   "slope_p90_auc_rain_stratified": 0.7674731234567301,
+   "slope_p90_auc_within_huc": 0.7547388127258738,
+   "model_minus_slope_within_huc": 0.017175893832862332,
+   "model_minus_slope_rain_stratified": 0.02934295050633351
+  },
+  "0.2": {
+   "units": 12483,
+   "positive_units": 991,
+   "auc_rain_stratified": 0.790185761458678,
+   "auc_within_huc": 0.7601834172242212,
+   "slope_p90_auc_rain_stratified": 0.7581446188910248,
+   "slope_p90_auc_within_huc": 0.7396811410355348,
+   "model_minus_slope_within_huc": 0.020502276188686386,
+   "model_minus_slope_rain_stratified": 0.032041142567653225
+  }
+ }
+}

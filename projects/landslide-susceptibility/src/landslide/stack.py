@@ -11,6 +11,7 @@ Outputs in data/interim/stack_<region>/:
                           4 open / agricultural (31, 52, 71, 81, 82), 5 wetland (90, 95), 6 open water (11); 0 nodata
   canopy.tif (float32)    tree canopy %, 2021
   rain_mm.tif (float32)   MRMS 72 h storm total, cell-wise max of the windows ending 2024-09-28 00Z and 12Z
+  rain1h_max.tif, rain6h_max.tif (float32)  max 1 h / running 6 h MRMS rainfall, 25 Sep 00Z - 28 Sep 12Z (M6 check)
   geology.tif (uint8)     lithology group, GEOLOGY_GROUPS; 0 = unmapped
   hsg.tif (uint8)         SSURGO dominant hydrologic soil group 1 A, 2 B, 3 C, 4 D (dual X/D -> 4); 0 = not rated
   bedrock_cm.tif (float32) SSURGO minimum depth to bedrock (cm); NO_BEDROCK_CM where none is recorded within
@@ -99,6 +100,30 @@ def rain(region, g):
     return _warp(None, g, Resampling.bilinear, float(ND_F), np.float32, float(ND_F), a, tr, crs)
 
 
+def intensity(region, g) -> dict:
+    """Maximum 1 h and maximum running 6 h MRMS rainfall over the 84 hourly grids (mm), on the 5 m grid."""
+    from .harvest import mrms_hourly_names
+    from rasterio.warp import transform_bounds
+    from rasterio.windows import from_bounds
+    stack = []
+    for _, f in mrms_hourly_names():
+        with rasterio.open(f"/vsigzip/{C.RAW / 'mrms_hourly' / f}") as s:
+            b = transform_bounds(g["crs"], s.crs, *rasterio.transform.array_bounds(g["height"], g["width"],
+                                                                                g["transform"]))
+            win = from_bounds(b[0] - 0.1, b[1] - 0.1, b[2] + 0.1, b[3] + 0.1, s.transform).round_offsets().round_lengths()
+            stack.append(s.read(1, window=win).astype(np.float32))  # region window only (CONUS x 84 h ~ 8 GB)
+            tr, crs = s.window_transform(win), s.crs
+    a = np.stack(stack)
+    a[a < 0] = np.nan
+    cs = np.concatenate([np.zeros((1,) + a.shape[1:], np.float32), np.nancumsum(a, 0)])
+    six = cs[6:] - cs[:-6]
+    out = {}
+    for name, v in (("rain1h_max", np.nanmax(a, 0)), ("rain6h_max", six.max(0))):
+        v = np.where(np.isfinite(v), v, ND_F).astype(np.float32)
+        out[name] = _warp(None, g, Resampling.bilinear, float(ND_F), np.float32, float(ND_F), v, tr, crs)
+    return out
+
+
 def geology(region, g):
     geo = gpd.read_parquet(C.RAW / "geology_1985.parquet").to_crs(C.CRS)
     code = {u: k for k, (_, units) in GEOLOGY_GROUPS.items() for u in units}
@@ -138,6 +163,11 @@ def run_region(region: str) -> dict:
     del a
     for name, fn in (("canopy", canopy), ("rain_mm", rain)):
         a = fn(region, g)
+        _write(out / f"{name}.tif", a, g, float(ND_F))
+        v = a[a != ND_F]
+        report[name] = {"nodata_share": float((a == ND_F).mean()), "min": float(v.min()), "max": float(v.max())}
+        del a, v
+    for name, a in intensity(region, g).items():
         _write(out / f"{name}.tif", a, g, float(ND_F))
         v = a[a != ND_F]
         report[name] = {"nodata_share": float((a == ND_F).mean()), "min": float(v.min()), "max": float(v.max())}

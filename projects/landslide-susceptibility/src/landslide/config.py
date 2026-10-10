@@ -45,6 +45,9 @@ MRMS_FILES = (  # 72 h windows ending 2024-09-28 00Z and 12Z; cell-wise maximum 
     "MRMS_MultiSensor_QPE_72H_Pass2_00.00_20240928-000000.grib2.gz",
     "MRMS_MultiSensor_QPE_72H_Pass2_00.00_20240928-120000.grib2.gz",
 )
+# Trigger-intensity check (METHOD M6 item 4): hourly QPE for the same period, hours ending 25 Sep 01Z .. 28 Sep 12Z
+MRMS_HOURLY = "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/"
+MRMS_HOURLY_START, MRMS_HOURLY_HOURS = "2024-09-25T01:00", 84
 MRLC_WCS = "https://www.mrlc.gov/geoserver/ows"
 MRLC_COVERAGES = {
     "nlcd2021": "mrlc_download__NLCD_2021_Land_Cover_L48",

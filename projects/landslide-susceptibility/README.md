@@ -1,8 +1,9 @@
 # Landslide Susceptibility — Buncombe + Yancey, NC
 
-> Status: **M5 (advanced model)** run and stopped by its pre-registered rule, pending an owner decision; app not
-> started. Results: [`validation/M4_BASELINE.md`](validation/M4_BASELINE.md),
-> [`validation/M5_ADVANCED.md`](validation/M5_ADVANCED.md). Plan: [`PLAN.md`](PLAN.md) · method draft:
+> Status: **M6 done** (5 m logistic regression; robust locally, not transferable; geology confound under review);
+> local preliminary web prototype (`make web`, `make serve`). Results: [`validation/M4_BASELINE.md`](validation/M4_BASELINE.md),
+> [`validation/M5_ADVANCED.md`](validation/M5_ADVANCED.md),
+> [`validation/M6_UNCERTAINTY_TRANSFER.md`](validation/M6_UNCERTAINTY_TRANSFER.md). Plan: [`PLAN.md`](PLAN.md) · method draft:
 > [`METHOD.md`](METHOD.md) · sources: [`DATA_SOURCES.md`](DATA_SOURCES.md).
 
 **Question (spec §6):** can we build a spatially transferable landslide susceptibility model and show where its
@@ -26,6 +27,9 @@ make qa             # data QA -> validation/M1_DATA_QA.md
 make prepare        # terrain (Rust), stack, hydrology, slope units, labels, unit tables, extra samples
 make baseline       # logistic regression + leave-one-HUC-12-out validation -> validation/M4_BASELINE.md
 make advanced       # gradient boosting, 5 m -> unit aggregation, candidates -> validation/M5_ADVANCED.md (~35 min)
+make product        # final 5 m ranks + per-k held-out capture
+make m6             # sensitivity, ensemble, area of applicability, trigger check, Watauga (~40 min)
+make web            # web/data for the local prototype; then `make serve` (http://localhost:8138)
 make bench          # Rust vs reference -> benchmarks/terrain_kernels.json
 make test
 ```

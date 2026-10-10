@@ -1,8 +1,8 @@
 # Landslide Susceptibility — Method
 
 > Status: **draft** — M1 (harvest + QA), M2 (terrain kernels), M3 (stack, slope units, sampling) and M4 (baseline +
-> spatial validation) done; M5 (advanced model) run 2026-10-09 and **stopped by its pre-registered rule**
-> pending an owner decision. Spec section: §6.
+> spatial validation) done; M5 (advanced model) stopped by its pre-registered rule; owner chose the 5 m LR (2026-10-10);
+> M6 (uncertainty, transfer, sensitivity) done: robust locally, not transferable, geology confound found. Spec section: §6.
 > Each statement is tagged **[verified]** (checked against a primary source or live service on 2026-10-08),
 > **[planned]** (design, see [`PLAN.md`](PLAN.md)) or **[assumption]** (to be tested). Results will replace the
 > planned items as milestones complete.
@@ -319,7 +319,7 @@ of it changes the product.
      15 m (3 × 3 mean). Recurrence baseline = distance to the nearest 1940 outline.
    - **Reported:** AUC vs eligible domain cells, with intervals from a bootstrap over outlines (clusters).
 
-[results below as they are produced]
+Results: §Uncertainty and sensitivity and [`validation/M6_UNCERTAINTY_TRANSFER.md`](validation/M6_UNCERTAINTY_TRANSFER.md).
 - **Primary:** leave-one-HUC-12-out inside the triggered domain (500 m buffer), rainfall-stratified metrics, per-watershed replicates; plus leave-one-county-out, HUC-10 grouping and distance decay.
 - **Temporal:** Watauga 1940 → Helene 2024.
 - **Strata and contrast:** rainfall-stratified evaluation; random split as a contrast only.
@@ -328,11 +328,37 @@ of it changes the product.
 - **Comparison, not validation:** USGS slope-relief susceptibility and the NCGS channelized debris-flow model.
 
 ## Uncertainty and sensitivity
-[planned]
-- **Separate layers:** prediction uncertainty (bootstrap rank spread), training-data density, out-of-domain (area
-  of applicability).
-- **One-at-a-time sensitivity:** unit threshold, negative buffer and ratio, positive definition, label dilation,
-  grid size, domain threshold, rainfall contrast model.
+**M6, 2026-10-10** (5 m LR; numbers from `validation/m6_*.json`; full tables in
+[`validation/M6_UNCERTAINTY_TRANSFER.md`](validation/M6_UNCERTAINTY_TRANSFER.md)).
+
+- **Robust within the study area.** Negative ratio 1:5/1:20, positives ≥ 50 m² only, a 3×3 registration
+  tolerance, domain ≥ 300 mm and dropping the rainfall covariate change the AUC by ≤ 0.012. The model stays
+  better than slope alone in every variant (+0.05 within watersheds). The summary layer beats slope p90 at
+  A = 0.05/0.1/0.2 by +0.01–0.03.
+- **Not transferable beyond ~5–10 km.**
+  - Leave-one-county-out: rainfall-stratified AUC 0.676, below slope alone. Training on Buncombe and testing on
+    Yancey gives a within-watershed AUC of 0.85; the reverse gives 0.69.
+  - Distance decay: removing training cells within 2 or 5 km of the held-out watershed costs ≤ 0.02, within
+    10 km 0.18.
+  - **Watauga** (indicative): the transferred AOI model reaches AUC 0.50 (0.44–0.56), slope alone 0.55. A model
+    trained on Watauga's 1940 outlines reaches 0.79, and distance to the 1940 outlines 0.58.
+- **Cause found (post-hoc diagnosis, no model changed):** the geology terms.
+  - AOI natural initiations occur only in geology groups 1 and 3.
+  - Groups 2 and 4 are the least-rained rock types (hillslope median 268 mm vs 350 and 535 mm).
+  - The geology coefficients therefore largely encode the rainfall gradient.
+  - Without them, the Watauga transfer AUC is 0.70.
+  - This confounds the product ranking across geology boundaries, and the within-AOI validation cannot detect it.
+- **Prediction uncertainty** (30 HUC-12 bootstrap refits):
+  - 58 % of the final top-10 % cells stay in the top 10 % in ≥ 90 % of refits.
+  - 7 % fall below the top 20 % in their worst decile.
+- **Area of applicability:** 4.5 % of the hillslope lattice lies outside it. It covers predictor space only;
+  the transfer tests show that this is not sufficient.
+- **Trigger intensity check:**
+  - The maximum 6 h rainfall explains *where* initiations happened better than the 72 h total (T1: unit AUC
+    0.806 vs 0.742, Δ +0.065, CI +0.012 to +0.156).
+  - It does not change the terrain ranking (T2: Δ −0.0006).
+  - → No "meaningful benefit" by the pre-registered rule. It is relevant to the open question of watersheds with
+    heavy rain but almost no mapped failures.
 
 ## Decision metric
 Held-out capture of mapped Helene initiation sites in the top *k* % of hillslope area (*k* = 5/10/20 % scenarios),
@@ -461,3 +487,8 @@ Known before analysis:
 | 2026-10-09 | No external reference product scored in M4 | wait for ScienceBase | optional per owner; NCGS debris-flow model is post-event |
 | 2026-10-09 | M5 criteria C1/C2 and the product rule fixed before the first M5 fit; 5 m scores aggregated to units as a per-area intensity | choose after seeing results | prevents choosing the bar after the fact |
 | 2026-10-09 | **M5 stop rule applied:** no candidate passes C2; GBM not detectably better than LR | relax C2 after seeing that (d) beats slope within watersheds | the rule was fixed in advance; changing the product definition is an owner decision |
+| 2026-10-10 | Owner: product = 5 m LR; GBM and slope alone as comparisons; slope units as summary layer | unit model; stop | M5: 5 m model beats slope, unit models do not |
+| 2026-10-10 | M6 design (sensitivity list, ensemble, AOA, trigger check T1/T2, Watauga tests) fixed before computation | decide after results | pre-registration |
+| 2026-10-10 | Watauga roads from a separate OSM extract of the same snapshot (sha checked) | re-extract the AOI file | keeps the AOI road corridor reproducible |
+| 2026-10-10 | Geology confound reported, not fixed | drop geology terms now | found post hoc; changing the product model is an owner decision; a pre-registered re-test is proposed |
+| 2026-10-10 | VIF selection skips constant columns | crash | a class absent from a subdomain (geology 2 above 300 mm) gave an undefined correlation |

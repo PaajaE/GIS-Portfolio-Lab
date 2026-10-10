@@ -1,0 +1,123 @@
+{
+ "domain_km2": 768.785825,
+ "hillslope_km2": 311.537575,
+ "slope_threshold_deg": 20.921464920043945,
+ "helene_outlines_natural_or_unassessed_conf_hm": 198,
+ "helene_test_outlines": 140,
+ "helene_test_outlines_with_cells": 129,
+ "helene_test_cells": 1066,
+ "outlines_1940": 1218,
+ "outlines_1940_with_cells": 1140,
+ "cells_1940": 10122,
+ "outlines_1940_location_confidence": {
+  "Low": 1209,
+  "High": 9
+ },
+ "negatives_test": 50000,
+ "rain_mm_test_positives_median": 291.7488098144531,
+ "transfer_aoi_model": {
+  "auc": 0.5004824765478424,
+  "ci95": [
+   0.4420905113936496,
+   0.5563274035029288
+  ],
+  "auc_rain_stratified": 0.5484234381426741,
+  "ci95_rain_stratified": [
+   0.48577525375446673,
+   0.6026892466916973
+  ]
+ },
+ "slope_alone": {
+  "auc": 0.5472291651031895,
+  "ci95": [
+   0.4985626478365016,
+   0.594900181381265
+  ],
+  "auc_rain_stratified": 0.5409198766250501,
+  "ci95_rain_stratified": [
+   0.4920456461599174,
+   0.5885179285936573
+  ]
+ },
+ "temporal_1940_model": {
+  "auc": 0.7867066416510319,
+  "ci95": [
+   0.7278195524038024,
+   0.8347244096822821
+  ],
+  "auc_rain_stratified": 0.7921216020850377,
+  "ci95_rain_stratified": [
+   0.7343541455143104,
+   0.8392727763328288
+  ],
+  "coefficients": {
+   "slope_deg": 0.24422587430485077,
+   "planc_15": 0.8460881885154454,
+   "profc_15": -0.02590075433195938,
+   "profc_5": -0.0629461675723611,
+   "tpi_250": 0.03303901498517419,
+   "relief_50": 0.4832175360569692,
+   "relief_250": -0.048297212581371575,
+   "rough_25": 0.03740941574370262,
+   "log_area": 0.2996344935192413,
+   "hand": -0.6348929463538283,
+   "dist_channel": 0.5080000415171455,
+   "northness": -0.4224041794364683,
+   "eastness": 0.7492576067029392,
+   "canopy": 0.00875106244039393,
+   "bedrock_cm": 0.03672538796824801,
+   "lc_group_2": 0.13197340449369607,
+   "lc_group_3": 0.07587634608407351,
+   "lc_group_4": -0.007341746713172913,
+   "lc_group_5": -0.04218861768005835,
+   "geology_2": -0.1877198484231265,
+   "geology_3": -0.11431814684030657,
+   "geology_4": -0.37707494204200287,
+   "hsg_0": -0.11055337746687928,
+   "hsg_3": -0.15254088669578994,
+   "hsg_4": -0.1008334038247908,
+   "rain_mm": 0.05292411523791664
+  }
+ },
+ "recurrence_baseline": {
+  "auc": 0.5753292495309569,
+  "ci95": [
+   0.4798939529981722,
+   0.6655157246057469
+  ],
+  "auc_rain_stratified": 0.5853973382291814,
+  "ci95_rain_stratified": [
+   0.4925148749466104,
+   0.6726354527959066
+  ]
+ },
+ "delta_transfer_aoi_model_minus_slope_alone": {
+  "value": -0.04674668855534714,
+  "ci95": [
+   -0.10409590618611522,
+   0.005495170172669832
+  ]
+ },
+ "delta_transfer_aoi_model_minus_recurrence_baseline": {
+  "value": -0.07484677298311448,
+  "ci95": [
+   -0.1678224717146099,
+   0.013013911711849954
+  ]
+ },
+ "delta_temporal_1940_model_minus_slope_alone": {
+  "value": 0.23947747654784235,
+  "ci95": [
+   0.18298116178142862,
+   0.2954811706043022
+  ]
+ },
+ "delta_temporal_1940_model_minus_recurrence_baseline": {
+  "value": 0.211377392120075,
+  "ci95": [
+   0.1284511286736287,
+   0.30215532061158573
+  ]
+ },
+ "spearman_transfer_vs_temporal_scores": 0.5119611472054088
+}

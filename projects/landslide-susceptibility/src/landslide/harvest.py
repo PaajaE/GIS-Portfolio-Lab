@@ -200,6 +200,46 @@ def harvest_mrms(m):
         _record(m, "mrms_" + re.search(r"_(\d{8}-\d{6})\.", f).group(1), gz, url=C.MRMS + f)
 
 
+def mrms_hourly_names() -> list[tuple[str, str]]:
+    t0 = dt.datetime.fromisoformat(C.MRMS_HOURLY_START)
+    out = []
+    for h in range(C.MRMS_HOURLY_HOURS):
+        t = t0 + dt.timedelta(hours=h)
+        f = f"MRMS_MultiSensor_QPE_01H_Pass2_00.00_{t:%Y%m%d-%H%M%S}.grib2.gz"
+        out.append((f"{t:%Y%m%d}/{f}", f))
+    return out
+
+
+def harvest_osm_roads_watauga(m):
+    """OSM highways for the buffered Watauga region (M6 indicative test: test positives > 30 m from roads).
+    Separate file, so the AOI road corridor used for the labels keeps its snapshot; same-snapshot check by sha."""
+    import pyogrio
+
+    pbf = C.RAW / "osm_nc.osm.pbf"
+    sha = _download(C.OSM_PBF, pbf)
+    bb = tuple(gpd.GeoSeries([box(*region_bounds()["watauga"])], crs=C.CRS).to_crs(4326).total_bounds)
+    g = pyogrio.read_dataframe(pbf, layer="lines", bbox=bb, where="highway IS NOT NULL",
+                               columns=["osm_id", "name", "highway", "other_tags"])
+    p = C.RAW / "osm_roads_watauga.parquet"
+    g.to_parquet(p)
+    nbytes = pbf.stat().st_size
+    pbf.unlink()
+    _record(m, "osm_roads_watauga", p, url=C.OSM_PBF, pbf_sha256=sha, pbf_bytes=nbytes, n=len(g),
+            same_snapshot_as_aoi=sha == m["sources"].get("osm_roads", {}).get("pbf_sha256"),
+            licence="ODbL; local analysis only, never published")
+
+
+def harvest_mrms_hourly(m):
+    """Hourly QPE (84 files, ~70 MB) for the trigger-intensity check; kept gzipped, read via /vsigzip/."""
+    d = C.RAW / "mrms_hourly"
+    d.mkdir(exist_ok=True)
+    for rel, f in mrms_hourly_names():
+        p = d / f
+        if not p.exists():
+            p.write_bytes(_get(C.MRMS_HOURLY + rel))
+        _record(m, "mrms01h_" + re.search(r"_(\d{8}-\d{6})\.", f).group(1), p, url=C.MRMS_HOURLY + rel)
+
+
 def harvest_mrlc(m):
     """NLCD 2021 land cover and tree canopy 2021 over each buffered region, native EPSG:5070 30 m."""
     for r, b in region_bounds().items():
@@ -273,8 +313,8 @@ def harvest_osm_roads(m):
             licence="ODbL; local audit only, never published")
 
 
-SMALL_STEPS = ("counties", "wbd", "inventory", "mrms", "geology", "mrlc", "ssurgo", "roads", "buildings",
-               "osm_roads")
+SMALL_STEPS = ("counties", "wbd", "inventory", "mrms", "mrms_hourly", "geology", "mrlc", "ssurgo", "roads", "buildings",
+               "osm_roads", "osm_roads_watauga")
 
 
 def small(only: list[str] | None = None):

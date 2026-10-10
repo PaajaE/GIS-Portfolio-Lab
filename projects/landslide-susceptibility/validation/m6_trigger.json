@@ -1,0 +1,117 @@
+{
+ "T1_units_trigger_alone_pooled_auc": {
+  "rain_mm": {
+   "auc": 0.7417529411221194,
+   "ci95": [
+    0.6119852964069216,
+    0.8408826680842967
+   ]
+  },
+  "rain1h_max": {
+   "auc": 0.7004641208359144,
+   "ci95": [
+    0.568378806834114,
+    0.7999013093042885
+   ]
+  },
+  "rain6h_max": {
+   "auc": 0.8064164656337235,
+   "ci95": [
+    0.7155410694696553,
+    0.8800336438309503
+   ]
+  },
+  "delta_rain1h_max_minus_72h": {
+   "value": -0.041288820286205064,
+   "ci95": [
+    -0.0956077001274553,
+    0.0013890438103659447
+   ]
+  },
+  "delta_rain6h_max_minus_72h": {
+   "value": 0.06466352451160406,
+   "ci95": [
+    0.012150675632802307,
+    0.15644960941323405
+   ]
+  },
+  "spearman_unit_means": {
+   "rain_mm": {
+    "rain_mm": 1.0,
+    "rain1h_max": 0.784,
+    "rain6h_max": 0.803
+   },
+   "rain1h_max": {
+    "rain_mm": 0.784,
+    "rain1h_max": 1.0,
+    "rain6h_max": 0.818
+   },
+   "rain6h_max": {
+    "rain_mm": 0.803,
+    "rain1h_max": 0.818,
+    "rain6h_max": 1.0
+   }
+  }
+ },
+ "T2_cells_within_watershed_auc": {
+  "rain_mm": {
+   "auc_within_huc": {
+    "value": 0.8683254383608754,
+    "ci95": [
+     0.8519017535806119,
+     0.8971460663141583
+    ]
+   },
+   "reference_value": 334.3593292236328,
+   "covariate_coefficient_final_fold_mean": 0.1921920649538169
+  },
+  "rain1h_max": {
+   "auc_within_huc": {
+    "value": 0.8688983474819733,
+    "ci95": [
+     0.8529807045962653,
+     0.896925431193066
+    ]
+   },
+   "reference_value": 39.948381423950195,
+   "covariate_coefficient_final_fold_mean": 0.3553866810790087
+  },
+  "rain6h_max": {
+   "auc_within_huc": {
+    "value": 0.8676819081339765,
+    "ci95": [
+     0.8514681458252564,
+     0.8944266230387332
+    ]
+   },
+   "reference_value": 109.27502822875977,
+   "covariate_coefficient_final_fold_mean": 0.6044468243358141
+  },
+  "delta_rain1h_max_minus_72h": {
+   "value": 0.0005729091210978643,
+   "ci95": [
+    -0.0012200562439386414,
+    0.0017611160103668615
+   ]
+  },
+  "delta_rain6h_max_minus_72h": {
+   "value": -0.0006435302268988918,
+   "ci95": [
+    -0.004735220871762985,
+    0.0013487616970362072
+   ]
+  }
+ },
+ "verdict": {
+  "rain1h_max": {
+   "T1": false,
+   "T2": false,
+   "meaningful_benefit": false
+  },
+  "rain6h_max": {
+   "T1": true,
+   "T2": false,
+   "meaningful_benefit": false
+  }
+ }
+}
