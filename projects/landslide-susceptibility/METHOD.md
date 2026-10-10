@@ -1,7 +1,8 @@
 # Landslide Susceptibility — Method
 
 > Status: **draft** — M1 (harvest + QA), M2 (terrain kernels), M3 (stack, slope units, sampling) and M4 (baseline +
-> spatial validation) done (2026-10-09); advanced model not started. Spec section: §6.
+> spatial validation) done; M5 (advanced model) run 2026-10-09 and **stopped by its pre-registered rule**
+> pending an owner decision. Spec section: §6.
 > Each statement is tagged **[verified]** (checked against a primary source or live service on 2026-10-08),
 > **[planned]** (design, see [`PLAN.md`](PLAN.md)) or **[assumption]** (to be tested). Results will replace the
 > planned items as milestones complete.
@@ -127,8 +128,44 @@ area are adjustment covariates that are always kept.
   discriminates less where the trigger was extreme. [interpretation, untested]
 
 ## Advanced method
-HistGradientBoosting with native categoricals, tuned only inside training folds; pixel and slope-unit variants.
-Out-of-fold ranks drive all validation views; a final all-data model gives the product map. [planned]
+**Run in M5, 2026-10-09** (`src/landslide/advanced.py`; results in
+[`validation/M5_ADVANCED.md`](validation/M5_ADVANCED.md)).
+
+**Setup:**
+- HistGradientBoosting (learning rate 0.05, L2 1). Leaves, minimum leaf size and iterations are tuned per outer
+  fold by inner CV grouped by HUC-12, scored by rainfall-stratified AUC.
+- Native categoricals at 5 m.
+- 5 m scores are aggregated to units as a per-area intensity. Every hillslope cell is scored by the fold model
+  that did not see its watershed, which also produces out-of-fold 5 m score rasters.
+
+**Outcome:**
+
+| Candidate (units) | Δ vs slope p90, stratified AUC | Δ vs slope p90, within watershed |
+|---|---|---|
+| (a) unit LR | −0.000 (−0.042 to +0.034) | −0.011 (−0.026 to +0.004) |
+| (b) unit GBM | −0.008 (−0.049 to +0.020) | +0.000 (−0.013 to +0.016) |
+| (c) 5 m LR → units | +0.029 (−0.016 to +0.059) | +0.017 (+0.006 to +0.034) |
+| (d) 5 m GBM → units | +0.022 (−0.005 to +0.039) | +0.026 (+0.019 to +0.034) |
+
+- **C1 fails at both units:** GBM − LR is −0.008 (−0.032 to +0.026) on units and +0.008 (−0.003 to +0.021) on
+  cells. Gradient boosting is **not detectably better** than logistic regression.
+- **C2 fails for all candidates.**
+  - (c) and (d) beat slope within watersheds: the intervals exclude 0, and (d) is better in 9 of 9 replicates.
+  - They do not beat it on the primary rainfall-stratified metric (lower bounds < 0).
+  - → **Stop rule applied:** no product chosen, M6 not started.
+- **At 5 m** the model does beat slope: GBM +0.069 (+0.046 to +0.089), LR +0.061.
+- **Importance:** slope dominates every model. At 5 m, relief / position / roughness, aspect and curvature add
+  value; land cover, soil and geology add almost none.
+- **Artefact audit (out-of-fold residuals, units):**
+  - Units near roads have fewer *natural* positives than the terrain predicts (O/E 0.57–0.72 in the nearest
+    quintile). This is expected from the target definition, since failures near roads are mostly coded
+    road-related and excluded. It means the ranking is terrain susceptibility to *natural* initiation, not to all
+    failures.
+  - Residuals fall with mapped-feature density (O/E ≈ 0 in the lowest density quintiles). That variable contains
+    the labels, so the association is partly circular. It shows that the model ranks high terrain where nothing at
+    all was mapped (low trigger intensity or unmapped; cannot be separated).
+  - Units near the county line have fewer positives than predicted (O/E 0.6). This is not explained yet.
+
 
 
 ## Sampling (implemented in M3)
@@ -218,7 +255,29 @@ pooled AUC, the slope-only and rainfall-only scores are contrasts, not gates.
 - **Reference products:** none scored. ScienceBase (optional) was not obtained, and the NCGS debris-flow model is
   post-event. Slope-only and rainfall-only scores are the comparison rules.
 
-[planned for M5–M6]
+**M5 criteria and product rule, fixed 2026-10-09 before the first M5 fit.**
+
+Candidates (all out-of-fold, leave-one-HUC-12-out with the 500 m buffer, scored on the same slope units):
+- (a) unit LR (M4)
+- (b) unit gradient boosting
+- (c) 5 m LR aggregated to units
+- (d) 5 m gradient boosting aggregated to units
+
+Aggregation: unit score = log of the mean over the unit's domain cells of exp(cell score), with cells below the
+hillslope threshold contributing 0. It is a per-area intensity, so flat units rank low.
+
+- **C1, advanced better than baseline:** Δ(GBM − LR) rainfall-stratified AUC, with the HUC-12 block-bootstrap
+  95 % lower bound > 0, on the same unit (units: b − a; cells: GBM − LR).
+- **C2, better than slope alone:** Δ(candidate − slope p90) rainfall-stratified AUC lower bound > 0 **and**
+  Δ within-watershed AUC point estimate > 0.
+- **Product rule:**
+  - Among the candidates that pass C2, the unit product is the one with the highest within-watershed AUC.
+  - If none passes C2, no model is chosen. The finding "terrain slope explains the ranking; the model's added
+    value is not detectable" is reported, and work stops for an owner decision before M6.
+  - Selecting among four candidates on the same out-of-fold results is mildly optimistic; this is stated with
+    the result.
+
+[planned for M6]
 - **Primary:** leave-one-HUC-12-out inside the triggered domain (500 m buffer), rainfall-stratified metrics, per-watershed replicates; plus leave-one-county-out, HUC-10 grouping and distance decay.
 - **Temporal:** Watauga 1940 → Helene 2024.
 - **Strata and contrast:** rainfall-stratified evaluation; random split as a contrast only.
@@ -358,3 +417,5 @@ Known before analysis:
 | 2026-10-09 | Predictor selection by forward VIF in a fixed physical priority order (slope first) | greedy backward VIF (drop the largest) | **changed after the first M4 run:** backward pruning dropped slope p90 and mean (VIF 85/57) and kept roughness/relief proxies. First run: stratified AUC 0.744, LR − slope −0.023 (CI −0.091 to +0.022), gates also passed. Disclosed here because it was decided after seeing results |
 | 2026-10-09 | M5 must beat slope p90 alone, not only the LR | compare only with the LR | the unit LR equals slope p90 (Δ 0.000) |
 | 2026-10-09 | No external reference product scored in M4 | wait for ScienceBase | optional per owner; NCGS debris-flow model is post-event |
+| 2026-10-09 | M5 criteria C1/C2 and the product rule fixed before the first M5 fit; 5 m scores aggregated to units as a per-area intensity | choose after seeing results | prevents choosing the bar after the fact |
+| 2026-10-09 | **M5 stop rule applied:** no candidate passes C2; GBM not detectably better than LR | relax C2 after seeing that (d) beats slope within watersheds | the rule was fixed in advance; changing the product definition is an owner decision |

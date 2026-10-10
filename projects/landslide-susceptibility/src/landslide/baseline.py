@@ -88,7 +88,7 @@ class LR:
     def __init__(self, names: list[str], protected=()):
         self.names, self.protected = names, protected
 
-    def fit(self, X, y, w=None):
+    def fit(self, X, y, w=None, groups=None):
         self.mu, self.sd = X.mean(0), X.std(0)
         self.sd[self.sd == 0] = 1
         Z = (X - self.mu) / self.sd
@@ -173,14 +173,20 @@ def buffered_out(xy: np.ndarray, poly, buffer_m: float) -> np.ndarray:
 
 # ------------------------------------------------------------------------------------------------- CV
 def cross_val(X, y, groups, xy, polys, names, protected, ref, *, buffer_m=BUFFER_M, w=None, subsample=None,
-              seed=C.SEED, extra=None):
+              seed=C.SEED, extra=None, make_model=None, perm=None):
     """Leave-one-group-out with a buffer; returns OOF linear scores at reference values and at actual values,
-    the OOF probability, the per-fold coefficients and fold sizes. `extra` = (X_extra, groups_extra) rows that
-    are only scored (never trained on). `subsample(train_idx, rng)` may thin the training rows."""
+    the OOF probability, the per-fold models, coefficients and fold sizes.
+
+    `extra` = (X_extra, groups_extra) rows that are only scored (never trained on). `subsample(train_idx, rng)`
+    may thin the training rows. `make_model()` returns an object with fit(X, y, w, groups) and linear(X)
+    (default: LR). `perm` = {name: column indices}: grouped permutation importance, i.e. the OOF reference
+    score with those columns shuffled jointly across the held-out rows."""
+    make_model = make_model or (lambda: LR(names, protected))
     n = len(y)
     oof_ref, oof_act = np.full(n, np.nan), np.full(n, np.nan)
     ex_ref = None if extra is None else np.full(len(extra[1]), np.nan)
-    coefs, folds = [], []
+    oof_perm = {k: np.full(n, np.nan) for k in (perm or {})}
+    coefs, folds, models = [], [], {}
     rng = np.random.default_rng(seed)
     for g in np.unique(groups):
         test = groups == g
@@ -192,17 +198,25 @@ def cross_val(X, y, groups, xy, polys, names, protected, ref, *, buffer_m=BUFFER
         tr_idx = np.flatnonzero(train)
         if subsample is not None:
             tr_idx = subsample(tr_idx, rng)
-        m = LR(names, protected).fit(X[tr_idx], y[tr_idx], None if w is None else w[tr_idx])
-        oof_ref[test] = m.linear(at_reference(X[test], names, ref))
+        m = make_model().fit(X[tr_idx], y[tr_idx], None if w is None else w[tr_idx], groups[tr_idx])
+        Xt = at_reference(X[test], names, ref)
+        oof_ref[test] = m.linear(Xt)
         oof_act[test] = m.linear(X[test])
+        for k, cols in (perm or {}).items():
+            Xp = Xt.copy()
+            Xp[:, cols] = Xt[rng.permutation(len(Xt))][:, cols]
+            oof_perm[k][test] = m.linear(Xp)
         if extra is not None:
             et = extra[1] == g
             ex_ref[et] = m.linear(at_reference(extra[0][et], names, ref))
-        coefs.append(m.coefs())
+        if hasattr(m, "coefs"):
+            coefs.append(m.coefs())
+        models[g] = m
         folds.append({"group": g, "n_train": int(tr_idx.size), "n_test": int(test.sum()),
-                      "pos_test": int(y[test].sum()), "dropped_by_buffer": int((~test & ~train).sum())})
+                      "pos_test": int(y[test].sum()), "dropped_by_buffer": int((~test & ~train).sum()),
+                      **({"params": m.params} if hasattr(m, "params") else {})})
     return {"ref": oof_ref, "act": oof_act, "p": 1 / (1 + np.exp(-oof_act)), "coefs": coefs, "folds": folds,
-            "extra_ref": ex_ref}
+            "extra_ref": ex_ref, "models": models, "perm": oof_perm}
 
 
 def random_groups(n: int, k: int, seed: int) -> np.ndarray:
