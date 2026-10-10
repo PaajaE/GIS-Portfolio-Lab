@@ -12,6 +12,7 @@ dependencies = [
     "pyarrow>=17",       # Parquet / GeoParquet
     "terrain-kernels",   # local Rust terrain kernels (rust/), PLAN §10
     "pysheds>=0.4",      # D8 fill / flow direction / accumulation (not available in GDAL), PLAN §3
+    "scikit-learn>=1.5", # logistic regression (M4) and gradient boosting (M5), PLAN §7
 ]
 
 [dependency-groups]

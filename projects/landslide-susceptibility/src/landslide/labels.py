@@ -178,19 +178,35 @@ def run() -> dict:
     rep["sample"] = {"positives": int(pos_idx.size), "negative_pool": int(neg_idx.size),
                      "negative_pool_weight": float(neg_all.size / neg_idx.size), "seed": C.SEED}
     del neg_all
+    tables = sample_tables({"positives": (pos_idx, 1), "negatives": (neg_idx, 0)},
+                           {"county": county_id, "hillslope": hillslope}, tr, shape)
+    del county_id, hillslope
+    for name, df in tables.items():
+        df.to_parquet(out / f"{name}.parquet", index=False)
+    rep["county_names"] = {i + 1: n for i, n in enumerate(cty["NAME"])}
+    rep["modifier_audit"] = modifier_audit(inv, cty, rd, out)
+    rep["density"] = density(inv, tr, shape, out)
+    (out / "report.json").write_text(json.dumps(rep, indent=1, default=float))
+    return rep
+
+
+def sample_tables(spec: dict, flags: dict, tr, shape) -> dict[str, pd.DataFrame]:
+    """One table per {name: (flat cell indices, label)}: cell position, label, the per-cell `flags` arrays,
+    HUC-12, every predictor and the slope-unit id at each threshold."""
     huc = gpd.read_parquet(C.RAW / "huc12.parquet").to_crs(C.CRS).reset_index(drop=True)
     huc_r = rasterize(((g, i + 1) for i, g in enumerate(huc.geometry)), out_shape=shape, transform=tr, fill=0,
                       dtype=np.uint16)
     tables = {}
-    for name, idx, y in (("positives", pos_idx, 1), ("negatives", neg_idx, 0)):
+    for name, (idx, y) in spec.items():
         r, c = np.divmod(idx, shape[1])
         x, yy = rasterio.transform.xy(tr, r, c)
-        df = pd.DataFrame({"row": r.astype(np.int32), "col": c.astype(np.int32), "x": x, "y": yy, "label": y,
-                           "county": county_id.ravel()[idx], "hillslope": hillslope.ravel()[idx]})
+        df = pd.DataFrame({"row": r.astype(np.int32), "col": c.astype(np.int32), "x": x, "y": yy, "label": y})
+        for k, a in flags.items():
+            df[k] = a.ravel()[idx]
         h = huc_r.ravel()[idx]
         df["huc12"] = np.where(h > 0, huc["huc12"].to_numpy()[np.maximum(h, 1) - 1], None)
         tables[name] = df
-    del huc_r, county_id, hillslope
+    del huc_r
     for group, names in ((f"terrain_{REGION}", TERRAIN_LAYERS), (f"hydro_{REGION}", HYDRO_LAYERS),
                          (f"stack_{REGION}", STACK_FLOAT + STACK_INT)):
         for k in names:
@@ -206,13 +222,7 @@ def run() -> dict:
             rr, cc = np.asarray(rr), np.asarray(cc)
             ok = (rr >= 0) & (rr < lab.shape[0]) & (cc >= 0) & (cc < lab.shape[1])
             df[f"unit_{a_km2}"] = np.where(ok, lab[np.clip(rr, 0, lab.shape[0] - 1), np.clip(cc, 0, lab.shape[1] - 1)], 0)
-    for name, df in tables.items():
-        df.to_parquet(out / f"{name}.parquet", index=False)
-    rep["county_names"] = {i + 1: n for i, n in enumerate(cty["NAME"])}
-    rep["modifier_audit"] = modifier_audit(inv, cty, rd, out)
-    rep["density"] = density(inv, tr, shape, out)
-    (out / "report.json").write_text(json.dumps(rep, indent=1, default=float))
-    return rep
+    return tables
 
 
 def modifier_audit(inv, cty, rd, out) -> dict:

@@ -1,0 +1,36 @@
+huc12,units,positive_units,sources,domain_km2,rain_mm,name,positive_hillslope_cells,replicate,per_huc_score,fold_flag_lt20_positive_units
+030501050301,1167,307,660,94.270,543.953,Headwaters Broad River,3778,True,True,False
+060101080301,1289,292,558,104.944,420.089,Headwaters Cane River,3823,True,True,False
+060101050701,1396,150,306,110.545,396.921,Upper Cane Creek,1464,True,True,False
+060101050603,1332,106,185,102.239,317.045,Middle Swannanoa River,773,True,True,False
+060101050601,1016,95,128,80.294,424.984,North Fork Swannanoa River,1025,True,True,False
+060101080303,694,84,213,56.958,297.439,Upper Cane River,1269,True,True,False
+060101080201,1268,61,142,111.587,546.069,Upper South Toe River,992,True,True,False
+060101050801,764,56,168,58.610,319.593,Dillingham Creek,1533,True,True,False
+060101050602,699,53,118,56.987,472.877,Upper Swannanoa River,700,True,True,False
+060101080202,476,14,52,36.849,334.921,Little Crabtree Creek,739,False,True,True
+060101050604,1331,7,8,101.821,315.735,Lower Swannanoa River,59,False,False,True
+060101080302,242,6,10,17.650,271.018,Price Creek,40,False,False,True
+060101080203,711,3,11,54.322,419.250,Lower South Toe River,45,False,False,True
+060101050901,1000,2,3,81.824,309.410,Beaverdam Creek-French Broad River,10,False,False,True
+030501050302,31,2,3,2.629,572.442,Hickory Creek-Broad River,6,False,False,True
+060101080106,68,0,0,5.065,293.974,Bear Creek-North Toe River,0,False,False,True
+060101080105,248,0,0,21.422,452.669,Big Crabtree Creek,0,False,False,True
+030501010103,53,0,0,4.110,538.155,Crooked Creek,0,False,False,True
+060101050906,750,0,0,58.425,269.440,Sandymush Creek,0,False,False,True
+060101080205,2,0,0,0.304,255.896,Pigpen Creek-North Toe River,0,False,False,True
+060101080206,35,0,0,2.123,251.885,Jacks Creek,0,False,False,True
+060101050907,289,0,0,22.522,288.890,Lee Creek-French Broad River,0,False,False,True
+060101050803,182,0,0,14.729,283.923,Upper Ivy Creek,0,False,False,True
+060101050905,446,0,0,33.432,259.610,Turkey Creek,0,False,False,True
+060101050903,725,0,0,55.209,264.685,Reems Creek,0,False,False,True
+060101050902,941,0,0,70.686,265.221,Newfound Creek,0,False,False,True
+060101050705,1195,0,0,94.818,347.572,Bent Creek-French Broad River,0,False,False,True
+060101050704,635,0,0,47.128,347.372,Avery Creek-French Broad River,0,False,False,True
+060101050703,643,0,0,51.848,336.971,Lower Cane Creek,0,False,False,True
+060101050503,834,0,0,61.944,322.258,Lower Hominy Creek,0,False,False,True
+060101050502,745,0,0,58.586,276.830,Upper Hominy Creek,0,False,False,True
+060101050501,1255,0,0,99.229,319.007,South Hominy Creek,0,False,False,True
+030501050304,96,0,0,7.320,536.795,Cedar Creek,0,False,False,True
+030501050303,10,0,0,1.212,531.182,Lake Lure-Broad River,0,False,False,True
+060101080305,1,0,0,0.089,250.967,Middle Cane River,0,False,False,True

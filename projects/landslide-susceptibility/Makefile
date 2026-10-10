@@ -1,10 +1,10 @@
-# Landslide Susceptibility — local, reproducible pipeline (M1: harvest + data QA).
+# Landslide Susceptibility — local, reproducible pipeline (M1 harvest ... M4 baseline).
 # Requires: uv and a Rust toolchain (rust/ is built by `uv sync`). Later milestones add tippecanoe.
 PY := uv run python -m landslide
 # cargo is needed by `uv sync` (builds rust/) and `make test`; add the usual rustup locations.
 export PATH := $(PATH):$(HOME)/.cargo/bin:/opt/homebrew/opt/rustup/bin
 
-.PHONY: setup harvest harvest-small harvest-dem feasibility qa terrain stack hydro units labels aggregate prepare bench test
+.PHONY: setup harvest harvest-small harvest-dem feasibility qa terrain stack hydro units labels aggregate samples prepare baseline bench test
 
 setup:
 	uv sync
@@ -42,7 +42,13 @@ labels:             ## positives, exclusions, domain, sample tables, modifier au
 aggregate:          ## slope-unit predictor tables -> data/out/units_<A>.parquet
 	$(PY).aggregate
 
-prepare: terrain stack hydro units labels aggregate   ## M2-M3 stages in order
+samples:            ## unrestricted domain sample + runoff-variant positive cells for the M4 checks
+	$(PY).samples
+
+prepare: terrain stack hydro units labels aggregate samples   ## M2-M3 stages in order
+
+baseline:           ## M4 logistic regression + spatial validation -> validation/m4_baseline.json, M4_BASELINE.md
+	$(PY).baseline
 
 bench:              ## Rust vs reference timing at several sizes -> benchmarks/terrain_kernels.json
 	$(PY).bench

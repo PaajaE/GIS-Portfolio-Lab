@@ -1,6 +1,7 @@
 # Landslide Susceptibility — Method
 
-> Status: **draft** — M1 (harvest + QA), M2 (terrain kernels) and M3 (stack, slope units, sampling) done (2026-10-09); no model yet. Spec section: §6.
+> Status: **draft** — M1 (harvest + QA), M2 (terrain kernels), M3 (stack, slope units, sampling) and M4 (baseline +
+> spatial validation) done (2026-10-09); advanced model not started. Spec section: §6.
 > Each statement is tagged **[verified]** (checked against a primary source or live service on 2026-10-08),
 > **[planned]** (design, see [`PLAN.md`](PLAN.md)) or **[assumption]** (to be tested). Results will replace the
 > planned items as milestones complete.
@@ -93,7 +94,37 @@ Full provenance: [`DATA_SOURCES.md`](DATA_SOURCES.md).
 event trigger.
 
 ## Baseline
-L2 logistic regression on a VIF-pruned predictor set, fitted inside spatial CV folds. [planned]
+**Implemented in M4, 2026-10-09** (`src/landslide/baseline.py`; full results in
+[`validation/M4_BASELINE.md`](validation/M4_BASELINE.md), numbers from `validation/m4_baseline.json`).
+
+**Model:** L2 logistic regression (C = 1). Inside each training fold: standardize, then select predictors by
+forward VIF (≤ 10) in a fixed physical priority order, slope first. Rainfall (MRMS 72 h) and, for units, log unit
+area are adjustment covariates that are always kept.
+- **Score** = the linear predictor with rainfall set to the triggered-domain median (334 mm) and unit area to the
+  median (0.066 km²): terrain ranked under equal trigger. It is a rank, not a probability.
+- **Slope units** (A = 0.1 km², 22,569 units): every unit is used, so there is no negative sampling. Label = ≥ 1
+  primary source area.
+- **5 m hillslope cells:** all positive cells; per fold, 10 negatives per positive from the M3 pool.
+
+**Result (leave-one-HUC-12-out, 500 m buffer; point, 95 % HUC-12 block bootstrap):**
+
+| | Rainfall-stratified AUC | Within-watershed AUC | Capture, top 10 % of area |
+|---|---|---|---|
+| Units, LR | 0.767 (0.704–0.814) | 0.744 (0.680–0.814) | 37 % (27–51 %) |
+| Units, slope p90 alone | 0.767 (0.707–0.842) | 0.755 (0.704–0.824) | 39 % (27–55 %) |
+| 5 m cells, LR | 0.867 (0.846–0.891) | 0.868 (0.852–0.897) | 61 % |
+| 5 m cells, slope alone | 0.806 (0.772–0.844) | 0.814 (0.786–0.842) | – |
+
+- **Gates (fixed before the first fit):** G1 and G2 pass. The 9 replicate watersheds have within-watershed AUC
+  0.63–0.85.
+- **At unit level the LR does not beat slope p90 alone** (Δ 0.000, CI −0.042 to +0.034). At 5 m it does
+  (Δ +0.061, CI +0.029 to +0.088).
+  → M5 must beat **slope alone**, not only the LR. Aggregating the 5 m score to units is a candidate for the
+  unit product.
+- **Rainfall adjustment changes the ranking little:** rain-adjusted minus terrain-only LR is +0.003 (CI includes
+  0). The pooled AUC (0.831) exceeds the stratified one (0.767) because of the between-rainfall contrast.
+- **Lowest within-watershed AUC is the wettest replicate** (Headwaters Broad River, 544 mm, AUC 0.63). Terrain
+  discriminates less where the trigger was extreme. [interpretation, untested]
 
 ## Advanced method
 HistGradientBoosting with native categoricals, tuned only inside training folds; pixel and slope-unit variants.
@@ -145,7 +176,49 @@ A = 0.1 km². The others are in units that are mostly below the rainfall thresho
 AOI grid, on a 100 m grid (`labels_aoi/density_100m.tif`).
 
 ## Validation
-[planned]
+**M4 decision gates, fixed 2026-10-09 before the first model fit.** The baseline (slope units, A = 0.1 km²,
+primary positive rule, leave-one-HUC-12-out with a 500 m buffer) shows *convincing spatial predictive value* only if:
+- **G1:** the rainfall-stratified out-of-fold ROC-AUC is ≥ 0.70, and its 95 % HUC-12 block-bootstrap lower bound
+  is ≥ 0.60;
+- **G2:** the within-watershed out-of-fold AUC is > 0.60 in at least 7 of the 9 replicate HUC-12s (≥ 50
+  positive units each).
+
+If either gate fails, M5 (gradient boosting) does not start; the method is revised first. The random split, the
+pooled AUC, the slope-only and rainfall-only scores are contrasts, not gates.
+
+**M4 checks (2026-10-09):**
+- **Fold sufficiency** ([`validation/folds_huc12.csv`](validation/folds_huc12.csv)): 35 HUC-12 folds.
+  - 10 have ≥ 10 positive units and get a per-watershed score; 9 have ≥ 50 (replicates).
+  - 25 are flagged (< 20 positive units), and 20 have none. Those are held out and pooled, but never scored alone.
+  - Effective n for every interval ≈ 10 watersheds.
+- **Spatial leakage:**
+  - Residual correlation between units is ≤ 0.12 below 2 km and ≈ 0 beyond 8 km, so the HUC-12 blocks (median
+    76 km²) exceed the correlation range.
+  - Dropping the 500 m buffer raises the AUC by 0.014. Leave-one-HUC-10-out gives 0.756. A random 5-fold split
+    gives 0.797 (units) and 0.882 (cells). The leakage inflation is modest, but real.
+  - Held-out positive units lie at a median 2.4 km from the nearest positive in another watershed.
+- **Negative-sample bias (5 m):**
+  - Scoring against unrestricted domain cells (including the excluded zones near mapped features and roads)
+    instead of the filtered pool changes the stratified AUC from 0.867 to 0.862.
+  - Excluded cells rank only slightly higher than eligible ones (AUC 0.529).
+  - At unit level there is no exclusion. The 1,000 units whose only Helene sources are road-related or
+    otherwise non-primary are labelled 0; without them the AUC is 0.778.
+- **Mapping effort:** out-of-fold observed / expected positive units is 0.86 in Yancey and 0.91 in Buncombe, so
+  there is no county difference after conditioning on terrain and rainfall.
+  - 20 HUC-12s, some at 340–450 mm, have almost no mapped Helene feature of any kind (e.g. Big Crabtree Creek,
+    Bent Creek). Whether that is lower trigger *intensity* (not captured by 72 h totals) or unmapped terrain
+    cannot be separated with these data. The within-watershed AUC is the metric that is immune to it.
+- **Positive rule:**
+  - The slope-only variant (incl. 380 runoff-modified natural slopes) gives practically the same ranking:
+    Spearman of out-of-fold scores 0.997.
+  - Scored on primary labels, the difference is +0.000 (CI −0.002 to +0.002); the cell model is 0.858 vs 0.867.
+  - The rule choice does not change the susceptibility ranking.
+- **Calibration (diagnostic only):** Brier skill 0.047 at actual rainfall. Weak, and not a basis for any
+  probability statement.
+- **Reference products:** none scored. ScienceBase (optional) was not obtained, and the NCGS debris-flow model is
+  post-event. Slope-only and rainfall-only scores are the comparison rules.
+
+[planned for M5–M6]
 - **Primary:** leave-one-HUC-12-out inside the triggered domain (500 m buffer), rainfall-stratified metrics, per-watershed replicates; plus leave-one-county-out, HUC-10 grouping and distance decay.
 - **Temporal:** Watauga 1940 → Helene 2024.
 - **Strata and contrast:** rainfall-stratified evaluation; random split as a contrast only.
@@ -279,3 +352,9 @@ Known before analysis:
 | 2026-10-09 | SSURGO null bedrock depth = 250 cm + flag; clay not used | treat null as missing | null means no bedrock in the described profile; HSG covers infiltration |
 | 2026-10-09 | pysheds 0.5 with an `np.in1d` shim (NumPy 2.5) | pin NumPy < 2.4; own D8 code | one-line documented shim; mature routing kept |
 | 2026-10-09 | Unit labels from representative points of in-county positives; units kept if ≥ 50 % in the triggered domain | any positive cell | one source = one unit; low-rain units are not tested by Helene |
+| 2026-10-09 | M4 gates G1/G2 fixed before the first fit (stratified AUC ≥ 0.70 with lower bound ≥ 0.60; within-watershed AUC > 0.60 in ≥ 7 of 9 replicates) | judge after seeing results | prevents moving the bar |
+| 2026-10-09 | Rainfall-stratified (50 mm bins) and within-watershed AUC as primary; pooled AUC as contrast | pooled AUC | pooled AUC rewards the rainfall footprint (rainfall alone: pooled 0.74, stratified 0.54) |
+| 2026-10-09 | Unit model includes log unit area as covariate; scored at median area; capture over unit domain area | rank by P(unit has a source) | larger units contain sources more often; the decision metric is per area |
+| 2026-10-09 | Predictor selection by forward VIF in a fixed physical priority order (slope first) | greedy backward VIF (drop the largest) | **changed after the first M4 run:** backward pruning dropped slope p90 and mean (VIF 85/57) and kept roughness/relief proxies. First run: stratified AUC 0.744, LR − slope −0.023 (CI −0.091 to +0.022), gates also passed. Disclosed here because it was decided after seeing results |
+| 2026-10-09 | M5 must beat slope p90 alone, not only the LR | compare only with the LR | the unit LR equals slope p90 (Δ 0.000) |
+| 2026-10-09 | No external reference product scored in M4 | wait for ScienceBase | optional per owner; NCGS debris-flow model is post-event |
