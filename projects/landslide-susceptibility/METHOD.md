@@ -528,5 +528,4 @@ Known before analysis:
 | 2026-10-10 | Watauga roads from a separate OSM extract of the same snapshot (sha checked) | re-extract the AOI file | keeps the AOI road corridor reproducible |
 | 2026-10-10 | Geology confound reported, not fixed | drop geology terms now | found post hoc; changing the product model is an owner decision; a pre-registered re-test is proposed |
 | 2026-10-10 | VIF selection skips constant columns | crash | a class absent from a subdomain (geology 2 above 300 mm) gave an undefined correlation |
-
 | 2026-10-10 | No-geology test and decision rule (R1 non-inferiority ≥ −0.01 lower bound; R2 leave-one-county-out and Watauga lower bounds > 0) fixed before computation | judge on point estimates | owner instruction: intervals, not points |
