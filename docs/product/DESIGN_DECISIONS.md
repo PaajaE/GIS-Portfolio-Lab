@@ -3,7 +3,8 @@
 Living reference for the family of portfolio apps (see `.claude/skills/web-ux`). Only decisions that were
 actually made and implemented. Each entry: decision · context · reason · source · apps.
 
-Apps: **PI** = Parcel Intelligence (`projects/parcel-intelligence/web`).
+Apps: **PI** = Parcel Intelligence (`projects/parcel-intelligence/web`); **LS** = Landslide Susceptibility
+(`projects/landslide-susceptibility/web`, preliminary local prototype).
 
 ## Page structure
 
@@ -99,3 +100,28 @@ none (report is beside the map). *Reason:* quality gate found no visible feedbac
 
 **D18. Validation that has not been reviewed by a person says so wherever it is cited**
 ("AI-assisted, pending human review"), with a review sheet in the repository. · PI
+
+## Added with Landslide Susceptibility (preliminary prototype, 2026-10-10)
+
+**D19. A screening threshold is a slider, not radios (deliberate deviation from D6).**
+LS: "flag the top k % of hillslope area", k = 1–30 % in 1 % steps, with ticks at 5/10/20 and ± buttons (44 px).
+`aria-valuetext` reads the full result sentence; the text says that the slider changes a screening policy,
+not the model. *Reason:* k is an ordinal continuum with many meaningful values, not named assumption sets. · LS
+
+**D20. Thresholded 5 m rasters: one RGB tile set, decoded as `raster-dem` with `custom` encoding and coloured by
+a `color-relief` layer.** Each channel carries one ranking (0 = outside, 1 = not ranked, 102 − r = top r %);
+the slider only rewrites `color-relief-color`, so there is no browser computation.
+- Decoding factors: 1 for the wanted channel and 1/256, 1/65536 for the others. A zero factor breaks MapLibre's
+  packing of the colour stops.
+- Tiles are lossless WebP; overview zooms re-rank pixels by area so "top k %" holds at every zoom.
+- The page needs MapLibre GL JS ≥ 5.6 (`color-relief`) and ≥ 5.20 (`resampling`).
+
+*Source:* MapLibre Style Spec (layers: color-relief; sources: raster-dem `encoding`). · LS
+
+**D21. Susceptibility uses a warm sequential ramp (ColorBrewer OrRd), darker = higher in the ranking.**
+It deliberately differs from PI's teal, which means "robustness"; the area not tested by the trigger uses the
+D9 hatch. *Reason:* different constructs get different hues across the family. · LS
+
+**D22. A preliminary app says so in a banner above the h1** and lists what is still missing. Its data are not
+committed or published until the checks it depends on are done. · LS
+

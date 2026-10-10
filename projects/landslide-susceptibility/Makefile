@@ -4,7 +4,7 @@ PY := uv run python -m landslide
 # cargo is needed by `uv sync` (builds rust/) and `make test`; add the usual rustup locations.
 export PATH := $(PATH):$(HOME)/.cargo/bin:/opt/homebrew/opt/rustup/bin
 
-.PHONY: setup harvest harvest-small harvest-dem feasibility qa terrain stack hydro units labels aggregate samples prepare baseline advanced bench test
+.PHONY: setup harvest harvest-small harvest-dem feasibility qa terrain stack hydro units labels aggregate samples prepare baseline advanced product web serve bench test
 
 setup:
 	uv sync
@@ -52,6 +52,15 @@ baseline:           ## M4 logistic regression + spatial validation -> validation
 
 advanced:           ## M5 gradient boosting, 5 m -> unit aggregation, candidates -> validation/M5_ADVANCED.md
 	$(PY).advanced
+
+product:            ## final 5 m LR, area-percentile rasters, per-k held-out capture -> validation/per_k_metrics.json
+	$(PY).product
+
+web:                ## web/data: susceptibility + hillshade PMTiles, overlays, summary.json (preliminary prototype)
+	$(PY).web_data
+
+serve:
+	npx --yes http-server@14.1.1 web -p 8138 -c-1   # needs HTTP Range support for PMTiles
 
 bench:              ## Rust vs reference timing at several sizes -> benchmarks/terrain_kernels.json
 	$(PY).bench

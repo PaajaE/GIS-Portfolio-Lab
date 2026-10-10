@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Landslide Susceptibility — Buncombe &amp; Yancey, NC</title>
+<meta name="description" content="Preliminary prototype: a relative ranking of hillslopes by susceptibility to rainfall-triggered landslide initiation, checked against Hurricane Helene in held-out watersheds.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@6.11.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/pmtiles@4.5.0/dist/pmtiles.js" defer></script>
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#controls">Skip to the ranking controls</a>
+
+<p class="prelim" role="note"><strong>Preliminary prototype.</strong> Uncertainty, area-of-applicability and
+transfer checks are still being computed; numbers and layers may change.</p>
+
+<header class="intro">
+  <p class="eyebrow">Landslide Susceptibility · Buncombe &amp; Yancey counties, North Carolina</p>
+  <h1>Which hillslopes are most susceptible to rainfall-triggered landslides — and how well did that ranking match Hurricane Helene?</h1>
+  <p class="lede">
+    A <strong>relative ranking</strong> of <span data-v="hillslope_km2" data-fmt="int">…</span>&nbsp;km² of hillslopes
+    by susceptibility to the <em>initiation</em> of shallow landslides, built from pre-event (2017) lidar terrain and checked
+    against <span data-v="sites.in_domain" data-fmt="int">…</span> natural initiation sites mapped by the NC Geological Survey
+    after Helene (<span data-v="event.date">…</span>). It is a screening ranking, <strong>not a probability of a future
+    landslide</strong>, not a hazard map and not a risk map.
+  </p>
+  <p class="headline" id="headline">…</p>
+</header>
+
+<main id="workbench" class="workbench">
+  <div class="map-wrap">
+    <div id="map" role="region" aria-label="Map of relative landslide-initiation susceptibility. The panel describes what the map shows."></div>
+  </div>
+
+  <aside class="panel" id="controls" aria-label="Ranking controls and results">
+    <fieldset class="seg">
+      <legend>Ranking shown on the map</legend>
+      <label><input type="radio" name="view" value="final" checked> <span>Terrain model</span></label>
+      <label><input type="radio" name="view" value="oof"> <span>Terrain model, held-out</span></label>
+      <label><input type="radio" name="view" value="slope"> <span>Slope alone</span></label>
+    </fieldset>
+    <p class="muted" id="view-note">…</p>
+
+    <div class="slider">
+      <label for="k">Flag the top <output id="k-out" for="k">10</output>&nbsp;% of hillslope area</label>
+      <div class="slider-row">
+        <button type="button" id="k-dec" aria-label="Flag one percent less">−</button>
+        <input id="k" type="range" min="1" max="30" step="1" value="10" list="k-ticks">
+        <button type="button" id="k-inc" aria-label="Flag one percent more">+</button>
+      </div>
+      <datalist id="k-ticks"><option value="5"></option><option value="10"></option><option value="20"></option></datalist>
+      <p class="muted">The slider sets a screening policy (how much area to flag). It does not change the model.</p>
+    </div>
+
+    <div class="readout" aria-live="polite" id="readout">…</div>
+
+    <figure class="chart" aria-labelledby="chart-cap">
+      <svg id="curve" viewBox="0 0 360 230" role="img" aria-labelledby="chart-cap"></svg>
+      <figcaption id="chart-cap">Share of mapped Helene initiation sites inside the flagged area, by flagged share
+        of hillslope area, in <strong>held-out watersheds</strong> (each watershed scored by a model that never saw it).
+        Bands: 95&nbsp;% intervals from resampling watersheds. Dotted line: no better than chance.</figcaption>
+      <details><summary>Table of the curve</summary><div id="curve-table"></div></details>
+    </figure>
+
+    <div class="legend" aria-label="Map legend">
+      <h2>Legend</h2>
+      <div class="ramp" aria-hidden="true"></div>
+      <p class="ramp-labels"><span>top 1&nbsp;%</span><span id="ramp-k">top 10&nbsp;%</span></p>
+      <p class="muted">Flagged hillslope cells, darker = higher in the ranking. Unflagged terrain shows the hillshade only.</p>
+      <label class="toggle"><input type="checkbox" id="t-sites" checked> <span class="sw sw-site" aria-hidden="true"></span>
+        Mapped natural initiation sites, Helene (NCGS)</label>
+      <label class="toggle"><input type="checkbox" id="t-nt" checked> <span class="sw sw-hatch" aria-hidden="true"></span>
+        Not tested by Helene's rainfall (&lt; <span data-v="domain.trigger_mm">…</span>&nbsp;mm in 72&nbsp;h): not ranked</label>
+      <label class="toggle"><input type="checkbox" id="t-huc"> <span class="sw sw-huc" aria-hidden="true"></span>
+        Watersheds (HUC-12), the validation blocks</label>
+    </div>
+  </aside>
+</main>
+
+<section class="case">
+  <h2>How the ranking was made and checked</h2>
+  <ul>
+    <li><strong>Target:</strong> natural initiation zones (source areas) of Helene landslides mapped by the NC Geological Survey on
+      2025 imagery and lidar change detection, excluding road-, cut- or drainage-related failures.</li>
+    <li><strong>Terrain:</strong> 5&nbsp;m predictors from 2016–17 USGS 3DEP lidar (slope, curvature, relief, position,
+      roughness, contributing area, aspect), plus land cover, canopy, geology and soils.</li>
+    <li><strong>Trigger:</strong> only land that received at least <span data-v="domain.trigger_mm">…</span>&nbsp;mm in 72&nbsp;h
+      (MRMS radar) is ranked; rainfall is held at the median (<span data-v="domain.rain_reference_mm">…</span>&nbsp;mm), so the
+      map ranks terrain under equal rain, not where it rained most.</li>
+    <li><strong>Model:</strong> logistic regression on 5&nbsp;m cells. Gradient boosting was <span id="gbm-vs-lr">…</span>.</li>
+    <li><strong>Check:</strong> leave-one-watershed-out (HUC-12, 500&nbsp;m buffer). Ranking quality within watersheds:
+      model AUC <span id="auc-lr">…</span>, slope alone <span id="auc-slope">…</span>. Only
+      <span data-v="validation.replicate_watersheds">…</span> watersheds have enough mapped sites to be scored on their own,
+      so intervals are wide.</li>
+    <li><strong>Slope units:</strong> aggregated to small hillslope units, the model is not detectably better than slope alone
+      on the primary metric; this prototype therefore shows the 5&nbsp;m ranking.</li>
+  </ul>
+
+  <h2>What this screen cannot tell you</h2>
+  <ul>
+    <li><strong>Whether a landslide will happen.</strong> The ranking is relative and was learned from one storm's mapped
+      inventory. It is not a probability, a recurrence interval or a hazard.</li>
+    <li><strong>Where debris goes.</strong> Only initiation is ranked; runout paths and the areas they reach are not modelled.</li>
+    <li><strong>Road, cut and fill failures.</strong> They were excluded from the target; near roads, actual failures are mostly of that kind.</li>
+    <li><strong>That an unflagged or unmapped slope is safe.</strong> A flagged slope without a mapped Helene initiation is
+      "high susceptibility, no mapped initiation", not a model error: Helene did not test every slope equally and not
+      every failure was mapped. Some well-watered watersheds have almost no mapped failures of any kind; whether that
+      reflects lower rainfall intensity or unmapped terrain cannot be told from these data.</li>
+    <li><strong>Other places, storms or terrain changes.</strong> It was built and checked inside one storm footprint in
+      two counties; terrain graded after 2017 is not represented.</li>
+    <li><strong>Fine detail at the finest zoom.</strong> The map shows the 5&nbsp;m ranking generalised to about 8&nbsp;m pixels.</li>
+  </ul>
+
+  <h2>Sources</h2>
+  <p class="muted">Landslide inventory: NC Geological Survey, Landslide Inventory of North Carolina (NC DEQ).
+    Terrain: USGS 3D Elevation Program 1&nbsp;m lidar. Rainfall: NOAA MRMS. Land cover and canopy: MRLC NLCD 2021.
+    Geology: NCGS 1985. Soils: USDA NRCS SSURGO. Watersheds: USGS WBD. Analysis and method:
+    <code>projects/landslide-susceptibility/METHOD.md</code>.</p>
+</section>
+</body>
+</html>
