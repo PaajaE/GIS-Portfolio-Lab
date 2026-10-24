@@ -4,7 +4,9 @@ Run on the build Mac:   python3 src/firepath/probe.py --label build-mac
 (or `make probe`). Writes provenance/probe_<label>.json and prints a summary table.
 
 Downloads only metadata, directory listings, HEAD responses and byte-range samples (<= max_bytes per
-request). Never submits jobs, never sends credentials, never registers. A failure is recorded with the
+request). Never submits jobs, never registers. Optional keys the owner obtained themselves
+(FIRMS_MAP_KEY, SYNOPTIC_TOKEN) are read from the environment or from the git-ignored `.env` in the
+project directory, sent only to their own service, and redacted from the report. A failure is recorded with the
 HTTP status or the exception text; "reachable" means the endpoint answered, not that the dataset is
 usable — usability is decided in M1b with real AOI requests.
 """
@@ -77,6 +79,17 @@ CHECKS = [
     ("synoptic_notoken", "Synoptic API without token (expects auth error)", "https://api.synopticdata.com/v2/stations/metadata?stid=KFLG", "GET", 20_000, {}),
     ("pypi_pyretechnics", "pyretechnics package metadata (PyPI)", "https://pypi.org/pypi/pyretechnics/json", "GET", 2_000_000, {}),
 ]
+
+# Optional owner-supplied keys: env var -> (id, purpose, url template with {key}, max_bytes)
+KEYED_CHECKS = {
+    "FIRMS_MAP_KEY": [
+        ("firms_key_status", "FIRMS MAP_KEY status (transaction quota)", "https://firms.modaps.eosdis.nasa.gov/mapserver/mapkey_status/?MAP_KEY={key}", 20_000),
+        ("firms_key_availability", "FIRMS data availability with MAP_KEY", "https://firms.modaps.eosdis.nasa.gov/api/data_availability/csv/{key}/all", 20_000),
+    ],
+    "SYNOPTIC_TOKEN": [
+        ("synoptic_token", "Synoptic station metadata with token", "https://api.synopticdata.com/v2/stations/metadata?stid=KFLG&token={key}", 20_000),
+    ],
+}
 
 AUTH_HINTS = re.compile(r"(api[_ ]?key|map_key|token|unauthori[sz]ed|login|credential|register)", re.I)
 
@@ -232,11 +245,57 @@ def nifc_perimeter_services(services_body: bytes) -> dict:
     return out
 
 
+def load_env(path: Path) -> list[str]:
+    """Read KEY=VALUE lines from a .env file into os.environ (existing variables win). Returns the
+    names of non-empty keys that were set. Values are never printed."""
+    loaded = []
+    if not path.is_file():
+        return loaded
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, v = line.split("=", 1)
+        k, v = k.strip(), v.strip().strip('"').strip("'")
+        if v and k not in os.environ:
+            os.environ[k] = v
+            loaded.append(k)
+    return loaded
+
+
+def redact(obj, secret: str):
+    """Replace a secret everywhere in a (nested) record."""
+    if isinstance(obj, str):
+        return obj.replace(secret, "<redacted>")
+    if isinstance(obj, dict):
+        return {k: redact(v, secret) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [redact(v, secret) for v in obj]
+    return obj
+
+
+def keyed_checks() -> list[dict]:
+    out = []
+    for var, checks in KEYED_CHECKS.items():
+        key = os.environ.get(var, "")
+        for cid, purpose, tmpl, mx in checks:
+            if not key:
+                out.append({"id": cid, "purpose": purpose, "status": None, "skipped": f"{var} not set"})
+                continue
+            rec = fetch_retry(tmpl.format(key=key), "GET", mx)
+            rec.pop("_body", None)
+            rec = redact(rec, key)
+            rec.update(id=cid, purpose=purpose, key_var=var)
+            out.append(rec)
+    return out
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--label", required=True, help="where the probe runs, e.g. build-mac or cloud-session")
     ap.add_argument("--skip-crawl", action="store_true")
     a = ap.parse_args(argv)
+    env_loaded = load_env(PROJECT / ".env")
     du = shutil.disk_usage(PROJECT)
     report = {
         "label": a.label, "utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -245,6 +304,8 @@ def main(argv=None):
         "disk": {"path": str(PROJECT), "free_gb": round(du.free / 1e9, 1), "total_gb": round(du.total / 1e9, 1),
                  "required_free_gb": 30, "ok": du.free / 1e9 >= 30},
         "checks": [],
+        "keys_present": {v: bool(os.environ.get(v)) for v in KEYED_CHECKS},
+        "env_file_keys_loaded": env_loaded,
     }
     bodies = {}
     for cid, purpose, url, method, mx, hdr in CHECKS:
@@ -253,6 +314,9 @@ def main(argv=None):
         rec.update(id=cid, purpose=purpose)
         report["checks"].append(rec)
         print(f"{cid:24s} {str(rec.get('status')):>5s} {rec.get('error', rec.get('reason', ''))[:90]}")
+    for rec in keyed_checks():
+        report["checks"].append(rec)
+        print(f"{rec['id']:24s} {str(rec.get('status')):>5s} {rec.get('skipped') or rec.get('error', rec.get('reason', ''))[:90]}")
     if not a.skip_crawl:
         report["nirops_inventory"] = nirops_inventory()
         if bodies.get("nifc_services"):

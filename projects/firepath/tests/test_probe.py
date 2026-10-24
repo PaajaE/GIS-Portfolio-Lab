@@ -44,3 +44,25 @@ def test_crawler_finds_ir_files_and_timestamps(tmp_path):
     pipe = {f["file"].rsplit("/", 1)[1] for f in out["fires"]["Pipeline 2022"]["ir_files"]}
     assert pipe == {"20220613_0115_Pipeline_IR.kmz", "20220613_0120_Haywire_IR.kmz"}
     assert "Telegraph 2021" not in out["fires"]
+
+
+def test_env_loading_and_secret_redaction(tmp_path, monkeypatch):
+    from firepath import probe
+    env = tmp_path / ".env"
+    env.write_text("# comment\nFIRMS_MAP_KEY=abc123secret\nSYNOPTIC_TOKEN=\nEXISTING=fromfile\n")
+    monkeypatch.delenv("FIRMS_MAP_KEY", raising=False)
+    monkeypatch.setenv("EXISTING", "fromshell")
+    loaded = probe.load_env(env)
+    assert loaded == ["FIRMS_MAP_KEY"]  # empty values skipped, shell variables win
+    import os
+    assert os.environ["EXISTING"] == "fromshell"
+    rec = {"url": "https://x/api/abc123secret/all", "nested": [{"snippet": "key abc123secret bad"}]}
+    assert "abc123secret" not in str(probe.redact(rec, "abc123secret"))
+
+
+def test_keyed_checks_skip_without_keys(monkeypatch):
+    from firepath import probe
+    for v in probe.KEYED_CHECKS:
+        monkeypatch.delenv(v, raising=False)
+    recs = probe.keyed_checks()
+    assert recs and all(r.get("skipped") for r in recs)

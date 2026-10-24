@@ -2,10 +2,13 @@
 # Requires: uv. `make probe` needs only python3 (standard library).
 PY := uv run python -m firepath
 
-.PHONY: setup probe test bakeoff
+.PHONY: setup env probe test bakeoff
 
 setup:
 	uv sync
+
+env:                ## create the git-ignored .env from .env.example (keeps an existing .env)
+	@test -f .env && echo ".env exists, not overwritten" || (cp .env.example .env && echo "created .env: fill in FIRMS_MAP_KEY")
 
 probe:              ## M0: reachability / auth / inventory probe -> provenance/probe_<label>.json
 	python3 src/firepath/probe.py --label $${LABEL:-build-mac}
