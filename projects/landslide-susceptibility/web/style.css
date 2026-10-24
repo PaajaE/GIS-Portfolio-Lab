@@ -141,12 +141,17 @@ fieldset.seg.seg-sites { grid-template-columns: repeat(2, 1fr); max-width: 760px
   .goto-l { grid-column: 1 / -1; }
   .goto-b { display: contents; }
   .goto button { padding: 6px 8px; font-size: 0.84rem; line-height: 1.2; }
-  #here { grid-column: 1 / -1; }
 }
 .goto-s { font-weight: 400; color: var(--ink-2); font-size: 0.85rem; }
-.goto .cross { font-weight: 700; }
 .map-box { position: relative; }
-.crosshair { position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; pointer-events: none; z-index: 2; }
+.crosshair { position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; pointer-events: none; z-index: 2; display: none; }
+.map-box:focus-within .crosshair { display: block; }
 .crosshair::before, .crosshair::after { content: ""; position: absolute; background: var(--ink); box-shadow: 0 0 0 1px #fff; }
 .crosshair::before { left: 7px; top: 0; width: 2px; height: 16px; }
 .crosshair::after { top: 7px; left: 0; height: 2px; width: 16px; }
+.pop-big { font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.pop-sw { width: 14px; height: 14px; border-radius: 3px; background: #d9d4c9; border: 1px solid #8a8f96; flex: none; }
+.pop-sw.on { background: #b30000; border-color: #b30000; }
+.pop-ev { padding: 6px 8px; background: #f2efe7; border-radius: 4px; }
+.pop-warn { color: #7a3e00; }
+@media (max-width: 700px) { .ls-popup .maplibregl-popup-content { max-height: 32vh; } }

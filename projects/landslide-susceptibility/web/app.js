@@ -242,36 +242,43 @@ async function describe(lngLat, point) {
   const county = at(["counties-hit"])[0], huc = at(["huc-hit"])[0];
   const notTested = at(["nt-hit"]).length > 0, outsideAoa = at(["aoa-hit"]).length > 0;
   const pad = 8;
-  const nearSite = layerOn.sites && map.queryRenderedFeatures(
-    [[point.x - pad, point.y - pad], [point.x + pad, point.y + pad]], { layers: ["sites"] }).length > 0;
-  const inBox = SITES.sites.find((x) => {
-    const [[w, s], [e, n]] = boxBounds(x, 1);
-    return lngLat.lng >= w && lngLat.lng <= e && lngLat.lat >= s && lngLat.lat <= n;
-  });
-  let r = null;
-  try { r = await rankAt(lngLat.lng, lngLat.lat); } catch (err) { console.error("rank lookup failed:", err); }
+  const near = layerOn.sites ? map.queryRenderedFeatures(
+    [[point.x - pad, point.y - pad], [point.x + pad, point.y + pad]], { layers: ["sites"] })[0] : null;
+  const v = VIEWS[view];
+  const key = view === "slope" ? "slope" : view;   // channel name in rankAt
+  let r = null, rSite = null;
+  try {
+    r = await rankAt(lngLat.lng, lngLat.lat);
+    if (near) rSite = await rankAt(...near.geometry.coordinates);
+  } catch (err) { console.error("rank lookup failed:", err); }
 
-  let h = `<p class="pop-h">${county ? esc(county.properties.NAME) : "Outside the two counties"}` +
-    `${huc ? ` · <span class="pop-sub">${esc(huc.properties.name)}</span>` : ""}</p>`;
+  let h = "";
   if (!county) {
-    h += `<p>Not part of the study area; no ranking here.</p>`;
+    h = `<p class="pop-big">Outside the study area</p><p>There is no ranking here.</p>`;
   } else if (notTested) {
-    h += `<p><strong>Not ranked:</strong> Helene's rainfall here was below ${S.domain.trigger_mm}${NB}mm in 72${NB}h, so this location did not test the model.</p>`;
+    h = `<p class="pop-big">Not tested by Helene</p><p>Rainfall here stayed below ${S.domain.trigger_mm}${NB}mm in 72${NB}h, so this spot is not ranked.</p>`;
   } else if (r) {
-    const rows = [["final", "Terrain model"], ["oof", "Terrain model, held-out"], ["slope", "Slope alone"]];
-    const same = rows.every(([v]) => r[v] === r.final);
-    h += same
-      ? `<p>All three rankings: ${rankText(r.final)}${r.final > 1 ? " of hillslope area" : ""}.</p>`
-      : `<table class="pop-t"><caption class="sr-only">Relative rank of this 5 m cell</caption>` +
-        rows.map(([v, label]) => `<tr${v === view ? ' class="pop-on"' : ""}><th scope="row">${label}</th><td>${rankText(r[v])}</td></tr>`).join("") +
-        `</table>`;
-    h += `<p class="pop-n">Relative rank of this 5 m cell among hillslope area, not a probability.${same ? "" : ` Bold: the ranking drawn on the map.`}</p>`;
+    const val = r[key];
+    if (val === 0) h = `<p class="pop-big">Outside the study area</p>`;
+    else if (val === 1) h = `<p class="pop-big">Not ranked: too flat</p><p>Slope is below ${S.domain.hillslope_threshold_deg}°. Only steeper hillslopes are ranked.</p>`;
+    else {
+      const top = 102 - val, flagged = top <= k;
+      const where = top >= 90 ? "among the <strong>lowest-ranked</strong> hillslopes" : `in the <strong>top ${top}${NB}%</strong> of hillslope area`;
+      h = `<p class="pop-big"><span class="pop-sw ${flagged ? "on" : ""}" aria-hidden="true"></span>${flagged ? "Flagged" : "Not flagged"}</p>` +
+        `<p>This slope ranks ${where}` + (flagged ? "." : `, below your top ${k}${NB}% cut-off.`) + `</p>`;
+    }
   }
-  if (outsideAoa) h += `<p><strong>Caution:</strong> terrain here is unlike the training data (outside the area of applicability).</p>`;
-  if (nearSite) h += `<p>A mapped natural initiation site (NC Geological Survey, Helene) is at this spot.</p>`;
-  if (inBox) h += `<p>Inside example area ${inBox.id.slice(1)} (dashed square); before and after images are below the map.</p>`;
+  if (county && !notTested && near && rSite) {
+    const top = 102 - rSite.oof, ranked = rSite.oof >= 2;
+    h += `<p class="pop-ev"><strong>A landslide start was mapped here</strong> after Helene. ` +
+      (ranked ? `The held-out ranking put it in the top ${top}${NB}%: ${top <= k ? "caught" : "missed"} at your ${k}${NB}% setting.`
+        : `It lies on ground the held-out ranking did not rank.`) + `</p>`;
+  }
+  if (county && outsideAoa && !notTested) h += `<p class="pop-warn"><strong>Treat with care:</strong> terrain here is unlike the data the model learned from.</p>`;
+  if (county) h += `<p class="pop-n">${esc(county.properties.NAME)}${huc ? `, ${esc(huc.properties.name)} watershed` : ""}.<br>` +
+    `Ranking shown: ${esc(v.label)}. A relative ranking, not a probability.</p>`;
   popup?.remove();
-  popup = new maplibregl.Popup({ maxWidth: "300px", className: "ls-popup" }).setLngLat(lngLat).setHTML(h).addTo(map);
+  popup = new maplibregl.Popup({ maxWidth: "280px", className: "ls-popup" }).setLngLat(lngLat).setHTML(h).addTo(map);
 }
 
 async function initMap() {
@@ -335,6 +342,8 @@ async function initMap() {
   });
   map.on("load", () => { ready = true; applyMap(); applyLayers(); });
   map.on("click", (e) => describe(e.lngLat, e.point));
+  // keyboard: the cross appears while the map has focus; Enter reads the spot under it
+  map.getCanvasContainer().addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); describe(map.getCenter()); } });
   map.on("mousemove", () => { map.getCanvas().style.cursor = "pointer"; });
 }
 
@@ -350,7 +359,6 @@ function bind() {
   for (const [id, layer] of Object.entries(TOGGLES)) {
     document.getElementById(id).addEventListener("change", (e) => { layerOn[layer] = e.target.checked; applyLayers(); });
   }
-  document.getElementById("here").addEventListener("click", () => describe(map.getCenter()));
   document.getElementById("to-site").addEventListener("click", (e) => {
     const id = e.currentTarget.dataset.site;
     const radio = document.querySelector(`#site-pick input[value="${id}"]`);
