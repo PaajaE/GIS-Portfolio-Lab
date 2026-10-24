@@ -122,6 +122,14 @@ the slider only rewrites `color-relief-color`, so there is no browser computatio
 It deliberately differs from PI's teal, which means "robustness"; the area not tested by the trigger uses the
 D9 hatch. *Reason:* different constructs get different hues across the family. · LS
 
-**D22. A preliminary app says so in a banner above the h1** and lists what is still missing. Its data are not
-committed or published until the checks it depends on are done. · LS
+**D22. A preliminary app says so in a banner above the h1** and lists what is still missing. (Update 2026-10-24: the data are
+committed; the banner now states the app is a local experiment.) · LS
 
+
+## Added with the site landing page (2026-10-24)
+
+**D23. The site root is a directory of apps, not a redirect.** `site/index.html` has one card per app: title,
+one-sentence question, status wording, link. Static HTML with inline CSS (family tokens, no JS, no framework);
+the Pages workflow copies `site/` to the root and each `projects/*/web/` to `/<project>/`. A new app needs a
+card there. A "local experiment" status is stated on the card as well as in the app. *Reason:* two apps now
+exist and more will follow; a redirect to one app hides the others. · LS

@@ -488,6 +488,24 @@ so aspect and curvature are 0 there.
   raw speed.
 - No parallelism yet (not needed).
 
+## Story sites and hand-check sample (M7, simplified; owner 2026-10-24)
+Exposure was skipped by the owner. M7 produces display and review material only; none of it enters a model or a metric.
+Both samples are drawn by fixed rules (`src/landslide/m7.py`, seeded) and frozen in `validation/`.
+- **Story sites** (`validation/story_sites.json`): 2 km × 2 km squares on the UTM lattice (multiples of 2,000 m).
+  - S1 / S2: most mapped primary initiation sites in Buncombe / Yancey (square ≥ 50 % in the domain).
+  - S3, "ranked high, no mapped initiation": no mapped site, ≥ 80 % in the domain, mean 72 h rainfall ≥ 350 mm,
+    largest share of top-10 % (final model) hillslope cells.
+  - S4, "missed": most mapped sites whose held-out rank is outside the top 30 %.
+  - Each site shows before/after orthoimagery, the top-10 % cells and the mapped sites (with held-out ranks). The sites
+    are chosen to illustrate cases, so they say nothing about typical performance.
+- **Hand-check sample** (`validation/hand_check_sample.csv`): 40 seeded locations: 15 held-out hits (mapped, top 10 %),
+  15 top-10 % cells without a mapped initiation, 10 misses (mapped, outside the top 30 %). Columns for an AI-assisted
+  and a human assessment are empty and every row is "not reviewed". Any AI-assisted pass must be labelled "AI-assisted,
+  pending human review"; until a person reviews it, the sample supports no claim.
+- **Why the second group matters:** a flagged slope with no mapped failure is not a false positive (mapped absence
+  is not true absence; Helene did not test every slope). The review is meant to tell mapping gaps from real
+  non-failures, using the Helene 2025 imagery.
+
 ## Limitations and omitted processes
 Known before analysis:
 - **One trigger event:** transfer to other storms is tested only in Watauga, with small n. [verified as a data limit]

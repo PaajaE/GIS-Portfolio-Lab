@@ -168,6 +168,26 @@ Size of natural Helene source polygons (n = 4,752): median 84 m², IQR 45–152 
 | Licence | NC OneMap terms: free and unrestricted use, citation requested (item `licenseInfo` → terms page) | NC OneMap terms; use constraints "None"; acknowledge NC Collaboratory at UNC Chapel Hill | public domain (U.S. Government) |
 | Use | curated-site before/after swipe only | same | fallback for "post" |
 
+**Sites used in the app** (frozen by the rule in METHOD §"M7"; 2 km × 2 km, 1 m `exportImage`, 2,000 px JPEG per epoch,
+fetched 2026-10-24 by `python -m landslide.m7`; files in `web/data/sites/`, listed in `sites.json`):
+
+| Site | Selection | Centre (lon, lat) |
+|---|---|---|
+| S1 | most mapped initiation sites, Buncombe (88) | −82.335, 35.569 |
+| S2 | most mapped initiation sites, Yancey (46) | −82.273, 35.822 |
+| S3 | ranked high, no mapped initiation (Buncombe) | −82.202, 35.535 |
+| S4 | most mapped sites missed by the held-out ranking (Buncombe; 17 of 63) | −82.356, 35.515 |
+
+Credits shown with the images: before = NC OneMap Orthoimagery 2020–2023 (NC911, NCCGIA); after = NC OneMap
+Orthoimagery Helene 2025 (NC Collaboratory at UNC Chapel Hill); citation: NC OneMap (2019). North Carolina Department of
+Information Technology, Government Data Analytics Center, Center for Geographic Information and Analysis. Available at
+www.nconemap.gov.
+
+**Licence check (verified 2026-10-24).** NC OneMap terms (Hub page item `e60514c3b78542ef9902e3d7f7a671c1`, read via the
+ArcGIS REST item data): "free and unrestricted use policy"; written release agreements "are not required and will not be
+issued"; citation as above; no warranty. Four excerpts for display with citation and credits are consistent with the
+published terms. This is a reading of the published terms, not legal advice.
+
 The Helene "Priority 1" lidar (2025) is named in the post-event imagery description. It was not found in the TNM
 API on 2026-10-08 and again on 2026-10-09 (only NC_Phase5_2018_A18 and legacy point clouds over Yancey). The pre/post lidar
 swipe is therefore shelved until a public release exists.

@@ -1,9 +1,11 @@
 # Landslide Susceptibility — Buncombe + Yancey, NC
 
-> Status: **M6 done** (5 m logistic regression; robust locally, not transferable; geology confound under review);
-> local preliminary web prototype (`make web`, `make serve`). Results: [`validation/M4_BASELINE.md`](validation/M4_BASELINE.md),
-> [`validation/M5_ADVANCED.md`](validation/M5_ADVANCED.md),
-> [`validation/M6_UNCERTAINTY_TRANSFER.md`](validation/M6_UNCERTAINTY_TRANSFER.md). Plan: [`PLAN.md`](PLAN.md) · method draft:
+> Status (2026-10-24): **finished on the simple path — a local experiment.** The 5 m logistic-regression ranking is
+> robust inside Buncombe + Yancey, does **not** transfer beyond them, and is distorted across geology boundaries.
+> Exposure is skipped. Static web app in [`web/`](web/) (`make serve`). Results:
+> [`validation/M4_BASELINE.md`](validation/M4_BASELINE.md), [`validation/M5_ADVANCED.md`](validation/M5_ADVANCED.md),
+> [`validation/M6_UNCERTAINTY_TRANSFER.md`](validation/M6_UNCERTAINTY_TRANSFER.md),
+> [`validation/NOGEO_TEST.md`](validation/NOGEO_TEST.md). Plan: [`PLAN.md`](PLAN.md) · method:
 > [`METHOD.md`](METHOD.md) · sources: [`DATA_SOURCES.md`](DATA_SOURCES.md).
 
 **Question (spec §6):** can we build a spatially transferable landslide susceptibility model and show where its
@@ -17,8 +19,33 @@ predictions are reliable?
 
 Open items, analytical next steps and the cloud/local split: [`FUTURE_WORK.md`](FUTURE_WORK.md).
 
-The output will be a **relative susceptibility ranking**, not hazard, risk or a probability of a future
-landslide.
+The output is a **relative susceptibility ranking** of hillslopes for the initiation of shallow landslides, not hazard,
+risk or a probability of a future landslide.
+
+## Result and limits (what the evidence supports)
+- **Inside the area:** in watersheds the model never saw (leave-one-HUC-12-out, inside the rainfall that Helene
+  actually delivered), flagging the top 10 % of hillslope area captured 59 % of mapped Helene initiation sites
+  (95 % interval 48–69 %). The 5 m model beats slope alone (AUC +0.06; M4). Gradient boosting was not detectably better (M5).
+- **Beyond the area:** it does not transfer. Leave-one-county-out AUC 0.68 is below slope alone, and the Watauga
+  1940 → 2024 check gives 0.50 (indicative only; different mapping method). The geology terms encode the rainfall
+  gradient; removing them failed the pre-registered rule (`validation/NOGEO_TEST.md`), so the model is kept as
+  a **local experiment** and its top 10 % over-represents one rock-type group.
+- **Labels are mapped initiation, not true absence.** One storm (Helene, 2024-09-27), pre-event 2017 lidar, shallow
+  initiation only (no run-out, deep-seated or road-related failures). A flagged slope without a mapped failure is
+  not a false positive.
+- **Not done:** exposure (skipped by the owner), human review of the hand-check sample
+  (`validation/hand_check_sample.csv`: 40 frozen locations, no reviewer yet), external reference product, and a
+  transferable trigger-based model. See [`FUTURE_WORK.md`](FUTURE_WORK.md).
+- **Imagery** in the app (four 2 km × 2 km sites at 1 m, before/after Helene) is display only and never a model
+  input; credits and the licence check are in `DATA_SOURCES.md`.
+
+## Running the app
+```
+make serve          # http://localhost:8138 (static; HTTP Range for PMTiles)
+```
+`web/data/` (PMTiles, GeoJSON, `summary.json`, site images; about 36 MB) is committed. Regenerating it needs `data/`
+(`make data-restore`, then `make web`, then `python -m landslide.m7` for the site images). The public site is
+assembled by `.github/workflows/pages.yml` at `/landslide-susceptibility/`.
 
 ## Commands (run in this directory)
 ```

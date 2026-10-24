@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - "projects/*/web/**"
+      - "site/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -28,18 +29,14 @@ jobs:
       - uses: actions/configure-pages@v6
       - name: Assemble site
         run: |
-          mkdir -p _site/parcel-intelligence
-          cp -R projects/parcel-intelligence/web/. _site/parcel-intelligence/
-          # Root: send visitors to the first (currently only) app.
-          cat > _site/index.html <<'EOF'
-          <!doctype html>
-          <html lang="en"><head><meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <title>GIS Portfolio Lab</title>
-          <meta http-equiv="refresh" content="0; url=parcel-intelligence/">
-          <link rel="canonical" href="parcel-intelligence/">
-          </head><body><p><a href="parcel-intelligence/">Parcel Intelligence — Amherst, MA</a></p></body></html>
-          EOF
+          mkdir -p _site
+          # Root: directory of apps (site/index.html); add a card there for each new app.
+          cp -R site/. _site/
+          for app in projects/*/web; do
+            name=$(basename "$(dirname "$app")")
+            mkdir -p "_site/$name"
+            cp -R "$app"/. "_site/$name/"
+          done
           du -sh _site
       - uses: actions/upload-pages-artifact@v5
         with:
@@ -50,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}parcel-intelligence/
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5

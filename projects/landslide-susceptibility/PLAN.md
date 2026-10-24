@@ -651,8 +651,11 @@ order.
 |  | **M6 status 2026-10-10** | **done:** locally robust (sensitivity Δ ≤ 0.012; beats slope in every local variant); **not transferable** (leave-one-county-out 0.68 < slope; 10 km decay −0.18; Watauga transfer AUC 0.50); cause: geology terms encode the rainfall gradient (Watauga without them 0.70). Ensemble: 58 % of top-10 % cells stable; AOA: 4.5 % outside. Trigger intensity: 6 h max explains location (T1 pass) but not ranking (T2 fail) → no benefit. Report: `validation/M6_UNCERTAINTY_TRANSFER.md`. Local web prototype built (preliminary, data not committed) |
 |  | **No-geology test 2026-10-10** | pre-registered; **not adopted** (AOI non-inferiority and leave-one-county-out intervals fail; Watauga +0.18 but not independent). Current model = local experiment; its top 10 % over-represents geology group 3 and excludes group 2. Report: `validation/NOGEO_TEST.md` |
 | M7 | Exposure, hand checks, summary | exposure per HUC-12 with wording; frozen hand-check and story-site samples; figures and sheet; `summary.json` |
+|  | **M7 status 2026-10-24** | **done on the simple path (owner):** exposure skipped; four story sites with NC OneMap before/after imagery and a frozen 40-location hand-check sample (no reviewer yet); `summary.json`. Rules: METHOD §"Story sites and hand-check sample" |
 | M8 | Web app + Pages | story, slider and swipe built on real outputs; verified in a browser at 320 / 400 / 768 / 1280 px with a keyboard-only pass; workflow builds both apps (root change only after approval) |
+|  | **M8 status 2026-10-24** | **built, checks done:** app at `/landslide-susceptibility/`; a site root `site/index.html` (directory of apps, D23) and a workflow that publishes every `projects/*/web/`. Browser checks at 320 / 400 / 768 / 1280 px, keyboard-only pass, automated axe-core pass and payload measured 2026-10-24 (see FUTURE_WORK / PR). **Publishing = merge to `main`, done by the owner** |
 | M9 | Docs + handoff | README / METHOD / DATA_SOURCES complete; `/quality-gate` triggered by you |
+|  | **M9 status 2026-10-24** | README, METHOD, DATA_SOURCES updated; PR open for the owner; `/quality-gate` still to be triggered by the owner |
 
 ### Budget (estimates, to be measured)
 - **Network:** ~20 GB in total.

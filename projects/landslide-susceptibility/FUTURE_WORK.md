@@ -2,27 +2,34 @@
 
 Status 2026-10-24: finished on the **simple path** chosen by the owner. The 5 m logistic regression is a **local
 experiment** for Buncombe + Yancey: robust inside the AOI, not transferable, and distorted across geology
-boundaries. Exposure is skipped. The app is public-ready once the items in "Open for completion" are done. The
+boundaries. Exposure is skipped. The app is public-ready once the owner has merged the PR and run the quality gate ("Still open"). The
 public summary of this list is the "What could come next" section of `web/index.html`.
 
-## Open for completion (can be done in a cloud session; no `data/` needed)
-1. **Site root landing page** (owner decision 2026-10-24: a directory of apps; more apps will follow).
-   - Add `site/index.html` with one card per app: title, one-sentence question, status ("local experiment"
-     for this app), link.
-   - Change `.github/workflows/pages.yml` to copy `site/` to `_site/` and both `projects/*/web/` folders.
-   - Record the landing-page decision in `docs/product/DESIGN_DECISIONS.md`.
-2. **Web data in git:** `web/data/` is committed as of 2026-10-24 (the published artifacts).
-   - Re-generating it needs `data/` (`make data-restore`, then `make web`, then `python -m landslide.m7` for the
-     site images), so that is a local or full-bundle task.
-3. **Docs (M9):**
-   - README (status, how to run, limits)
-   - DATA_SOURCES (NC OneMap terms verified 2026-10-24, quoted in "Licence check" below; the site images and
-     their credits)
-   - METHOD (M7 rule and the hand-check sample)
-   - PLAN status rows for M7–M9
-4. **Browser checks still missing:** 320 / 400 / 768 px widths, a full keyboard-only pass, an automated
-   accessibility check (if available), and the measured payload per first view.
-5. **PR** `feat/landslide-susceptibility` → `main`. **Merging deploys to Pages (= publishing); the owner merges.**
+## Completed 2026-10-24 (cloud session, no `data/`)
+1. **Site root landing page:** `site/index.html` (one card per app); `pages.yml` copies `site/` and every
+   `projects/*/web/`; decision D23 in `docs/product/DESIGN_DECISIONS.md`.
+2. **Web data in git:** `web/data/` is committed (the published artifacts). Re-generating it needs `data/`
+   (`make data-restore`, then `make web`, then `python -m landslide.m7`), so that is a local or full-bundle task.
+3. **Docs (M9):** README, DATA_SOURCES (licence check, site images and credits), METHOD (M7 rule, hand-check sample),
+   PLAN rows M7–M9.
+4. **Browser checks** (Chromium via Playwright on the assembled site, served with HTTP Range):
+   - 320 / 400 / 768 / 1280 px: no horizontal overflow, no console errors, on the landing page and the app.
+   - axe-core 4.10.2 (WCAG 2 A/AA, 2.1 AA, best practice) at 320 and 1280 px: after two fixes (status banner is now a
+     labelled `aside`, "How the ranking was made" section is labelled) no violations. Automated checks do not cover
+     everything (e.g. colour-only meaning, reading order for screen readers).
+   - Keyboard-only pass on the app: 18 stops in a logical order, visible 3 px focus on every stop, no trap; the
+     slider and the before/after reveal respond to arrow keys; the slider's `aria-valuetext` carries the result
+     sentence. Not tested: map panning/zoom by keyboard beyond focus reaching the canvas, and a real screen reader.
+   - First-view payload (all responses until the network was idle, nothing scrolled): about 3.5 MB at every width
+     (largest: site S1 before/after images 1.0 MB each; `counties`, `huc12`, `initiations` GeoJSON about 0.25–0.30 MB
+     each; PMTiles are range-read).
+   - Not checked: real phone hardware (touch gestures on the before/after reveal), other browsers than Chromium.
+   - Noticed, not changed: the app's "Sources" section names `METHOD.md` as plain text, with no link to the
+     repository files.
+5. **PR** `feat/landslide-susceptibility` → `main` opened for the owner. **Merging deploys to Pages (= publishing);
+   the owner merges.**
+
+## Still open
 6. `/quality-gate projects/landslide-susceptibility`, triggered by the owner.
 
 ## Licence check (verified 2026-10-24)

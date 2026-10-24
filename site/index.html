@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIS Portfolio Lab</title>
+<meta name="description" content="Analytical GIS products built from open data. Each app serves precomputed results and states what its evidence can and cannot support.">
+<style>
+:root {
+  --paper: #f7f5f0;
+  --surface: #ffffff;
+  --ink: #1f2328;
+  --ink-2: #4a5059;
+  --rule: #d9d4c9;
+  --focus: #0b57d0;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --radius: 6px;
+  --gutter: clamp(16px, 3vw, 32px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.55 var(--font); }
+a { color: var(--focus); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+main, header, footer { max-width: 1180px; margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+header { padding-top: 28px; }
+.eyebrow { margin: 0 0 6px; font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-2); }
+h1 { font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.3rem); line-height: 1.2; margin: 0 0 12px; max-width: 30ch; }
+.lede { max-width: 72ch; margin: 0 0 24px; }
+.apps { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 16px; height: 100%; display: flex; flex-direction: column; gap: 8px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.card h2 { font-size: 1.15rem; line-height: 1.3; margin: 0; }
+.card p { margin: 0; }
+.status { font-size: 0.85rem; color: var(--ink-2); }
+.status b { color: var(--ink); }
+.open { margin-top: auto; padding-top: 8px; font-weight: 600; display: inline-block; min-height: 44px; line-height: 44px; }
+footer { padding-top: 24px; padding-bottom: 32px; color: var(--ink-2); font-size: 0.92rem; max-width: 72ch; margin-left: auto; margin-right: auto; }
+</style>
+</head>
+<body>
+<header>
+  <p class="eyebrow">Portfolio</p>
+  <h1>GIS Portfolio Lab</h1>
+  <p class="lede">
+    Analytical GIS products built from open data. The analysis runs locally; each app below serves the precomputed
+    result and says what the evidence can and cannot support. More apps will be added here.
+  </p>
+</header>
+
+<main>
+  <ul class="apps">
+    <li>
+      <article class="card">
+        <h2>Parcel Intelligence — Amherst, MA</h2>
+        <p>How much of each parcel lies outside mapped constraints, and how much of that depends on the assumptions?</p>
+        <p class="status"><b>Status:</b> potential feasibility under stated screening assumptions, not a development entitlement.</p>
+        <a class="open" href="parcel-intelligence/">Open Parcel Intelligence <span class="sr-only">(Amherst, MA)</span></a>
+      </article>
+    </li>
+    <li>
+      <article class="card">
+        <h2>Landslide Susceptibility — Buncombe &amp; Yancey, NC</h2>
+        <p>Which hillslopes are most susceptible to rainfall-triggered landslide initiation, and how well did that ranking match Hurricane Helene?</p>
+        <p class="status"><b>Status:</b> local experiment. A relative ranking that holds inside these two counties; it does not transfer beyond them and is not a hazard or risk map.</p>
+        <a class="open" href="landslide-susceptibility/">Open Landslide Susceptibility <span class="sr-only">(Buncombe and Yancey, NC)</span></a>
+      </article>
+    </li>
+  </ul>
+</main>
+
+<footer>
+  <p>Built from open public data; sources, methods and limits are stated inside each app.</p>
+</footer>
+</body>
+</html>
