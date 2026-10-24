@@ -31,7 +31,14 @@ but does not transfer beyond them, and it is distorted across rock-type boundari
 
 <main id="workbench" class="workbench">
   <div class="map-wrap">
+    <div class="goto" role="group" aria-label="Move the map">
+      <span class="goto-l">Go to</span>
+      <span class="goto-b" id="goto"></span>
+      <button type="button" id="here">What is at the map centre?</button>
+    </div>
     <div id="map" role="region" aria-label="Map of relative landslide-initiation susceptibility. The panel describes what the map shows."></div>
+    <p class="muted" id="map-hint">Click or tap the map for the rank of that spot, its county and watershed.
+      <a id="to-site" href="#sites-h" hidden></a></p>
   </div>
 
   <aside class="panel" id="controls" aria-label="Ranking controls and results">
@@ -68,7 +75,7 @@ but does not transfer beyond them, and it is distorted across rock-type boundari
       <h2>Legend</h2>
       <div class="ramp" aria-hidden="true"></div>
       <p class="ramp-labels"><span>top 1&nbsp;%</span><span id="ramp-k">top 10&nbsp;%</span></p>
-      <p class="muted">Flagged hillslope cells, darker = higher in the ranking. Unflagged terrain shows the hillshade only.</p>
+      <p class="muted">Flagged hillslope cells, darker = higher in the ranking. Unflagged terrain shows the hillshade only. Dashed squares mark the four 2&nbsp;km sites compared below.</p>
       <label class="toggle"><input type="checkbox" id="t-sites" checked> <span class="sw sw-site" aria-hidden="true"></span>
         Mapped natural initiation sites, Helene (NCGS)</label>
       <label class="toggle"><input type="checkbox" id="t-nt" checked> <span class="sw sw-hatch" aria-hidden="true"></span>
@@ -165,7 +172,7 @@ but does not transfer beyond them, and it is distorted across rock-type boundari
     (NC911, NCCGIA) and Helene 2025 (acquired by the NC Collaboratory at UNC Chapel Hill); citation: NC OneMap (2019).
     North Carolina Department of Information Technology, Government Data Analytics Center, Center for Geographic
     Information and Analysis. Available at www.nconemap.gov. Analysis and method:
-    <code>projects/landslide-susceptibility/METHOD.md</code>.</p>
+    <a href="https://github.com/PaajaE/GIS-Portfolio-Lab/blob/main/projects/landslide-susceptibility/METHOD.md">METHOD.md</a> (data and licences: <a href="https://github.com/PaajaE/GIS-Portfolio-Lab/blob/main/projects/landslide-susceptibility/DATA_SOURCES.md">DATA_SOURCES.md</a>).</p>
 </section>
 </body>
 </html>

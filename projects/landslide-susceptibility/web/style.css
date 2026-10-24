@@ -43,7 +43,7 @@ h1 { font-size: clamp(1.45rem, 1.1rem + 1.7vw, 2.2rem); line-height: 1.2; margin
 .workbench { max-width: 1180px; margin: 0 auto; padding: 8px var(--gutter) 24px; display: grid; gap: 20px;
   grid-template-columns: minmax(0, 1fr) 360px; align-items: start; }
 .map-wrap { position: sticky; top: 12px; }
-#map { height: min(78vh, 760px); border: 1px solid var(--rule); border-radius: var(--radius); background: #ece8df; }
+#map { height: min(70vh, 700px); border: 1px solid var(--rule); border-radius: var(--radius); background: #ece8df; }
 .panel { display: grid; gap: 14px; min-width: 0; }
 .panel h2 { font-size: 1rem; margin: 0 0 6px; }
 
@@ -115,4 +115,31 @@ fieldset.seg.seg-sites { grid-template-columns: repeat(2, 1fr); max-width: 760px
 }
 @media (min-width: 441px) and (max-width: 900px) {
   fieldset.seg { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---------- map toolbar and click popup ---------- */
+.goto { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-bottom: 8px; }
+.goto-l { font-weight: 600; font-size: 0.92rem; }
+.goto-b { display: contents; }
+.goto button { font: inherit; font-size: 0.88rem; min-height: 44px; padding: 6px 12px; background: var(--surface); color: var(--ink);
+  border: 1px solid var(--rule); border-radius: var(--radius); cursor: pointer; }
+.goto button:hover { border-color: var(--ink); }
+#map-hint { margin: 8px 0 0; }
+.ls-popup .maplibregl-popup-content { font: 0.88rem/1.4 var(--font); color: var(--ink); padding: 12px 14px; }
+.ls-popup p { margin: 0 0 6px; }
+.pop-h { font-weight: 600; }
+.pop-sub { font-weight: 400; color: var(--ink-2); }
+.pop-t { border-collapse: collapse; width: 100%; margin: 0 0 6px; }
+.pop-t th { text-align: left; font-weight: 400; padding: 3px 8px 3px 0; color: var(--ink-2); white-space: nowrap; }
+.pop-t td { padding: 3px 0; }
+.pop-t .pop-on th, .pop-t .pop-on td { font-weight: 700; color: var(--ink); }
+.pop-n { font-size: 0.8rem; color: var(--ink-2); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ls-popup .maplibregl-popup-content { max-height: 45vh; overflow-y: auto; }
+@media (max-width: 700px) {
+  .goto { display: grid; grid-template-columns: 1fr 1fr; }
+  .goto-l { grid-column: 1 / -1; }
+  .goto-b { display: contents; }
+  .goto button { padding: 6px 8px; font-size: 0.84rem; line-height: 1.2; }
+  #here { grid-column: 1 / -1; }
 }
