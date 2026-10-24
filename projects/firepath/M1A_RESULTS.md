@@ -10,7 +10,7 @@
 
 | Decision | Outcome |
 |---|---|
-| **D1 propagation scheme (status after M1a-3)** | **Still undecided: no scheme meets the pre-registered V&V criteria at 30 m (see "M1a-3").** The level set is the only convergent scheme and passes all exact cases at 15 m; the hybrid has the best 30 m record. The decision goes back to the owner. *Earlier status (M1a bake-off):* Not decided: no candidate passed all pre-declared criteria.** Under the rule fixed in CRITICAL_REVIEW, the decision returns to the owner and M1b does not start. The WENO5 level set came closest (it passes criteria 1 and 3, misses criterion 2 at LB 8 by 0.5 pp, and fails the barrier fixtures). Radius-8 label-setting fails criteria 1–3 and passes the barriers. |
+| **D1 propagation scheme (owner decision 2026-10-24)** | **Decided by the owner: hybrid (HY) at 30 m**, with the pre-registered code-verification criterion relaxed **for the LB 8 cases only**. The LB 8 / 45° tail (p95 16.1 %) is a documented, accepted limitation, not a verification pass; all other criteria stay as registered. Before M1b: a short pre-registered confirmation run of HY at 30 m (see "D1 decision" at the end). *Status after M1a-3:* Still undecided: no scheme meets the pre-registered V&V criteria at 30 m (see "M1a-3").** The level set is the only convergent scheme and passes all exact cases at 15 m; the hybrid has the best 30 m record. The decision goes back to the owner. *Earlier status (M1a bake-off):* Not decided: no candidate passed all pre-declared criteria.** Under the rule fixed in CRITICAL_REVIEW, the decision returns to the owner and M1b does not start. The WENO5 level set came closest (it passes criteria 1 and 3, misses criterion 2 at LB 8 by 0.5 pp, and fails the barrier fixtures). Radius-8 label-setting fails criteria 1–3 and passes the barriers. |
 | **D2 LB relation** | **Decided:** FARSITE form (Finney 1998: Anderson 1983 − 0.397, *effective midflame* wind in **m/s**, cap 8) as the default; BehavePlus 1 + 0.25 U_E (mi/h) as a sensitivity. Units are verified algebraically. The source wording was read in excerpts of the primary document, not in the full text |
 | **D3 wind multiplier** | **Adopted provisionally:** `a_u` on the 20 ft wind speed (systematic correction), plus a separate scenario factor λ for input uncertainty. The model cannot distinguish them (tested), so they are kept apart by design |
 | M0 on the Mac | **Not run.** This session cannot reach the Mac (`M0_RESULTS.md`). M1b stays NO-GO |
@@ -323,6 +323,21 @@ none meets the criteria as registered:
 3. Changing the physics to suit the numerics (e.g. capping LB lower) is **not** advised.
 
 Both 1 and 2 would need a short pre-registered confirmation run before M1b.
+
+## D1 decision (owner, 2026-10-24)
+
+The owner chose option 2: **hybrid at 30 m**, relaxing the pre-registered criterion for the LB 8 cases only.
+What this means, and what it does not:
+- It is a **decision**, not a verification result. M1a-3 stands as written: HY failed 1/17 exact cases
+  (LB 8 at 45°: median 2.07 %, p95 16.1 %). That number is reported wherever HY results are shown.
+- Scope of the relaxation: cases where LB reaches the cap of 8 (effective midflame wind ≥ ~20 mi/h).
+  Every other criterion (the 16 other exact cases, barriers, never-early) keeps its registered limit.
+- Consequence for later stages: on validation fires, hours with LB = 8 are flagged, and the
+  validation report shows errors split by LB < 8 vs LB = 8, so the known numerical tail is not
+  mistaken for model skill or model failure.
+- Still required before M1b: a short confirmation run of HY at 30 m with criteria fixed beforehand
+  (the heterogeneous mosaic against the G8 upper bound and the lower bound, and the barrier fixtures on
+  the real cell size), and the HY cost per cell for the M1b/M2 budget.
 
 ## M0 on the build Mac
 
