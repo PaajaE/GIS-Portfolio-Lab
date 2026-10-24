@@ -13,9 +13,8 @@
 <body>
 <a class="skip" href="#controls">Skip to the ranking controls</a>
 
-<p class="prelim" role="note"><strong>Preliminary prototype.</strong> Uncertainty and area-of-applicability layers are
-computed but not shown yet. The ranking is a local experiment: it does not transfer beyond the two counties, and
-it is distorted across rock-type boundaries (see the limitations below).</p>
+<p class="prelim" role="note"><strong>A local experiment.</strong> The ranking holds up inside Buncombe and Yancey counties
+but does not transfer beyond them, and it is distorted across rock-type boundaries (see the limitations below).</p>
 
 <header class="intro">
   <p class="eyebrow">Landslide Susceptibility · Buncombe &amp; Yancey counties, North Carolina</p>
@@ -74,11 +73,37 @@ it is distorted across rock-type boundaries (see the limitations below).</p>
         Mapped natural initiation sites, Helene (NCGS)</label>
       <label class="toggle"><input type="checkbox" id="t-nt" checked> <span class="sw sw-hatch" aria-hidden="true"></span>
         Not tested by Helene's rainfall (&lt; <span data-v="domain.trigger_mm">…</span>&nbsp;mm in 72&nbsp;h): not ranked</label>
+      <label class="toggle"><input type="checkbox" id="t-aoa"> <span class="sw sw-aoa" aria-hidden="true"></span>
+        Outside the model's area of applicability (terrain unlike the training data; <span id="aoa-share">…</span> of hillslopes)</label>
       <label class="toggle"><input type="checkbox" id="t-huc"> <span class="sw sw-huc" aria-hidden="true"></span>
         Watersheds (HUC-12), the validation blocks</label>
     </div>
   </aside>
 </main>
+
+<section class="sites" aria-labelledby="sites-h">
+  <h2 id="sites-h">Before and after Helene at four sites</h2>
+  <p class="muted">Sites chosen by a fixed rule (most mapped initiations in each county, a highly ranked area without
+    mapped initiations, and the area with most missed initiations). Each is 2&nbsp;km × 2&nbsp;km. The imagery is for
+    viewing only; it was never a model input.</p>
+  <fieldset class="seg seg-sites" id="site-pick"><legend>Site</legend></fieldset>
+  <figure class="compare" id="compare">
+    <div class="compare-frame" id="compare-frame">
+      <img id="img-before" alt="" width="2000" height="2000" decoding="async" loading="lazy">
+      <img id="img-after" alt="" width="2000" height="2000" decoding="async" loading="lazy">
+      <img id="img-top10" alt="" width="400" height="400" hidden>
+      <svg id="site-points" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true"></svg>
+      <div class="compare-line" id="compare-line" aria-hidden="true"></div>
+    </div>
+    <label class="compare-ctl" for="reveal">Show the after-Helene image to the right of the line:
+      <input id="reveal" type="range" min="0" max="100" step="1" value="50"></label>
+    <div class="compare-toggles">
+      <label class="toggle"><input type="checkbox" id="t-site-top10"> <span class="sw sw-top10" aria-hidden="true"></span> Top 10&nbsp;% of the ranking (final model)</label>
+      <label class="toggle"><input type="checkbox" id="t-site-pts" checked> <span class="sw sw-site" aria-hidden="true"></span> Mapped initiation sites (ring = outside the held-out top 30&nbsp;%)</label>
+    </div>
+    <figcaption id="site-cap">…</figcaption>
+  </figure>
+</section>
 
 <section class="case">
   <h2>How the ranking was made and checked</h2>
@@ -95,6 +120,9 @@ it is distorted across rock-type boundaries (see the limitations below).</p>
       model AUC <span id="auc-lr">…</span>, slope alone <span id="auc-slope">…</span>. Only
       <span data-v="validation.replicate_watersheds">…</span> watersheds have enough mapped sites to be scored on their own,
       so intervals are wide.</li>
+    <li><strong>Stability and applicability:</strong> refitting the model on resampled watersheds keeps
+      <span id="stable-share">…</span> of the top-10&nbsp;% cells in the top 10&nbsp;%; <span id="aoa-share2">…</span>
+      of hillslopes have terrain unlike the training data (hatched when switched on).</li>
     <li><strong>Slope units:</strong> aggregated to small hillslope units, the model is not detectably better than slope alone
       on the primary metric; this prototype therefore shows the 5&nbsp;m ranking.</li>
   </ul>
@@ -121,10 +149,22 @@ it is distorted across rock-type boundaries (see the limitations below).</p>
     <li><strong>Fine detail at the finest zoom.</strong> The map shows the 5&nbsp;m ranking generalised to about 8&nbsp;m pixels.</li>
   </ul>
 
+  <h2>What could come next</h2>
+  <ul>
+    <li>A ranking that transfers: a test of how rainfall is represented (for example short-duration intensity, which
+      explained where Helene's failures happened better than the 72-hour total), fixed in advance like every other test here.</li>
+    <li>Exposure of buildings and roads in the flagged slopes, once a building-footprint source with clear terms is used.</li>
+    <li>A person's review of a frozen sample of hits, misses and flagged slopes without mapped failures.</li>
+    <li>Other storms and regions, which would need their own inventories.</li>
+  </ul>
+
   <h2>Sources</h2>
   <p class="muted">Landslide inventory: NC Geological Survey, Landslide Inventory of North Carolina (NC DEQ).
     Terrain: USGS 3D Elevation Program 1&nbsp;m lidar. Rainfall: NOAA MRMS. Land cover and canopy: MRLC NLCD 2021.
-    Geology: NCGS 1985. Soils: USDA NRCS SSURGO. Watersheds: USGS WBD. Analysis and method:
+    Geology: NCGS 1985. Soils: USDA NRCS SSURGO. Watersheds: USGS WBD. Site imagery: NC OneMap Orthoimagery 2020–2023
+    (NC911, NCCGIA) and Helene 2025 (acquired by the NC Collaboratory at UNC Chapel Hill); citation: NC OneMap (2019).
+    North Carolina Department of Information Technology, Government Data Analytics Center, Center for Geographic
+    Information and Analysis. Available at www.nconemap.gov. Analysis and method:
     <code>projects/landslide-susceptibility/METHOD.md</code>.</p>
 </section>
 </body>

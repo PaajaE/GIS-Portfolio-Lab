@@ -23,6 +23,19 @@ const VIEWS = {
 };
 const RAMP = ["#fdcc8a", "#fc8d59", "#e34a33", "#b30000"];
 let S, map, ready = false, view = "final", k = 10;
+// overlay toggles: desired state is kept here and applied once the style has loaded (toggles may be used earlier)
+const TOGGLES = { "t-sites": "sites", "t-nt": "nt", "t-huc": "huc", "t-aoa": "aoa" };
+const layerOn = { sites: true, nt: true, huc: false, aoa: false };
+let aoaLoaded = false;
+
+async function applyLayers() {
+  if (!ready) return;
+  for (const [layer, on] of Object.entries(layerOn)) map.setLayoutProperty(layer, "visibility", on ? "visible" : "none");
+  if (layerOn.aoa && !aoaLoaded) {
+    aoaLoaded = true;
+    map.getSource("aoa").setData(await (await fetch(dataUrl("outside_aoa.geojson"))).json());
+  }
+}
 
 function get(obj, path) { return path.split(".").reduce((o, p) => (o == null ? o : o[p]), obj); }
 
@@ -39,6 +52,8 @@ function fillText() {
   document.getElementById("gbm-vs-lr").textContent = d.ci95[0] > 0
     ? "detectably better and is shown as a comparison"
     : `not detectably better (difference ${d.value >= 0 ? "+" : ""}${d.value.toFixed(3)}, 95${NB}% interval ${d.ci95[0].toFixed(3)} to +${d.ci95[1].toFixed(3)}), so the simpler model is used`;
+  for (const id of ["aoa-share", "aoa-share2"]) document.getElementById(id).textContent = pct(S.m6.outside_aoa_share, 1);
+  document.getElementById("stable-share").textContent = pct(S.m6.top10_stable_share);
   const i = S.per_k.k_pct.indexOf(10);
   const m = S.per_k.oof_lr, s = S.per_k.slope;
   document.getElementById("headline").innerHTML =
@@ -135,6 +150,16 @@ function hatchImage() {
   return { width: n, height: n, data };
 }
 
+function crossHatchImage() {
+  const n = 8, data = new Uint8Array(n * n * 4);
+  for (let yy = 0; yy < n; yy++) for (let xx = 0; xx < n; xx++) {
+    if (xx === yy || xx === n - 1 - yy) {
+      const o = (yy * n + xx) * 4; data[o] = 61; data[o + 1] = 63; data[o + 2] = 68; data[o + 3] = 220;
+    }
+  }
+  return { width: n, height: n, data };
+}
+
 async function initMap() {
   const protocol = new pmtiles.Protocol();
   maplibregl.addProtocol("pmtiles", protocol.tile);
@@ -162,12 +187,15 @@ async function initMap() {
         nt: { type: "geojson", data: dataUrl("not_tested.geojson") },
         huc: { type: "geojson", data: dataUrl("huc12.geojson") },
         sites: { type: "geojson", data: dataUrl("initiations.geojson") },
+        aoa: { type: "geojson", data: { type: "FeatureCollection", features: [] } }, // loaded on first toggle
       },
       layers: [
         { id: "bg", type: "background", paint: { "background-color": "#f7f5f0" } },
         { id: "hs", type: "raster", source: "hs", paint: { "raster-opacity": 1 } },
         relief("rank-oof", "s_oof"), relief("rank-final", "s_final"), relief("rank-slope", "s_slope"),
         { id: "nt", type: "fill", source: "nt", paint: { "fill-pattern": "hatch", "fill-opacity": 0.8 } },
+        { id: "aoa", type: "fill", source: "aoa", layout: { visibility: "none" },
+          paint: { "fill-pattern": "xhatch", "fill-opacity": 0.9 } },
         { id: "huc", type: "line", source: "huc", layout: { visibility: "none" },
           paint: { "line-color": "#2b4a6b", "line-width": 1.4 } },
         { id: "counties", type: "line", source: "counties", paint: { "line-color": "#1f2328", "line-width": 1.6 } },
@@ -180,8 +208,11 @@ async function initMap() {
   map.on("error", (e) => console.error("map error:", e.error && e.error.message));
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
   map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-left");
-  map.on("styleimagemissing", (e) => { if (e.id === "hatch" && !map.hasImage("hatch")) map.addImage("hatch", hatchImage()); });
-  map.on("load", () => { ready = true; applyMap(); });
+  map.on("styleimagemissing", (e) => {
+    if (e.id === "hatch" && !map.hasImage("hatch")) map.addImage("hatch", hatchImage());
+    if (e.id === "xhatch" && !map.hasImage("xhatch")) map.addImage("xhatch", crossHatchImage());
+  });
+  map.on("load", () => { ready = true; applyMap(); applyLayers(); });
 }
 
 function bind() {
@@ -193,10 +224,59 @@ function bind() {
   slider.addEventListener("input", () => set(+slider.value));
   document.getElementById("k-dec").addEventListener("click", () => set(k - 1));
   document.getElementById("k-inc").addEventListener("click", () => set(k + 1));
-  const vis = (id, layer) => document.getElementById(id).addEventListener("change", (e) => {
-    if (map) map.setLayoutProperty(layer, "visibility", e.target.checked ? "visible" : "none");
+  for (const [id, layer] of Object.entries(TOGGLES)) {
+    document.getElementById(id).addEventListener("change", (e) => { layerOn[layer] = e.target.checked; applyLayers(); });
+  }
+}
+
+// ---------- before / after sites (static images; the range input clips the after image) ----------
+let SITES, site;
+
+function showSite(id) {
+  site = SITES.sites.find((x) => x.id === id);
+  const src = (f) => dataUrl(`sites/${f}`);
+  const before = document.getElementById("img-before"), after = document.getElementById("img-after");
+  before.src = src(`${id}_before.jpg`);
+  after.src = src(`${id}_after.jpg`);
+  before.alt = `${site.title}: imagery before Helene (2020–2023)`;
+  after.alt = `${site.title}: imagery after Helene (spring 2025)`;
+  document.getElementById("img-top10").src = src(`${id}_top10.png`);
+  const svg = document.getElementById("site-points");
+  svg.innerHTML = site.points.map((p) => {
+    const missed = p.held_out_rank === 0 || p.held_out_rank > 30;
+    return missed
+      ? `<circle cx="${p.fx}" cy="${p.fy}" r="0.007" fill="none" stroke="#fff" stroke-width="0.006"/><circle cx="${p.fx}" cy="${p.fy}" r="0.007" fill="none" stroke="#1f2328" stroke-width="0.003"/>`
+      : `<circle cx="${p.fx}" cy="${p.fy}" r="0.0055" fill="#1f2328" stroke="#fff" stroke-width="0.002"/>`;
+  }).join("");
+  const missed = site.points.filter((p) => p.held_out_rank === 0 || p.held_out_rank > 30).length;
+  document.getElementById("site-cap").textContent =
+    `${site.title} (${site.county}). ${site.points.length} mapped natural initiation sites, ${missed} of them outside the ` +
+    `held-out top 30 %; ${pct(site.top10_share_of_hillslope)} of its hillslopes are in the final top 10 %; mean 72-h ` +
+    `rainfall ${Math.round(site.rain_mean_mm)} mm. Before: ${site.before_credit}. After: ${site.after_credit}. ` +
+    `Area 2 km × 2 km, north up.`;
+}
+
+function setReveal(v) {
+  document.getElementById("img-after").style.clipPath = `inset(0 0 0 ${v}%)`;
+  document.getElementById("compare-line").style.left = `calc(${v}% - 1px)`;
+  document.getElementById("reveal").setAttribute("aria-valuetext", `Line at ${v} percent from the left; after-Helene image to the right`);
+}
+
+async function initSites() {
+  SITES = await (await fetch(dataUrl("sites/sites.json"))).json();
+  const pick = document.getElementById("site-pick");
+  SITES.sites.forEach((x, j) => {
+    const l = document.createElement("label");
+    l.innerHTML = `<input type="radio" name="site" value="${x.id}" ${j ? "" : "checked"}> <span>${x.title}</span>`;
+    l.querySelector("input").addEventListener("change", () => showSite(x.id));
+    pick.appendChild(l);
   });
-  vis("t-sites", "sites"); vis("t-nt", "nt"); vis("t-huc", "huc");
+  const r = document.getElementById("reveal");
+  r.addEventListener("input", () => setReveal(r.value));
+  document.getElementById("t-site-top10").addEventListener("change", (e) => { document.getElementById("img-top10").hidden = !e.target.checked; });
+  document.getElementById("t-site-pts").addEventListener("change", (e) => { document.getElementById("site-points").style.display = e.target.checked ? "" : "none"; });
+  setReveal(r.value);
+  showSite(SITES.sites[0].id);
 }
 
 async function main() {
@@ -205,6 +285,7 @@ async function main() {
   curveTable();
   bind();
   updateReadout();
+  initSites();
   await initMap();
 }
 main();

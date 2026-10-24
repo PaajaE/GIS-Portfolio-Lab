@@ -1,0 +1,1079 @@
+{
+ "rule": "M7 (simplified, owner 2026-10-24): frozen story sites with before/after imagery, and a frozen hand-check sample.\n\nStory sites: 2 km x 2 km squares on the UTM lattice (multiples of 2,000 m), chosen by a fixed rule:\n  S1 / S2 - most mapped primary initiation sites, in Buncombe and in Yancey (square >= 50 % in the domain);\n  S3 - \"high ranking, no mapped initiation\": no mapped site, >= 80 % in the domain, mean 72 h rainfall >= 350 mm,\n       largest share of top-10 % (final model) hillslope cells;\n  S4 - \"missed\": most mapped sites whose held-out rank is outside the top 30 %.",
+ "citation": "NC OneMap (2019). North Carolina Department of Information Technology, Government Data Analytics Center, Center for Geographic Information and Analysis. Available at www.nconemap.gov.",
+ "image_px": 2000,
+ "sites": [
+  {
+   "id": "S1",
+   "title": "Most mapped initiation sites, Buncombe",
+   "x0": 378000.0,
+   "y0": 3936000.0,
+   "size_m": 2000,
+   "county": "Buncombe County",
+   "mapped_sites": 88,
+   "missed_sites": 11,
+   "top10_share_of_hillslope": 0.14105041114813466,
+   "rain_mean_mm": 521.0819884511948,
+   "domain_share": 1.0,
+   "selected_by": "sites",
+   "before_credit": "NC OneMap Orthoimagery 2020\u20132023 (NC911, NCCGIA)",
+   "after_credit": "NC OneMap Orthoimagery Helene 2025 (NC Collaboratory at UNC Chapel Hill)",
+   "points": [
+    {
+     "fx": 0.0329,
+     "fy": 0.0185,
+     "held_out_rank": 3
+    },
+    {
+     "fx": 0.0288,
+     "fy": 0.0051,
+     "held_out_rank": 5
+    },
+    {
+     "fx": 0.0626,
+     "fy": 0.0568,
+     "held_out_rank": 5
+    },
+    {
+     "fx": 0.0253,
+     "fy": 0.3066,
+     "held_out_rank": 11
+    },
+    {
+     "fx": 0.0665,
+     "fy": 0.3395,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.0882,
+     "fy": 0.312,
+     "held_out_rank": 17
+    },
+    {
+     "fx": 0.103,
+     "fy": 0.2947,
+     "held_out_rank": 26
+    },
+    {
+     "fx": 0.3096,
+     "fy": 0.3024,
+     "held_out_rank": 23
+    },
+    {
+     "fx": 0.2783,
+     "fy": 0.3611,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.2472,
+     "fy": 0.4688,
+     "held_out_rank": 5
+    },
+    {
+     "fx": 0.2049,
+     "fy": 0.4759,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.1705,
+     "fy": 0.3341,
+     "held_out_rank": 11
+    },
+    {
+     "fx": 0.1868,
+     "fy": 0.4707,
+     "held_out_rank": 5
+    },
+    {
+     "fx": 0.1373,
+     "fy": 0.4521,
+     "held_out_rank": 3
+    },
+    {
+     "fx": 0.1877,
+     "fy": 0.4233,
+     "held_out_rank": 11
+    },
+    {
+     "fx": 0.1391,
+     "fy": 0.4012,
+     "held_out_rank": 17
+    },
+    {
+     "fx": 0.1183,
+     "fy": 0.3898,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.1186,
+     "fy": 0.3736,
+     "held_out_rank": 4
+    },
+    {
+     "fx": 0.1114,
+     "fy": 0.3565,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.2568,
+     "fy": 0.1888,
+     "held_out_rank": 12
+    },
+    {
+     "fx": 0.2472,
+     "fy": 0.0957,
+     "held_out_rank": 3
+    },
+    {
+     "fx": 0.2443,
+     "fy": 0.0371,
+     "held_out_rank": 25
+    },
+    {
+     "fx": 0.3101,
+     "fy": 0.1672,
+     "held_out_rank": 41
+    },
+    {
+     "fx": 0.2959,
+     "fy": 0.1656,
+     "held_out_rank": 7
+    },
+    {
+     "fx": 0.3041,
+     "fy": 0.1545,
+     "held_out_rank": 19
+    },
+    {
+     "fx": 0.2505,
+     "fy": 0.2758,
+     "held_out_rank": 11
+    },
+    {
+     "fx": 0.4363,
+     "fy": 0.0317,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.6589,
+     "fy": 0.0591,
+     "held_out_rank": 15
+    },
+    {
+     "fx": 0.5543,
+     "fy": 0.223,
+     "held_out_rank": 7
+    },
+    {
+     "fx": 0.5461,
+     "fy": 0.2078,
+     "held_out_rank": 4
+    },
+    {
+     "fx": 0.5546,
+     "fy": 0.1572,
+     "held_out_rank": 5
+    },
+    {
+     "fx": 0.5362,
+     "fy": 0.1721,
+     "held_out_rank": 5
+    },
+    {
+     "fx": 0.5201,
+     "fy": 0.1778,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.5133,
+     "fy": 0.1728,
+     "held_out_rank": 5
+    },
+    {
+     "fx": 0.4999,
+     "fy": 0.1703,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.5067,
+     "fy": 0.1368,
+     "held_out_rank": 7
+    },
+    {
+     "fx": 0.532,
+     "fy": 0.0695,
+     "held_out_rank": 10
+    },
+    {
+     "fx": 0.505,
+     "fy": 0.0661,
+     "held_out_rank": 4
+    },
+    {
+     "fx": 0.4776,
+     "fy": 0.0769,
+     "held_out_rank": 7
+    },
+    {
+     "fx": 0.4788,
+     "fy": 0.3865,
+     "held_out_rank": 29
+    },
+    {
+     "fx": 0.4968,
+     "fy": 0.4444,
+     "held_out_rank": 11
+    },
+    {
+     "fx": 0.4537,
+     "fy": 0.3572,
+     "held_out_rank": 9
+    },
+    {
+     "fx": 0.4454,
+     "fy": 0.3472,
+     "held_out_rank": 18
+    },
+    {
+     "fx": 0.4503,
+     "fy": 0.3423,
+     "held_out_rank": 19
+    },
+    {
+     "fx": 0.4498,
+     "fy": 0.3301,
+     "held_out_rank": 15
+    },
+    {
+     "fx": 0.4711,
+     "fy": 0.3275,
+     "held_out_rank": 37
+    },
+    {
+     "fx": 0.4689,
+     "fy": 0.3386,
+     "held_out_rank": 15
+    },
+    {
+     "fx": 0.4774,
+     "fy": 0.3148,
+     "held_out_rank": 8
+    },
+    {
+     "fx": 0.5693,
+     "fy": 0.329,
+     "held_out_rank": 62
+    },
+    {
+     "fx": 0.7846,
+     "fy": 0.7027,
+     "held_out_rank": 8
+    },
+    {
+     "fx": 0.5378,
+     "fy": 0.6232,
+     "held_out_rank": 32
+    },
+    {
+     "fx": 0.4525,
+     "fy": 0.3202,
+     "held_out_rank": 25
+    },
+    {
+     "fx": 0.5429,
+     "fy": 0.5243,
+     "held_out_rank": 24
+    },
+    {
+     "fx": 0.6623,
+     "fy": 0.4756,
+     "held_out_rank": 30
+    },
+    {
+     "fx": 0.6685,
+     "fy": 0.4821,
+     "held_out_rank": 39
+    },
+    {
+     "fx": 0.6905,
+     "fy": 0.5082,
+     "held_out_rank": 28
+    },
+    {
+     "fx": 0.8219,
+     "fy": 0.5817,
+     "held_out_rank": 31
+    },
+    {
+     "fx": 0.8616,
+     "fy": 0.6351,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.8681,
+     "fy": 0.6484,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.8991,
+     "fy": 0.6999,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.9021,
+     "fy": 0.708,
+     "held_out_rank": 3
+    },
+    {
+     "fx": 0.9394,
+     "fy": 0.9265,
+     "held_out_rank": 4
+    },
+    {
+     "fx": 0.9978,
+     "fy": 0.5681,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.5961,
+     "fy": 0.6448,
+     "held_out_rank": 19
+    },
+    {
+     "fx": 0.5548,
+     "fy": 0.6327,
+     "held_out_rank": 18
+    },
+    {
+     "fx": 0.8761,
+     "fy": 0.8005,
+     "held_out_rank": 12
+    },
+    {
+     "fx": 0.8898,
+     "fy": 0.7914,
+     "held_out_rank": 15
+    },
+    {
+     "fx": 0.8928,
+     "fy": 0.784,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.8433,
+     "fy": 0.8028,
+     "held_out_rank": 7
+    },
+    {
+     "fx": 0.8508,
+     "fy": 0.8029,
+     "held_out_rank": 7
+    },
+    {
+     "fx": 0.909,
+     "fy": 0.4587,
+     "held_out_rank": 4
+    },
+    {
+     "fx": 0.9606,
+     "fy": 0.3621,
+     "held_out_rank": 7
+    },
+    {
+     "fx": 0.9438,
+     "fy": 0.5043,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.9526,
+     "fy": 0.4901,
+     "held_out_rank": 0
+    },
+    {
+     "fx": 0.9947,
+     "fy": 0.5002,
+     "held_out_rank": 4
+    },
+    {
+     "fx": 0.2365,
+     "fy": 0.689,
+     "held_out_rank": 16
+    },
+    {
+     "fx": 0.3667,
+     "fy": 0.5634,
+     "held_out_rank": 63
+    },
+    {
+     "fx": 0.5422,
+     "fy": 0.7193,
+     "held_out_rank": 5
+    },
+    {
+     "fx": 0.561,
+     "fy": 0.7461,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.2777,
+     "fy": 0.9402,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.3554,
+     "fy": 0.7765,
+     "held_out_rank": 35
+    },
+    {
+     "fx": 0.39,
+     "fy": 0.9069,
+     "held_out_rank": 20
+    },
+    {
+     "fx": 0.8195,
+     "fy": 0.9881,
+     "held_out_rank": 59
+    },
+    {
+     "fx": 0.8184,
+     "fy": 0.9823,
+     "held_out_rank": 0
+    },
+    {
+     "fx": 0.7971,
+     "fy": 0.9475,
+     "held_out_rank": 19
+    },
+    {
+     "fx": 0.0104,
+     "fy": 0.9315,
+     "held_out_rank": 11
+    },
+    {
+     "fx": 0.0072,
+     "fy": 0.9535,
+     "held_out_rank": 9
+    },
+    {
+     "fx": 0.005,
+     "fy": 0.9752,
+     "held_out_rank": 16
+    }
+   ],
+   "center_lonlat": [
+    -82.33528,
+    35.5693
+   ]
+  },
+  {
+   "id": "S2",
+   "title": "Most mapped initiation sites, Yancey",
+   "x0": 384000.0,
+   "y0": 3964000.0,
+   "size_m": 2000,
+   "county": "Yancey County",
+   "mapped_sites": 46,
+   "missed_sites": 3,
+   "top10_share_of_hillslope": 0.1287396536922753,
+   "rain_mean_mm": 470.2287269704819,
+   "domain_share": 1.0,
+   "selected_by": "sites",
+   "before_credit": "NC OneMap Orthoimagery 2020\u20132023 (NC911, NCCGIA)",
+   "after_credit": "NC OneMap Orthoimagery Helene 2025 (NC Collaboratory at UNC Chapel Hill)",
+   "points": [
+    {
+     "fx": 0.4361,
+     "fy": 0.2521,
+     "held_out_rank": 42
+    },
+    {
+     "fx": 0.4222,
+     "fy": 0.2566,
+     "held_out_rank": 9
+    },
+    {
+     "fx": 0.4053,
+     "fy": 0.2506,
+     "held_out_rank": 15
+    },
+    {
+     "fx": 0.4132,
+     "fy": 0.2265,
+     "held_out_rank": 6
+    },
+    {
+     "fx": 0.3917,
+     "fy": 0.2329,
+     "held_out_rank": 34
+    },
+    {
+     "fx": 0.4084,
+     "fy": 0.1746,
+     "held_out_rank": 11
+    },
+    {
+     "fx": 0.4632,
+     "fy": 0.1272,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.1337,
+     "fy": 0.8052,
+     "held_out_rank": 27
+    },
+    {
+     "fx": 0.1322,
+     "fy": 0.8152,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.1191,
+     "fy": 0.8389,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.1273,
+     "fy": 0.8287,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.0997,
+     "fy": 0.7553,
+     "held_out_rank": 18
+    },
+    {
+     "fx": 0.1474,
+     "fy": 0.7552,
+     "held_out_rank": 13
+    },
+    {
+     "fx": 0.0897,
+     "fy": 0.7232,
+     "held_out_rank": 7
+    },
+    {
+     "fx": 0.0906,
+     "fy": 0.6622,
+     "held_out_rank": 9
+    },
+    {
+     "fx": 0.8117,
+     "fy": 0.5649,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.844,
+     "fy": 0.5611,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.8512,
+     "fy": 0.5666,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.7704,
+     "fy": 0.5013,
+     "held_out_rank": 3
+    },
+    {
+     "fx": 0.812,
+     "fy": 0.592,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.8379,
+     "fy": 0.5947,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.5222,
+     "fy": 0.239,
+     "held_out_rank": 3
+    },
+    {
+     "fx": 0.4575,
+     "fy": 0.4236,
+     "held_out_rank": 3
+    },
+    {
+     "fx": 0.4296,
+     "fy": 0.4135,
+     "held_out_rank": 6
+    },
+    {
+     "fx": 0.3946,
+     "fy": 0.4257,
+     "held_out_rank": 8
+    },
+    {
+     "fx": 0.3575,
+     "fy": 0.4216,
+     "held_out_rank": 4
+    },
+    {
+     "fx": 0.2853,
+     "fy": 0.423,
+     "held_out_rank": 6
+    },
+    {
+     "fx": 0.5535,
+     "fy": 0.6665,
+     "held_out_rank": 7
+    },
+    {
+     "fx": 0.5349,
+     "fy": 0.6537,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.5331,
+     "fy": 0.5981,
+     "held_out_rank": 14
+    },
+    {
+     "fx": 0.2626,
+     "fy": 0.9206,
+     "held_out_rank": 3
+    },
+    {
+     "fx": 0.2671,
+     "fy": 0.8918,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.2848,
+     "fy": 0.845,
+     "held_out_rank": 10
+    },
+    {
+     "fx": 0.089,
+     "fy": 0.516,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.0866,
+     "fy": 0.5076,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.0958,
+     "fy": 0.4899,
+     "held_out_rank": 15
+    },
+    {
+     "fx": 0.0862,
+     "fy": 0.4345,
+     "held_out_rank": 5
+    },
+    {
+     "fx": 0.1259,
+     "fy": 0.4338,
+     "held_out_rank": 18
+    },
+    {
+     "fx": 0.1152,
+     "fy": 0.3991,
+     "held_out_rank": 12
+    },
+    {
+     "fx": 0.5039,
+     "fy": 0.8271,
+     "held_out_rank": 29
+    },
+    {
+     "fx": 0.0261,
+     "fy": 0.9662,
+     "held_out_rank": 6
+    },
+    {
+     "fx": 0.0278,
+     "fy": 0.9602,
+     "held_out_rank": 6
+    },
+    {
+     "fx": 0.0209,
+     "fy": 0.9687,
+     "held_out_rank": 7
+    },
+    {
+     "fx": 0.0878,
+     "fy": 0.3716,
+     "held_out_rank": 31
+    },
+    {
+     "fx": 0.0139,
+     "fy": 0.3402,
+     "held_out_rank": 13
+    },
+    {
+     "fx": 0.1101,
+     "fy": 0.0077,
+     "held_out_rank": 19
+    }
+   ],
+   "center_lonlat": [
+    -82.27309,
+    35.82242
+   ]
+  },
+  {
+   "id": "S3",
+   "title": "Ranked high, no mapped initiation",
+   "x0": 390000.0,
+   "y0": 3932000.0,
+   "size_m": 2000,
+   "county": "Buncombe County",
+   "mapped_sites": 0,
+   "missed_sites": 0,
+   "top10_share_of_hillslope": 0.23835323648925727,
+   "rain_mean_mm": 537.2098282448825,
+   "domain_share": 0.9603625,
+   "selected_by": "top10_share",
+   "before_credit": "NC OneMap Orthoimagery 2020\u20132023 (NC911, NCCGIA)",
+   "after_credit": "NC OneMap Orthoimagery Helene 2025 (NC Collaboratory at UNC Chapel Hill)",
+   "points": [],
+   "center_lonlat": [
+    -82.20234,
+    35.53464
+   ]
+  },
+  {
+   "id": "S4",
+   "title": "Mapped initiations the ranking missed",
+   "x0": 376000.0,
+   "y0": 3930000.0,
+   "size_m": 2000,
+   "county": "Buncombe County",
+   "mapped_sites": 63,
+   "missed_sites": 17,
+   "top10_share_of_hillslope": 0.20760744859235725,
+   "rain_mean_mm": 463.29192026062015,
+   "domain_share": 1.0,
+   "selected_by": "misses",
+   "before_credit": "NC OneMap Orthoimagery 2020\u20132023 (NC911, NCCGIA)",
+   "after_credit": "NC OneMap Orthoimagery Helene 2025 (NC Collaboratory at UNC Chapel Hill)",
+   "points": [
+    {
+     "fx": 0.943,
+     "fy": 0.1363,
+     "held_out_rank": 13
+    },
+    {
+     "fx": 0.9688,
+     "fy": 0.1387,
+     "held_out_rank": 35
+    },
+    {
+     "fx": 0.9295,
+     "fy": 0.1602,
+     "held_out_rank": 27
+    },
+    {
+     "fx": 0.9206,
+     "fy": 0.1698,
+     "held_out_rank": 12
+    },
+    {
+     "fx": 0.9049,
+     "fy": 0.1791,
+     "held_out_rank": 41
+    },
+    {
+     "fx": 0.9025,
+     "fy": 0.1119,
+     "held_out_rank": 32
+    },
+    {
+     "fx": 0.8987,
+     "fy": 0.1212,
+     "held_out_rank": 28
+    },
+    {
+     "fx": 0.8704,
+     "fy": 0.7097,
+     "held_out_rank": 8
+    },
+    {
+     "fx": 0.8833,
+     "fy": 0.8079,
+     "held_out_rank": 5
+    },
+    {
+     "fx": 0.8908,
+     "fy": 0.8059,
+     "held_out_rank": 3
+    },
+    {
+     "fx": 0.9909,
+     "fy": 0.7293,
+     "held_out_rank": 5
+    },
+    {
+     "fx": 0.9986,
+     "fy": 0.7471,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.968,
+     "fy": 0.5671,
+     "held_out_rank": 4
+    },
+    {
+     "fx": 0.9522,
+     "fy": 0.5523,
+     "held_out_rank": 4
+    },
+    {
+     "fx": 0.8371,
+     "fy": 0.5668,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.8554,
+     "fy": 0.5647,
+     "held_out_rank": 3
+    },
+    {
+     "fx": 0.8632,
+     "fy": 0.5652,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.8569,
+     "fy": 0.5397,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.8611,
+     "fy": 0.5339,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.8022,
+     "fy": 0.5564,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.795,
+     "fy": 0.554,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.7693,
+     "fy": 0.4694,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.808,
+     "fy": 0.315,
+     "held_out_rank": 46
+    },
+    {
+     "fx": 0.8134,
+     "fy": 0.3257,
+     "held_out_rank": 71
+    },
+    {
+     "fx": 0.784,
+     "fy": 0.2853,
+     "held_out_rank": 44
+    },
+    {
+     "fx": 0.6524,
+     "fy": 0.4075,
+     "held_out_rank": 5
+    },
+    {
+     "fx": 0.6226,
+     "fy": 0.4395,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.5553,
+     "fy": 0.4146,
+     "held_out_rank": 7
+    },
+    {
+     "fx": 0.5316,
+     "fy": 0.3669,
+     "held_out_rank": 5
+    },
+    {
+     "fx": 0.5373,
+     "fy": 0.3483,
+     "held_out_rank": 7
+    },
+    {
+     "fx": 0.5242,
+     "fy": 0.4101,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.7072,
+     "fy": 0.6779,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.7143,
+     "fy": 0.6778,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.7155,
+     "fy": 0.6849,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.6632,
+     "fy": 0.608,
+     "held_out_rank": 33
+    },
+    {
+     "fx": 0.7002,
+     "fy": 0.58,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.446,
+     "fy": 0.343,
+     "held_out_rank": 33
+    },
+    {
+     "fx": 0.3781,
+     "fy": 0.3533,
+     "held_out_rank": 44
+    },
+    {
+     "fx": 0.4025,
+     "fy": 0.3734,
+     "held_out_rank": 18
+    },
+    {
+     "fx": 0.3922,
+     "fy": 0.3955,
+     "held_out_rank": 45
+    },
+    {
+     "fx": 0.4003,
+     "fy": 0.4019,
+     "held_out_rank": 43
+    },
+    {
+     "fx": 0.2922,
+     "fy": 0.3583,
+     "held_out_rank": 35
+    },
+    {
+     "fx": 0.2187,
+     "fy": 0.4077,
+     "held_out_rank": 27
+    },
+    {
+     "fx": 0.2747,
+     "fy": 0.482,
+     "held_out_rank": 62
+    },
+    {
+     "fx": 0.3744,
+     "fy": 0.5182,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.3704,
+     "fy": 0.5183,
+     "held_out_rank": 1
+    },
+    {
+     "fx": 0.3724,
+     "fy": 0.5237,
+     "held_out_rank": 2
+    },
+    {
+     "fx": 0.3566,
+     "fy": 0.5162,
+     "held_out_rank": 40
+    },
+    {
+     "fx": 0.1871,
+     "fy": 0.6914,
+     "held_out_rank": 17
+    },
+    {
+     "fx": 0.3674,
+     "fy": 0.7082,
+     "held_out_rank": 12
+    },
+    {
+     "fx": 0.3255,
+     "fy": 0.724,
+     "held_out_rank": 33
+    },
+    {
+     "fx": 0.4709,
+     "fy": 0.8592,
+     "held_out_rank": 0
+    },
+    {
+     "fx": 0.3856,
+     "fy": 0.8384,
+     "held_out_rank": 36
+    },
+    {
+     "fx": 0.4682,
+     "fy": 0.9064,
+     "held_out_rank": 4
+    },
+    {
+     "fx": 0.5314,
+     "fy": 0.911,
+     "held_out_rank": 4
+    },
+    {
+     "fx": 0.5511,
+     "fy": 0.9182,
+     "held_out_rank": 3
+    },
+    {
+     "fx": 0.5655,
+     "fy": 0.9236,
+     "held_out_rank": 4
+    },
+    {
+     "fx": 0.5196,
+     "fy": 0.9094,
+     "held_out_rank": 21
+    },
+    {
+     "fx": 0.6193,
+     "fy": 0.8917,
+     "held_out_rank": 9
+    },
+    {
+     "fx": 0.6349,
+     "fy": 0.8829,
+     "held_out_rank": 4
+    },
+    {
+     "fx": 0.5327,
+     "fy": 0.9645,
+     "held_out_rank": 19
+    },
+    {
+     "fx": 0.2156,
+     "fy": 0.9299,
+     "held_out_rank": 29
+    },
+    {
+     "fx": 0.2048,
+     "fy": 0.9311,
+     "held_out_rank": 21
+    }
+   ],
+   "center_lonlat": [
+    -82.35643,
+    35.51497
+   ]
+  }
+ ]
+}

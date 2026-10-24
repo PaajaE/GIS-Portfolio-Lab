@@ -232,6 +232,14 @@ def overlays() -> dict:
     huc = huc[huc.intersects(cty.union_all())][["huc12", "name", "geometry"]]
     huc.assign(geometry=huc.simplify(30)).to_crs(4326).to_file(WEB / "huc12.geojson", driver="GeoJSON",
                                                                COORDINATE_PRECISION=5)
+    # outside the area of applicability (M6, 50 m lattice): polygons, generalised
+    with rasterio.open(SCORES / "aoa_50m.tif") as a:
+        flag, tra = a.read(1), a.transform
+    out_ = (flag == 2).astype(np.uint8)
+    polys = [to_shape(g) for g, v in shapes(out_, mask=out_ > 0, transform=tra) if v == 1]
+    aoa = gpd.GeoSeries(polys, crs=C.CRS).buffer(25).union_all().buffer(-10).simplify(20)
+    gpd.GeoDataFrame({"label": ["outside the area of applicability"]}, geometry=[aoa], crs=C.CRS).to_crs(4326) \
+        .to_file(WEB / "outside_aoa.geojson", driver="GeoJSON", COORDINATE_PRECISION=5)
     inv = inventory()
     p = inv[positive_mask(inv)].copy()
     p["geometry"] = p.geometry.representative_point()
@@ -270,6 +278,20 @@ def summary(tiles: dict, ov: dict) -> dict:
                        "replicate_watersheds": m4["units"]["primary"]["replicates"]["n"],
                        "random_split_auc_cells": m4["pixels"]["primary"]["design_contrasts"]["random_5fold"]["auc_rain_stratified"]["value"]},
         "tiles": tiles, "overlays": ov,
+    }
+    m6u = json.loads((v / "m6_uncertainty.json").read_text())
+    m6s = json.loads((v / "m6_sensitivity.json").read_text())
+    m6w = json.loads((v / "m6_watauga.json").read_text())
+    ng = json.loads((v / "nogeo_test.json").read_text())
+    s["m6"] = {
+        "top10_stable_share": m6u["ensemble"]["final_top10_stays_in_top10_in_90pct_of_refits"],
+        "outside_aoa_share": m6u["area_of_applicability"]["share_outside_aoa"],
+        "loco_auc_rain_stratified": m6s["leave_one_county_out"]["auc_rain_stratified"],
+        "watauga_transfer_auc": m6w["transfer_aoi_model"]["auc"], "watauga_transfer_ci95": m6w["transfer_aoi_model"]["ci95"],
+        "no_geology_adopted": ng["decision"]["replace_current_model"],
+        "no_geology_watauga_auc": ng["watauga"]["transfer_no_geology"]["auc"],
+        "top10_share_geology3": ng["ranking_and_stability"]["top10_share_by_geology"]["current"].get("3", 0),
+        "hillslope_share_geology3": ng["ranking_and_stability"]["hillslope_share_by_geology"].get("3", 0),
     }
     (WEB / "summary.json").write_text(json.dumps(s, indent=1))
     return s

@@ -15,6 +15,8 @@ predictions are reliable?
 - **Validation:** held-out watersheds, inside the area that Helene's rainfall actually tested.
 - **Temporal check:** Watauga County (1940 storm → Helene), indicative only.
 
+Open items, analytical next steps and the cloud/local split: [`FUTURE_WORK.md`](FUTURE_WORK.md).
+
 The output will be a **relative susceptibility ranking**, not hazard, risk or a probability of a future
 landslide.
 
