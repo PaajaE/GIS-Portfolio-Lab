@@ -40,8 +40,8 @@ dependency.
 | Field | Value |
 |---|---|
 | Provider | LANDFIRE (USGS EROS / USDA Forest Service) |
-| Official source URL | https://landfire.gov/ ; LANDFIRE Product Service (LFPS) — *endpoint and email requirement to verify (M0)* |
-| Dataset / version / vintage | version whose last disturbance year precedes the fire: LF 2019 Limited or LF 2016 Remap (2020 fires), LF 2020 / 220 (2021–2022 fires) — *to verify* |
+| Official source URL | https://landfire.gov/ ; LFPS https://lfps.usgs.gov/api/ (verified 2026-10-24: catalogue LF2016, LF2022–2025); LF 2020 archived on USGS ScienceBase (landfire.gov/data/lf2020) |
+| Dataset / version / vintage | version whose last disturbance year precedes the fire: LF 2016 Remap via LFPS (2020 fires); LF 2020 / 220 from ScienceBase (2021–2022 fires). Not LF 2022 (contains the 2021–22 burn scars) |
 | Acquisition date | not yet |
 | License | public domain, credit requested — *confirm (M0)* |
 | AOI | per fire |
@@ -63,14 +63,14 @@ dependency.
 | Source CRS → target CRS | NAD83 geographic → EPSG:26912, averaged to 30 m before slope |
 | Known limitations / biases | mosaic of source dates |
 
-## Observed perimeters (NIROPS IR; NIFS/WFIGS; MTBS)
+## Observed perimeters (NIROPS IR via Mendeley; NIFC archive; MTBS)
 
 | Field | Value |
 |---|---|
-| Provider | USFS National Infrared Operations via NIFC FTP; NIFC (NIFS Operational Data Archive, WFIGS); MTBS (USGS EROS / USFS GTAC) |
-| Official source URL | https://ftp.wildfire.gov/public/incident_specific_data/ ; NIFC Open Data hub; https://www.mtbs.gov/ — *to verify (M0)* |
-| Dataset / version / vintage | per fire; screening index: Magstadt et al., Mendeley Data doi:10.17632/95rj5d379g.1 (NIROPS 2020–2024, R1–R6) — licence *to verify* |
-| License | NIFC FTP content is public, non-copyrighted (FTP posting rules); MTBS public domain — *confirm* |
+| Provider | USFS National Infrared Operations (IR perimeters), as compiled by Magstadt et al. on Mendeley Data; NIFC Operational Data Archive (cross-check); MTBS (USGS EROS / USFS GTAC) |
+| Official source URL | https://data.mendeley.com/datasets/95rj5d379g/1 (primary); NIFC_Authoritative "Operational Data Archive 2020/2021/2022" on ArcGIS Online; https://www.mtbs.gov/. The NIFC file share (`ftp.wildfire.gov/protected/…`) requires FAMAuth since 2026-05-04 and is not used |
+| Dataset / version / vintage | Magstadt et al., NIROPS 2020–2024 R1–R6, doi:10.17632/95rj5d379g.1, version 1 (2026-06-02); inventory `provenance/nirops_mendeley_inventory.json` |
+| License | Mendeley dataset **CC BY 4.0** (attribution required in the app and case study); NIFC archive public; MTBS public domain |
 | Known limitations / biases | IR perimeters are interpreted heat edges at scan time; NIFS `GDB_FROM` is an edit time, not an observation time; MTBS outlines include unburned islands (commission) |
 
 ## NASA FIRMS active fire (VIIRS 375 m, MODIS 1 km)
@@ -78,7 +78,7 @@ dependency.
 | Field | Value |
 |---|---|
 | Provider | NASA LANCE / FIRMS |
-| Official source URL | https://firms.modaps.eosdis.nasa.gov/ — API requires a MAP_KEY (open question Q2) |
+| Official source URL | https://firms.modaps.eosdis.nasa.gov/ — MAP_KEY obtained by the owner (verified 2026-10-24: 5,000 transactions / 10 min), kept in the git-ignored `.env` |
 | Use | timing proxy, comparison only (PLAN §2.4) |
 | Known limitations / biases | overpass-limited timing; pixel ≫ cell; omission under cloud/smoke/low intensity |
 
