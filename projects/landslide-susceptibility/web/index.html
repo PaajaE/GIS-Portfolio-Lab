@@ -32,12 +32,15 @@ but does not transfer beyond them, and it is distorted across rock-type boundari
 <main id="workbench" class="workbench">
   <div class="map-wrap">
     <div class="goto" role="group" aria-label="Move the map">
-      <span class="goto-l">Go to</span>
+      <span class="goto-l">Zoom to <span class="goto-s">(areas 1–4 are example squares, 2&nbsp;km wide, with photographs below)</span></span>
       <span class="goto-b" id="goto"></span>
-      <button type="button" id="here">What is at the map centre?</button>
+      <button type="button" id="here"><span class="cross" aria-hidden="true">+</span> Details for the map centre</button>
     </div>
-    <div id="map" role="region" aria-label="Map of relative landslide-initiation susceptibility. The panel describes what the map shows."></div>
-    <p class="muted" id="map-hint">Click or tap the map for the rank of that spot, its county and watershed.
+    <div class="map-box">
+      <div id="map" role="region" aria-label="Map of relative landslide-initiation susceptibility. The panel describes what the map shows."></div>
+      <span class="crosshair" aria-hidden="true"></span>
+    </div>
+    <p class="muted" id="map-hint">Click or tap any spot on the map for its rank, county and watershed. The button above does the same for the spot under the + in the middle of the map (useful with a keyboard).
       <a id="to-site" href="#sites-h" hidden></a></p>
   </div>
 
@@ -75,7 +78,7 @@ but does not transfer beyond them, and it is distorted across rock-type boundari
       <h2>Legend</h2>
       <div class="ramp" aria-hidden="true"></div>
       <p class="ramp-labels"><span>top 1&nbsp;%</span><span id="ramp-k">top 10&nbsp;%</span></p>
-      <p class="muted">Flagged hillslope cells, darker = higher in the ranking. Unflagged terrain shows the hillshade only. Dashed squares mark the four 2&nbsp;km sites compared below.</p>
+      <p class="muted">Flagged hillslope cells, darker = higher in the ranking. Unflagged terrain shows the hillshade only. Dashed squares are the four 2&nbsp;km example areas compared with photographs below.</p>
       <label class="toggle"><input type="checkbox" id="t-sites" checked> <span class="sw sw-site" aria-hidden="true"></span>
         Mapped natural initiation sites, Helene (NCGS)</label>
       <label class="toggle"><input type="checkbox" id="t-nt" checked> <span class="sw sw-hatch" aria-hidden="true"></span>
@@ -89,11 +92,11 @@ but does not transfer beyond them, and it is distorted across rock-type boundari
 </main>
 
 <section class="sites" aria-labelledby="sites-h">
-  <h2 id="sites-h">Before and after Helene at four sites</h2>
-  <p class="muted">Sites chosen by a fixed rule (most mapped initiations in each county, a highly ranked area without
+  <h2 id="sites-h">Before and after Helene in four example areas</h2>
+  <p class="muted">Areas chosen by a fixed rule (most mapped initiations in each county, a highly ranked area without
     mapped initiations, and the area with most missed initiations). Each is 2&nbsp;km × 2&nbsp;km. The imagery is for
     viewing only; it was never a model input.</p>
-  <fieldset class="seg seg-sites" id="site-pick"><legend>Site</legend></fieldset>
+  <fieldset class="seg seg-sites" id="site-pick"><legend>Example area</legend></fieldset>
   <figure class="compare" id="compare">
     <div class="compare-frame" id="compare-frame">
       <img id="img-before" alt="" width="2000" height="2000" decoding="async" loading="lazy">

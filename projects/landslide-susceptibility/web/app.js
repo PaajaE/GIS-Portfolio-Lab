@@ -164,9 +164,9 @@ function crossHatchImage() {
 }
 
 // ---------- places on the map: jump buttons, site outlines, click popup ----------
-const START_KM = 2.4;   // half-width of the opening view around site 1
+const START_KM = 2.4;   // half-width of the opening view around example area 1
 const JUMP_KM = 1.6;    // half-width when jumping to a site
-const SHORT = { S1: "Buncombe", S2: "Yancey", S3: "no sites mapped", S4: "missed sites" };
+const SHORT = { S1: "Buncombe, many mapped sites", S2: "Yancey, many mapped sites", S3: "ranked high, none mapped", S4: "ranking missed sites" };
 let rankArchive, popup;
 const tileCache = new Map();
 
@@ -199,7 +199,7 @@ function setSiteLink(id) {
   const link = document.getElementById("to-site");
   link.hidden = id === "all";
   link.dataset.site = id;
-  link.textContent = id === "all" ? "" : `Compare before and after Helene at site ${id.slice(1)} ↓`;
+  link.textContent = id === "all" ? "" : `Compare before and after Helene in area ${id.slice(1)} ↓`;
 }
 
 // Rank of the clicked 5 m cell, decoded from the same tile set the map draws (channels: R held-out, G final, B slope).
@@ -269,7 +269,7 @@ async function describe(lngLat, point) {
   }
   if (outsideAoa) h += `<p><strong>Caution:</strong> terrain here is unlike the training data (outside the area of applicability).</p>`;
   if (nearSite) h += `<p>A mapped natural initiation site (NC Geological Survey, Helene) is at this spot.</p>`;
-  if (inBox) h += `<p>Inside the 2${NB}km site ${inBox.id.slice(1)} (dashed square); see the before and after images below.</p>`;
+  if (inBox) h += `<p>Inside example area ${inBox.id.slice(1)} (dashed square); before and after images are below the map.</p>`;
   popup?.remove();
   popup = new maplibregl.Popup({ maxWidth: "300px", className: "ls-popup" }).setLngLat(lngLat).setHTML(h).addTo(map);
 }
@@ -400,7 +400,7 @@ async function initSites() {
     pick.appendChild(l);
   });
   const bar = document.getElementById("goto");
-  for (const [id, label] of [["all", "Whole area"], ...SITES.sites.map((x) => [x.id, `Site ${x.id.slice(1)}: ${SHORT[x.id] || x.title}`])]) {
+  for (const [id, label] of [["all", "Whole area"], ...SITES.sites.map((x) => [x.id, `Area ${x.id.slice(1)}: ${SHORT[x.id] || x.title}`])]) {
     const b = document.createElement("button");
     b.type = "button"; b.textContent = label;
     b.addEventListener("click", () => goTo(id));
@@ -412,7 +412,7 @@ async function initSites() {
   document.getElementById("t-site-pts").addEventListener("change", (e) => { document.getElementById("site-points").style.display = e.target.checked ? "" : "none"; });
   setReveal(r.value);
   showSite(SITES.sites[0].id);
-  setSiteLink(SITES.sites[0].id); // the map opens on site 1
+  setSiteLink(SITES.sites[0].id); // the map opens on example area 1
 }
 
 async function main() {
