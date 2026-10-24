@@ -70,3 +70,12 @@ GeoParquet, EPSG:26986, one row per parcel. Suffix `_con` / `_mod` / `_agg` = sc
 | `sewer_share` | share of parcel area in the Amherst sewer service area (0–1) |
 
 Owner names and owner addresses are not harvested or published.
+
+### Data on a new machine or in a cloud session
+`data/` is not in git. The inputs that cannot be re-harvested identically (see `data_bundle.txt`) are kept as a
+private release of `PaajaE/GIS-Portfolio-Lab-data` (needs `gh` logged in with access):
+```
+uv sync
+make data-restore   # latest bundle -> data/, sha256 verified; then the make targets rebuild the rest
+make data-pack      # after a re-harvest: new dated release
+```

@@ -36,3 +36,12 @@ make test
 
 `data/` is git-ignored. Provenance (URLs, checksums, service edit dates, lidar dates per tile) is written to
 `provenance/harvest_manifest.json`.
+
+### Data on a new machine or in a cloud session
+`data/` is not in git. The inputs that cannot be re-harvested identically (see `data_bundle.txt`) are kept as a
+private release of `PaajaE/GIS-Portfolio-Lab-data` (needs `gh` logged in with access):
+```
+uv sync
+make data-restore   # latest bundle -> data/, sha256 verified; then the make targets rebuild the rest
+make data-pack      # after a re-harvest: new dated release
+```

@@ -5,7 +5,7 @@ PY := uv run python -m parcel_intel
 # (rustup's default and Homebrew's rustup) in case the shell profile does not.
 export PATH := $(PATH):$(HOME)/.cargo/bin:/opt/homebrew/opt/rustup/bin
 
-.PHONY: all setup harvest prepare analyze access validate bench tiles web test serve
+.PHONY: all setup harvest prepare analyze access validate bench tiles web test serve data-pack data-restore
 
 all: prepare analyze access validate web
 
@@ -39,3 +39,9 @@ test:
 
 serve:
 	npx --yes http-server@14.1.1 web -p 8137 -c-1   # needs HTTP Range support for PMTiles
+
+data-pack:          ## upload data/ bundle (data_bundle.txt) as a release of the private data repo
+	../../scripts/data_bundle.sh pack $(notdir $(CURDIR))
+
+data-restore:       ## restore the latest data bundle into data/ (checksums verified)
+	../../scripts/data_bundle.sh restore $(notdir $(CURDIR))

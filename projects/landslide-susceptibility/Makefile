@@ -4,7 +4,7 @@ PY := uv run python -m landslide
 # cargo is needed by `uv sync` (builds rust/) and `make test`; add the usual rustup locations.
 export PATH := $(PATH):$(HOME)/.cargo/bin:/opt/homebrew/opt/rustup/bin
 
-.PHONY: setup harvest harvest-small harvest-dem feasibility qa terrain stack hydro units labels aggregate samples prepare baseline advanced product m6 nogeo web serve bench test
+.PHONY: setup harvest harvest-small harvest-dem feasibility qa terrain stack hydro units labels aggregate samples prepare baseline advanced product m6 nogeo web serve bench test data-pack data-restore
 
 setup:
 	uv sync
@@ -79,3 +79,9 @@ bench:              ## Rust vs reference timing at several sizes -> benchmarks/t
 test:
 	uv run pytest -q
 	cd rust && cargo test -q
+
+data-pack:          ## upload data/ bundle (data_bundle.txt) as a release of the private data repo
+	../../scripts/data_bundle.sh pack $(notdir $(CURDIR))
+
+data-restore:       ## restore the latest data bundle into data/ (checksums verified)
+	../../scripts/data_bundle.sh restore $(notdir $(CURDIR))

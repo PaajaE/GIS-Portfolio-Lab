@@ -49,6 +49,9 @@ Settled by Parcel Intelligence (2026-10-08); reuse unless a project needs otherw
 - One self-contained directory per project: `projects/<name>/` with its own `pyproject.toml` + `uv.lock`, `Makefile`, `METHOD.md`, `DATA_SOURCES.md`, `README.md`, `src/<pkg>/`, `tests/`, `rust/`, `web/`, `provenance/`, `benchmarks/`, `validation/`.
 - Python ↔ Rust: a PyO3/maturin crate in `rust/` installed as a uv path dependency (`uv sync` builds it, release profile). The pure-Rust kernel builds and tests without Python (`python` cargo feature enabled by maturin).
 - `data/` (raw, interim, out) is git-ignored; `web/data/` holds the published derived artifacts.
+- Data backup / fresh machine: the paths in `projects/<name>/data_bundle.txt` live as release assets of the private
+  repo `PaajaE/GIS-Portfolio-Lab-data`; `make data-pack` / `make data-restore` (via `scripts/data_bundle.sh`, sha256
+  checked). Never make that repo public (ODbL extracts, footprints without licence). Settled 2026-10-24.
 - Commands (run inside the project directory): `uv sync`, `make harvest`, `make all`, `make bench`, `make test`, `make serve` (dev server must support HTTP Range for PMTiles).
 - Toolchain on the build Mac: uv and rustup/tippecanoe via Homebrew (`/opt/homebrew/bin`, rustup in `/opt/homebrew/opt/rustup/bin`); GDAL/PROJ come from the rasterio/pyproj wheels, not a system install.
 - Web: static MapLibre + PMTiles, conventions in `docs/product/DESIGN_DECISIONS.md`. Preview via `.claude/launch.json`.
