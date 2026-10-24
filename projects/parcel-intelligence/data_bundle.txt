@@ -1,0 +1,3 @@
+# Paths under data/ in the private data bundle (scripts/data_bundle.sh). The rest of data/ is rebuilt by make.
+raw
+out

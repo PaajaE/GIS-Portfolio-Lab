@@ -1,0 +1,7 @@
+# Paths under data/ in the private data bundle (scripts/data_bundle.sh). The rest of data/ is rebuilt by make.
+# raw: inputs incl. the frozen NCGS inventory snapshot and OSM extracts (cannot be re-harvested identically)
+raw
+# 5 m DEM tiles (re-creating them means re-downloading ~20 GB of 1 m lidar, ~2.5 h)
+interim/dem5_tiles
+# unit tables and out-of-fold scores used by the reports
+out

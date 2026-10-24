@@ -1,0 +1,281 @@
+{
+ "algorithms": {
+  "window_stats": "sliding sums (f64, mean-centred) for mean/sd + van Herk/Gil-Werman min/max, strict nodata via a nodata-count table; reference = scipy.ndimage C filters",
+  "terrain3x3": "single 3x3 pass: Horn slope/aspect, Zevenbergen-Thorne curvatures, Riley TRI; reference = vectorised NumPy float64 in 1024-row bands"
+ },
+ "input": "centre crops of data/interim/dem_5m_aoi.tif (USGS 3DEP 2017, 5 m)",
+ "harness": "timeit.repeat(number=1); repeat 5 (1024\u00b2) or 3",
+ "hardware": {
+  "cpu": "Apple M4",
+  "logical_cpus": "10",
+  "ram_gb": 16.0,
+  "os": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "python": "3.13.16",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "threads": "single-threaded (both implementations)"
+ },
+ "rows": [
+  {
+   "kernel": "terrain3x3",
+   "cells": 1048576,
+   "shape": [
+    1024,
+    1024
+   ],
+   "radius_cells": null,
+   "window": "3x3",
+   "agree": true,
+   "reference_min_s": 0.0347,
+   "reference_median_s": 0.035,
+   "rust_min_s": 0.0124,
+   "rust_median_s": 0.0125,
+   "speedup_median": 2.8
+  },
+  {
+   "kernel": "window_stats",
+   "cells": 1048576,
+   "shape": [
+    1024,
+    1024
+   ],
+   "radius_cells": 1,
+   "window": "3x3",
+   "agree": true,
+   "reference_min_s": 0.0489,
+   "reference_median_s": 0.0492,
+   "rust_min_s": 0.0196,
+   "rust_median_s": 0.0201,
+   "speedup_median": 2.45
+  },
+  {
+   "kernel": "window_stats",
+   "cells": 1048576,
+   "shape": [
+    1024,
+    1024
+   ],
+   "radius_cells": 5,
+   "window": "11x11",
+   "agree": true,
+   "reference_min_s": 0.0501,
+   "reference_median_s": 0.0532,
+   "rust_min_s": 0.0195,
+   "rust_median_s": 0.0198,
+   "speedup_median": 2.69
+  },
+  {
+   "kernel": "window_stats",
+   "cells": 1048576,
+   "shape": [
+    1024,
+    1024
+   ],
+   "radius_cells": 10,
+   "window": "21x21",
+   "agree": true,
+   "reference_min_s": 0.0512,
+   "reference_median_s": 0.0514,
+   "rust_min_s": 0.0188,
+   "rust_median_s": 0.0189,
+   "speedup_median": 2.72
+  },
+  {
+   "kernel": "window_stats",
+   "cells": 1048576,
+   "shape": [
+    1024,
+    1024
+   ],
+   "radius_cells": 50,
+   "window": "101x101",
+   "agree": true,
+   "reference_min_s": 0.0522,
+   "reference_median_s": 0.0524,
+   "rust_min_s": 0.0177,
+   "rust_median_s": 0.0177,
+   "speedup_median": 2.96
+  },
+  {
+   "kernel": "terrain3x3",
+   "cells": 16777216,
+   "shape": [
+    4096,
+    4096
+   ],
+   "radius_cells": null,
+   "window": "3x3",
+   "agree": true,
+   "reference_min_s": 0.5713,
+   "reference_median_s": 0.5828,
+   "rust_min_s": 0.5429,
+   "rust_median_s": 0.5449,
+   "speedup_median": 1.07
+  },
+  {
+   "kernel": "window_stats",
+   "cells": 16777216,
+   "shape": [
+    4096,
+    4096
+   ],
+   "radius_cells": 1,
+   "window": "3x3",
+   "agree": true,
+   "reference_min_s": 1.1355,
+   "reference_median_s": 1.1584,
+   "rust_min_s": 0.444,
+   "rust_median_s": 0.4443,
+   "speedup_median": 2.61
+  },
+  {
+   "kernel": "window_stats",
+   "cells": 16777216,
+   "shape": [
+    4096,
+    4096
+   ],
+   "radius_cells": 5,
+   "window": "11x11",
+   "agree": true,
+   "reference_min_s": 1.1214,
+   "reference_median_s": 1.1407,
+   "rust_min_s": 0.4505,
+   "rust_median_s": 0.451,
+   "speedup_median": 2.53
+  },
+  {
+   "kernel": "window_stats",
+   "cells": 16777216,
+   "shape": [
+    4096,
+    4096
+   ],
+   "radius_cells": 10,
+   "window": "21x21",
+   "agree": true,
+   "reference_min_s": 1.1345,
+   "reference_median_s": 1.1453,
+   "rust_min_s": 0.446,
+   "rust_median_s": 0.4469,
+   "speedup_median": 2.56
+  },
+  {
+   "kernel": "window_stats",
+   "cells": 16777216,
+   "shape": [
+    4096,
+    4096
+   ],
+   "radius_cells": 50,
+   "window": "101x101",
+   "agree": true,
+   "reference_min_s": 1.1582,
+   "reference_median_s": 1.1583,
+   "rust_min_s": 0.4508,
+   "rust_median_s": 0.4646,
+   "speedup_median": 2.49
+  },
+  {
+   "kernel": "terrain3x3",
+   "cells": 67108864,
+   "shape": [
+    8192,
+    8192
+   ],
+   "radius_cells": null,
+   "window": "3x3",
+   "agree": true,
+   "reference_min_s": 2.1998,
+   "reference_median_s": 2.4408,
+   "rust_min_s": 0.8396,
+   "rust_median_s": 0.8445,
+   "speedup_median": 2.89
+  },
+  {
+   "kernel": "window_stats",
+   "cells": 67108864,
+   "shape": [
+    8192,
+    8192
+   ],
+   "radius_cells": 1,
+   "window": "3x3",
+   "agree": true,
+   "reference_min_s": 5.3405,
+   "reference_median_s": 5.4824,
+   "rust_min_s": 1.7054,
+   "rust_median_s": 1.7218,
+   "speedup_median": 3.18
+  },
+  {
+   "kernel": "window_stats",
+   "cells": 67108864,
+   "shape": [
+    8192,
+    8192
+   ],
+   "radius_cells": 5,
+   "window": "11x11",
+   "agree": true,
+   "reference_min_s": 5.7266,
+   "reference_median_s": 5.9472,
+   "rust_min_s": 1.8158,
+   "rust_median_s": 1.8538,
+   "speedup_median": 3.21
+  },
+  {
+   "kernel": "window_stats",
+   "cells": 67108864,
+   "shape": [
+    8192,
+    8192
+   ],
+   "radius_cells": 10,
+   "window": "21x21",
+   "agree": true,
+   "reference_min_s": 6.1726,
+   "reference_median_s": 6.3929,
+   "rust_min_s": 1.7908,
+   "rust_median_s": 1.8003,
+   "speedup_median": 3.55
+  },
+  {
+   "kernel": "window_stats",
+   "cells": 67108864,
+   "shape": [
+    8192,
+    8192
+   ],
+   "radius_cells": 50,
+   "window": "101x101",
+   "agree": true,
+   "reference_min_s": 6.1932,
+   "reference_median_s": 6.2342,
+   "rust_min_s": 2.0306,
+   "rust_median_s": 2.0351,
+   "speedup_median": 3.06
+  }
+ ],
+ "production_runs_rust_only": {
+  "aoi": {
+   "region": "aoi",
+   "cells": 225821925,
+   "kernel_calls": 96,
+   "kernel_seconds": 31.7,
+   "wall_seconds": 293.6,
+   "tile": 4096,
+   "halo": 54
+  },
+  "watauga": {
+   "region": "watauga",
+   "cells": 63637715,
+   "kernel_calls": 36,
+   "kernel_seconds": 10.3,
+   "wall_seconds": 109.1,
+   "tile": 4096,
+   "halo": 54
+  }
+ }
+}

@@ -1,0 +1,2670 @@
+{
+ "sources": {
+  "buildings": {
+   "acquired_utc": "2026-10-09T05:49:32+00:00",
+   "bbox4326": [
+    -82.92036113653764,
+    35.393131872498934,
+    -82.10551555517637,
+    36.105087009115415
+   ],
+   "bytes": 25793246,
+   "licence": "not stated; local analysis only until resolved",
+   "n": 160651,
+   "path": "data/raw/nc_buildings.parquet",
+   "sha256": "35c1e2f9f37dfe4dbfbe1ef0c9bce472a82ca2729316918a467883da441e3107",
+   "url": "https://services1.arcgis.com/YBWrN5qiESVpqi92/arcgis/rest/services/North_Carolina_Composite_Building_Footprints/FeatureServer/0"
+  },
+  "counties": {
+   "acquired_utc": "2026-10-09T05:30:19+00:00",
+   "bytes": 247147,
+   "n": 3,
+   "path": "data/raw/counties.parquet",
+   "sha256": "46947add2412a054ce92043bc70da83b31eb9b8826b5aecbffda462b866708e2",
+   "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1",
+   "where": "STATE='37' AND NAME IN ('Buncombe County','Yancey County','Watauga County')"
+  },
+  "dem_tiles_aoi": {
+   "mosaic": {
+    "bounds": [
+     327120.0,
+     3918305.0,
+     399615.0,
+     3996180.0
+    ],
+    "path": "data/interim/dem_5m_aoi.tif",
+    "seams": [
+     {
+      "overlap_cells": 0,
+      "tile": "USGS_1M_17_x32y395_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0289306640625,
+      "median_m": 0.000244140625,
+      "overlap_cells": 1154,
+      "p99_abs_m": 0.0250531005859375,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x32y396_NC_Phase5_2018_A18"
+     },
+     {
+      "overlap_cells": 0,
+      "tile": "USGS_1M_17_x33y392_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.071533203125,
+      "median_m": 0.0,
+      "overlap_cells": 4004,
+      "p99_abs_m": 0.0364843749999999,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x33y393_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0321044921875,
+      "median_m": 0.0,
+      "overlap_cells": 4008,
+      "p99_abs_m": 0.02288391113281249,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x33y394_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0457763671875,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.0284423828125,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x33y395_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.059814453125,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.0240478515625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x33y396_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.000732421875,
+      "median_m": 0.0,
+      "overlap_cells": 680,
+      "p99_abs_m": 0.0006103515625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x34y392_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.03955078125,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.027099609375,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x34y393_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0347900390625,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.0201416015625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x34y394_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0311279296875,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.023862915039062516,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x34y395_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.02734375,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.013670043945312516,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x34y396_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.00054931640625,
+      "median_m": 0.0,
+      "overlap_cells": 680,
+      "p99_abs_m": 0.0003662109375,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x35y392_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.03607177734375,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.01775756835937503,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x35y393_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.02996826171875,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.015375366210937547,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x35y394_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0428466796875,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.01665893554687503,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x35y395_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0360107421875,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.01519775390625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x35y396_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0614013671875,
+      "median_m": 0.0,
+      "overlap_cells": 4004,
+      "p99_abs_m": 0.03216369628906249,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x35y397_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.00048828125,
+      "median_m": 0.0,
+      "overlap_cells": 680,
+      "p99_abs_m": 0.000244140625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x36y392_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.040771484375,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.018247680664062516,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x36y393_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0323486328125,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.016843872070312516,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x36y394_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.02294921875,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.01519775390625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x36y395_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0313720703125,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.018308715820312516,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x36y396_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.02410888671875,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.0133056640625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x36y397_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.03106689453125,
+      "median_m": 0.0,
+      "overlap_cells": 4004,
+      "p99_abs_m": 0.023370971679687463,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x36y398_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0390625,
+      "median_m": 0.0,
+      "overlap_cells": 4004,
+      "p99_abs_m": 0.02147705078124995,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x36y399_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.01763916015625,
+      "median_m": 0.0,
+      "overlap_cells": 4004,
+      "p99_abs_m": 0.00042724609375,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x37y393_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0411376953125,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.016965942382812516,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x37y394_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.03216552734375,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.01885986328125,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x37y395_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.065185546875,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.02209106445312503,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x37y396_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.043212890625,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.02318969726562503,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x37y397_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0352783203125,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.021116333007812516,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x37y398_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0296630859375,
+      "median_m": 0.0,
+      "overlap_cells": 7910,
+      "p99_abs_m": 0.022705078125,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x37y399_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.031005859375,
+      "median_m": 0.0,
+      "overlap_cells": 3976,
+      "p99_abs_m": 0.02294921875,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x37y400_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0068359375,
+      "median_m": 0.0,
+      "overlap_cells": 4004,
+      "p99_abs_m": 0.00048828125,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x38y393_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0433349609375,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.022092895507812516,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x38y394_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0421142578125,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.022216796875,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x38y395_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0469970703125,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.025693969726562516,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x38y396_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0401611328125,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.02001953125,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x38y397_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0396728515625,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.01708984375,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x38y398_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0330810546875,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.016965942382812516,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x38y399_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.04248046875,
+      "median_m": 0.0,
+      "overlap_cells": 6474,
+      "p99_abs_m": 0.02186706542968747,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x38y400_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0128173828125,
+      "median_m": 0.0,
+      "overlap_cells": 4004,
+      "p99_abs_m": 0.000457763671875,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x39y393_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.036865234375,
+      "median_m": 0.0,
+      "overlap_cells": 7848,
+      "p99_abs_m": 0.01953125,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x39y394_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.00628662109375,
+      "median_m": 0.0,
+      "overlap_cells": 4004,
+      "p99_abs_m": 0.00048828125,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x39y396_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.04345703125,
+      "median_m": 0.0,
+      "overlap_cells": 7848,
+      "p99_abs_m": 0.01702880859375,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x39y397_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0350341796875,
+      "median_m": 0.0,
+      "overlap_cells": 7848,
+      "p99_abs_m": 0.0157470703125,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x39y398_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0478515625,
+      "median_m": 0.0,
+      "overlap_cells": 7848,
+      "p99_abs_m": 0.015657348632812484,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x39y399_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 1.7352294921875,
+      "median_m": 0.0303955078125,
+      "overlap_cells": 17919,
+      "p99_abs_m": 0.31929199218749993,
+      "share_gt_1m": 0.00044645348512751827,
+      "tile": "USGS_one_meter_x36y398_TN_Eastern_2_16_B16_Del4_2016"
+     },
+     {
+      "max_abs_diff_m": 10.5318603515625,
+      "median_m": -0.0653076171875,
+      "overlap_cells": 820378,
+      "p99_abs_m": 0.5390625,
+      "share_gt_1m": 0.0032972605311210198,
+      "tile": "USGS_one_meter_x36y399_TN_Eastern_2_16_B16_Del4_2016"
+     },
+     {
+      "max_abs_diff_m": 0.0001220703125,
+      "median_m": 0.0,
+      "overlap_cells": 4004,
+      "p99_abs_m": 6.103515625e-05,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_one_meter_x36y400_TN_Eastern_2_16_B16_Del4_2016"
+     },
+     {
+      "max_abs_diff_m": 4.30450439453125,
+      "median_m": 0.0303955078125,
+      "overlap_cells": 189409,
+      "p99_abs_m": 0.5826367187500008,
+      "share_gt_1m": 0.0019692834025838266,
+      "tile": "USGS_one_meter_x37y399_TN_Eastern_2_16_B16_Del4_2016"
+     },
+     {
+      "max_abs_diff_m": 17.65185546875,
+      "median_m": 0.07476806640625,
+      "overlap_cells": 693889,
+      "p99_abs_m": 0.8758618164062497,
+      "share_gt_1m": 0.0073369083527768855,
+      "tile": "USGS_one_meter_x37y400_TN_Eastern_2_16_B16_Del4_2016"
+     },
+     {
+      "overlap_cells": 0,
+      "tile": "USGS_one_meter_x38y400_TN_Eastern_2_16_B16_Del4_2016"
+     }
+    ],
+    "sha256": "bcb58c945c7c3ec4403d1862cf8c0a4c9164c5968f7a6c6ff87a2e7db01ffae3",
+    "shape": [
+     15575,
+     14499
+    ]
+   },
+   "tiles": {
+    "USGS_1M_17_x32y395_NC_Phase5_2018_A18": {
+     "bytes_1m": 324848721,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "35bfec9e270d7c9de35c6938f4c97e01092be77c0258a1d07519bd17f195faf6",
+     "sha256_5m": "00541bf6748a04fe06ae233fa0425119aacbbe3e910129fb7d13d3d099d95baa",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x32y395_NC_Phase5_2018_A18.tif",
+     "zmax": 1613.77587890625,
+     "zmin": 694.0033569335938
+    },
+    "USGS_1M_17_x32y396_NC_Phase5_2018_A18": {
+     "bytes_1m": 323097981,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "5460ed2fcde911ede63df96fbd248d99d6c90ef03461821a3252aea73e3d9973",
+     "sha256_5m": "eba5a2f7c79d80509c1fc1a44f3830f61bfecd2b022cb844fffe33f50de8394e",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x32y396_NC_Phase5_2018_A18.tif",
+     "zmax": 1570.891357421875,
+     "zmin": 714.0122680664062
+    },
+    "USGS_1M_17_x33y392_NC_Phase5_2018_A18": {
+     "bytes_1m": 313595504,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "f4afbb19fea362357034a4c9eb2cd5ccaa39cd514e5633ed537017820cc37ab6",
+     "sha256_5m": "b99e5597f6f4b703b78b2c0729b8cc5b04e11cd43ee2897f6ad8a1c2ea94ef59",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x33y392_NC_Phase5_2018_A18.tif",
+     "zmax": 1850.0343017578125,
+     "zmin": 785.4155883789062
+    },
+    "USGS_1M_17_x33y393_NC_Phase5_2018_A18": {
+     "bytes_1m": 321530888,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "15698f9a710b9985bd5171d8cfe285d3285a01a6e4cdf23671f009f3492c8294",
+     "sha256_5m": "824342fb50f82bee6c17f6b4da2adb9d677ff819a7f85de574b720a6de1d8e55",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x33y393_NC_Phase5_2018_A18.tif",
+     "zmax": 1836.8551025390625,
+     "zmin": 752.387939453125
+    },
+    "USGS_1M_17_x33y394_NC_Phase5_2018_A18": {
+     "bytes_1m": 321420834,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "608b62073aab8a027da9b37046c9855d4423a1dd2dea265eee6ecdb500a83d74",
+     "sha256_5m": "47c48290cef1e8f5a330cbe33812d75f1d0e72e8056963bdf7c0d47763463d29",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x33y394_NC_Phase5_2018_A18.tif",
+     "zmax": 1406.1524658203125,
+     "zmin": 681.6963500976562
+    },
+    "USGS_1M_17_x33y395_NC_Phase5_2018_A18": {
+     "bytes_1m": 324452542,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "64bd20d6eb69f46a57c5195813a3dc661819aa02251e9314d7e00449189de3d4",
+     "sha256_5m": "fbd5842664d2ab4ce7816ec81341369a9829f4d6835264959956066e8c1a4ca8",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x33y395_NC_Phase5_2018_A18.tif",
+     "zmax": 1455.0909423828125,
+     "zmin": 644.5552978515625
+    },
+    "USGS_1M_17_x33y396_NC_Phase5_2018_A18": {
+     "bytes_1m": 328159116,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "8a120ab14c95913285935be7a1024a19b61bc3cf2f865ac122c4f8f9eda371cc",
+     "sha256_5m": "331063bb49f88d28457259f49956391e23c8f83902cd520fa37bd333b50dc9af",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x33y396_NC_Phase5_2018_A18.tif",
+     "zmax": 1509.654296875,
+     "zmin": 612.8701782226562
+    },
+    "USGS_1M_17_x34y392_NC_Phase5_2018_A18": {
+     "bytes_1m": 327746868,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "fbebd6419bc72e8596bb0c694d9e89e45d30378a7c0cafb738b311006e55b990",
+     "sha256_5m": "80663a6f80ecb462e94e95c0034888a4f6d6bd6af4e4cecfebf1751709ca021e",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x34y392_NC_Phase5_2018_A18.tif",
+     "zmax": 1606.6248779296875,
+     "zmin": 667.709716796875
+    },
+    "USGS_1M_17_x34y393_NC_Phase5_2018_A18": {
+     "bytes_1m": 326491772,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "927e3ca52364cf9973e580202460a2124aca5bccf7b945b83f18d54254d76b8d",
+     "sha256_5m": "b6af48f986ebc5356222cce3f4c7c42501da66c2ef3d55543bcece0e6baf4f58",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x34y393_NC_Phase5_2018_A18.tif",
+     "zmax": 1742.88720703125,
+     "zmin": 663.4072265625
+    },
+    "USGS_1M_17_x34y394_NC_Phase5_2018_A18": {
+     "bytes_1m": 316325645,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "628c8adb0a34083a27641a43415429c50b7a20b56b5a2fbe932d77a05cbc7582",
+     "sha256_5m": "b9358b9918680b7d1a39aa83dd69fe3e793fcf0f602b6ff26fd5bb68ed2d820a",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x34y394_NC_Phase5_2018_A18.tif",
+     "zmax": 1227.666748046875,
+     "zmin": 539.1221313476562
+    },
+    "USGS_1M_17_x34y395_NC_Phase5_2018_A18": {
+     "bytes_1m": 320401122,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "dfa91e7e155cbab252a07a62068f84462045ed8dbe2864a58b8eecc4aec954ba",
+     "sha256_5m": "8d9533ad46248054c5d367d8be7d0ca54b722bfe5f8073facd2a403871ca6d13",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x34y395_NC_Phase5_2018_A18.tif",
+     "zmax": 1240.3140869140625,
+     "zmin": 589.7745971679688
+    },
+    "USGS_1M_17_x34y396_NC_Phase5_2018_A18": {
+     "bytes_1m": 330983607,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "0533aa9fb9a6d125483400021f1e2c76512016c0da737f6826057794305ab03f",
+     "sha256_5m": "94bf65ede5eaf5a54df188cd82a68e8c20a4a256d31f1de1faf910ccd2f3d526",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x34y396_NC_Phase5_2018_A18.tif",
+     "zmax": 1109.001953125,
+     "zmin": 509.9267272949219
+    },
+    "USGS_1M_17_x35y392_NC_Phase5_2018_A18": {
+     "bytes_1m": 307693001,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "40df9dae1ff850f46308c3e3cab1c0e26f5bdde151f337eaad6f8d79b48ed160",
+     "sha256_5m": "c25f0a70005b73b605856575194aca1ee77fb57bbf8d1d0a24c09b08cee6ef0b",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x35y392_NC_Phase5_2018_A18.tif",
+     "zmax": 999.6289672851562,
+     "zmin": 623.7355346679688
+    },
+    "USGS_1M_17_x35y393_NC_Phase5_2018_A18": {
+     "bytes_1m": 313939345,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "3c886a7d7476c04fc02650137f78412c05a737cb9f233e4e6922d4a285ff9542",
+     "sha256_5m": "a6cdcc629773a960e90eda0688eb14a90c85e25d6834f1bc70461e3dc1f87e61",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x35y393_NC_Phase5_2018_A18.tif",
+     "zmax": 1133.8499755859375,
+     "zmin": 609.8912963867188
+    },
+    "USGS_1M_17_x35y394_NC_Phase5_2018_A18": {
+     "bytes_1m": 304997154,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "ba85754da9cacf1d6120da701be34940f35fcb8d57a3e029c0eafd685b28b96b",
+     "sha256_5m": "7e9e238e8b936ce43d3318880d950d1286bcce5818dd7c3663dc2c838ff5da03",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x35y394_NC_Phase5_2018_A18.tif",
+     "zmax": 985.070556640625,
+     "zmin": 598.0567016601562
+    },
+    "USGS_1M_17_x35y395_NC_Phase5_2018_A18": {
+     "bytes_1m": 313062815,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "28bc0f2ad1671604293a5006635621cf2cf854e02446f2f2d177722344aa8f70",
+     "sha256_5m": "f97eba0f67456b103248ec5191586dbd0f88d295f4375361a8f0091728ef01aa",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x35y395_NC_Phase5_2018_A18.tif",
+     "zmax": 1010.2908935546875,
+     "zmin": 554.5001220703125
+    },
+    "USGS_1M_17_x35y396_NC_Phase5_2018_A18": {
+     "bytes_1m": 320041595,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "15f5547538fc8c832e19ad91dba05dba76c8827cfb7d1d113ec8fde7d553ffb1",
+     "sha256_5m": "b7f12e6b7b6fa947a2f0a1b7274d6fe37a9adfa16262db314c4c449613b371a4",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x35y396_NC_Phase5_2018_A18.tif",
+     "zmax": 861.5853881835938,
+     "zmin": 507.6636962890625
+    },
+    "USGS_1M_17_x35y397_NC_Phase5_2018_A18": {
+     "bytes_1m": 330292417,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "f9833ec07cbd7c974db78100be678c667fd395032d0618b5894e35ffa7e72646",
+     "sha256_5m": "3210158aa15b0f3026b6301be4ca0a0b7c4659a00d83e4cf68a65511cfbf5ca8",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x35y397_NC_Phase5_2018_A18.tif",
+     "zmax": 1093.036376953125,
+     "zmin": 502.8665771484375
+    },
+    "USGS_1M_17_x36y392_NC_Phase5_2018_A18": {
+     "bytes_1m": 305111300,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "f6a14d0189f12bc04527f75ac48207e4fa318d252d82e43515b65afc348bcf2b",
+     "sha256_5m": "f8e406cf84e63a13e5e91da935f1e021a937e3c5ef840c35aa043f8f1980313a",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x36y392_NC_Phase5_2018_A18.tif",
+     "zmax": 1049.4404296875,
+     "zmin": 588.22265625
+    },
+    "USGS_1M_17_x36y393_NC_Phase5_2018_A18": {
+     "bytes_1m": 299181671,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "0a046d3a13bcbc4021a513f69136e54bbc1dd7d8c79a4bae0d8bcc51a87692d0",
+     "sha256_5m": "7ff8aaa9c044ed4b0499d29d79291a05fd34ea64e1bf29d9f0b88aed803711a5",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x36y393_NC_Phase5_2018_A18.tif",
+     "zmax": 1088.4305419921875,
+     "zmin": 571.9766235351562
+    },
+    "USGS_1M_17_x36y394_NC_Phase5_2018_A18": {
+     "bytes_1m": 316835382,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "82794ab0ff4207c8193a93ad2cfce9056c789612488217fe297c33f0cd1c44a4",
+     "sha256_5m": "2a4bea729227cd3055bc888fbd4f3c305e8e67de8afb49c1ff2f84736c3339df",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x36y394_NC_Phase5_2018_A18.tif",
+     "zmax": 1206.9962158203125,
+     "zmin": 602.9910888671875
+    },
+    "USGS_1M_17_x36y395_NC_Phase5_2018_A18": {
+     "bytes_1m": 324971851,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "0ddd28fb832d4a379934b0962901bc8d3492ff34b1d0f4a4289bcb19e5f46b19",
+     "sha256_5m": "3fe8243bae506fee11c4d3ce43aa5fdecb3542c7ffaff0b993ef3d92113229a9",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x36y395_NC_Phase5_2018_A18.tif",
+     "zmax": 1506.3665771484375,
+     "zmin": 625.0849609375
+    },
+    "USGS_1M_17_x36y396_NC_Phase5_2018_A18": {
+     "bytes_1m": 328754584,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "da9bed3c58d8e96551edffd26cc83674f1ac501916ecd477ea2c1900146b565e",
+     "sha256_5m": "07d0e6f719a89e1552a4b1955327666573e297142fbc042c4ed6ac3ae39a9e73",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x36y396_NC_Phase5_2018_A18.tif",
+     "zmax": 1415.0347900390625,
+     "zmin": 623.5770263671875
+    },
+    "USGS_1M_17_x36y397_NC_Phase5_2018_A18": {
+     "bytes_1m": 328807749,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "c61fefe9d04944d77ca3cb0b59b2aeb4e5a2f5191e282a22418ee621da5ec782",
+     "sha256_5m": "c51716f76c60c9ee0159c0207fa96aeb0005eaa1be7e0a3897bde9af96416359",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x36y397_NC_Phase5_2018_A18.tif",
+     "zmax": 1102.40478515625,
+     "zmin": 589.9033813476562
+    },
+    "USGS_1M_17_x36y398_NC_Phase5_2018_A18": {
+     "bytes_1m": 324385691,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "0f874b1bfe24972dc9e922d253dfa6e64c12370d3facabfd6ab253f50ae266e9",
+     "sha256_5m": "0d4bbca801b507f986267475156ea0ad4ca21b2deb4ac348d88d601e428db6d2",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x36y398_NC_Phase5_2018_A18.tif",
+     "zmax": 1482.9500732421875,
+     "zmin": 691.4256591796875
+    },
+    "USGS_1M_17_x36y399_NC_Phase5_2018_A18": {
+     "bytes_1m": 142090216,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.5473001024949077,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "02cca0e5b65b7e5820a5a503f0362474f0ce8a0287b696a911994605039ffd3e",
+     "sha256_5m": "d0b194015a3735076d6164b30f67ff7a557ceaea5d7bff14cb4da8fff048fe5f",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x36y399_NC_Phase5_2018_A18.tif",
+     "zmax": 1681.2205810546875,
+     "zmin": 843.608154296875
+    },
+    "USGS_1M_17_x37y393_NC_Phase5_2018_A18": {
+     "bytes_1m": 323160745,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "dad755d20f64988eac5292438a9972d83a570a1ef7899a978583fb6cb35863f6",
+     "sha256_5m": "92da5b48a610169f69649a9d5867632b7f082b4d12acb9dc82be1e5ca44a9a33",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x37y393_NC_Phase5_2018_A18.tif",
+     "zmax": 1345.09912109375,
+     "zmin": 648.7225952148438
+    },
+    "USGS_1M_17_x37y394_NC_Phase5_2018_A18": {
+     "bytes_1m": 321378609,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "40e69bf9bb2b177549ae101679b3b988c5e131da5b03d2cb59c8e20570e7fba5",
+     "sha256_5m": "8ffb3dece4e5d0b44d4301cdc19cfcf45de74c6fb39751fd8898e825376ac25f",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x37y394_NC_Phase5_2018_A18.tif",
+     "zmax": 1334.3782958984375,
+     "zmin": 659.0022583007812
+    },
+    "USGS_1M_17_x37y395_NC_Phase5_2018_A18": {
+     "bytes_1m": 311819380,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "ac06a5b62ea5da35b197a97eb00889357cb70fcd8ec6456e2cc5ae28e96a6567",
+     "sha256_5m": "1f8cfaeae57217ca05001d4f197284c321e93a5adcc555b4faa8a5fab974b8a7",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x37y395_NC_Phase5_2018_A18.tif",
+     "zmax": 1637.483642578125,
+     "zmin": 645.5089111328125
+    },
+    "USGS_1M_17_x37y396_NC_Phase5_2018_A18": {
+     "bytes_1m": 321918549,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "af63140e71ba2a54d74989535d5fe1a45784630f2875dd93b02d1ec5b09ba535",
+     "sha256_5m": "b6d8e12cc34ec74aafbcfaeea8724d7a25c4d93c34727ddb15501790724ea777",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x37y396_NC_Phase5_2018_A18.tif",
+     "zmax": 1847.509765625,
+     "zmin": 686.2550048828125
+    },
+    "USGS_1M_17_x37y397_NC_Phase5_2018_A18": {
+     "bytes_1m": 322696391,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "f46af5553965f4f348831604d77d970abaaadab596421471ddef1e738425a908",
+     "sha256_5m": "69ef14fe2bbdd3648ed0fad5dfe233ead1c10104b62c07abaf95f1017f172fc7",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x37y397_NC_Phase5_2018_A18.tif",
+     "zmax": 1816.9522705078125,
+     "zmin": 696.1981201171875
+    },
+    "USGS_1M_17_x37y398_NC_Phase5_2018_A18": {
+     "bytes_1m": 329126317,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "6d9e9a8ad32b6c7952f2d4554f6457447a3dbb4f64664abba6dcbd9428bbc214",
+     "sha256_5m": "52f1a568f86a5e6a484b483d588f905104ecb3f2754130ef7d2c7b5cbf1b5fd3",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x37y398_NC_Phase5_2018_A18.tif",
+     "zmax": 1411.227294921875,
+     "zmin": 722.744384765625
+    },
+    "USGS_1M_17_x37y399_NC_Phase5_2018_A18": {
+     "bytes_1m": 335956576,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0001724050175598627,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "5df7b52081e0a3c2c466d8b7c5836a2ee61ac3e36715a527036d9b706dd9af6a",
+     "sha256_5m": "f0cefcee626de51f6295ee9c8eaabf74791fcffd12f43763e4580bd9ca4ad660",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x37y399_NC_Phase5_2018_A18.tif",
+     "zmax": 1400.75341796875,
+     "zmin": 609.7320556640625
+    },
+    "USGS_1M_17_x37y400_NC_Phase5_2018_A18": {
+     "bytes_1m": 194237109,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.4235115533816832,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "6fd0af42b4c36857487edc38f4348983d05ef6ec060722e4398669865108669e",
+     "sha256_5m": "9b462cb77ad776d7a65794a88fc5b4627668996a687cc2a6611b3ce5d62cda3c",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x37y400_NC_Phase5_2018_A18.tif",
+     "zmax": 1437.27490234375,
+     "zmin": 527.8640747070312
+    },
+    "USGS_1M_17_x38y393_NC_Phase5_2018_A18": {
+     "bytes_1m": 344683261,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "2617ab0fe1cc4d2957de24efdc92602eca82127367a5780c7402bb8353780bb3",
+     "sha256_5m": "5a354079a83dd6d2faa361b871716ae82a9c0f9a026eda273cecb48c80ff9a29",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x38y393_NC_Phase5_2018_A18.tif",
+     "zmax": 1220.712158203125,
+     "zmin": 298.26263427734375
+    },
+    "USGS_1M_17_x38y394_NC_Phase5_2018_A18": {
+     "bytes_1m": 339509696,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "42752288503641c1f6859ed62e87231a5945bea2e983a59c7c4bf4c6d47ec7b6",
+     "sha256_5m": "055fb02fd449e80de5596c9106d6e287cf33244dd85f6591c512775ca3e012f1",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x38y394_NC_Phase5_2018_A18.tif",
+     "zmax": 1200.3553466796875,
+     "zmin": 476.88482666015625
+    },
+    "USGS_1M_17_x38y395_NC_Phase5_2018_A18": {
+     "bytes_1m": 339657354,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "89662be835e277d03661217ab2b3e86ea3a4f53208a5bee0088dc4e2f54fcde1",
+     "sha256_5m": "6e4d36945edd30f22418eb2def24e8f05fce9a4dc3020fcd833e7beaa7dfba1d",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x38y395_NC_Phase5_2018_A18.tif",
+     "zmax": 1648.7242431640625,
+     "zmin": 453.645263671875
+    },
+    "USGS_1M_17_x38y396_NC_Phase5_2018_A18": {
+     "bytes_1m": 324612969,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "52feb87d3724ea0a1b1fb587f7313932267a91767fed663407f71df327694577",
+     "sha256_5m": "6b830fbac6ae7f15cb39b6213dc473763f5099dfabddcd28ad279764dff38a37",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x38y396_NC_Phase5_2018_A18.tif",
+     "zmax": 2037.1168212890625,
+     "zmin": 692.1746215820312
+    },
+    "USGS_1M_17_x38y397_NC_Phase5_2018_A18": {
+     "bytes_1m": 321257855,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "30fdc2026adbec627de8f20cddad4415ea70bd4869e1b94d2396d33c0ee74468",
+     "sha256_5m": "ef137f534ea1633e200ce9780282c799ac0355ccc2b1db26f6dda86b3e1cb435",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x38y397_NC_Phase5_2018_A18.tif",
+     "zmax": 2025.311767578125,
+     "zmin": 823.5122680664062
+    },
+    "USGS_1M_17_x38y398_NC_Phase5_2018_A18": {
+     "bytes_1m": 325876960,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "3373b1bc9138335975692d3aa419b268f54d425ed2f555ad2ebe39444b03b2b9",
+     "sha256_5m": "2124f797f9f5093da8cc700b0f404abf92688b377b890897b186a053cb25168d",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x38y398_NC_Phase5_2018_A18.tif",
+     "zmax": 1500.743408203125,
+     "zmin": 738.702880859375
+    },
+    "USGS_1M_17_x38y399_NC_Phase5_2018_A18": {
+     "bytes_1m": 335227390,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "2c7a723010ad9e82dc6d2173a0745ef4fda06ec8649f000eb0240c055334eb2f",
+     "sha256_5m": "d5967f1c1d91a99acc9c1a96871680d435c21494d005722395cb44a8204902fe",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x38y399_NC_Phase5_2018_A18.tif",
+     "zmax": 1340.4163818359375,
+     "zmin": 616.1865234375
+    },
+    "USGS_1M_17_x38y400_NC_Phase5_2018_A18": {
+     "bytes_1m": 319819170,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.03598449502545407,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "145b6245c9ab2536883959a518cd4743058c17b11f798708546728fde9b70a19",
+     "sha256_5m": "f1ff17edf9af417c23eaeb7996ce90dedd41c927f1eead69ff6ba1804da14748",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x38y400_NC_Phase5_2018_A18.tif",
+     "zmax": 1575.7476806640625,
+     "zmin": 632.0321655273438
+    },
+    "USGS_1M_17_x39y393_NC_Phase5_2018_A18": {
+     "bytes_1m": 349534480,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "f32dd3a98422b6c3e1ca42087d2073013d5a669dfa49cb970598aef345e1d055",
+     "sha256_5m": "fae84b217a2390340c4206aeb7f29440c8e402d2b2375c43310d9cc773348422",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x39y393_NC_Phase5_2018_A18.tif",
+     "zmax": 839.8123168945312,
+     "zmin": 247.8139190673828
+    },
+    "USGS_1M_17_x39y394_NC_Phase5_2018_A18": {
+     "bytes_1m": 350628291,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "8a819a7c2368700111850926b6235b9fec27f1bdef952a9579885dfbfb1346c5",
+     "sha256_5m": "d133c57053450f8dd739d0c0edf27b7a65cc61c733763d1a1a1a1cbb96f52ac3",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x39y394_NC_Phase5_2018_A18.tif",
+     "zmax": 995.418212890625,
+     "zmin": 327.9682922363281
+    },
+    "USGS_1M_17_x39y396_NC_Phase5_2018_A18": {
+     "bytes_1m": 348535573,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "77f39f01ad673771b7e4dcae975ac0e2e04eb315ea9a96c64095d9b54dd33625",
+     "sha256_5m": "d52f2c9dc113d3d2c19317844e02e761bb4c6e3bc8c6b951f6a20b09a48eeeaa",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x39y396_NC_Phase5_2018_A18.tif",
+     "zmax": 1501.9053955078125,
+     "zmin": 446.3793640136719
+    },
+    "USGS_1M_17_x39y397_NC_Phase5_2018_A18": {
+     "bytes_1m": 322104940,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "a1170654439ca3c50d6ddbf50e67d5577e10bd0017bdf23418a681cdaa99903d",
+     "sha256_5m": "3452fbe083ce21236464c46aa44d40238e30a3089f408d151d01e81367be7477",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x39y397_NC_Phase5_2018_A18.tif",
+     "zmax": 1248.8251953125,
+     "zmin": 541.8617553710938
+    },
+    "USGS_1M_17_x39y398_NC_Phase5_2018_A18": {
+     "bytes_1m": 327710614,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "0c8a55205cfbdeebd40a561e8d7a83b56f2b8cfdcef153883cf02c193822bc56",
+     "sha256_5m": "ca76ee782ad8c542c112a0c7bacc5c054686eb89b3adef583f6f241caaee08c3",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x39y398_NC_Phase5_2018_A18.tif",
+     "zmax": 1236.1429443359375,
+     "zmin": 702.7127075195312
+    },
+    "USGS_1M_17_x39y399_NC_Phase5_2018_A18": {
+     "bytes_1m": 329558979,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "96db831e541fa7be61b2939e3d7eded6f5a6cb2972d8a4fd60ed18f0ee18f3ad",
+     "sha256_5m": "ccaed9cb1b08ba6cba7b85c199e32d41bdfce02643853b5bf20a9d3bbc87231d",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x39y399_NC_Phase5_2018_A18.tif",
+     "zmax": 1255.326416015625,
+     "zmin": 659.9320678710938
+    },
+    "USGS_one_meter_x36y398_TN_Eastern_2_16_B16_Del4_2016": {
+     "bytes_1m": 7033752,
+     "lidar_begdate": "20160205",
+     "lidar_enddate": "20160404",
+     "nodata_share_5m": 0.9955291960786466,
+     "project": "TN_Eastern_2_16_B16_Del4_2016",
+     "published": "2020-03-30",
+     "sha256_1m": "95e8e4e51f2348a8c734c677888ede7e90903bf181809c04efd24c4c1b942b7a",
+     "sha256_5m": "63525f7f0d01f33b5b44bae346e1921b027340d66cb3f1a9571ba304774a0c73",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/TN_Eastern_2_16_B16_Del4_2016/TIFF/USGS_one_meter_x36y398_TN_Eastern_2_16_B16_Del4_2016.tif",
+     "zmax": 1217.5841064453125,
+     "zmin": 1020.2798461914062
+    },
+    "USGS_one_meter_x36y399_TN_Eastern_2_16_B16_Del4_2016": {
+     "bytes_1m": 377457776,
+     "lidar_begdate": "20160205",
+     "lidar_enddate": "20160404",
+     "nodata_share_5m": 0.24801497204094608,
+     "project": "TN_Eastern_2_16_B16_Del4_2016",
+     "published": "2020-03-30",
+     "sha256_1m": "4b1a268d91aaf22068f00070188df161152e6410acd119d3afc75a3c43a370c2",
+     "sha256_5m": "f86b87a5883f3b3d336a4d298c7d4c7f561de952a9e22399ba95770b283e628d",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/TN_Eastern_2_16_B16_Del4_2016/TIFF/USGS_one_meter_x36y399_TN_Eastern_2_16_B16_Del4_2016.tif",
+     "zmax": 1680.9716796875,
+     "zmin": 610.9967651367188
+    },
+    "USGS_one_meter_x36y400_TN_Eastern_2_16_B16_Del4_2016": {
+     "bytes_1m": 510871927,
+     "lidar_begdate": "20160205",
+     "lidar_enddate": "20160404",
+     "nodata_share_5m": 0.0,
+     "project": "TN_Eastern_2_16_B16_Del4_2016",
+     "published": "2020-03-30",
+     "sha256_1m": "961469409c7ac794224b48aab0e3acb11004f079e750070231b056c458d111d8",
+     "sha256_5m": "695e9b928eb4c32c98198fd4e34cb711be1b03e98a0c2d4deff62d9385ce99db",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/TN_Eastern_2_16_B16_Del4_2016/TIFF/USGS_one_meter_x36y400_TN_Eastern_2_16_B16_Del4_2016.tif",
+     "zmax": 1305.2955322265625,
+     "zmin": 493.7276306152344
+    },
+    "USGS_one_meter_x37y399_TN_Eastern_2_16_B16_Del4_2016": {
+     "bytes_1m": 28086758,
+     "lidar_begdate": "20160205",
+     "lidar_enddate": "20160404",
+     "nodata_share_5m": 0.9525933606852688,
+     "project": "TN_Eastern_2_16_B16_Del4_2016",
+     "published": "2020-03-30",
+     "sha256_1m": "4f85447c7dc817a3e10340e56d4405bd736a825a7ff02560f135e6e787bad137",
+     "sha256_5m": "43d27537f45dc97c652f9f8db06c63803189c8f68eb20ab7489744e25f48c4d2",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/TN_Eastern_2_16_B16_Del4_2016/TIFF/USGS_one_meter_x37y399_TN_Eastern_2_16_B16_Del4_2016.tif",
+     "zmax": 1310.3529052734375,
+     "zmin": 904.7152099609375
+    },
+    "USGS_one_meter_x37y400_TN_Eastern_2_16_B16_Del4_2016": {
+     "bytes_1m": 340558589,
+     "lidar_begdate": "20160205",
+     "lidar_enddate": "20160404",
+     "nodata_share_5m": 0.3316336510642205,
+     "project": "TN_Eastern_2_16_B16_Del4_2016",
+     "published": "2020-03-30",
+     "sha256_1m": "8ce440d32c74fdb56da7154c51892e6e9b41f62d31f286b43889cfc92f995746",
+     "sha256_5m": "3696268ce3ce02d5c68b506979272248d59a300f886ed80d6d2c4b2b563856f5",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/TN_Eastern_2_16_B16_Del4_2016/TIFF/USGS_one_meter_x37y400_TN_Eastern_2_16_B16_Del4_2016.tif",
+     "zmax": 1355.3809814453125,
+     "zmin": 490.5230407714844
+    },
+    "USGS_one_meter_x38y400_TN_Eastern_2_16_B16_Del4_2016": {
+     "bytes_1m": 86256851,
+     "lidar_begdate": "20160205",
+     "lidar_enddate": "20160404",
+     "nodata_share_5m": 0.8315872439249062,
+     "project": "TN_Eastern_2_16_B16_Del4_2016",
+     "published": "2020-03-30",
+     "sha256_1m": "0ad5870cf6adc727a3e0fdc94415120939d8fb5f6c439cefcb802961c0b9d35b",
+     "sha256_5m": "653081016367177f68e4a76c40083f4c2449313304e748e4173577142678b5c4",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/TN_Eastern_2_16_B16_Del4_2016/TIFF/USGS_one_meter_x38y400_TN_Eastern_2_16_B16_Del4_2016.tif",
+     "zmax": 1575.690673828125,
+     "zmin": 815.69970703125
+    }
+   }
+  },
+  "dem_tiles_watauga": {
+   "mosaic": {
+    "bounds": [
+     415550.0,
+     3994615.0,
+     461025.0,
+     4029600.0
+    ],
+    "path": "data/interim/dem_5m_watauga.tif",
+    "seams": [
+     {
+      "overlap_cells": 0,
+      "tile": "USGS_1M_17_x41y401_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.00079345703125,
+      "median_m": 0.0,
+      "overlap_cells": 1782,
+      "p99_abs_m": 0.0003662109375,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x41y402_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0001220703125,
+      "median_m": 0.0,
+      "overlap_cells": 4,
+      "p99_abs_m": 0.00011840820312499997,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x42y400_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.000732421875,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.000244140625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x42y401_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0008544921875,
+      "median_m": 0.0,
+      "overlap_cells": 7890,
+      "p99_abs_m": 0.00030517578125,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x42y402_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.00048828125,
+      "median_m": 0.0,
+      "overlap_cells": 3490,
+      "p99_abs_m": 0.000244140625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x42y403_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0003662109375,
+      "median_m": 0.0,
+      "overlap_cells": 2156,
+      "p99_abs_m": 0.000244140625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x43y400_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0008544921875,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.000244140625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x43y401_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0006103515625,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.000244140625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x43y402_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0003662109375,
+      "median_m": 0.0,
+      "overlap_cells": 5492,
+      "p99_abs_m": 0.000244140625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x43y403_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.00042724609375,
+      "median_m": 0.0,
+      "overlap_cells": 2156,
+      "p99_abs_m": 0.000244140625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x44y400_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.000732421875,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.000244140625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x44y401_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0003662109375,
+      "median_m": 0.0,
+      "overlap_cells": 8004,
+      "p99_abs_m": 0.00018310546875,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x44y402_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0003662109375,
+      "median_m": 0.0,
+      "overlap_cells": 7842,
+      "p99_abs_m": 0.000244140625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x44y403_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.0003662109375,
+      "median_m": 0.0,
+      "overlap_cells": 2156,
+      "p99_abs_m": 0.000244140625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x45y400_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.00115966796875,
+      "median_m": 0.0,
+      "overlap_cells": 6386,
+      "p99_abs_m": 0.000244140625,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x45y401_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.00030517578125,
+      "median_m": 0.0,
+      "overlap_cells": 6916,
+      "p99_abs_m": 0.00018310546875,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x45y402_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 0.00030517578125,
+      "median_m": 0.0,
+      "overlap_cells": 2840,
+      "p99_abs_m": 0.00018310546875,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x46y402_NC_Phase5_2018_A18"
+     },
+     {
+      "max_abs_diff_m": 5.10552978515625,
+      "median_m": 0.08258056640625,
+      "overlap_cells": 454157,
+      "p99_abs_m": 0.35246093750000007,
+      "share_gt_1m": 0.001006259949753059,
+      "tile": "USGS_1M_17_x45y400_NC_Phase4_2017_A17"
+     },
+     {
+      "max_abs_diff_m": 5.03424072265625,
+      "median_m": 0.056884765625,
+      "overlap_cells": 461185,
+      "p99_abs_m": 0.271240234375,
+      "share_gt_1m": 0.00012142632566106876,
+      "tile": "USGS_1M_17_x45y401_NC_Phase4_2017_A17"
+     },
+     {
+      "max_abs_diff_m": 3.31884765625,
+      "median_m": -0.065673828125,
+      "overlap_cells": 194666,
+      "p99_abs_m": 0.2220458984375,
+      "share_gt_1m": 9.246607008928113e-05,
+      "tile": "USGS_1M_17_x45y402_NC_Phase4_2017_A17"
+     },
+     {
+      "max_abs_diff_m": 0.0361328125,
+      "median_m": 0.0,
+      "overlap_cells": 4004,
+      "p99_abs_m": 0.006406860351562488,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_1M_17_x46y401_NC_Phase4_2017_A17"
+     },
+     {
+      "max_abs_diff_m": 1.6820068359375,
+      "median_m": -0.044036865234375,
+      "overlap_cells": 33742,
+      "p99_abs_m": 0.2181146240234373,
+      "share_gt_1m": 0.0001185466184577085,
+      "tile": "USGS_1M_17_x46y402_NC_Phase4_2017_A17"
+     },
+     {
+      "overlap_cells": 0,
+      "tile": "USGS_one_meter_x41y401_TN_Eastern_2_16_B16_Del4_2016"
+     },
+     {
+      "max_abs_diff_m": 6.4937744140625,
+      "median_m": -0.0223388671875,
+      "overlap_cells": 587879,
+      "p99_abs_m": 0.4819470214843733,
+      "share_gt_1m": 0.001731648859714329,
+      "tile": "USGS_one_meter_x41y402_TN_Eastern_2_16_B16_Del4_2016"
+     },
+     {
+      "max_abs_diff_m": 0.0001220703125,
+      "median_m": 0.0,
+      "overlap_cells": 1782,
+      "p99_abs_m": 6.103515625e-05,
+      "share_gt_1m": 0.0,
+      "tile": "USGS_one_meter_x41y403_TN_Eastern_2_16_B16_Del4_2016"
+     },
+     {
+      "max_abs_diff_m": 2.6011962890625,
+      "median_m": -0.0052490234375,
+      "overlap_cells": 233428,
+      "p99_abs_m": 0.41410705566406314,
+      "share_gt_1m": 0.0007925355998423496,
+      "tile": "USGS_one_meter_x42y402_TN_Eastern_2_16_B16_Del4_2016"
+     },
+     {
+      "max_abs_diff_m": 3.50634765625,
+      "median_m": -0.023681640625,
+      "overlap_cells": 681698,
+      "p99_abs_m": 0.3828125,
+      "share_gt_1m": 0.0007319956931075051,
+      "tile": "USGS_one_meter_x42y403_TN_Eastern_2_16_B16_Del4_2016"
+     },
+     {
+      "max_abs_diff_m": 4.327880859375,
+      "median_m": -0.02783203125,
+      "overlap_cells": 1174568,
+      "p99_abs_m": 0.24257385253906705,
+      "share_gt_1m": 0.00045037835187064523,
+      "tile": "USGS_one_meter_x43y403_TN_Eastern_2_16_B16_Del4_2016"
+     }
+    ],
+    "sha256": "426d44ef45f9f62337ae854f25c157f31659b3a367097cecd6a8281a9068a6de",
+    "shape": [
+     6997,
+     9095
+    ]
+   },
+   "tiles": {
+    "USGS_1M_17_x41y401_NC_Phase5_2018_A18": {
+     "bytes_1m": 287414875,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.09276088546817818,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "e7046ebe2f3ff6e46acdbd0df0ebd23f1492f2ad2b8c5a9c3fb17b007e25a8f4",
+     "sha256_5m": "693e0a4eb01dd76744b099af415d0f07829b8d17d5b7962eba8da521120c7041",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x41y401_NC_Phase5_2018_A18.tif",
+     "zmax": 1624.3232421875,
+     "zmin": 772.0641479492188
+    },
+    "USGS_1M_17_x41y402_NC_Phase5_2018_A18": {
+     "bytes_1m": 125771834,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.6267538655151043,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "237d460be9648da6ea861cb66c443df28166efbc2fc961ffe3f49076b9f50aae",
+     "sha256_5m": "1fd8d4396c1dbb0420d61747dd3070085214634234791ee01680608d3f74c74b",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x41y402_NC_Phase5_2018_A18.tif",
+     "zmax": 1281.2493896484375,
+     "zmin": 628.5171508789062
+    },
+    "USGS_1M_17_x42y400_NC_Phase5_2018_A18": {
+     "bytes_1m": 305937118,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "08985d6857a3e123ef7e1fa47e11666009e76c5421e859d08c71af904e07ae23",
+     "sha256_5m": "6c448594af72b288f409a349640146a6543d68677f1fc347762598890df5a0d0",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x42y400_NC_Phase5_2018_A18.tif",
+     "zmax": 1811.648681640625,
+     "zmin": 631.3836669921875
+    },
+    "USGS_1M_17_x42y401_NC_Phase5_2018_A18": {
+     "bytes_1m": 304415332,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "b163dcced7d99f85883a82eb303e18667a39cd662eb24e855a727beab5aecae4",
+     "sha256_5m": "f9d7b2c358f6743d5e241c83f0c93d75ba07c584e4b79c6174b77ed8101837c5",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x42y401_NC_Phase5_2018_A18.tif",
+     "zmax": 1677.1907958984375,
+     "zmin": 800.753662109375
+    },
+    "USGS_1M_17_x42y402_NC_Phase5_2018_A18": {
+     "bytes_1m": 328640335,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.003529437595371661,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "b4a7dbad7c25269a5ef96b63ddb3309a08f0cbbc285f153b3003dede8ff162ec",
+     "sha256_5m": "8ef143559e3d7974d81a67e88e5893a161ef0bacb4b7256d0738e37f32e12139",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x42y402_NC_Phase5_2018_A18.tif",
+     "zmax": 1334.4918212890625,
+     "zmin": 745.8561401367188
+    },
+    "USGS_1M_17_x42y403_NC_Phase5_2018_A18": {
+     "bytes_1m": 90349060,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.7162684967380272,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "6c4544f76f8d656ea021c2c0d7af3fb639250a859bcb1f26b7d379872ad7745e",
+     "sha256_5m": "69784b1dd2ed2406e756cc104a3d94ff01457c30d80320fb0d550a10daec0086",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x42y403_NC_Phase5_2018_A18.tif",
+     "zmax": 1419.68701171875,
+     "zmin": 901.4795532226562
+    },
+    "USGS_1M_17_x43y400_NC_Phase5_2018_A18": {
+     "bytes_1m": 338077594,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "06826c9a68a71f86256b746540dca26a3d60862079da5c5eca9327fd502d8d8a",
+     "sha256_5m": "ea84ed6a9970d690ebe489c3e8defeba40659ed336fb3732829ad7b6899acfad",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x43y400_NC_Phase5_2018_A18.tif",
+     "zmax": 1319.509521484375,
+     "zmin": 413.9596862792969
+    },
+    "USGS_1M_17_x43y401_NC_Phase5_2018_A18": {
+     "bytes_1m": 314929561,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "1ff5d9aeab1987fc4a5c0fcf3c88c9e7913d6f4373b435f4a71adee3d5d4fc07",
+     "sha256_5m": "75e77280403403272bb80dd8dc5f042a2eda1ed72cf1c055d18ed6c8c78977b2",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x43y401_NC_Phase5_2018_A18.tif",
+     "zmax": 1416.1746826171875,
+     "zmin": 808.781494140625
+    },
+    "USGS_1M_17_x43y402_NC_Phase5_2018_A18": {
+     "bytes_1m": 305865164,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "e21a3ce6d170e85eff1041869441ad5e2076443b698e48ddd60eaead519c500a",
+     "sha256_5m": "ee33c48ad0900307a6f5878e15868636bcbeace26a14ec4157cf9e1711b796ac",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x43y402_NC_Phase5_2018_A18.tif",
+     "zmax": 1640.3399658203125,
+     "zmin": 818.6473999023438
+    },
+    "USGS_1M_17_x43y403_NC_Phase5_2018_A18": {
+     "bytes_1m": 223181758,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.2777360002634728,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "d0f08a97094cc49ce7c36771ddc1cfb4a085e171e045ddfc7029e68f704723a1",
+     "sha256_5m": "85d4b73de36746a1f1038735b648b5eef398df389df2b1f828949c718ce3f386",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x43y403_NC_Phase5_2018_A18.tif",
+     "zmax": 1705.60986328125,
+     "zmin": 904.1246337890625
+    },
+    "USGS_1M_17_x44y400_NC_Phase5_2018_A18": {
+     "bytes_1m": 348046513,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "14b98fedbdf3a66e187218ad2bed6a1a86732e5ce51b249f2ecab1c09eb38e38",
+     "sha256_5m": "dbf0b763a037c58e17e9eb980aa673a50a5acb9883604090937113a07430c4a6",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x44y400_NC_Phase5_2018_A18.tif",
+     "zmax": 1196.5714111328125,
+     "zmin": 432.0777587890625
+    },
+    "USGS_1M_17_x44y401_NC_Phase5_2018_A18": {
+     "bytes_1m": 314635978,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "4d8fe4f88d4c97417421e799aae7760ebf78cd56afb3c9632f82b591bce23134",
+     "sha256_5m": "6ebd280a5eca48ab55f9ecd1fe75877aa2065d6defa2926978a39553d2255054",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x44y401_NC_Phase5_2018_A18.tif",
+     "zmax": 1258.9306640625,
+     "zmin": 573.9551391601562
+    },
+    "USGS_1M_17_x44y402_NC_Phase5_2018_A18": {
+     "bytes_1m": 311640442,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "9f3dd24f2132d250bd6f8366f6a18c230d4519707d529bc42f633bf6b51e71c8",
+     "sha256_5m": "ca369a7a34a4d6db922e37d07649dbe40f0eb89ce0e45cdfb7b74326037d358f",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x44y402_NC_Phase5_2018_A18.tif",
+     "zmax": 1487.8843994140625,
+     "zmin": 883.2515258789062
+    },
+    "USGS_1M_17_x44y403_NC_Phase5_2018_A18": {
+     "bytes_1m": 301833086,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "52e0829945f258b8c68d49ebd6a4f2e6e9cd261b36f5efca29460757d02d33ae",
+     "sha256_5m": "a91f858d11f5d0eabaa9e0fbcfe0480e096769348bb9952bcbb40f6b57c7297d",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x44y403_NC_Phase5_2018_A18.tif",
+     "zmax": 1586.297119140625,
+     "zmin": 883.923095703125
+    },
+    "USGS_1M_17_x45y400_NC_Phase4_2017_A17": {
+     "bytes_1m": 185752976,
+     "lidar_begdate": "20160227",
+     "lidar_enddate": "20171030",
+     "nodata_share_5m": 0.5013315854974196,
+     "project": "NC_Phase4_2017_A17",
+     "published": "2024-05-09",
+     "sha256_1m": "14309c1912632456922456b8bf1ca29848fb2315857ff12df5d95e4beacb5579",
+     "sha256_5m": "361852651cd8c32c5c198e118acb5d9bab07e7a49f7f2608df6956848baac110",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase4_2017_A17/TIFF/USGS_1M_17_x45y400_NC_Phase4_2017_A17.tif",
+     "zmax": 785.713134765625,
+     "zmin": 356.3544616699219
+    },
+    "USGS_1M_17_x45y400_NC_Phase5_2018_A18": {
+     "bytes_1m": 238779736,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.34033873219687405,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "2e23f9ce35add224cebc1f1315ea04b71325fbc8ec0a4abcf550fccd063feb69",
+     "sha256_5m": "2adfff6eccf0553df3e237e3fd23a194fbdfca8d4eec6e10a3caf0e52163993d",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x45y400_NC_Phase5_2018_A18.tif",
+     "zmax": 912.9302978515625,
+     "zmin": 333.9834289550781
+    },
+    "USGS_1M_17_x45y401_NC_Phase4_2017_A17": {
+     "bytes_1m": 115687568,
+     "lidar_begdate": "20160227",
+     "lidar_enddate": "20171030",
+     "nodata_share_5m": 0.6773376473676174,
+     "project": "NC_Phase4_2017_A17",
+     "published": "2024-05-09",
+     "sha256_1m": "41002d77a05cd5703e6151f5135efb8faaf8256545a4c903bf4b0af1e0e1cd9d",
+     "sha256_5m": "4f04691d712313418dfc44c91e0ee85adee89d83837273485e7a4ec83bd62d48",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase4_2017_A17/TIFF/USGS_1M_17_x45y401_NC_Phase4_2017_A17.tif",
+     "zmax": 1095.4061279296875,
+     "zmin": 401.97540283203125
+    },
+    "USGS_1M_17_x45y401_NC_Phase5_2018_A18": {
+     "bytes_1m": 271455202,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.20800004191612584,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "ae1f517ed846d89896d1b829ee7f52ac28ca8898d77b3b7f819677d2404e9334",
+     "sha256_5m": "fca5a17d8833dcf6a79af3103b05604888ffb3b5ac3f73d4338d56a3019cbd33",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x45y401_NC_Phase5_2018_A18.tif",
+     "zmax": 1173.01123046875,
+     "zmin": 408.58447265625
+    },
+    "USGS_1M_17_x45y402_NC_Phase4_2017_A17": {
+     "bytes_1m": 34335402,
+     "lidar_begdate": "20160227",
+     "lidar_enddate": "20171030",
+     "nodata_share_5m": 0.9016505472549429,
+     "project": "NC_Phase4_2017_A17",
+     "published": "2024-05-09",
+     "sha256_1m": "7583b0f5a127313813fa1448394a808b57d27f3ce1caad7233b9613028825912",
+     "sha256_5m": "9f294ea4df5321ba9146a0db81366ecb5b68c28035b95b9bc0d040e5368d429d",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase4_2017_A17/TIFF/USGS_1M_17_x45y402_NC_Phase4_2017_A17.tif",
+     "zmax": 1243.0089111328125,
+     "zmin": 695.8638916015625
+    },
+    "USGS_1M_17_x45y402_NC_Phase5_2018_A18": {
+     "bytes_1m": 300615935,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.05005159675489346,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "9c07c60841315e8e4fdd6a2f70964491eed4f4127ea78f78ed4abf8356b4e456",
+     "sha256_5m": "2e54f280d43f95166417765b6fbb7466406f50bf0dfdcb4a04979a181731e8a7",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x45y402_NC_Phase5_2018_A18.tif",
+     "zmax": 1243.0865478515625,
+     "zmin": 853.5297241210938
+    },
+    "USGS_1M_17_x46y401_NC_Phase4_2017_A17": {
+     "bytes_1m": 356051366,
+     "lidar_begdate": "20160227",
+     "lidar_enddate": "20171030",
+     "nodata_share_5m": 0.0,
+     "project": "NC_Phase4_2017_A17",
+     "published": "2024-05-09",
+     "sha256_1m": "f13c41917eef97d3b19431a9a2f0a7f47d33e4fd0c18e3b9c4409e9c912cace6",
+     "sha256_5m": "5e63f92cf566311f3f39aba884127ffadc8ecb7be74f891dce2c32040f3a1635",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase4_2017_A17/TIFF/USGS_1M_17_x46y401_NC_Phase4_2017_A17.tif",
+     "zmax": 813.5357666015625,
+     "zmin": 346.9586181640625
+    },
+    "USGS_1M_17_x46y402_NC_Phase4_2017_A17": {
+     "bytes_1m": 244033035,
+     "lidar_begdate": "20160227",
+     "lidar_enddate": "20171030",
+     "nodata_share_5m": 0.2741641475407709,
+     "project": "NC_Phase4_2017_A17",
+     "published": "2024-05-09",
+     "sha256_1m": "488c71693acaa1fd2ad964598db453a992942e6babe443237670ce2cb2da853a",
+     "sha256_5m": "a91e6242b57cea78bb0a92beec5e1e3ab15dfb52ad85e9a48c852ed1f1145105",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase4_2017_A17/TIFF/USGS_1M_17_x46y402_NC_Phase4_2017_A17.tif",
+     "zmax": 1135.107421875,
+     "zmin": 445.7968444824219
+    },
+    "USGS_1M_17_x46y402_NC_Phase5_2018_A18": {
+     "bytes_1m": 127413470,
+     "lidar_begdate": "20170211",
+     "lidar_enddate": "20170411",
+     "nodata_share_5m": 0.6078337247168416,
+     "project": "NC_Phase5_2018_A18",
+     "published": "2022-05-12",
+     "sha256_1m": "428171be8b66f150f34682af18985aed1b4f2e65ccb0acbfdf81b054db1bb002",
+     "sha256_5m": "51a94455fbab3fbab4454546f8365e694215053e9b9d83c69886443fb541e2fe",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NC_Phase5_2018_A18/TIFF/USGS_1M_17_x46y402_NC_Phase5_2018_A18.tif",
+     "zmax": 1135.142822265625,
+     "zmin": 681.771240234375
+    },
+    "USGS_one_meter_x41y401_TN_Eastern_2_16_B16_Del4_2016": {
+     "bytes_1m": 127444264,
+     "lidar_begdate": "20160205",
+     "lidar_enddate": "20160404",
+     "nodata_share_5m": 0.7481689140030798,
+     "project": "TN_Eastern_2_16_B16_Del4_2016",
+     "published": "2020-03-30",
+     "sha256_1m": "736d983f32146b6f133f97ae2c2440a71d0866d826d4e6c05f9083d72cae9de4",
+     "sha256_5m": "382441714d4fcdffcdd935a72d4f462254bc37bdcad3c32844a647710add661c",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/TN_Eastern_2_16_B16_Del4_2016/TIFF/USGS_one_meter_x41y401_TN_Eastern_2_16_B16_Del4_2016.tif",
+     "zmax": 1557.4449462890625,
+     "zmin": 707.7980346679688
+    },
+    "USGS_one_meter_x41y402_TN_Eastern_2_16_B16_Del4_2016": {
+     "bytes_1m": 393777905,
+     "lidar_begdate": "20160205",
+     "lidar_enddate": "20160404",
+     "nodata_share_5m": 0.17844617919542993,
+     "project": "TN_Eastern_2_16_B16_Del4_2016",
+     "published": "2020-03-30",
+     "sha256_1m": "529df4bacc298208528761dfe0002b93005ef512f63de902f0730b73d9775b0a",
+     "sha256_5m": "02ef04efc0b5d44401340550fb3b2c9f620ef9655d14f09ab9966b6018c3f0a8",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/TN_Eastern_2_16_B16_Del4_2016/TIFF/USGS_one_meter_x41y402_TN_Eastern_2_16_B16_Del4_2016.tif",
+     "zmax": 1309.5582275390625,
+     "zmin": 595.2755737304688
+    },
+    "USGS_one_meter_x41y403_TN_Eastern_2_16_B16_Del4_2016": {
+     "bytes_1m": 467213701,
+     "lidar_begdate": "20160205",
+     "lidar_enddate": "20160404",
+     "nodata_share_5m": 0.0,
+     "project": "TN_Eastern_2_16_B16_Del4_2016",
+     "published": "2020-03-30",
+     "sha256_1m": "76ed964fa21ef67be1f66e14c9f8594bc3d4873121c9a94a8d6afe2a2b626ada",
+     "sha256_5m": "8d384032fa5fa588d11d19c99e3810e78f6c93372f98a1b29f347f40d9e0bc1b",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/TN_Eastern_2_16_B16_Del4_2016/TIFF/USGS_one_meter_x41y403_TN_Eastern_2_16_B16_Del4_2016.tif",
+     "zmax": 1177.982177734375,
+     "zmin": 595.2755737304688
+    },
+    "USGS_one_meter_x42y402_TN_Eastern_2_16_B16_Del4_2016": {
+     "bytes_1m": 35118204,
+     "lidar_begdate": "20160205",
+     "lidar_enddate": "20160404",
+     "nodata_share_5m": 0.9382585446521511,
+     "project": "TN_Eastern_2_16_B16_Del4_2016",
+     "published": "2020-03-30",
+     "sha256_1m": "08a53b26d34dbe6f85eddb00d90754f0a98e5a292ae39414b6933625c80b7b52",
+     "sha256_5m": "366f8ae0eed106c2427fddee7748b5594d4d5fd92bc6126e1e402d970a65b432",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/TN_Eastern_2_16_B16_Del4_2016/TIFF/USGS_one_meter_x42y402_TN_Eastern_2_16_B16_Del4_2016.tif",
+     "zmax": 1284.9744873046875,
+     "zmin": 859.9478759765625
+    },
+    "USGS_one_meter_x42y403_TN_Eastern_2_16_B16_Del4_2016": {
+     "bytes_1m": 432906885,
+     "lidar_begdate": "20160205",
+     "lidar_enddate": "20160404",
+     "nodata_share_5m": 0.11473316892897313,
+     "project": "TN_Eastern_2_16_B16_Del4_2016",
+     "published": "2020-03-30",
+     "sha256_1m": "fbf78f111f99c6854944accbec0185a42f1e12c2ca67ecf8b9e4e023db9acc55",
+     "sha256_5m": "1df40b59a5ac0c99bc1537f781f590c99ee83e8dda3eb53e0a9cf82562680af2",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/TN_Eastern_2_16_B16_Del4_2016/TIFF/USGS_one_meter_x42y403_TN_Eastern_2_16_B16_Del4_2016.tif",
+     "zmax": 1419.5811767578125,
+     "zmin": 638.8973388671875
+    },
+    "USGS_one_meter_x43y403_TN_Eastern_2_16_B16_Del4_2016": {
+     "bytes_1m": 289273881,
+     "lidar_begdate": "20160205",
+     "lidar_enddate": "20160404",
+     "nodata_share_5m": 0.4198803194807191,
+     "project": "TN_Eastern_2_16_B16_Del4_2016",
+     "published": "2020-03-30",
+     "sha256_1m": "96cb47b45b9c0cf66e9565935fd6077af6f7c43462afa2aac0533545efda310b",
+     "sha256_5m": "b21949d517346f24738461e5f464d3e4012cc8925080ec4eae8c480bc0351e70",
+     "units": "metre",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/TN_Eastern_2_16_B16_Del4_2016/TIFF/USGS_one_meter_x43y403_TN_Eastern_2_16_B16_Del4_2016.tif",
+     "zmax": 1705.4166259765625,
+     "zmin": 752.8119506835938
+    }
+   }
+  },
+  "geology": {
+   "acquired_utc": "2026-10-09T05:35:17+00:00",
+   "bytes": 1303801,
+   "n": 283,
+   "path": "data/raw/geology_1985.parquet",
+   "sha256": "c574fcb49b87762d31d3d17f9689ac8de62feba691dbceb117dc41f646e53872",
+   "url": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Geologic_Map_of_North_Carolina/FeatureServer/3"
+  },
+  "huc10": {
+   "acquired_utc": "2026-10-09T05:30:19+00:00",
+   "bbox4326": [
+    -82.92036113653764,
+    35.393131872498934,
+    -81.43296306163548,
+    36.41078642281918
+   ],
+   "bytes": 2936985,
+   "n": 57,
+   "path": "data/raw/huc10.parquet",
+   "sha256": "23dc15d7f7668f47f7ea986c8f1998c56b8f9452532f1d5ec8498040df66d071",
+   "url": "https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer/5"
+  },
+  "huc12": {
+   "acquired_utc": "2026-10-09T05:30:19+00:00",
+   "bbox4326": [
+    -82.92036113653764,
+    35.393131872498934,
+    -81.43296306163548,
+    36.41078642281918
+   ],
+   "bytes": 4812657,
+   "n": 214,
+   "path": "data/raw/huc12.parquet",
+   "sha256": "741887c559d4d61471adcb2239824107f16a538805701cfe1d94b9de8ecaf389",
+   "url": "https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer/6"
+  },
+  "mrms01h_20240925-010000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 622311,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-010000.grib2.gz",
+   "sha256": "0c4c6b0e7c0b5b98afc541b3044008ab6d9e5073c5b32962037465919dfd3649",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-010000.grib2.gz"
+  },
+  "mrms01h_20240925-020000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 619080,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-020000.grib2.gz",
+   "sha256": "10c3f45da37aab2e1f9cf9d2bc367b00befb91fb6d97daabdedc2ed53c18f5db",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-020000.grib2.gz"
+  },
+  "mrms01h_20240925-030000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 612958,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-030000.grib2.gz",
+   "sha256": "d9dc84127f4f27b2bdf1a5c3ea868477791924953f51e52b9fb2ad5d36bcb93b",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-030000.grib2.gz"
+  },
+  "mrms01h_20240925-040000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 612896,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-040000.grib2.gz",
+   "sha256": "d9869f5d7db3e6012a362ab26c1d68d974eac436977fb2cd5a3f65b394655b1a",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-040000.grib2.gz"
+  },
+  "mrms01h_20240925-050000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 659299,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-050000.grib2.gz",
+   "sha256": "bb67a06dbf6d588da7dc12c4da396bbef1e271bd87ff22caa9e5eff85f2e9bda",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-050000.grib2.gz"
+  },
+  "mrms01h_20240925-060000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 654316,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-060000.grib2.gz",
+   "sha256": "cd3be3683bf48ffdc530ac992ab9491e8b195c4bcc7974e57fc739a6ac9a88f2",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-060000.grib2.gz"
+  },
+  "mrms01h_20240925-070000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 721347,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-070000.grib2.gz",
+   "sha256": "325bceedd68260d64199534081da7efe2e3260846e9093b8d7103b857fc5c77a",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-070000.grib2.gz"
+  },
+  "mrms01h_20240925-080000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 750539,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-080000.grib2.gz",
+   "sha256": "ddc558882b0c0ad0edd3f44326cbc9add5cdf0da14c7eafed5e18d3ee515c17f",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-080000.grib2.gz"
+  },
+  "mrms01h_20240925-090000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 750035,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-090000.grib2.gz",
+   "sha256": "56edeeab573dafa0d56ac66192987f1c170cc8048d7949b85d73979c1f3d5190",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-090000.grib2.gz"
+  },
+  "mrms01h_20240925-100000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 768037,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-100000.grib2.gz",
+   "sha256": "72f8e516b3733e5a9ed9a080e484f196a84e820225b8a0c0fcd589d250e35adb",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-100000.grib2.gz"
+  },
+  "mrms01h_20240925-110000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 821452,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-110000.grib2.gz",
+   "sha256": "1ab33fc9cefb3e6cda7d0fa484a75797ba55a44a96dc157dab54c9f462aba359",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-110000.grib2.gz"
+  },
+  "mrms01h_20240925-120000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 896813,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-120000.grib2.gz",
+   "sha256": "17f8e0f1c8bdf67d76d4d5aba98636a28887cdbdbae154f68c441950331cf98d",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-120000.grib2.gz"
+  },
+  "mrms01h_20240925-130000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 964954,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-130000.grib2.gz",
+   "sha256": "be53393bdfc6e067b54f6e0d336331596c68569e5e989b5d7d0d65a4984f4c42",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-130000.grib2.gz"
+  },
+  "mrms01h_20240925-140000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 956374,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-140000.grib2.gz",
+   "sha256": "def41e36adef1b2568ace3e0c144892d509493b4705b812d95335c22f00dd589",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-140000.grib2.gz"
+  },
+  "mrms01h_20240925-150000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 917529,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-150000.grib2.gz",
+   "sha256": "b0f891892b370462ecf2a7e7249acef2f2796974296358c7131ced5134991255",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-150000.grib2.gz"
+  },
+  "mrms01h_20240925-160000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 916361,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-160000.grib2.gz",
+   "sha256": "dad9d8b001a5c295cad695c0bd51cdc18566853275fd2b60778387d5ee811449",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-160000.grib2.gz"
+  },
+  "mrms01h_20240925-170000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 911540,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-170000.grib2.gz",
+   "sha256": "9c823eb529ed2987898fd95094df663ee0308265d62447125e2dfbeb0aeee8a8",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-170000.grib2.gz"
+  },
+  "mrms01h_20240925-180000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 972208,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-180000.grib2.gz",
+   "sha256": "443b4f8a9f47a55d16e9fe611e000ef9ff2ff2c5f35bea73ae615f78adaa16a6",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-180000.grib2.gz"
+  },
+  "mrms01h_20240925-190000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1004066,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-190000.grib2.gz",
+   "sha256": "e147ef0226dfd54699cc3a0707962c5074e1a4d757308633f7f981beed674ec5",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-190000.grib2.gz"
+  },
+  "mrms01h_20240925-200000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1055585,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-200000.grib2.gz",
+   "sha256": "e3b44481dfdc4969ae03d003912b46846b559cd721dbb662564f01aab8f1e237",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-200000.grib2.gz"
+  },
+  "mrms01h_20240925-210000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1097979,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-210000.grib2.gz",
+   "sha256": "805ec0822023f3205c0ac58d40b5ba6ede20deefbf933c1a11d66a9e578826ad",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-210000.grib2.gz"
+  },
+  "mrms01h_20240925-220000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1087508,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-220000.grib2.gz",
+   "sha256": "16408ad462c2107577bb4572b22f340fe396a2a99f5652ddf059c6a50e9256d8",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-220000.grib2.gz"
+  },
+  "mrms01h_20240925-230000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1069855,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-230000.grib2.gz",
+   "sha256": "81bc28ec272e2eaa75d844c44da7a40c8c40d8faa052c39351a7e9743d78f953",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240925/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240925-230000.grib2.gz"
+  },
+  "mrms01h_20240926-000000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1068409,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-000000.grib2.gz",
+   "sha256": "5dbd3bf7a95ff8c13c7e2aef2b961a4b427bbec254fe5e7f3a7da5143daa8f11",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-000000.grib2.gz"
+  },
+  "mrms01h_20240926-010000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1061547,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-010000.grib2.gz",
+   "sha256": "dcf8925d8cd4f0bed637a09f5eba24df7137281247b69b41fc1a9ef6bd397198",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-010000.grib2.gz"
+  },
+  "mrms01h_20240926-020000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 973259,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-020000.grib2.gz",
+   "sha256": "b1e942a5e106afc07b86e0eb47f279bb80373cdeffbbcf9c8a4f37d11a24995a",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-020000.grib2.gz"
+  },
+  "mrms01h_20240926-030000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 917218,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-030000.grib2.gz",
+   "sha256": "5e3db8bc6703040c2e4d645f2129a2ee565965cf6e034ac97e68fb36fbd9a13e",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-030000.grib2.gz"
+  },
+  "mrms01h_20240926-040000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 921464,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-040000.grib2.gz",
+   "sha256": "a6390d2fdf805307646caf65e486608772a82f0013b49da1dd7882f1b9ca8eb6",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-040000.grib2.gz"
+  },
+  "mrms01h_20240926-050000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 911512,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-050000.grib2.gz",
+   "sha256": "5b3bc8324a9b57f64a3309d8e4e23dd3eea88688414494294b93d25e3c0d3af1",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-050000.grib2.gz"
+  },
+  "mrms01h_20240926-060000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 905846,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-060000.grib2.gz",
+   "sha256": "151f917ab75e5e79629ec4a35fb437eda5b572bc7fbfb3c0b6693c72a2747b37",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-060000.grib2.gz"
+  },
+  "mrms01h_20240926-070000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 933469,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-070000.grib2.gz",
+   "sha256": "2cff03f960ca6083cd12357dddfe016df2424f1c35e9c562c0371ce5e8eabd68",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-070000.grib2.gz"
+  },
+  "mrms01h_20240926-080000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 936597,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-080000.grib2.gz",
+   "sha256": "3a41ac8ccd6f04e46324caf7b9c695c237b6024c0c6f7ac5081d819a51a39f9b",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-080000.grib2.gz"
+  },
+  "mrms01h_20240926-090000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 946930,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-090000.grib2.gz",
+   "sha256": "d2b82ab26ff8f2127f11a3c678de95b18aa2c4f4f110a3ee34064b592b80e1a2",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-090000.grib2.gz"
+  },
+  "mrms01h_20240926-100000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 938115,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-100000.grib2.gz",
+   "sha256": "f0e8e4b8e098341f296dc547af4fe8bc6702580d8ea58b07ecbce117794116c1",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-100000.grib2.gz"
+  },
+  "mrms01h_20240926-110000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 923958,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-110000.grib2.gz",
+   "sha256": "458f4d03bd77fe00de87e914e3f6775eeee786bcbc176b5a59e256129fb825c3",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-110000.grib2.gz"
+  },
+  "mrms01h_20240926-120000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 955480,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-120000.grib2.gz",
+   "sha256": "7e926120548c20513468a5eb7965b3a747b1ea35c6dffb925eac18c45ac6e5e6",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-120000.grib2.gz"
+  },
+  "mrms01h_20240926-130000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 950732,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-130000.grib2.gz",
+   "sha256": "48bac9aa97ba346c6143ef0d01e8b947c46c31956cc47de99dfe0659a91da6ab",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-130000.grib2.gz"
+  },
+  "mrms01h_20240926-140000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 931063,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-140000.grib2.gz",
+   "sha256": "4050f626bfe9cc29aab96df1b1546729b43e5b9cd71d744e89d67ec7efe481db",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-140000.grib2.gz"
+  },
+  "mrms01h_20240926-150000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 899249,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-150000.grib2.gz",
+   "sha256": "da49ba1622148e953784192da42ec273451449195de4582b2a27bcaa5481fdc1",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-150000.grib2.gz"
+  },
+  "mrms01h_20240926-160000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 889842,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-160000.grib2.gz",
+   "sha256": "52f519a2ead1d88f6fb9af8fc949679b50f6b9510e635319ca9067537b6d7012",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-160000.grib2.gz"
+  },
+  "mrms01h_20240926-170000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 887012,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-170000.grib2.gz",
+   "sha256": "68388656d5e142e6dbb5953e4ba2e3518c0ac442a6c9ad427ec03ea2a1822efc",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-170000.grib2.gz"
+  },
+  "mrms01h_20240926-180000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 925150,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-180000.grib2.gz",
+   "sha256": "620c41ef38a1f00999f7be048e9423a0da2df9439bc9a53e06de9a94eb07431f",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-180000.grib2.gz"
+  },
+  "mrms01h_20240926-190000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 946797,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-190000.grib2.gz",
+   "sha256": "76c2586e81ec91b2d1ec4afbdbd8727eb2a54a49fc4acefe50f1083943b943d6",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-190000.grib2.gz"
+  },
+  "mrms01h_20240926-200000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 953677,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-200000.grib2.gz",
+   "sha256": "a41224d46acc8e107a8bebcd61072b6a3ae7f2d4ae494891419645daf401a61b",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-200000.grib2.gz"
+  },
+  "mrms01h_20240926-210000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 970192,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-210000.grib2.gz",
+   "sha256": "bb639fb22a15c7b8bac48ae3eeb4866378579ba4856f1d655c3428e0b72561ca",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-210000.grib2.gz"
+  },
+  "mrms01h_20240926-220000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 986516,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-220000.grib2.gz",
+   "sha256": "c25a24769c00464da47d7f7c785ded5f1ed3364079631982e0dee785225491dd",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-220000.grib2.gz"
+  },
+  "mrms01h_20240926-230000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1005229,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-230000.grib2.gz",
+   "sha256": "e71eb8516ae6fd8c9b88fbe149381056ae27e367734c234bb9b90e7c8562836b",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240926/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240926-230000.grib2.gz"
+  },
+  "mrms01h_20240927-000000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1039298,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-000000.grib2.gz",
+   "sha256": "1a5ba0c55fbabc2787dfe7838222fcc077b78d9e2555ec48ed1a445237b33d3f",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-000000.grib2.gz"
+  },
+  "mrms01h_20240927-010000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1003076,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-010000.grib2.gz",
+   "sha256": "ec7ddd74a8d79d5a8f3e9e7e4342337a09a56260dc8c7c8c4c458c0eef081a0b",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-010000.grib2.gz"
+  },
+  "mrms01h_20240927-020000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 1000974,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-020000.grib2.gz",
+   "sha256": "5eb6fe6124899c6cdbdfb85e65c85f99104c1fad539e48710ad52a37ffc98b42",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-020000.grib2.gz"
+  },
+  "mrms01h_20240927-030000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 940008,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-030000.grib2.gz",
+   "sha256": "72db2be7cfbc1c3d5704d719107c8bc621ec4abcce791d9a85bbe56482c36cc0",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-030000.grib2.gz"
+  },
+  "mrms01h_20240927-040000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 925207,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-040000.grib2.gz",
+   "sha256": "efa6718a632626da47d7090ba34d76d4639ed4ec7ecef7c61319993554c1eb23",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-040000.grib2.gz"
+  },
+  "mrms01h_20240927-050000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 918607,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-050000.grib2.gz",
+   "sha256": "4600399eae6575096d6e877d4428d95688f3e3a07cb9e7066cb843b567a3389a",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-050000.grib2.gz"
+  },
+  "mrms01h_20240927-060000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 900192,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-060000.grib2.gz",
+   "sha256": "128171f5c168bd1e72566dd4af21a1d1a6cf324349b699adaa54c324984f7915",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-060000.grib2.gz"
+  },
+  "mrms01h_20240927-070000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 880703,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-070000.grib2.gz",
+   "sha256": "a516e5353230c9878ebe06a78fc8155204f61af574e63001f4b8262e7bf5a16f",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-070000.grib2.gz"
+  },
+  "mrms01h_20240927-080000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 852086,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-080000.grib2.gz",
+   "sha256": "cb8ccf8cf6ec95c3996bd42add68e19040dd380738c010b7177353fd584a95f5",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-080000.grib2.gz"
+  },
+  "mrms01h_20240927-090000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 826012,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-090000.grib2.gz",
+   "sha256": "7aa849854375575938b11f2084d7b000c9b6410dd0e4be5700e28ade3b9087f9",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-090000.grib2.gz"
+  },
+  "mrms01h_20240927-100000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 782268,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-100000.grib2.gz",
+   "sha256": "8542523a316d02e9e2f3cd8739adcf070570d4b96f8bc489eeb58de8ed033c0e",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-100000.grib2.gz"
+  },
+  "mrms01h_20240927-110000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 782988,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-110000.grib2.gz",
+   "sha256": "ae6a1d6da5276abf0edf3986fda5f24c8e29c9cc7add333989070e2cf26c35dd",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-110000.grib2.gz"
+  },
+  "mrms01h_20240927-120000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 768079,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-120000.grib2.gz",
+   "sha256": "12b64c75a25ed2f87919ae0ff8528c51e3dcba975c1e1ae40354c8d009bdfcaf",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-120000.grib2.gz"
+  },
+  "mrms01h_20240927-130000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 726822,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-130000.grib2.gz",
+   "sha256": "2f2ac9ab18a525acf5b49823faeb3d82ff4b834e9a178982c1f51afe1f4c73f5",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-130000.grib2.gz"
+  },
+  "mrms01h_20240927-140000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 695661,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-140000.grib2.gz",
+   "sha256": "34f7895174fe2eb214cd5c878ea1cc74ac60e90e959d20d926ec8ffba10ca642",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-140000.grib2.gz"
+  },
+  "mrms01h_20240927-150000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 662671,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-150000.grib2.gz",
+   "sha256": "0595c2437acc51b9a019d93868b266af65334af05753297f4548a716f2111f47",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-150000.grib2.gz"
+  },
+  "mrms01h_20240927-160000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 656094,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-160000.grib2.gz",
+   "sha256": "db226e1e49b3d2e4d3d52b0a2335c93ab11e17114da7153b668af33fce3d1bf7",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-160000.grib2.gz"
+  },
+  "mrms01h_20240927-170000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 619186,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-170000.grib2.gz",
+   "sha256": "2d05b54c3b5e41c20d65f88c59f536aec607f0830898ecf48ef2e1bca119fc04",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-170000.grib2.gz"
+  },
+  "mrms01h_20240927-180000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 614019,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-180000.grib2.gz",
+   "sha256": "303967582e429cfe173374eaeea5ce14cf9e1f51f6e4a2d1c0369b4674a43e8d",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-180000.grib2.gz"
+  },
+  "mrms01h_20240927-190000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 593476,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-190000.grib2.gz",
+   "sha256": "ae990aeb92e327afb738afb969caf546d7497de60c5244ff4fff6277babc2dd7",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-190000.grib2.gz"
+  },
+  "mrms01h_20240927-200000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 596620,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-200000.grib2.gz",
+   "sha256": "bd2ecd6d568b847a3e21a5673fd5cea79344cce0b78a7c44c3f0926601b1ec12",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-200000.grib2.gz"
+  },
+  "mrms01h_20240927-210000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 608193,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-210000.grib2.gz",
+   "sha256": "b564b5add640877e822ae69053c6171c7ab45868088afbcea8b28787272d04b8",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-210000.grib2.gz"
+  },
+  "mrms01h_20240927-220000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 574670,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-220000.grib2.gz",
+   "sha256": "a2d9e65e0d141b0ae3d65e379253b6aa8efec23b9b95b14cd7c4cd06b5870dfe",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-220000.grib2.gz"
+  },
+  "mrms01h_20240927-230000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 540121,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-230000.grib2.gz",
+   "sha256": "a2f6df1713481f6bb0486b2fa3a44eac45ef332e7467304a9c1c7259b947cba7",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240927/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240927-230000.grib2.gz"
+  },
+  "mrms01h_20240928-000000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 506862,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-000000.grib2.gz",
+   "sha256": "ddfbbfd99172fa47935f11d1cc1e3d2e89769c2e9ea458baf57db0ed3fa64a7a",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-000000.grib2.gz"
+  },
+  "mrms01h_20240928-010000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 462832,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-010000.grib2.gz",
+   "sha256": "e4febb47a7dfebb812001bd745de80d822b99d245c64e3943abff855a9adc0b5",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-010000.grib2.gz"
+  },
+  "mrms01h_20240928-020000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 414363,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-020000.grib2.gz",
+   "sha256": "fa355fde00ff564ed1f778ead9fa25c75261889de9cc205755cd91295f07c2bf",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-020000.grib2.gz"
+  },
+  "mrms01h_20240928-030000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 365272,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-030000.grib2.gz",
+   "sha256": "e82b2eda7d8f3b37659f9c3f02803e1971c5faba521753f347f3dc261ea8452f",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-030000.grib2.gz"
+  },
+  "mrms01h_20240928-040000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 325998,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-040000.grib2.gz",
+   "sha256": "4a37cf09581453ce6b2934d786324968aaa7f2d98bff39c0a57073b8bf6d7cb2",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-040000.grib2.gz"
+  },
+  "mrms01h_20240928-050000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 292913,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-050000.grib2.gz",
+   "sha256": "5dd62ad9afc78a5b102dfc1f027f0132006be5a7f7d5b9388645793693bae2a2",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-050000.grib2.gz"
+  },
+  "mrms01h_20240928-060000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 287328,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-060000.grib2.gz",
+   "sha256": "6b9b56ad738e9c14a612188ccc721b9d6879b1c88d4b404f1ce0243ccd308e94",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-060000.grib2.gz"
+  },
+  "mrms01h_20240928-070000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 309174,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-070000.grib2.gz",
+   "sha256": "05755ed7bc0884411389fb3cb1cf1369aa8142835057cfb31baf3bf2a58b827b",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-070000.grib2.gz"
+  },
+  "mrms01h_20240928-080000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 319545,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-080000.grib2.gz",
+   "sha256": "a898f8b732faa6851fc22c4e45ebd92caa68f002d724928f5579c5012d71e05a",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-080000.grib2.gz"
+  },
+  "mrms01h_20240928-090000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 317882,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-090000.grib2.gz",
+   "sha256": "513b0373c989fe90a5b66d4fb24af615e4f29247194bb1464b6d5701861ae6f3",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-090000.grib2.gz"
+  },
+  "mrms01h_20240928-100000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 305335,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-100000.grib2.gz",
+   "sha256": "1172ad229911a3d66847433b30706de53ef195faca63a8ce7e4ca2d265bf154d",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-100000.grib2.gz"
+  },
+  "mrms01h_20240928-110000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 315373,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-110000.grib2.gz",
+   "sha256": "3073c9b4d81193d63d9a550ebedfe0e0d5822fc67aaf6330de28dc76418015d7",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-110000.grib2.gz"
+  },
+  "mrms01h_20240928-120000": {
+   "acquired_utc": "2026-10-10T19:09:54+00:00",
+   "bytes": 322567,
+   "path": "data/raw/mrms_hourly/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-120000.grib2.gz",
+   "sha256": "b2a40eb6a460fbe3a67363ea27998b7759c6b3e6efd553303e921276e4825d32",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_01H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_01H_Pass2_00.00_20240928-120000.grib2.gz"
+  },
+  "mrms_20240928-000000": {
+   "acquired_utc": "2026-10-09T05:30:19+00:00",
+   "bytes": 8073664,
+   "path": "data/raw/MRMS_MultiSensor_QPE_72H_Pass2_00.00_20240928-000000.grib2.gz",
+   "sha256": "ddfe7aaa29b173ca4ba7189922567e188549e7265f06bff9ddc3cb0218546006",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_72H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_72H_Pass2_00.00_20240928-000000.grib2.gz"
+  },
+  "mrms_20240928-120000": {
+   "acquired_utc": "2026-10-09T05:30:19+00:00",
+   "bytes": 7653785,
+   "path": "data/raw/MRMS_MultiSensor_QPE_72H_Pass2_00.00_20240928-120000.grib2.gz",
+   "sha256": "5214dbf652668f86bc8565ec0548083f1751133a058439596fd4925eac1f4583",
+   "url": "https://noaa-mrms-pds.s3.amazonaws.com/CONUS/MultiSensor_QPE_72H_Pass2_00.00/20240928/MRMS_MultiSensor_QPE_72H_Pass2_00.00_20240928-120000.grib2.gz"
+  },
+  "ncgs_features": {
+   "acquired_utc": "2026-10-09T05:30:19+00:00",
+   "bbox4326": [
+    -82.92036113653764,
+    35.393131872498934,
+    -81.43296306163548,
+    36.41078642281918
+   ],
+   "bytes": 11384200,
+   "n": 26050,
+   "path": "data/raw/ncgs_features.parquet",
+   "service_last_edit_utc": "2026-10-08T18:54:29+00:00",
+   "sha256": "a5ba172b6c2ce9afaead47810ee1b4dd4b5341955404d4f701114ca34d512f1e",
+   "url": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/NC_Landslide_Inventory/FeatureServer/2"
+  },
+  "ncgs_ground_ruptures": {
+   "acquired_utc": "2026-10-09T05:30:19+00:00",
+   "bbox4326": [
+    -82.92036113653764,
+    35.393131872498934,
+    -81.43296306163548,
+    36.41078642281918
+   ],
+   "bytes": 46363,
+   "n": 158,
+   "path": "data/raw/ncgs_ground_ruptures.parquet",
+   "service_last_edit_utc": "2026-10-08T11:50:33+00:00",
+   "sha256": "2ab51533c878897df1f0d39119fe8e81d427f881d42e5cd92b95a4c3f3f4ff6a",
+   "url": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/NC_Landslide_Inventory/FeatureServer/1"
+  },
+  "ncgs_observations": {
+   "acquired_utc": "2026-10-09T05:30:19+00:00",
+   "bbox4326": [
+    -82.92036113653764,
+    35.393131872498934,
+    -81.43296306163548,
+    36.41078642281918
+   ],
+   "bytes": 552985,
+   "n": 7341,
+   "path": "data/raw/ncgs_observations.parquet",
+   "service_last_edit_utc": "2026-10-08T18:57:26+00:00",
+   "sha256": "0f39bb7d3d5b3ba0b7b121c8361295676dc216afa725de0df291056fb6f4c0fc",
+   "url": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/NC_Landslide_Inventory/FeatureServer/0"
+  },
+  "nlcd2021_aoi": {
+   "acquired_utc": "2026-10-09T05:35:17+00:00",
+   "bytes": 9439404,
+   "coverage": "mrlc_download__NLCD_2021_Land_Cover_L48",
+   "path": "data/raw/nlcd2021_aoi.tif",
+   "sha256": "9861b082edb385b44fbf5d16e49a9a23ab8e86994b71eabb3e54de637d696695",
+   "url": "https://www.mrlc.gov/geoserver/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=mrlc_download__NLCD_2021_Land_Cover_L48&format=image%2Fgeotiff&subset=X(1163355,1246665)&subset=Y(1451925,1540845)"
+  },
+  "nlcd2021_watauga": {
+   "acquired_utc": "2026-10-09T05:35:17+00:00",
+   "bytes": 3147756,
+   "coverage": "mrlc_download__NLCD_2021_Land_Cover_L48",
+   "path": "data/raw/nlcd2021_watauga.tif",
+   "sha256": "c90f7976be6d1320d2fc2b320ee262869ef0e6b1841d88668195d7ef3fbec683",
+   "url": "https://www.mrlc.gov/geoserver/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=mrlc_download__NLCD_2021_Land_Cover_L48&format=image%2Fgeotiff&subset=X(1244625,1294695)&subset=Y(1541745,1583745)"
+  },
+  "osm_roads": {
+   "acquired_utc": "2026-10-10T01:23:39+00:00",
+   "bytes": 20231527,
+   "licence": "ODbL; local audit only, never published",
+   "n": 80072,
+   "path": "data/raw/osm_roads.parquet",
+   "pbf_bytes": 429458441,
+   "pbf_sha256": "3c8b9469e0ac93d0b0a6cfe3624dde96982349d64341ac7b54e0f33aa0547a6e",
+   "sha256": "0a9bbec472a6b2331bc885367738475e8d0dc950144da464840d91bf204263dc",
+   "url": "https://download.geofabrik.de/north-america/us/north-carolina-latest.osm.pbf"
+  },
+  "osm_roads_watauga": {
+   "acquired_utc": "2026-10-10T19:18:30+00:00",
+   "bytes": 7688513,
+   "licence": "ODbL; local analysis only, never published",
+   "n": 25705,
+   "path": "data/raw/osm_roads_watauga.parquet",
+   "pbf_bytes": 429458441,
+   "pbf_sha256": "3c8b9469e0ac93d0b0a6cfe3624dde96982349d64341ac7b54e0f33aa0547a6e",
+   "same_snapshot_as_aoi": true,
+   "sha256": "8c32d9f03b532ceebf359cbd3cf6c1a719bd48eec1efee4e70bb39a40c723c9e",
+   "url": "https://download.geofabrik.de/north-america/us/north-carolina-latest.osm.pbf"
+  },
+  "roads_021": {
+   "acquired_utc": "2026-10-09T05:36:11+00:00",
+   "bytes": 5041489,
+   "path": "data/raw/tl_2024_37021_roads.zip",
+   "sha256": "d4fe2f3516b60e2f14c3035f157861455be1ad7b9f9fc929303498940deacc6d",
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/ROADS/tl_2024_37021_roads.zip"
+  },
+  "roads_189": {
+   "acquired_utc": "2026-10-09T05:36:11+00:00",
+   "bytes": 2434043,
+   "path": "data/raw/tl_2024_37189_roads.zip",
+   "sha256": "d1c0dfcab9ab9e799210b357cd0a98b072d20b3cdf56f9534bb64bbb391559b0",
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/ROADS/tl_2024_37189_roads.zip"
+  },
+  "roads_199": {
+   "acquired_utc": "2026-10-09T05:36:11+00:00",
+   "bytes": 1708746,
+   "path": "data/raw/tl_2024_37199_roads.zip",
+   "sha256": "f62158c7fda24f8883f7277bad13be5e033685642312840d8e9f64d74ded4c07",
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/ROADS/tl_2024_37199_roads.zip"
+  },
+  "ssurgo_NC021": {
+   "acquired_utc": "2026-10-09T05:49:51+00:00",
+   "bytes": 36011859,
+   "n": 35176,
+   "path": "data/raw/ssurgo_NC021.parquet",
+   "sha256": "e702e798e3487e4800fca3c5e4bbbeac1fb67be757043ba0dc085385837ee925",
+   "survey_version": [
+    "25",
+    "9/10/2026 7:42:26 PM"
+   ],
+   "url": "https://sdmdataaccess.sc.egov.usda.gov/Tabular/post.rest"
+  },
+  "ssurgo_NC189": {
+   "acquired_utc": "2026-10-09T05:49:51+00:00",
+   "bytes": 20059282,
+   "n": 14846,
+   "path": "data/raw/ssurgo_NC189.parquet",
+   "sha256": "bc0d56aedfed94b8815505dc580766d22ab187e022bf680c711913eb66f18f9f",
+   "survey_version": [
+    "26",
+    "8/31/2026 2:49:09 PM"
+   ],
+   "url": "https://sdmdataaccess.sc.egov.usda.gov/Tabular/post.rest"
+  },
+  "ssurgo_NC199": {
+   "acquired_utc": "2026-10-09T05:49:51+00:00",
+   "bytes": 14118144,
+   "n": 14695,
+   "path": "data/raw/ssurgo_NC199.parquet",
+   "sha256": "f375833180abdaf00383ceba2e30860b800050481dd85556e2b1f824d78c7e8e",
+   "survey_version": [
+    "25",
+    "8/31/2026 2:49:09 PM"
+   ],
+   "url": "https://sdmdataaccess.sc.egov.usda.gov/Tabular/post.rest"
+  },
+  "tcc2021_aoi": {
+   "acquired_utc": "2026-10-09T05:35:17+00:00",
+   "bytes": 9439404,
+   "coverage": "mrlc_download__nlcd_tcc_conus_2021_v2021-4",
+   "path": "data/raw/tcc2021_aoi.tif",
+   "sha256": "9f2d97419a57aca0509638d9df807f9a8e397e4301e0496f14668ac12ef60833",
+   "url": "https://www.mrlc.gov/geoserver/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=mrlc_download__nlcd_tcc_conus_2021_v2021-4&format=image%2Fgeotiff&subset=X(1163355,1246665)&subset=Y(1451925,1540845)"
+  },
+  "tcc2021_watauga": {
+   "acquired_utc": "2026-10-09T05:35:17+00:00",
+   "bytes": 3147756,
+   "coverage": "mrlc_download__nlcd_tcc_conus_2021_v2021-4",
+   "path": "data/raw/tcc2021_watauga.tif",
+   "sha256": "b1d7dbe08dd9586a4c4fcd35ab84902e3a9a9d86ac49483889736592c6015a3f",
+   "url": "https://www.mrlc.gov/geoserver/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=mrlc_download__nlcd_tcc_conus_2021_v2021-4&format=image%2Fgeotiff&subset=X(1244625,1294695)&subset=Y(1541745,1583745)"
+  }
+ },
+ "updated_utc": "2026-10-10T19:20:58+00:00"
+}

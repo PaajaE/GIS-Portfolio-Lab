@@ -1,0 +1,149 @@
+{
+ "positives": {
+  "n": 2962,
+  "by_county": {
+   "Buncombe County": 1806,
+   "Yancey County": 1156
+  },
+  "road_related_helene_sources_in_aoi": 3625
+ },
+ "huc12": {
+  "n": 32,
+  "km2_median": 75.6501933513712,
+  "zero": 16,
+  "ge10": 12,
+  "ge50": 10,
+  "share_top3_5_10": [
+   0.5808525033829499,
+   0.7435723951285521,
+   0.9793640054127198
+  ],
+  "positives_outside_assigned_huc": 6
+ },
+ "clustering": {
+  "nn_median_m": 67.27032752316198,
+  "nn_p90_m": 290.2396510116162,
+  "nn_same_huc12": 0.9928958051420839,
+  "pairs_crossing_huc12_by_radius_m": {
+   "250": 0.00349969567863664,
+   "500": 0.022202316207050994,
+   "1000": 0.059381547742395985
+  },
+  "within_500m_of_huc12_boundary": 0.2144790257104195,
+  "K_over_pi_r2": {
+   "200": 23.523237654421244,
+   "1000": 7.972202376661484,
+   "3000": 5.012722707344156,
+   "5000": 3.907739345531893,
+   "10000": 2.4812858087233587
+  }
+ },
+ "rainfall": {
+  "bins_mm": [
+   0,
+   200,
+   250,
+   300,
+   350,
+   400,
+   450,
+   1000
+  ],
+  "area_km2": [
+   145.8,
+   572.2,
+   523.0,
+   557.2,
+   212.2,
+   113.6,
+   403.3
+  ],
+  "positives": [
+   2,
+   19,
+   245,
+   396,
+   426,
+   453,
+   1415
+  ],
+  "per_km2": [
+   0.014,
+   0.033,
+   0.468,
+   0.711,
+   2.007,
+   3.986,
+   3.509
+  ],
+  "triggered_domain_km2": 1809.2674998606421,
+  "positives_in_triggered_domain": 0.9928958051420839,
+  "aoi_mrms_nan_cells": 0,
+  "huc12_spearman_rain_density": {
+   "rho": 0.5598773322462576,
+   "p": 0.000862224354238066
+  },
+  "huc12_in_triggered_domain": {
+   "n": 21,
+   "positives": 2927,
+   "ge50": 10
+  }
+ },
+ "inventory_method": {
+  "basemap_top": {
+   "2025 UNC Collaboratory Imagery & 2025 NC Geological Survey LCD": 2949,
+   "UNC Collaboratory Imagery & 2025 NC Geological Survey LCD 2025": 5,
+   "2024 Nearmap & 2025 BGC LCD": 1
+  },
+  "area_m2_median": 93.78676068215748,
+  "share_lt_50m2": 0.22834912043301758,
+  "undated_in_aoi": 123
+ },
+ "watauga": {
+  "n_1940": 1218,
+  "n_helene": 318,
+  "feature_types_1940": {
+   "Outline": 1218
+  },
+  "feature_types_helene": {
+   "Outline": 318
+  },
+  "basemap_1940": {
+   "1940 Air Photo": 1209,
+   "1940 Air Photo & LiDAR": 9
+  },
+  "basemap_helene": {
+   "2024 Nearmap": 269,
+   "2024 Nearmap & NCDOT": 16,
+   "2024 Nearmap & NDVI": 10,
+   "2024 Nearmap & NOAA": 5
+  },
+  "modifier_helene": {
+   "not assessed": 175,
+   "Road Embankment": 42,
+   "Road Cut": 32,
+   "None Apparent": 26,
+   "Embankment/Fill Slope": 16,
+   "Cut Slope": 14,
+   "Other - See Comments": 10,
+   "Mining/Quarrying": 3
+  },
+  "exist_conf_1940": {
+   "Moderate": 1181,
+   "High": 37
+  },
+  "outline_area_m2_median": {
+   "1940": 660.1088326371155,
+   "helene": 977.824449605883
+  },
+  "helene_to_1940_m": {
+   "median": 367.56942493308054,
+   "lt100": 0.12264150943396226,
+   "lt250": 0.3490566037735849,
+   "lt1000": 0.8930817610062893
+  },
+  "helene_overlapping_1940": 17,
+  "helene_inside_1940_hull": 0.9874213836477987,
+  "mean_rain_mm": 307.29300555759005
+ }
+}
