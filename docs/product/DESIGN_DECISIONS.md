@@ -133,3 +133,13 @@ one-sentence question, status wording, link. Static HTML with inline CSS (family
 the Pages workflow copies `site/` to the root and each `projects/*/web/` to `/<project>/`. A new app needs a
 card there. A "local experiment" status is stated on the card as well as in the app. *Reason:* two apps now
 exist and more will follow; a redirect to one app hides the others. · LS
+
+**D24. A map of a large area opens on a case, not on the whole extent; a click or tap answers "what is here?".**
+LS: the map opens on site 1 (about 5 km across, where flagged slopes and mapped sites are legible); buttons jump to the
+whole area and to each of the four sites, whose 2 km squares are dashed on the map and link to the before/after images.
+The popup (also reachable with the "What is at the map centre?" button, for keyboard and touch) gives the county,
+the HUC-12, and the relative rank of the 5 m cell in all three rankings, plus "not tested by Helene's rainfall",
+"outside the area of applicability" and "mapped initiation site" where they apply. The rank is decoded from the same
+5 m tiles the map draws (no second data set); at low zoom the drawn pixel is an area-weighted overview, so the popup can
+differ slightly from the colour. *Reason:* at whole-area zoom the flagged cells are specks and the map read as
+decoration (user feedback, 2026-10-24). · LS
