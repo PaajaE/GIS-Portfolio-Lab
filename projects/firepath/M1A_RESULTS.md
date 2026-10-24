@@ -368,3 +368,45 @@ outputs are committed under `validation/`.
   check pending.
 - Full-text checks of Finney 1998 / Anderson 1983 / Andrews 2013 (blocked from this session).
 - **M0 on the Mac** (`make probe`): gates M1b.
+
+## M1a-4: HY confirmation at 30 m (2026-10-24)
+
+Pre-registration: `validation/M1A4_PREREGISTRATION.md`, committed before the run. Results:
+`validation/m1a4_C.json` (runner `firepath.confirm`).
+
+**Pre-registered verdict: FAIL.** HY at 30 m against LS at 7.5 m on the mosaic:
+
+| Case | median e | p95 e | signed median | HY later than ref. | ref. uncertainty u (median / p95) | lower-bound violations |
+|---|---|---|---|---|---|---|
+| iso | 5.23 % ✗ | 13.8 % ✗ | −5.2 % | 0 % of cells | 1.6 / 3.5 % | 0 |
+| lb2 | 5.05 % ✗ | 13.7 % ✗ | −5.0 % | 4 % | 1.4 / 3.1 % | 0 |
+| lb4 | 3.00 % ✓ | 15.2 % ✗ | −2.9 % | 19 % | 0.8 / 2.9 % | 0 |
+
+HY cost in the Python reference: 2.0–2.6 ms per cell at 30 m (single thread, cloud container).
+
+**Post-hoc diagnostic (not pre-registered; `validation/m1a4_diag_upper_bound.json`).** In a static
+field, a graph path with exactly integrated edge times is a path the fire can physically follow, so
+G8 is an **upper bound** on the true arrival time for its geometry. Comparing with G8 at 7.5 m:
+
+| Case | LS 7.5 m above the upper bound | LS 7.5 m − G8 7.5 m (median / p95) | HY 30 m − G8 7.5 m (median / p95) | HY above the upper bound |
+|---|---|---|---|---|
+| iso | **99.9 %** of cells | +2.9 / +5.7 % | −2.7 / −0.5 % | 0.8 % |
+| lb2 | **99.8 %** | +2.2 / +5.3 % | −2.3 / +1.8 % | 28 % |
+| lb4 | 77 % | +1.7 / +4.7 % | −0.5 / +3.8 % | 38 % |
+
+What this shows, and what it does not:
+- The reference is **provably late** (≥ 2–3 % median) on almost every cell, so about half of the
+  measured −5 % gap is reference error. The test cannot attribute the gap to HY. Choosing LS 7.5 m
+  as the sole reference was a design error in M1A4_PREREGISTRATION: M1a-3 had already shown LS to be
+  late at fuel contrasts.
+- HY 30 m lies between the hard lower bound (0 violations) and the G8 7.5 m upper bound on 99 % of
+  cells in iso. Its true error there is bracketed but not measured: it lies between −2.7 % (median
+  distance to the upper bound) and the unknown distance from the upper bound to the truth.
+- At lb2/lb4, 28–38 % of HY cells sit above the upper bound, by up to ≈ 4 % (p95). That error is real
+  and late.
+- The criteria are not changed after the run. Under the decision rule, D1 confirmation goes back to the
+  owner.
+
+**Recommended next step (M1a-5, to pre-register first):** a bracketing reference that does not rely on
+one scheme. Upper bound: G8 and G16 at 3.75 m. Estimate: LS at 15 / 7.5 / 3.75 m with Richardson where
+applicable. HY 30 m is judged against the bracket. Estimated cost: ≈ 1 h per case in the background.
