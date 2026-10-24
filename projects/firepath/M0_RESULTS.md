@@ -64,7 +64,7 @@ zones. Usable for cross-checks, not as the primary timing source.
 ### B3. Pipeline / Haywire
 Separate incident records in both Mendeley (different IRWIN IDs) and the NIFC archive: **S6 met**.
 
-### B4. Screening consequence — decision for the owner
+### B4. Screening consequence — **decided 2026-10-24: S7 added, Cerro Pelado replaces Tunnel**
 Under the pre-registered S1 (≥ 3 perimeters, ≥ 1 consecutive pair), **Tunnel formally passes, but it is
 nearly empty as a test**. IR coverage starts on 04-26, after the extreme 04-19/20 run, and only **78 ha**
 of growth remain to predict. A validation on 78 ha would be dominated by a handful of cells.
@@ -96,7 +96,7 @@ LF 2022 must **not** be used for the 2021–22 fires: it contains their own burn
 - **M1b (Mangum 2020 slice): data side GO.** Mangum has 23 IR perimeters with UTC times; LF2016 via LFPS,
   HRRR, gridMET and 3DEP are reachable from the Mac; disk is sufficient. The remaining precondition is
   numerical: the pre-registered HY confirmation run at 30 m (M1A_RESULTS, "D1 decision").
-- **Screening freeze:** waits for the owner's choice in B4 and the masked-day lists.
+- **Screening freeze:** S7 decided; waits for the masked-day lists (ICS-209-PLUS).
 
 ## Earlier status (kept for the record)
 

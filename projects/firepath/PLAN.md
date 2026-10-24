@@ -132,6 +132,9 @@ after the calibrated parameters are locked (§8, `validation/locked_params.json`
 
 - **Recommended:** calibration = **Bush 2020, Mangum 2020, Telegraph 2021**; validation = **Tunnel 2022,
   Pipeline 2022**.
+- **Current set (2026-10-24, after M0 screening S1–S7):** calibration = Bush 2020, Mangum 2020, Telegraph 2021;
+  validation = **Cerro Pelado 2022** (replaces Tunnel, which fails S7) and **Pipeline 2022**. Perimeters from
+  the Mendeley NIROPS 2020–2024 dataset (the NIFC file share now requires FAMAuth). Masked days still to list.
 - Why the test is fair and not cherry-picked: (1) the split is set by date, not by model fit, and mimics
   the real use (parameters from past fires applied to a later one); (2) the pool, the screening criteria
   and the rule are committed in this plan before any run, and every pool fire that passes screening is
@@ -143,7 +146,7 @@ after the calibrated parameters are locked (§8, `validation/locked_params.json`
   S1 ≥ 3 time-stamped perimeters in the evaluation window with ≥ 1 consecutive daily pair;
   S2 observation time known to ±1 h (scan time) or the perimeter is excluded; S3 point of origin known to
   ±500 m **or** usable first perimeter; S4 final area 2,000–100,000 ha; S5 LANDFIRE version that predates
-  the fire exists (§3); S6 the fire is separable from neighbouring incidents. Days whose growth the
+  the fire exists (§3); S6 the fire is separable from neighbouring incidents; **S7 (added 2026-10-24, owner-approved, before any model run on these fires) ≥ 2,000 ha of growth visible between consecutive daily IR perimeters** (the S4 floor applied to the growth that the evaluation can see; reason: Tunnel's IR coverage starts after its main run, leaving 78 ha, `M0_RESULTS.md` B4). Days whose growth the
   ICS-209 / InciWeb record attributes mainly to **firing (burnout) operations or long-range spotting** are
   masked from evaluation (a pre-declared list per fire, frozen before modelling). The fire is not dropped.
 - If a recommended fire fails screening, its listed alternative takes its place in the same role. If the
@@ -689,7 +692,9 @@ do not start until validation (M4) has written its G1/G2 verdicts.
   Note: anything placed in `projects/firepath/web/` goes live once merged to `main`.
 - **Q6:** resolved. Work is pushed to `feat/firepath` (and `claude/epic-faraday-01rz3x`).
 - **Q7:** resolved. Project 02 (Landslide) exists on `main`; FirePath reuses its shared conventions.
-- **Q1, Q2, Q3:** being handled by the owner (FIRMS MAP_KEY; RAWS source; fire set), see the session notes.
+- **Q1:** Arizona/New Mexico R3 first; California only as a transfer test after M4, if G1/G2 pass.
+- **Q2:** FIRMS MAP_KEY obtained (git-ignored `.env`). **Q3:** RAWS from the WRCC archive (no token).
+- **S7 + fire set:** approved; Cerro Pelado 2022 replaces Tunnel 2022 for validation.
 
 **Revision 2: decisions that need your approval now** (detail and evidence in `CRITICAL_REVIEW.md`):
 - **D1, propagation scheme:** the bake-off ran (M1A_RESULTS). No scheme passed all criteria, so this is
