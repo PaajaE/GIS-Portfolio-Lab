@@ -22,6 +22,7 @@ from math import inf
 import numpy as np
 
 from .reference import BARRIER, INITIAL, NOT_REACHED, REACHED, Result, SpreadField
+from .slopeplane import cov_to_slope, frame, vec_to_horizontal, w_in_slope
 
 
 def _hamiltonian(px, py, a, e, wx, wy):
@@ -30,15 +31,54 @@ def _hamiltonian(px, py, a, e, wx, wy):
     return a * (e * pw + np.sqrt(pw * pw + (1.0 - e * e) * pp * pp))
 
 
-def _dhamiltonian(px, py, a, e, wx, wy):
-    """(|dH/dpx|, |dH/dpy|) of the support-function Hamiltonian."""
+def _grad_hamiltonian(px, py, a, e, wx, wy):
+    """Signed (dH/dpx, dH/dpy) of the support-function Hamiltonian."""
     pw = px * wx + py * wy
     pp = -px * wy + py * wx
     s = np.sqrt(pw * pw + (1.0 - e * e) * pp * pp)
     s = np.where(s > 0, s, 1.0)
     hw = a * (e + pw / s)
     hp = a * (1.0 - e * e) * pp / s
-    return np.abs(hw * wx - hp * wy), np.abs(hw * wy + hp * wx)
+    return hw * wx - hp * wy, hw * wy + hp * wx
+
+
+def _dhamiltonian(px, py, a, e, wx, wy):
+    """(|dH/dpx|, |dH/dpy|) of the support-function Hamiltonian."""
+    gx, gy = _grad_hamiltonian(px, py, a, e, wx, wy)
+    return np.abs(gx), np.abs(gy)
+
+
+class _Ham:
+    """H(p) and |dH/dp| for planar or slope-plane cells (slopeplane.py): H(p) = h_E(P^T p),
+    dH/dp = P grad h_E(P^T p)."""
+
+    def __init__(self, a, e, wx, wy, slope=None):
+        self.a, self.e, self.slope = a, e, slope
+        if slope is None:
+            self.w = (wx, wy)
+        else:
+            cs, ux, uy = slope
+            self.w = w_in_slope(np.arctan2(wy, wx), cs, ux, uy)
+
+    def __call__(self, px, py):
+        if self.slope is not None:
+            px, py = cov_to_slope(px, py, *self.slope)
+        return _hamiltonian(px, py, self.a, self.e, *self.w)
+
+    def dabs(self, px, py):
+        if self.slope is None:
+            return _dhamiltonian(px, py, self.a, self.e, *self.w)
+        q1, q2 = cov_to_slope(px, py, *self.slope)
+        g1, g2 = _grad_hamiltonian(q1, q2, self.a, self.e, *self.w)
+        gx, gy = vec_to_horizontal(g1, g2, *self.slope)
+        return np.abs(gx), np.abs(gy)
+
+    def half_extents(self):
+        """Extent of the horizontal spread set from the focus along x and y: max(H(+-x)), max(H(+-y))."""
+        one, zero = np.ones_like(self.a), np.zeros_like(self.a)
+        ax = np.maximum(self(one, zero), self(-one, zero))
+        ay = np.maximum(self(zero, one), self(zero, -one))
+        return ax, ay
 
 
 def _eno2(phi, dx):
@@ -263,15 +303,17 @@ def propagate_levelset(f: SpreadField, *, points=(), inside=None, t0=0.0, t_stop
         a = f.r_head[h] / (1.0 + f.ecc[h])
         e = f.ecc[h]
         wx, wy = np.cos(f.theta[h]), np.sin(f.theta[h])
+        slope = None if f.tan_slope is None else frame(f.tan_slope, f.upslope)
         if extension:
             ix = _extension_index(phi, barrier)
             a, e = a.ravel()[ix], e.ravel()[ix]
             wx, wy = wx.ravel()[ix], wy.ravel()[ix]
-        # direction-specific LF bounds: half-extent of the unit-time spread set E along x and y,
-        # measured from the focus: |a e w_i| + sqrt(a^2 w_i^2 + b^2 w_perp_i^2)  (<= R_head)
-        b2 = (a * a) * (1.0 - e * e)
-        ax = np.abs(a * e * wx) + np.sqrt(a * a * wx * wx + b2 * wy * wy)
-        ay = np.abs(a * e * wy) + np.sqrt(a * a * wy * wy + b2 * wx * wx)
+            if slope is not None:
+                slope = tuple(np.broadcast_to(v, (nr, nc)).ravel()[ix] for v in slope)
+        ham_fn = _Ham(a, e, wx, wy, slope)
+        # direction-specific LF bounds: half-extent of the horizontal unit-time spread set along x and y,
+        # measured from the focus (planar: |a e w_i| + sqrt(a^2 w_i^2 + b^2 w_perp_i^2) <= R_head)
+        ax, ay = ham_fn.half_extents()
         if not np.isscalar(ax):
             g_ax, g_ay = np.pad(ax, 1, mode="edge"), np.pad(ay, 1, mode="edge")
             ax = np.maximum.reduce([g_ax[1:-1, 1:-1], g_ax[1:-1, :-2], g_ax[1:-1, 2:]])
@@ -303,13 +345,13 @@ def propagate_levelset(f: SpreadField, *, points=(), inside=None, t0=0.0, t_stop
                 xm, xp = (np.where(near_x, fm[i], hi[i]) for i in (0, 1))
                 ym, yp = (np.where(near_y, fm[i], hi[i]) for i in (2, 3))
             px, py = 0.5 * (xm + xp), 0.5 * (ym + yp)
-            ham = _hamiltonian(px, py, a, e, wx, wy)
+            ham = ham_fn(px, py)
             if dissipation == "local":  # |dH/dp| at the corners of the local gradient box (SLLF)
                 cx = np.zeros_like(ph)
                 cy = np.zeros_like(ph)
                 for gx in (xm, xp):
                     for gy in (ym, yp):
-                        hx, hy = _dhamiltonian(gx, gy, a, e, wx, wy)
+                        hx, hy = ham_fn.dabs(gx, gy)
                         cx = np.maximum(cx, hx)
                         cy = np.maximum(cy, hy)
                 cx = np.minimum(cx, ax)

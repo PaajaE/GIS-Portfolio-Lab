@@ -40,11 +40,24 @@ def support(nx, ny, r_head, ecc, theta):
     return a * (ecc * nw + np.sqrt(nw * nw + (1 - ecc * ecc) * npp * npp))
 
 
-def t_disc(dx, dy, r_head, ecc, theta, r0=R0):
-    """Earliest t with (dx, dy) in disc(r0) (+) t E  (vectorised over dx, dy arrays)."""
+def support_slope(nx, ny, r_head, ecc, theta, tan_s, up):
+    """Support function of the horizontal spread set P(E) on an inclined plane: h_E(P^T n)
+    (slopeplane.py); theta is the horizontal image of the slope-plane max-spread direction."""
+    from .slopeplane import cov_to_slope, frame, w_in_slope
+
+    cs, ux, uy = frame(tan_s, up)
+    q1, q2 = cov_to_slope(nx, ny, cs, ux, uy)
+    w1, w2 = w_in_slope(theta, cs, ux, uy)
+    return support(q1, q2, r_head, ecc, np.arctan2(w2, w1))
+
+
+def t_disc(dx, dy, r_head, ecc, theta, r0=R0, slope=None):
+    """Earliest t with (dx, dy) in disc(r0) (+) t E  (vectorised over dx, dy arrays).
+    slope = (tan_s, upslope) for an inclined plane, where E is replaced by its horizontal image P(E)."""
     dx = np.atleast_1d(dx)[:, None]
     dy = np.atleast_1d(dy)[:, None]
-    h = support(_NX, _NY, r_head, ecc, theta)[None, :]
+    h = (support(_NX, _NY, r_head, ecc, theta) if slope is None
+         else support_slope(_NX, _NY, r_head, ecc, theta, *slope))[None, :]
     return np.maximum(np.max((_NX * dx + _NY * dy - r0) / h, axis=1), 0.0)
 
 
@@ -133,10 +146,12 @@ def cases():
     """name -> builder(delta) returning (field, inside, x, y, exact_fn(xs, ys) -> T, score_mask, t_stop)."""
     out = {}
 
-    def mk(name, r_fn, ecc, theta, sources, exact, t_stop, t_change=(), forward=None):
+    def mk(name, r_fn, ecc, theta, sources, exact, t_stop, t_change=(), forward=None, slope=None):
         def build(delta):
             n, x, y = grid(delta)
-            f = uniform_field((n, n), r_head=1.0, ecc=ecc, theta=theta, t_change=t_change, cell_m=delta)
+            terrain = {} if slope is None else {"tan_slope": slope[0], "upslope": slope[1]}
+            f = uniform_field((n, n), r_head=1.0, ecc=ecc, theta=theta, t_change=t_change, cell_m=delta,
+                              **terrain)
             f.r_head[:] = r_fn(x, y)[None]
             inside = np.zeros((n, n), bool)
             dist = np.full((n, n), np.inf)
@@ -177,6 +192,15 @@ def cases():
             ex = (lambda rl_, rr2, e_: (lambda xs, ys: t_half_plane(xs, ys, src[0], src[1], xb, rl_, rr2, e_,
                                                                      0.0, 0.0, L)))(rl, rr_, e)
             mk(f"A4_halfplane_LB{lb:g}_{label}", rfn, e, 0.0, [src], ex, 2500 if label == "fastsrc" else 4000)
+    # A6 inclined plane (METHOD "Slope-plane geometry"): exact = disc (+) t P(E) via support functions
+    ci = (600.0, 600.0)
+    for lb, tan_s, up_deg, th_deg in ((1.0, 0.6, 90.0, 0.0), (2.0, 0.3, 90.0, 45.0), (4.0, 0.6, 30.0, 30.0)):
+        e = float(eccentricity(lb)) if lb > 1 else 0.0
+        sl = (tan_s, np.radians(up_deg))
+        th = np.radians(th_deg)
+        mk(f"A6_incline_LB{lb:g}_tan{tan_s:g}", one, e, th, [ci],
+           (lambda e_, th_, sl_: (lambda xs, ys: t_disc(xs - ci[0], ys - ci[1], 1.0, e_, th_, slope=sl_)))(e, th, sl),
+           550, slope=sl)
     s1, s2 = (400.0, 600.0), (800.0, 600.0)
     mk("A5_merging", one, 0.0, 0.0, [s1, s2],
        lambda xs, ys: np.minimum(t_disc(xs - s1[0], ys - s1[1], 1.0, 0.0, 0.0),
@@ -197,9 +221,11 @@ def errors(arr, x, y, exact, score, t_stop):
             "max": float(rel.max()), "median_signed": float(np.median(signed))}
 
 
-def run_A(scheme):
+def run_A(scheme, prefix=""):
     res = {}
     for name, build in cases().items():
+        if not name.startswith(prefix):
+            continue
         res[name] = {}
         for d in DELTAS:
             f, inside, x, y, exact, score, t_stop = build(d)
@@ -394,6 +420,9 @@ def main():
     if what == "A":
         scheme = sys.argv[2]
         (OUT / f"m1a3_A_{scheme}.json").write_text(json.dumps(run_A(scheme), indent=1))
+    elif what == "A6":   # inclined-plane cases only (added 2026-10-25)
+        scheme = sys.argv[2]
+        (OUT / f"m1a6_A6_{scheme}.json").write_text(json.dumps(run_A(scheme, "A6"), indent=1))
     elif what == "B":
         (OUT / "m1a3_B.json").write_text(json.dumps(run_B(), indent=1))
     elif what == "C":

@@ -62,7 +62,7 @@ were unreachable from the review session.
 | E8 | Directional spread (ray speed from the ignition point at the rear focus) | e = √(LB² − 1)/LB; r(ψ) = R_head (1 − e)/(1 − e cos ψ), ψ = angle from the max-spread direction | **[published]** elliptical fire shape (Albini & Chase 1980 for e; Richards 1990; used as the travel-time norm by MTT, Finney 2002) | head r(0) = R_head; back (1−e)/(1+e)·R_head | `test_ellipse_basics`; uniform-wind fixture |
 | E9 | Moisture damping and extinction | η_M = 1 − 2.59 r + 5.11 r² − 3.52 r³, r = min(M_f/M_x, 1), per category; live extinction M_x,live = max(M_x,dead, 2.9 W′(1 − M_f,dead/M_x,dead) − 0.226) | **[published]** Rothermel 1972; Albini 1976 [to cross-check] | fractions | η_M(0) = 1, η_M(1) = 0; extinction gives R0 = 0, so the cell becomes a barrier (static) |
 | E10 | Dynamic fuel models | cured share T = clamp((120 − M_lh)/90, 0, 1) of the live herbaceous load moves to a dead herbaceous class with the live herbaceous SAV and the dead 1-h moisture | **[published]** Scott & Burgan 2005; consistent with the IFTDSS table and pyretechnics | M_lh in % | `test_dynamic_fuel_curing` |
-| E11 | Wind adjustment factor | unsheltered WAF = 1.83/ln((20 + 0.36 H)/(0.13 H)), H = fuel bed depth (ft); sheltered WAF = 0.555/(√(f H_c) ln((20 + 0.36 H_c)/(0.13 H_c))) | **[published]** Andrews 2012 (GTR-266), via pyretechnics. **Unresolved:** the definition of the crown-fill portion f (pyretechnics: CC/3, crown ratio 1) and the sheltering threshold | H_c canopy height (ft) | after the source check |
+| E11 | Wind adjustment factor | unsheltered WAF = 1.83/ln((20 + 0.36 H)/(0.13 H)), H = fuel bed depth (ft); sheltered WAF = 0.555/(√(f H_c) ln((20 + 0.36 H_c)/(0.13 H_c))), f = CR·CC/3 | **[published, primary source read 2026-10-25]** Andrews 2012 (GTR-266) eqs. 1, 2, 9, 10: sheltered if f > 5 %; FARSITE uses CR = 1 (p. 10), adopted here (LANDFIRE has no crown ratio). PDF sha256 prefix 8b9cefc2b0fb921b | H_c canopy height (ft) | `tests/test_field.py::test_waf_sheltered_switch_follows_gtr266` |
 | E12 | 10 m → 20 ft wind | U_20ft = U_10m / 1.15 | **[FirePath convention, unverified]**: no primary source found; one press source gives /1.2 for the NWS; a neutral log profile gives 1.09–1.20 for z0 = 0.03–0.5 m (computed). The factor is a constant multiplier on wind speed, so any error is **absorbed by `a_u`** and cannot be separated from it | — | — |
 
 **Implementation status (2026-10-25):** E1, E2, E3, E9, E10 are implemented in `firepath.fuels` /
@@ -88,8 +88,12 @@ exactly. Not yet done: comparison with the GTR-153 fuel-model charts (figures; c
 Each cell is a plane with gradient g = ∇z (from the 30 m DEM, Horn). A horizontal unit direction d has
 surface rise p = g·d. The ellipse lives in the slope plane (E4/E8). The angle ψ is measured there between
 the surface direction (d, p)/√(1+p²) and the max-spread direction. The **horizontal-plane speed** used by
-propagation is s_h(d) = r(ψ)/√(1 + p²). On flat cells this reduces to the planar ellipse. To be tested on an
-inclined-plane fixture (M1a).
+propagation is s_h(d) = r(ψ)/√(1 + p²). On flat cells this reduces to the planar ellipse. **Implemented 2026-10-25** (`slopeplane.py`): the horizontal spread set is the linear image P(E) of the
+slope-plane ellipse, so the level set uses h_{P(E)}(p) = h_E(Pᵀp) and the graph the radial function of
+P(E). Both match a brute-force construction of P(E) (`tests/test_slopeplane.py`). The wind vector is
+projected orthogonally onto the slope plane before E2/E4 (`field.py`). Inclined-plane code-verification
+cases A6 (LB 1/2/4, tan s 0.3/0.6): HY at 30 m median ≤ 1.5 %, p95 ≤ 2.6 % (passes); LS fails LB 4 /
+tan 0.6 at 30 m (median 5.2 %) and converges (0.4 % at 7.5 m). `validation/m1a6_A6_*.json`.
 
 ### Fuel moisture [FirePath mapping of published scenarios]
 - M1: dead 100-h = gridMET fm100, the median over the fire's evaluation window (one value per fire,

@@ -15,10 +15,11 @@ from __future__ import annotations
 
 import heapq
 from dataclasses import dataclass, field
-from math import cos, inf
+from math import cos, hypot, inf, sin
 
 import numpy as np
 
+from .slopeplane import dir_to_slope, frame, w_in_slope
 from .stencil import Traversal, edge_valid, traversals
 
 # status codes of the output raster (METHOD.md, output schema)
@@ -36,6 +37,9 @@ class SpreadField:
     theta: (H, nr, nc) direction of maximum spread (rad, counter-clockwise from east).
     burnable: (nr, nc) bool. Non-burnable cells are barriers.
     cell_m: cell size (m).
+    tan_slope, upslope: optional (nr, nc) static terrain. When given, r_head is the slope-plane head ROS,
+        theta the horizontal image of the slope-plane max-spread direction, and speeds are horizontal
+        (slopeplane.py). When None, the field is planar.
     """
 
     t_change: np.ndarray
@@ -44,6 +48,8 @@ class SpreadField:
     theta: np.ndarray
     burnable: np.ndarray
     cell_m: float
+    tan_slope: np.ndarray | None = None
+    upslope: np.ndarray | None = None
     _starts: list = field(init=False, repr=False)
 
     def __post_init__(self):
@@ -55,6 +61,10 @@ class SpreadField:
         # zero spread is time-invariant: a burnable cell must spread in every interval
         assert np.all(self.r_head[:, self.burnable] > 0), "burnable cell with zero head ROS"
         self._starts = list(map(float, self.t_change))
+        if (self.tan_slope is None) != (self.upslope is None):
+            raise ValueError("give both tan_slope and upslope, or neither")
+        if self.tan_slope is not None:
+            assert self.tan_slope.shape == self.upslope.shape == self.burnable.shape
 
     @property
     def shape(self):
@@ -69,8 +79,16 @@ class SpreadField:
         return h, end
 
     def speed(self, h: int, r: int, c: int, phi: float) -> float:
+        """Horizontal-plane spread speed along direction phi (rad, CCW from east)."""
         e = self.ecc[h, r, c]
-        return float(self.r_head[h, r, c] * (1.0 - e) / (1.0 - e * cos(phi - self.theta[h, r, c])))
+        if self.tan_slope is None:
+            return float(self.r_head[h, r, c] * (1.0 - e) / (1.0 - e * cos(phi - self.theta[h, r, c])))
+        cs, ux, uy = frame(self.tan_slope[r, c], self.upslope[r, c])
+        d1, d2 = dir_to_slope(cos(phi), sin(phi), cs, ux, uy)
+        norm = hypot(d1, d2)                                   # |P^-1 d| = sqrt(1 + p^2)
+        w1, w2 = w_in_slope(self.theta[h, r, c], cs, ux, uy)
+        cos_psi = (d1 * w1 + d2 * w2) / norm
+        return float(self.r_head[h, r, c] * (1.0 - e) / (1.0 - e * cos_psi) / norm)
 
 
 def edge_arrival(f: SpreadField, r: int, c: int, t: Traversal, t_u: float,
@@ -176,7 +194,8 @@ def propagate(f: SpreadField, radius: int = 2, *, points=(), inside: np.ndarray 
     return Result(arrival, status)
 
 
-def uniform_field(shape, r_head, ecc=0.0, theta=0.0, *, t_change=(), cell_m=30.0, burnable=None):
+def uniform_field(shape, r_head, ecc=0.0, theta=0.0, *, t_change=(), cell_m=30.0, burnable=None,
+                  tan_slope=None, upslope=None):
     """Convenience constructor: scalars or per-interval sequences broadcast over the grid."""
     h = len(t_change) + 1
     def per_interval(v):
@@ -187,5 +206,9 @@ def uniform_field(shape, r_head, ecc=0.0, theta=0.0, *, t_change=(), cell_m=30.0
             v = v[:, None, None] * np.ones((1, *shape))
         return v
     b = np.ones(shape, bool) if burnable is None else burnable
+    terrain = {}
+    if tan_slope is not None:
+        terrain = {"tan_slope": np.broadcast_to(np.asarray(tan_slope, float), shape).copy(),
+                   "upslope": np.broadcast_to(np.asarray(upslope, float), shape).copy()}
     return SpreadField(np.asarray(t_change, float), per_interval(r_head), per_interval(ecc),
-                       per_interval(theta), b, cell_m)
+                       per_interval(theta), b, cell_m, **terrain)
