@@ -5,7 +5,7 @@ interval-censored metrics (METHOD "Observations and validation metrics", PLAN §
 
 Parameters are HAND-SET placeholders (M1b), not calibrated: model k = a_u = a_s = 1; B0 c = 1 m/min;
 B1 c = 0.5 m/min, b = 0.05 (U10 in m/s). Results are a pipeline check, not a skill estimate.
-Writes data/out/<fire>/run_<cell>m_<scheme>.npz and validation/m1b_<fire>_<cell>m_<scheme>.json.
+Writes data/out/<fire>/run_<fire>_<cell>m_<scheme>_<models>.npz and validation/m1b_<same>.json.
 """
 
 from __future__ import annotations
@@ -204,11 +204,12 @@ def main(argv=None):
         out_arr[kind] = res.arrival.astype("f4")
         print(kind, f"{sec:.0f}s", {k: mt[k] for k in ("mean_abs_h", "share_early", "share_inside", "share_late")},
               flush=True)
+    tag = f"{a.fire}_{a.cell}m_{a.scheme}_{a.models.replace(',', '-')}"
     od = PROJECT / "data" / "out" / a.fire
     od.mkdir(parents=True, exist_ok=True)
-    np.savez_compressed(od / f"run_{a.cell}m_{a.scheme}.npz", **out_arr, lo=lo, hi=hi, flag=audit["flag"],
+    np.savez_compressed(od / f"run_{tag}.npz", **out_arr, lo=lo, hi=hi, flag=audit["flag"],
                         fuel=fuel, burnable=st.burnable, rel_scans_min=rel)
-    (PROJECT / "validation" / f"m1b_{a.fire}_{a.cell}m_{a.scheme}.json").write_text(json.dumps(report, indent=1))
+    (PROJECT / "validation" / f"m1b_{tag}.json").write_text(json.dumps(report, indent=1))
 
 
 if __name__ == "__main__":

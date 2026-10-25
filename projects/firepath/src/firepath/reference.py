@@ -19,7 +19,7 @@ from math import cos, hypot, inf, sin
 
 import numpy as np
 
-from .slopeplane import dir_to_slope, frame, w_in_slope
+from .slopeplane import frame
 from .stencil import Traversal, edge_valid, traversals
 
 # status codes of the output raster (METHOD.md, output schema)
@@ -65,6 +65,8 @@ class SpreadField:
             raise ValueError("give both tan_slope and upslope, or neither")
         if self.tan_slope is not None:
             assert self.tan_slope.shape == self.upslope.shape == self.burnable.shape
+            self._cs, self._ux, self._uy = (np.ascontiguousarray(v, dtype=float) for v in
+                                            np.broadcast_arrays(*frame(self.tan_slope, self.upslope)))
 
     @property
     def shape(self):
@@ -79,16 +81,20 @@ class SpreadField:
         return h, end
 
     def speed(self, h: int, r: int, c: int, phi: float) -> float:
-        """Horizontal-plane spread speed along direction phi (rad, CCW from east)."""
-        e = self.ecc[h, r, c]
+        """Horizontal-plane spread speed along direction phi (rad, CCW from east). Scalar fast path
+        (math on Python floats); the formulas are those of slopeplane.py."""
+        e = self.ecc.item(h, r, c)
+        th = self.theta.item(h, r, c)
         if self.tan_slope is None:
-            return float(self.r_head[h, r, c] * (1.0 - e) / (1.0 - e * cos(phi - self.theta[h, r, c])))
-        cs, ux, uy = frame(self.tan_slope[r, c], self.upslope[r, c])
-        d1, d2 = dir_to_slope(cos(phi), sin(phi), cs, ux, uy)
-        norm = hypot(d1, d2)                                   # |P^-1 d| = sqrt(1 + p^2)
-        w1, w2 = w_in_slope(self.theta[h, r, c], cs, ux, uy)
-        cos_psi = (d1 * w1 + d2 * w2) / norm
-        return float(self.r_head[h, r, c] * (1.0 - e) / (1.0 - e * cos_psi) / norm)
+            return self.r_head.item(h, r, c) * (1.0 - e) / (1.0 - e * cos(phi - th))
+        cs, ux, uy = self._cs.item(r, c), self._ux.item(r, c), self._uy.item(r, c)
+        dx, dy = cos(phi), sin(phi)
+        d1, d2 = (dx * ux + dy * uy) / cs, -dx * uy + dy * ux       # P^-1 d
+        tx, ty = cos(th), sin(th)
+        w1, w2 = (tx * ux + ty * uy) / cs, -tx * uy + ty * ux       # P^-1 theta_hat
+        norm = hypot(d1, d2)                                         # |P^-1 d| = sqrt(1 + p^2)
+        cos_psi = (d1 * w1 + d2 * w2) / (norm * hypot(w1, w2))
+        return self.r_head.item(h, r, c) * (1.0 - e) / (1.0 - e * cos_psi) / norm
 
 
 def edge_arrival(f: SpreadField, r: int, c: int, t: Traversal, t_u: float,
