@@ -255,7 +255,16 @@ def _extension_index(phi, barrier, offset=(0, 0)):
     if len(pts) == 0:
         return np.arange(nr * nc).reshape(nr, nc)
     rr, cc = np.mgrid[0:nr, 0:nc]
-    _, j = cKDTree(pts).query(np.stack([(rr + o0).ravel(), (cc + o1).ravel()], 1))
+    # nearest interface point; exact distance ties -> lowest point index (deterministic, shared with
+    # the Rust kernel; cKDTree alone leaves the tie order unspecified)
+    q = np.stack([(rr + o0).ravel(), (cc + o1).ravel()], 1).astype(float)
+    k = min(4, len(pts))
+    _, jj = cKDTree(pts).query(q, k=k)
+    jj = jj.reshape(len(q), k)
+    d2 = ((q[:, None, :] - pts[jj]) ** 2)
+    d2 = d2[..., 0] + d2[..., 1]
+    best = d2.min(1, keepdims=True)
+    j = np.where(d2 == best, jj, np.iinfo(np.int64).max).min(1)
     cell_r = np.clip(np.rint(pts[j, 0]).astype(int) - o0, 0, nr - 1)
     cell_c = np.clip(np.rint(pts[j, 1]).astype(int) - o1, 0, nc - 1)
     idx = (cell_r * nc + cell_c).reshape(nr, nc)
@@ -444,7 +453,7 @@ def propagate_hybrid(f: SpreadField, *, radius: int = 8, points=(), inside=None,
         from .reference import propagate
 
     ls = propagate_levelset(f, points=points, inside=inside, t0=t0, t_stop=t_stop, r0_cells=r0_cells,
-                            order=order)
+                            order=order, backend="rust" if graph == "rust" and order == 5 else "python")
     seed = np.where(np.isfinite(ls.arrival), ls.arrival, inf)
     g = propagate(f, radius=radius, inside=inside, t0=t0, t_stop=t_stop, seed=seed)
     arrival = np.minimum(ls.arrival, g.arrival)

@@ -51,3 +51,27 @@ def test_ignition_on_barrier_raises():
     f = uniform_field((4, 4), r_head=1.0, burnable=np.array([[1, 0, 1, 1]] * 4, bool))
     with pytest.raises(ValueError):
         propagate_graph(f, 1, points=[(0, 1, 0.0)])
+
+
+@pytest.mark.parametrize("seed", range(4))
+def test_rust_levelset_bit_identical_to_reference(seed):
+    """Rust level-set loop vs the NumPy reference: identical arrivals (both use the same tie rule for
+    the extension-velocity source: nearest interface point, ties -> lowest point index)."""
+    from firepath.levelset import propagate_levelset
+
+    rng = np.random.default_rng(100 + seed)
+    n = int(rng.integers(30, 60))
+    burn = rng.random((n, n)) > 0.08
+    terrain = {"tan_slope": rng.uniform(0, 0.5, (n, n)), "upslope": rng.uniform(-3, 3, (n, n))} if seed % 2 else {}
+    f = uniform_field((n, n), r_head=1.0, ecc=0.5, theta=0.7, t_change=[30.0, 60.0, 90.0], burnable=burn,
+                      cell_m=30.0, **terrain)
+    f.r_head[:] = rng.uniform(0.5, 3.0, f.r_head.shape)
+    f.ecc[:] = rng.uniform(0.0, 0.85, f.ecc.shape)
+    inside = np.zeros((n, n), bool)
+    inside[n // 2 - 2:n // 2 + 2, n // 2 - 2:n // 2 + 2] = True
+    burn[inside] = True
+    a = propagate_levelset(f, inside=inside, t_stop=150.0, order=5)
+    b = propagate_levelset(f, inside=inside, t_stop=150.0, order=5, backend="rust")
+    assert np.array_equal(a.status, b.status)
+    fin = np.isfinite(a.arrival)
+    assert np.array_equal(a.arrival[fin], b.arrival[fin])

@@ -192,21 +192,21 @@ impl Buckets {
             }
             let (rlo, rhi, clo, chi) = (br - ring, br + ring, bc - ring, bc + ring);
             for r in rlo.max(0)..=rhi.min(self.nr - 1) {
-                let full_row = r == rlo || r == rhi;
-                let cols: Vec<i64> = if full_row || clo == chi { (clo..=chi).collect() } else { vec![clo, chi] };
-                for c in cols {
-                    if c < 0 || c >= self.nc {
-                        continue;
-                    }
-                    let b = (r * self.nc + c) as usize;
-                    for &j in &self.idx[self.start[b]..self.start[b + 1]] {
-                        let (dr, dc) = (qr - pts[j].0, qc - pts[j].1);
-                        let d2 = dr * dr + dc * dc;
-                        match best {
-                            Some((bd, bj)) if d2 > bd || (d2 == bd && j > bj) => {}
-                            _ => best = Some((d2, j)),
+                let full_row = r == rlo || r == rhi || clo == chi;
+                let mut c = clo;
+                while c <= chi {
+                    if c >= 0 && c < self.nc {
+                        let b = (r * self.nc + c) as usize;
+                        for &j in &self.idx[self.start[b]..self.start[b + 1]] {
+                            let (dr, dc) = (qr - pts[j].0, qc - pts[j].1);
+                            let d2 = dr * dr + dc * dc;
+                            match best {
+                                Some((bd, bj)) if d2 > bd || (d2 == bd && j > bj) => {}
+                                _ => best = Some((d2, j)),
+                            }
                         }
                     }
+                    c = if full_row || c == chi { c + 1 } else { chi };
                 }
             }
         }
@@ -216,7 +216,9 @@ impl Buckets {
     /// Cells of a (wr, wc) window at global offset (o0, o1) within Chebyshev distance `radius`
     /// of any non-empty bucket (a superset of the cells within Euclidean distance `radius` of a point).
     fn mark(&self, radius: i64, wr: usize, wc: usize, o0: usize, o1: usize) -> Vec<bool> {
-        let mut m = vec![false; wr * wc];
+        // occupancy of buckets in window coordinates, then a separable box dilation
+        // (rows -radius..=radius+1, cols -radius..=radius+1, as the per-bucket box before)
+        let mut occ = vec![false; wr * wc];
         for br in 0..self.nr {
             for bc in 0..self.nc {
                 let b = (br * self.nc + bc) as usize;
@@ -224,14 +226,36 @@ impl Buckets {
                     continue;
                 }
                 let (gr, gc) = (br + self.r0 - o0 as i64, bc + self.c0 - o1 as i64);
-                for r in (gr - radius).max(0)..=(gr + radius + 1).min(wr as i64 - 1) {
-                    for c in (gc - radius).max(0)..=(gc + radius + 1).min(wc as i64 - 1) {
-                        m[r as usize * wc + c as usize] = true;
-                    }
+                if gr >= 0 && gr < wr as i64 && gc >= 0 && gc < wc as i64 {
+                    occ[gr as usize * wc + gc as usize] = true;
                 }
             }
         }
-        m
+        let dil = |src: &[bool], n_outer: usize, n_inner: usize, stride_o: usize, stride_i: usize| -> Vec<bool> {
+            // out[i] = any(src[j]) for j in [i - radius - 1, i + radius] along the inner axis
+            let mut out = vec![false; src.len()];
+            for o in 0..n_outer {
+                let mut last: i64 = i64::MIN / 2; // last occupied index seen so far
+                let mut next = vec![i64::MAX / 2; n_inner];
+                let mut nxt = i64::MAX / 2;
+                for i in (0..n_inner).rev() {
+                    if src[o * stride_o + i * stride_i] {
+                        nxt = i as i64;
+                    }
+                    next[i] = nxt;
+                }
+                for i in 0..n_inner {
+                    if src[o * stride_o + i * stride_i] {
+                        last = i as i64;
+                    }
+                    let ii = i as i64;
+                    out[o * stride_o + i * stride_i] = ii - last <= radius + 1 || next[i] - ii <= radius;
+                }
+            }
+            out
+        };
+        let rows = dil(&occ, wr, wc, wc, 1);
+        dil(&rows, wc, wr, 1, wc)
     }
 }
 
@@ -386,9 +410,22 @@ pub fn run(f: &Field, p: &Params, near_x: &[bool], near_y: &[bool], phi: &mut [f
             (0..wn).collect()
         } else {
             let bk = Buckets::new(&pts);
-            // only cells near the front need their parameters extended: active cells and their
-            // neighbours lie within band + 1.5 of the interface; elsewhere the values are masked
-            let near = bk.mark(p.band.ceil() as i64 + 3, wr, wc, r0, c0);
+            // only cells whose parameters can be used need the extension: those within band + 3 of the
+            // front (active cells and their neighbours after a reinitialization) ...
+            let mut near = bk.mark(p.band.ceil() as i64 + 3, wr, wc, r0, c0);
+            // ... and every cell whose bound enters the CFL step (not frozen before this step) with
+            // its neighbours (needed e.g. on the first step, when only barriers are frozen)
+            for r in 0..wr {
+                for c in 0..wc {
+                    if !frozen[gk(r * wc + c)] {
+                        for rr in r.saturating_sub(1)..(r + 2).min(wr) {
+                            for cc in c.saturating_sub(1)..(c + 2).min(wc) {
+                                near[rr * wc + cc] = true;
+                            }
+                        }
+                    }
+                }
+            }
             (0..wn)
                 .map(|i| {
                     if bar_w[i] || !near[i] {
