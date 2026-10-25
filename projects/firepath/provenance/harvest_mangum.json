@@ -1,0 +1,90 @@
+{
+ "files": {
+  "data/raw/mangum/dem/usgs_13_merged.tif": {
+   "bytes": 75239149,
+   "crs": "EPSG:4269",
+   "resolution": "1/3 arc-second",
+   "retrieved_utc": "2026-10-25T01:49:04+00:00",
+   "sha256": "c85ee671882888217a1f012d7042b9a52989dbc7c178c66c9077c1c8bf59c53d",
+   "tiles": [
+    "n37w113",
+    "n37w112"
+   ],
+   "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n37w113/USGS_13_n37w113.tif ; https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n37w112/USGS_13_n37w112.tif"
+  },
+  "data/raw/mangum/gridmet/fm100.nc": {
+   "bytes": 36596,
+   "retrieved_utc": "2026-10-25T01:49:43+00:00",
+   "sha256": "1761d09bc6357fd9a696c8d7eaabfaff89118f35b7a056495db60116187a5377",
+   "url": "https://thredds.northwestknowledge.net/thredds/ncss/agg_met_fm100_1979_CurrentYear_CONUS.nc?var=dead_fuel_moisture_100hr&north=37.058978486350824&west=-112.51512231438019&east=-111.90658103852672&south=36.45282882026816&disableProjSubset=on&horizStride=1&time_start=2020-06-08T00:00:00Z&time_end=2020-07-09T00:00:00Z&timeStride=1&accept=netcdf"
+  },
+  "data/raw/mangum/gridmet/fm1000.nc": {
+   "bytes": 36600,
+   "retrieved_utc": "2026-10-25T01:49:44+00:00",
+   "sha256": "c64b227bfa0871d16680d123ff5d9c28707a781afbd673fb301b0b6138f6a09c",
+   "url": "https://thredds.northwestknowledge.net/thredds/ncss/agg_met_fm1000_1979_CurrentYear_CONUS.nc?var=dead_fuel_moisture_1000hr&north=37.058978486350824&west=-112.51512231438019&east=-111.90658103852672&south=36.45282882026816&disableProjSubset=on&horizStride=1&time_start=2020-06-08T00:00:00Z&time_end=2020-07-09T00:00:00Z&timeStride=1&accept=netcdf"
+  },
+  "data/raw/mangum/landfire/LF2016_CC.tif": {
+   "bytes": 10486324,
+   "crs": "EPSG:3857",
+   "retrieved_utc": "2026-10-25T01:48:41+00:00",
+   "sha256": "d6ed9520b196c11078ddd62dfe1928d92f18f25f11d54f58583a54050727e0bc",
+   "url": "https://edcintl.cr.usgs.gov/geoserver/landfire/conus_2016/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=landfire__LF2016_CC_CONUS&format=image/geotiff&subset=X(-12516240,-12466260)&subset=Y(4374180,4436190)",
+   "version": "LF2016"
+  },
+  "data/raw/mangum/landfire/LF2016_CH.tif": {
+   "bytes": 10486324,
+   "crs": "EPSG:3857",
+   "retrieved_utc": "2026-10-25T01:48:45+00:00",
+   "sha256": "e3b447de1007dee79727757e8bd094b2bb780d2461e783bb2ca11d661adabbb7",
+   "url": "https://edcintl.cr.usgs.gov/geoserver/landfire/conus_2016/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=landfire__LF2016_CH_CONUS&format=image/geotiff&subset=X(-12516240,-12466260)&subset=Y(4374180,4436190)",
+   "version": "LF2016"
+  },
+  "data/raw/mangum/landfire/LF2016_FBFM40.tif": {
+   "bytes": 10486325,
+   "crs": "EPSG:3857",
+   "retrieved_utc": "2026-10-25T01:48:37+00:00",
+   "sha256": "9ec96dfc59b02ec47e123ba344c39dca63b438700b84aee886c3956ef904bc95",
+   "url": "https://edcintl.cr.usgs.gov/geoserver/landfire/conus_2016/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=landfire__LF2016_FBFM40_CONUS&format=image/geotiff&subset=X(-12516240,-12466260)&subset=Y(4374180,4436190)",
+   "version": "LF2016"
+  },
+  "data/raw/perimeters/nirops_mendeley_pool.geojson": {
+   "bytes": 25447710,
+   "note": "subset of NIROPS_2020_2024_R1_R6.shp by Incident_C; CC BY 4.0",
+   "records": 117,
+   "retrieved_utc": "2026-10-25T01:48:09+00:00",
+   "sha256": "d530f296433003c4445a073c8b28a7443bf4988136c69945cfc8efa90095fdbe",
+   "source_dbf_sha256": "568c0412d6507adc2ce9013bd3d5aefbfa8ed24ca0a70c7b08ca17453f6d0eb7",
+   "source_shx_sha256": "02f94a1415c9ad80072a24fe6198035e0b4f9b29bd0107a2bde66293b2b01b77",
+   "url": "https://data.mendeley.com/public-files/datasets/95rj5d379g/files/e9caf5e3-dcd1-4633-98a9-7f857d110b29/file_downloaded"
+  }
+ },
+ "fire": "mangum",
+ "notes": {
+  "grid": {
+   "bounds_lonlat": [
+    -112.4151223143802,
+    36.55282882026816,
+    -112.00658103852672,
+    36.95897848635082
+   ],
+   "bounds_utm": [
+    374010.0,
+    4046190.0,
+    409920.0,
+    4090800.0
+   ],
+   "buffer_m": 5000.0,
+   "cell": 30.0,
+   "epsg": 26912,
+   "height": 1487,
+   "width": 1197,
+   "x0": 374010.0,
+   "y1": 4090800.0
+  },
+  "run": {
+   "host": "Linux-6.18.44-fc-v153-x86_64-with-glibc2.39",
+   "utc": "2026-10-25T01:49:42+00:00"
+  }
+ }
+}

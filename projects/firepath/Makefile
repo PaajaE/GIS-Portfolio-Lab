@@ -2,7 +2,7 @@
 # Requires: uv. `make probe` needs only python3 (standard library).
 PY := uv run python -m firepath
 
-.PHONY: setup env probe test bakeoff
+.PHONY: setup env probe harvest test bakeoff
 
 setup:
 	uv sync
@@ -12,6 +12,9 @@ env:                ## create the git-ignored .env from .env.example (keeps an e
 
 probe:              ## M0: reachability / auth / inventory probe -> provenance/probe_<label>.json
 	python3 src/firepath/probe.py --label $${LABEL:-build-mac}
+
+harvest:            ## M1b raw inputs + provenance/harvest_<fire>.json (FIRE=mangum; STEPS optional)
+	uv run python -m firepath.harvest $${FIRE:-mangum} $(STEPS)
 
 test:               ## reference propagation fixtures, observation audit, inputs, probe crawler
 	uv run pytest -q
