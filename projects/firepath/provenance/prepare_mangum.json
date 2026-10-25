@@ -1,0 +1,274 @@
+{
+ "fire": "mangum",
+ "grid": {
+  "epsg": 26912,
+  "cell": 30.0,
+  "x0": 374010.0,
+  "y1": 4090800.0,
+  "width": 1197,
+  "height": 1487,
+  "bounds_utm": [
+   374010.0,
+   4046190.0,
+   409920.0,
+   4090800.0
+  ],
+  "buffer_m": 5000.0,
+  "bounds_lonlat": [
+   -112.4151223143802,
+   36.55282882026816,
+   -112.00658103852672,
+   36.95897848635082
+  ]
+ },
+ "utc": "2026-10-25T02:00:25+00:00",
+ "fuel": {
+  "version": "LF2016",
+  "missing_cells": 0,
+  "max_class_share_change_pp": 0.04653380407180774,
+  "shares_grid": {
+   "91": 0.00167,
+   "98": 0.0,
+   "99": 0.02661,
+   "101": 0.11867,
+   "102": 0.12234,
+   "103": 0.0,
+   "121": 0.21419,
+   "122": 0.25674,
+   "141": 0.02056,
+   "142": 0.01787,
+   "145": 0.01331,
+   "147": 0.01256,
+   "161": 0.00239,
+   "165": 0.00654,
+   "181": 0.00088,
+   "182": 8e-05,
+   "183": 0.02169,
+   "184": 0.00029,
+   "185": 0.00572,
+   "186": 0.00061,
+   "187": 0.0,
+   "188": 0.15727
+  }
+ },
+ "terrain": {
+  "elev_min": 1462.9339599609375,
+  "elev_max": 2687.402099609375,
+  "tan_slope_p50": 0.09143643826246262,
+  "tan_slope_p99": 0.6610345840454102
+ },
+ "perimeters": {
+  "n": 23,
+  "merged_equal_times": 0,
+  "first_utc": "2020-06-10 07:13:00",
+  "last_utc": "2020-07-08 06:11:00",
+  "steps": [
+   {
+    "k": 1,
+    "t": 1591860540.0,
+    "cells": 3576,
+    "new": 1029,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 2,
+    "t": 1591947960.0,
+    "cells": 10052,
+    "new": 6476,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 3,
+    "t": 1592035440.0,
+    "cells": 48604,
+    "new": 38552,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 4,
+    "t": 1592107920.0,
+    "cells": 89050,
+    "new": 40446,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 5,
+    "t": 1592208960.0,
+    "cells": 111083,
+    "new": 22067,
+    "removed_jitter": 34,
+    "removed_retraction": 0
+   },
+   {
+    "k": 6,
+    "t": 1592293500.0,
+    "cells": 133491,
+    "new": 22408,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 7,
+    "t": 1592378100.0,
+    "cells": 213857,
+    "new": 80366,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 8,
+    "t": 1592468220.0,
+    "cells": 246601,
+    "new": 32744,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 9,
+    "t": 1592552760.0,
+    "cells": 275206,
+    "new": 28611,
+    "removed_jitter": 6,
+    "removed_retraction": 0
+   },
+   {
+    "k": 10,
+    "t": 1592640180.0,
+    "cells": 301283,
+    "new": 26103,
+    "removed_jitter": 26,
+    "removed_retraction": 0
+   },
+   {
+    "k": 11,
+    "t": 1592724420.0,
+    "cells": 298115,
+    "new": 6817,
+    "removed_jitter": 1479,
+    "removed_retraction": 8506
+   },
+   {
+    "k": 12,
+    "t": 1592812140.0,
+    "cells": 302808,
+    "new": 4693,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 13,
+    "t": 1592896740.0,
+    "cells": 319455,
+    "new": 16670,
+    "removed_jitter": 19,
+    "removed_retraction": 4
+   },
+   {
+    "k": 14,
+    "t": 1592981520.0,
+    "cells": 319738,
+    "new": 283,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 15,
+    "t": 1592982780.0,
+    "cells": 320714,
+    "new": 976,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 16,
+    "t": 1593158340.0,
+    "cells": 321145,
+    "new": 431,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 17,
+    "t": 1593242820.0,
+    "cells": 321282,
+    "new": 140,
+    "removed_jitter": 0,
+    "removed_retraction": 3
+   },
+   {
+    "k": 18,
+    "t": 1593334440.0,
+    "cells": 321236,
+    "new": 223,
+    "removed_jitter": 188,
+    "removed_retraction": 81
+   },
+   {
+    "k": 19,
+    "t": 1593415620.0,
+    "cells": 321237,
+    "new": 1,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 20,
+    "t": 1593502920.0,
+    "cells": 321274,
+    "new": 76,
+    "removed_jitter": 23,
+    "removed_retraction": 16
+   },
+   {
+    "k": 21,
+    "t": 1593586080.0,
+    "cells": 321274,
+    "new": 0,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 22,
+    "t": 1594188660.0,
+    "cells": 321274,
+    "new": 0,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   }
+  ],
+  "flags": {
+   "consistent": 309243,
+   "initial": 2340,
+   "never": 1457996,
+   "inconsistent": 10360
+  }
+ },
+ "wind": {
+  "hours": 697,
+  "first_utc": "2020-06-09T07:00:00+00:00",
+  "last_utc": "2020-07-08T07:00:00+00:00",
+  "rotation_deg_at_centre": 8.43366690830039,
+  "hrrr_true_north_deg_from_grid_x_at_centre": 80.82009373863939,
+  "speed_max_ms": 20.228702545166016,
+  "wind_grid_shape": [
+   149,
+   120
+  ]
+ },
+ "moisture": {
+  "fm100_median_pct": 4.0732421875,
+  "fm1000_median_pct": 4.8314453125000005,
+  "window_utc": [
+   "2020-06-10T07:13:00+00:00",
+   "2020-07-08T06:11:00+00:00"
+  ]
+ },
+ "outputs": {
+  "data/interim/mangum/inputs.npz": "29b902c0c64f12fc5049b964ab7f95902990f524353af6064dca5358b668db1e",
+  "data/interim/mangum/wind.npz": "5a5d9d3635b369df8df69379a21e1077fdd11f309b5d432406cb1faee9a3ec9c"
+ }
+}
