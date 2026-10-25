@@ -65,6 +65,14 @@ were unreachable from the review session.
 | E11 | Wind adjustment factor | unsheltered WAF = 1.83/ln((20 + 0.36 H)/(0.13 H)), H = fuel bed depth (ft); sheltered WAF = 0.555/(√(f H_c) ln((20 + 0.36 H_c)/(0.13 H_c))) | **[published]** Andrews 2012 (GTR-266), via pyretechnics. **Unresolved:** the definition of the crown-fill portion f (pyretechnics: CC/3, crown ratio 1) and the sheltering threshold | H_c canopy height (ft) | after the source check |
 | E12 | 10 m → 20 ft wind | U_20ft = U_10m / 1.15 | **[FirePath convention, unverified]**: no primary source found; one press source gives /1.2 for the NWS; a neutral log profile gives 1.09–1.20 for z0 = 0.03–0.5 m (computed). The factor is a constant multiplier on wind speed, so any error is **absorbed by `a_u`** and cannot be separated from it | — | — |
 
+**Implementation status (2026-10-25):** E1, E2, E3, E9, E10 are implemented in `firepath.fuels` /
+`firepath.rothermel`. The SB40 table is transcribed from the GTR-153 PDF (Table 7, primary source).
+Verification against pyretechnics 2026.10.20 (`tests/test_fuels.py`, 40 models × D1–D4 × L1–L4):
+R0 ≤ 1e-4, φ_w ≤ 2e-4, φ_s ≤ 1e-6 relative difference once pyretechnics' 4-decimal lb/ft² loads are used.
+With FirePath's exact t/ac loads, R0 differs by ≤ 0.9 %, entirely from that rounding. The residual
+≤ 1e-4 is consistent with pyretechnics' 32-bit arithmetic. At extinction FirePath returns R0 = 0
+exactly. Not yet done: comparison with the GTR-153 fuel-model charts (figures; chart precision).
+
 **Free parameters** (revision 3: D3 adopted provisionally, see M1A_RESULTS §D3):
 
 | Parameter | Meaning | Range | Calibrated |
