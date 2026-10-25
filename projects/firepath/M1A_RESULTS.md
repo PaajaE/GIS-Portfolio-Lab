@@ -438,3 +438,7 @@ What the numbers do establish:
 
 Under the decision rule, D1 confirmation returns to the owner: HY at 30 m only by an explicit decision,
 documented as "not verified on the heterogeneous mosaic; bracketed: never early, late ≤ 6 % (p95)".
+
+**Owner decision (2026-10-25): HY at 30 m accepted** for M1b and M2, documented as "not verified on the
+heterogeneous mosaic; bracketed: never early, late ≤ 6 % (p95)", together with the LB 8 relaxation
+(M1a-4 section). M1a's numerical verification is closed with this decision.
