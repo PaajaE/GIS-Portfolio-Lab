@@ -265,7 +265,7 @@ def _extension_index(phi, barrier, offset=(0, 0)):
 def propagate_levelset(f: SpreadField, *, points=(), inside=None, t0=0.0, t_stop=inf,
                        r0_cells=2.0, cfl=0.4, first_order=False, dissipation="local",
                        order: int = 2, reinit_every: int = 10, band_cells: float = 8.0,
-                       extension: bool = True) -> Result:
+                       extension: bool = True, backend: str = "python") -> Result:
     """Level-set propagation on the same inputs as `reference.propagate`.
 
     points: (r, c, t) point ignitions, represented by a disc of radius r0_cells at time t (all points must
@@ -305,8 +305,23 @@ def propagate_levelset(f: SpreadField, *, points=(), inside=None, t0=0.0, t_stop
     near_x = _near(barrier, 1, radius)
     near_y = _near(barrier, 0, radius)
     t = t_start
+    if backend == "rust":   # same time loop in rust/src/levelset.rs (order 5, local LF, extension only)
+        if not (order == 5 and dissipation == "local" and extension and not first_order):
+            raise ValueError("the Rust level set implements order 5, local dissipation, extension velocities")
+        from firepath_kernels import levelset_run
+
+        from .slopeplane import frame as _frame
+        c = lambda v, dt=np.float64: np.ascontiguousarray(v, dtype=dt)  # noqa: E731
+        slope = None
+        if f.tan_slope is not None:
+            slope = tuple(c(np.broadcast_to(v, (nr, nc))) for v in _frame(f.tan_slope, f.upslope))
+        phi, arrival = c(phi), c(arrival)
+        levelset_run(c(f.t_change), c(f.r_head), c(f.ecc), c(f.theta), c(f.burnable, bool), float(dx),
+                     c(near_x, bool), c(near_y, bool), phi, arrival, float(t), float(t_stop), slope=slope,
+                     cfl=float(cfl), band=float(band_cells), reinit_every=int(reinit_every))
+        t = t_stop
     margin = radius + 2
-    while t < t_stop and np.any(~np.isfinite(arrival) & ~barrier):
+    while backend == "python" and t < t_stop and np.any(~np.isfinite(arrival) & ~barrier):
         h, end = f.interval(t)
         # Work window: every cell that can change this step (non-frozen before and after the band update)
         # plus the widest stencil. Cells outside it are frozen, so the result is identical to a
