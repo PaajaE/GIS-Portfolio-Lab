@@ -415,15 +415,18 @@ def propagate_levelset(f: SpreadField, *, points=(), inside=None, t0=0.0, t_stop
 
 
 def propagate_hybrid(f: SpreadField, *, radius: int = 8, points=(), inside=None, t0=0.0, t_stop=inf,
-                     r0_cells=2.0, order: int = 5) -> Result:
+                     r0_cells=2.0, order: int = 5, graph: str = "rust") -> Result:
     """E3 candidate (M1a-2): level set, then a graph correction seeded with the level-set arrivals.
 
     T = min(T_levelset, earliest graph path from any level-set-labelled cell). Both are physical-path
     upper bounds when the level set is not early, so the minimum keeps the level set where it is better
     (open fuel, changing wind) and the exact graph geometry where it is better (gaps, obstacle corners).
-    Cost = one level-set run + one label-setting run.
+    Cost = one level-set run + one label-setting run. graph: "rust" (kernel) or "python" (reference).
     """
-    from .reference import propagate
+    if graph == "rust":     # same algorithm as reference.propagate, tested to 1e-9 (tests/test_kernels.py)
+        from .kernels import propagate_graph as propagate
+    else:
+        from .reference import propagate
 
     ls = propagate_levelset(f, points=points, inside=inside, t0=t0, t_stop=t_stop, r0_cells=r0_cells,
                             order=order)

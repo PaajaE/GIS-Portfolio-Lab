@@ -55,6 +55,7 @@ name = "firepath"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "firepath-kernels" },
     { name = "numpy" },
     { name = "pyproj" },
     { name = "rasterio" },
@@ -69,6 +70,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "firepath-kernels", editable = "rust" },
     { name = "numpy", specifier = ">=2.1" },
     { name = "pyproj", specifier = ">=3.7" },
     { name = "rasterio", specifier = ">=1.4" },
@@ -78,6 +80,17 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [{ name = "pytest", specifier = ">=8" }]
+
+[[package]]
+name = "firepath-kernels"
+version = "0.1.0"
+source = { editable = "rust" }
+dependencies = [
+    { name = "numpy" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "numpy", specifier = ">=2.1" }]
 
 [[package]]
 name = "iniconfig"

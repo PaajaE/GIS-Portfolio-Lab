@@ -7,14 +7,18 @@ dependencies = [
     "numpy>=2.1",
     "shapely>=2.0",      # independent geometric reference (distance to polygon) in fixtures; perimeter geometry later
     "scipy>=1.14",       # distance transform (level-set init), csgraph oracle; later optimiser and metrics
-    "rasterio>=1.4",
-    "pyproj>=3.7",
+    "rasterio>=1.4",     # GDAL raster I/O, warping, rasterization (wheels bring GDAL)
+    "pyproj>=3.7",       # CRS transforms, true-north angles for wind rotation
+    "firepath-kernels",  # local Rust propagation kernel (rust/), PLAN §12
 ]
 
 [dependency-groups]
 dev = [
     "pytest>=8",
 ]
+
+[tool.uv.sources]
+firepath-kernels = { path = "rust", editable = true }
 
 [build-system]
 requires = ["hatchling"]
