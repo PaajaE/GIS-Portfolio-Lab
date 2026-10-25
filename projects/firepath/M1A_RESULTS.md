@@ -410,3 +410,31 @@ What this shows, and what it does not:
 **Recommended next step (M1a-5, to pre-register first):** a bracketing reference that does not rely on
 one scheme. Upper bound: G8 and G16 at 3.75 m. Estimate: LS at 15 / 7.5 / 3.75 m with Richardson where
 applicable. HY 30 m is judged against the bracket. Estimated cost: ≈ 1 h per case in the background.
+
+## M1a-5: HY at 30 m against a bracketing reference (2026-10-25)
+
+Pre-registration: `validation/M1A5_PREREGISTRATION.md`, committed before the run. Results:
+`validation/m1a5.json` (runner `firepath.bracket`; solves cached in `data/interim/m1a5/`, not committed).
+
+**Pre-registered verdict: INCONCLUSIVE** (all three cases). Richardson's assumptions held on too few
+cells for the LS estimate to serve as the reference (requirement: ≥ 50 % in the "estimate" category):
+
+| Case | reference: estimate / bound / fallback | HY error vs R: median / p95 | signed median | HY provably late (share; p95 amount) | lower-bound violations |
+|---|---|---|---|---|---|
+| iso | 28 / 25 / 47 % | 2.44 / 8.90 % | −2.4 % | 2 %; 1.0 % | 0 |
+| lb2 | 13 / 55 / 32 % | 2.69 / 10.5 % | −2.2 % | 30 %; 3.6 % | 0 |
+| lb4 | 8 / 29 / 64 % | 2.23 / 14.9 % | −0.3 % | 43 %; 5.9 % | 0 |
+
+What the numbers do establish:
+- The level set at 15 / 7.5 / 3.75 m does not converge monotonically at most mosaic cells, or its
+  extrapolation exceeds the feasible-path upper bound. So no fine-grid estimate of the true arrival
+  exists for this mosaic. The reference is in effect the 3.75 m upper bound U.
+- Against U, HY at 30 m has median |error| 2.2–2.7 % in all cases. Its p95 is 8.9 % (iso),
+  10.5 % (lb2) and 14.9 % (lb4).
+- Hard one-sided evidence: HY is **never earlier** than the physical lower bound, and is **provably late**
+  (above U) by at most 1.0 / 3.6 / 5.9 % at the 95th percentile.
+- Where HY is earlier than U, the true value lies somewhere between, so that part of the "error" is
+  partly the bound's own gap and not necessarily HY's.
+
+Under the decision rule, D1 confirmation returns to the owner: HY at 30 m only by an explicit decision,
+documented as "not verified on the heterogeneous mosaic; bracketed: never early, late ≤ 6 % (p95)".
