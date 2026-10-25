@@ -1,0 +1,25 @@
+{
+ "rule": "validation/MASKING_RULE.md (pre-declared 2026-10-25)",
+ "source_2020": "ICS-209-PLUS wildfire sitreps 1999-2020 (St. Denis et al., figshare doi:10.6084/m9.figshare.19858927.v3, CC BY 4.0), file ics209-plus-wf_sitreps_1999to2020.csv",
+ "fires": {
+  "mangum": {
+   "masked": [],
+   "candidates_not_masked": [
+    {"report": "2020-06-10 22:00 -> 2020-06-11 19:00 (local)", "text": "fire became active mid-afternoon breaching containment lines on the ne side of the fire due to fire behavior torching and mid-range spotting", "reason": "mid-range spotting as part of the fire's own spread; not long-range, not stated as most of the growth"},
+    {"report": "2020-06-19 20:00 -> 2020-06-20 20:00 (local)", "text": "elsewhere fire spread was limited to creeping and low-intensity surface spread associated with firing operations", "reason": "outside the evaluation window (ends 2020-06-17 07:15 UTC); minor spread, not most of the growth"}
+   ],
+   "note": "Reports for 2020-06-11 22:00 to 2020-06-17 have no narrative in the significant-events, observed-behaviour, remarks or threat fields, so no evidence for masking exists for the main growth days."
+  },
+  "bush": {
+   "masked": [],
+   "candidates_not_masked": [
+    {"report": "2020-06-17 and 2020-06-18 (PLANNED_ACTIONS)", "text": "resources will engage in / continue firing operations around the mount ord lookout and communication site tonight", "reason": "planned action (excluded by the rule); no later report attributes the period's growth to it"},
+    {"report": "2020-06-19 and 2020-06-20 (PLANNED_ACTIONS)", "text": "resources will continue buffering with fire around mount ord down the slopes and along the highway", "reason": "planned action (excluded by the rule)"}
+   ],
+   "note": "Past-tense narratives (2020-06-15 to 06-18) attribute growth to hot, dry, windy conditions and grass/chaparral fuels."
+  },
+  "telegraph": {"status": "pending: 2021 is outside ICS-209-PLUS; source to use: InciWeb / SIT-209 narratives"},
+  "pipeline": {"status": "pending: 2022, source InciWeb / SIT-209"},
+  "cerro_pelado": {"status": "pending: 2022, source InciWeb / SIT-209"}
+ }
+}
