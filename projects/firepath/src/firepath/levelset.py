@@ -118,7 +118,9 @@ def _weno5(phi, dx):
         s1 = 13 / 12 * (v1 - 2 * v2 + v3) ** 2 + 0.25 * (v1 - 4 * v2 + 3 * v3) ** 2
         s2 = 13 / 12 * (v2 - 2 * v3 + v4) ** 2 + 0.25 * (v2 - v4) ** 2
         s3 = 13 / 12 * (v3 - 2 * v4 + v5) ** 2 + 0.25 * (3 * v3 - 4 * v4 + v5) ** 2
-        eps = 1e-6 * max(float(np.max(v1 * v1)), float(np.max(v5 * v5)), 1e-12) + 1e-99
+        # pointwise epsilon (Osher & Fedkiw 2003, eq. 3.39 form): local, so distant data (e.g. unclamped
+        # phi at barriers) cannot change the weights at the front (2026-10-25; was a global max)
+        eps = 1e-6 * np.maximum.reduce([v1 * v1, v2 * v2, v3 * v3, v4 * v4, v5 * v5]) + 1e-99
         a1, a2, a3 = 0.1 / (eps + s1) ** 2, 0.6 / (eps + s2) ** 2, 0.3 / (eps + s3) ** 2
         tot = a1 + a2 + a3
         return (a1 * (v1 / 3 - 7 * v2 / 6 + 11 * v3 / 6) + a2 * (-v2 / 6 + 5 * v3 / 6 + v4 / 3)
@@ -171,10 +173,12 @@ def _first_order_neumann(ph, dx, barrier):
     return xm, xp, ym, yp
 
 
-def _interface_points(phi, barrier):
+def _interface_points(phi, barrier, offset=(0, 0)):
     """Zero crossings of phi on grid edges (linear interpolation), densified inside each grid square.
 
-    Coordinates in cell units (row, col) of cell centres. Pairs touching a barrier cell are ignored.
+    Coordinates in cell units (row, col) of cell centres, shifted by the integer `offset` of a work
+    window (added before the fractional part, so coordinates equal the whole-grid ones bit for bit).
+    Pairs touching a barrier cell are ignored.
     Returns (points[N, 2], mask of cells adjacent to a crossing).
     """
     neg = phi <= 0
@@ -188,16 +192,18 @@ def _interface_points(phi, barrier):
     a2, b2 = phi[:-1, :], phi[1:, :]
     ok2 = (neg[:-1, :] != neg[1:, :]) & ~barrier[:-1, :] & ~barrier[1:, :]
     vy = np.where(ok2, a2 / np.where(ok2, a2 - b2, 1.0), np.nan)
+    o0, o1 = offset
     r, c = np.nonzero(ok)
-    pts.append(np.stack([r, c + hx[r, c]], 1))
+    pts.append(np.stack([r + o0, (c + o1) + hx[r, c]], 1))
     adj[r, c] = adj[r, c + 1] = True
     r2, c2 = np.nonzero(ok2)
-    pts.append(np.stack([r2 + vy[r2, c2], c2], 1))
+    pts.append(np.stack([(r2 + o0) + vy[r2, c2], c2 + o1], 1))
     adj[r2, c2] = adj[r2 + 1, c2] = True
     # densify: in each grid square with exactly two crossings, add 3 points on the chord between them
     top, bot = hx[:-1, :], hx[1:, :]          # square (r, c): top edge row r, bottom edge row r+1
     lef, rig = vy[:, :-1], vy[:, 1:]          # left edge col c, right edge col c+1
     rr, cc = np.mgrid[0:phi.shape[0] - 1, 0:phi.shape[1] - 1]
+    rr, cc = rr + o0, cc + o1
     cand = [(rr, cc + top), (rr + 1, cc + bot), (rr + lef, cc), (rr + rig, cc + 1)]
     have = np.stack([np.isfinite(top), np.isfinite(bot), np.isfinite(lef), np.isfinite(rig)])
     two = have.sum(0) == 2
@@ -237,20 +243,21 @@ def _redistance(phi, dx, barrier, band):
     return np.clip(new, -band * dx, np.maximum(band * dx, phi * barrier))
 
 
-def _extension_index(phi, barrier):
+def _extension_index(phi, barrier, offset=(0, 0)):
     """Flat index of the cell containing each cell's nearest interface point (extension velocities,
     Adalsteinsson & Sethian 1999): spread parameters are taken from the front's own location, so the
     field away from the front does not see the speed jumps of cells the front has not reached."""
     from scipy.spatial import cKDTree
 
     nr, nc = phi.shape
-    pts, _ = _interface_points(phi, barrier)
+    o0, o1 = offset
+    pts, _ = _interface_points(phi, barrier, offset)
     if len(pts) == 0:
         return np.arange(nr * nc).reshape(nr, nc)
     rr, cc = np.mgrid[0:nr, 0:nc]
-    _, j = cKDTree(pts).query(np.stack([rr.ravel(), cc.ravel()], 1))
-    cell_r = np.clip(np.rint(pts[j, 0]).astype(int), 0, nr - 1)
-    cell_c = np.clip(np.rint(pts[j, 1]).astype(int), 0, nc - 1)
+    _, j = cKDTree(pts).query(np.stack([(rr + o0).ravel(), (cc + o1).ravel()], 1))
+    cell_r = np.clip(np.rint(pts[j, 0]).astype(int) - o0, 0, nr - 1)
+    cell_c = np.clip(np.rint(pts[j, 1]).astype(int) - o1, 0, nc - 1)
     idx = (cell_r * nc + cell_c).reshape(nr, nc)
     return np.where(barrier, np.arange(nr * nc).reshape(nr, nc), idx)
 
@@ -298,18 +305,36 @@ def propagate_levelset(f: SpreadField, *, points=(), inside=None, t0=0.0, t_stop
     near_x = _near(barrier, 1, radius)
     near_y = _near(barrier, 0, radius)
     t = t_start
+    margin = radius + 2
     while t < t_stop and np.any(~np.isfinite(arrival) & ~barrier):
         h, end = f.interval(t)
-        a = f.r_head[h] / (1.0 + f.ecc[h])
-        e = f.ecc[h]
-        wx, wy = np.cos(f.theta[h]), np.sin(f.theta[h])
-        slope = None if f.tan_slope is None else frame(f.tan_slope, f.upslope)
+        # Work window: every cell that can change this step (non-frozen before and after the band update)
+        # plus the widest stencil. Cells outside it are frozen, so the result is identical to a
+        # whole-grid step; only the cost changes (performance, 2026-10-25).
+        live = ~frozen
+        if reinit_every:
+            live = live | ((np.abs(phi) < (band_cells - 0.5) * dx) & ~barrier)
+        rows = np.flatnonzero(live.any(1))
+        cols = np.flatnonzero(live.any(0))
+        if rows.size == 0:
+            break
+        # even start offsets: interface points at exact half-cells round half-to-even (np.rint), so an
+        # even shift keeps the extension-velocity cell assignment identical to the whole-grid step
+        r0, c0 = max(rows[0] - margin, 0) // 2 * 2, max(cols[0] - margin, 0) // 2 * 2
+        W = (slice(r0, min(rows[-1] + margin + 1, nr)), slice(c0, min(cols[-1] + margin + 1, nc)))
+        wr, wc = W[0].stop - W[0].start, W[1].stop - W[1].start
+        ph_w, bar_w = phi[W], barrier[W]
+        a = f.r_head[h][W] / (1.0 + f.ecc[h][W])
+        e = f.ecc[h][W]
+        wx, wy = np.cos(f.theta[h][W]), np.sin(f.theta[h][W])
+        slope = None if f.tan_slope is None else tuple(
+            np.broadcast_to(v, (nr, nc))[W] for v in frame(f.tan_slope, f.upslope))
         if extension:
-            ix = _extension_index(phi, barrier)
+            ix = _extension_index(ph_w, bar_w, (W[0].start, W[1].start))
             a, e = a.ravel()[ix], e.ravel()[ix]
             wx, wy = wx.ravel()[ix], wy.ravel()[ix]
             if slope is not None:
-                slope = tuple(np.broadcast_to(v, (nr, nc)).ravel()[ix] for v in slope)
+                slope = tuple(v.ravel()[ix] for v in slope)
         ham_fn = _Ham(a, e, wx, wy, slope)
         # direction-specific LF bounds: half-extent of the horizontal unit-time spread set along x and y,
         # measured from the focus (planar: |a e w_i| + sqrt(a^2 w_i^2 + b^2 w_perp_i^2) <= R_head)
@@ -318,8 +343,8 @@ def propagate_levelset(f: SpreadField, *, points=(), inside=None, t0=0.0, t_stop
             g_ax, g_ay = np.pad(ax, 1, mode="edge"), np.pad(ay, 1, mode="edge")
             ax = np.maximum.reduce([g_ax[1:-1, 1:-1], g_ax[1:-1, :-2], g_ax[1:-1, 2:]])
             ay = np.maximum.reduce([g_ay[1:-1, 1:-1], g_ay[:-2, 1:-1], g_ay[2:, 1:-1]])
-        ax = np.where(frozen, 0.0, ax)
-        ay = np.where(frozen, 0.0, ay)
+        ax = np.where(frozen[W], 0.0, ax)
+        ay = np.where(frozen[W], 0.0, ay)
         amax = float((ax + ay).max())
         if amax == 0:
             break
@@ -334,16 +359,17 @@ def propagate_levelset(f: SpreadField, *, points=(), inside=None, t0=0.0, t_stop
             frozen = barrier | ~active
         else:
             frozen = barrier
+        fr_w, nx_w, ny_w = frozen[W], near_x[W], near_y[W]
 
         def rhs(ph):
-            fm = _first_order_neumann(ph, dx, barrier)
+            fm = _first_order_neumann(ph, dx, bar_w)
             if first_order:
                 xm, xp, ym, yp = fm
             else:
                 hi = _weno5(ph, dx) if order == 5 else _eno2(ph, dx)
                 # barrier faces: zero flux; high-order stencils touching a barrier fall back to first order
-                xm, xp = (np.where(near_x, fm[i], hi[i]) for i in (0, 1))
-                ym, yp = (np.where(near_y, fm[i], hi[i]) for i in (2, 3))
+                xm, xp = (np.where(nx_w, fm[i], hi[i]) for i in (0, 1))
+                ym, yp = (np.where(ny_w, fm[i], hi[i]) for i in (2, 3))
             px, py = 0.5 * (xm + xp), 0.5 * (ym + yp)
             ham = ham_fn(px, py)
             if dissipation == "local":  # |dH/dp| at the corners of the local gradient box (SLLF)
@@ -360,20 +386,21 @@ def propagate_levelset(f: SpreadField, *, points=(), inside=None, t0=0.0, t_stop
                 cx, cy = ax, ay
             diss = cx * 0.5 * (xp - xm) + cy * 0.5 * (yp - ym)
             out = -(ham - diss)
-            out[frozen] = 0.0
+            out[fr_w] = 0.0
             return out
 
         if order == 5:  # TVD RK3 (Shu & Osher)
-            p1 = phi + dt * rhs(phi)
-            p2 = 0.75 * phi + 0.25 * (p1 + dt * rhs(p1))
-            new = phi / 3 + 2 / 3 * (p2 + dt * rhs(p2))
+            p1 = ph_w + dt * rhs(ph_w)
+            p2 = 0.75 * ph_w + 0.25 * (p1 + dt * rhs(p1))
+            new = ph_w / 3 + 2 / 3 * (p2 + dt * rhs(p2))
         else:           # Heun (TVD RK2)
-            mid = phi + dt * rhs(phi)
-            new = 0.5 * (phi + mid + dt * rhs(mid))
-        cross = (phi > 0) & (new <= 0) & ~np.isfinite(arrival)
-        frac = np.where(cross, phi / np.where(cross, phi - new, 1.0), 0.0)
-        arrival[cross] = t + dt * frac[cross]
-        phi = new
+            mid = ph_w + dt * rhs(ph_w)
+            new = 0.5 * (ph_w + mid + dt * rhs(mid))
+        arr_w = arrival[W]
+        cross = (ph_w > 0) & (new <= 0) & ~np.isfinite(arr_w)
+        frac = np.where(cross, ph_w / np.where(cross, ph_w - new, 1.0), 0.0)
+        arr_w[cross] = t + dt * frac[cross]
+        phi[W] = new
         t += dt
         step += 1
         if reinit_every and step % reinit_every == 0:
