@@ -442,3 +442,7 @@ documented as "not verified on the heterogeneous mosaic; bracketed: never early,
 **Owner decision (2026-10-25): HY at 30 m accepted** for M1b and M2, documented as "not verified on the
 heterogeneous mosaic; bracketed: never early, late ≤ 6 % (p95)", together with the LB 8 relaxation
 (M1a-4 section). M1a's numerical verification is closed with this decision.
+
+**Note (2026-10-26):** two later changes to the level-set reference were re-verified on all A cases:
+the pointwise WENO epsilon (30 m medians and p95 changed by ≤ 1e-5) and the explicit tie rule for the
+extension-velocity source (no change at all). Verdicts are unchanged.

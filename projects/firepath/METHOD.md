@@ -288,9 +288,21 @@ Arrival time per cell; modelled closure time per road segment; population withou
 connection by hour. Each comes with its scenario range and its fire's validation error.
 
 ## Rust component
-Planned after M1a (PLAN §12, §16). The Python reference here is the oracle. Measured cost on the cloud
-container (4 vCPU, x86_64): ≈ 75 µs per cell at stencil radius 2 and ≈ 1.6 ms per cell at radius 8, for
-time-varying elliptical spread.
+**Reason (measured):** the M1b Mangum run at 90 m (198 k cells, 9 days of hourly wind) did not finish in
+the Python reference within ~2 h. A single 24 h step took 607 s in the level set and 16 s in the graph. The
+calibration plan needs thousands of such propagations (PLAN §12).
+
+**Status 2026-10-26 (`rust/`, crate `firepath_kernels`, PyO3/maturin, uv path dependency):**
+- graph (time-dependent label-setting, slope-plane speeds): matches `reference.propagate` within 1e-9
+  with identical status on random heterogeneous grids (`tests/test_kernels.py`); 23–27× faster;
+- level-set time loop (order 5, local LF, narrow band, reinitialization, extension velocities, work
+  window): **bit-identical** to `levelset.propagate_levelset` on random grids with slope, barriers and
+  hourly changes. This needed one explicit rule shared by both: the extension-velocity source is the
+  nearest interface point, ties → lowest point index (cKDTree left the tie order unspecified). The
+  canonical A cases are unchanged by that rule (re-run 2026-10-26);
+- Mangum 24 h step at 90 m: level set 13 s, graph 1 s. HY uses both.
+Open M2 items: Rayon scenario parallelism and the thread-count bit-identity test, the benchmark table
+(`make bench`, §12 fields).
 
 ## Limitations and omitted processes
 Spotting, crown-fire transition, dynamic moisture, fire–atmosphere feedback, suppression and firing
