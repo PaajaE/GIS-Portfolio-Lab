@@ -9,7 +9,7 @@ parameters are **hand-set placeholders** (run.py header). These numbers check th
 |---|---|---|
 | Harvest (perimeters, LANDFIRE LF2016 via WCS, 3DEP, HRRR f00, gridMET) | `provenance/harvest_mangum.json` (sha256 per file) | `tests/test_stage_boundaries.py::test_provenance_hashes_match_raw_files` |
 | Prepare (warp, Horn slope, HRRR rotation, perimeter audit, moisture) | `provenance/prepare_mangum.json` | `tests/test_prepare.py`; stage-boundary tests (CRS EPSG:26912, grid identity, fuel codes ⊂ SB40 ∪ non-burnable, no nodata, scan and wind time order, wind covers the AOI and all scans) |
-| LANDFIRE leakage rule | LF2016 for a 2020 fire | structural test (version year < fire year). The conus_2016 WCS serves no FDist layer, so the "no fire-year disturbance in the AOI" check is not possible from this source |
+| LANDFIRE leakage rule and stale fuels | LF2016 for a 2020 fire; `provenance/stale_fuels_mangum.json` from the annual WCS disturbance layers LF2020_Dist17–20 | version year < fire year (test). The 2020 disturbance layer covers 99.9 % of the final perimeter, so LF2020 fuels would leak the outcome (test). Stale fuels: 13.5 % of burnable cells inside the final perimeter (8.8 % of the AOI) were disturbed in 2017–2019 and are missing from LF2016 fuels; the recoded-fuel sensitivity scenario is M5 |
 | Mode A, 90 m, HY (D1), model + B0 + B1 | `validation/m1b_mangum_90m_HY_{model,B0,B1}.json` | output invariants (non-burnable never reached, arrivals ≥ 0, no NaN) |
 | One-step-ahead, 90 m, HY | `validation/m1b_mangum_90m_HY_step_model-B0-B1.json` | `tests/test_run_metrics.py` (metric definitions on a hand-checked case) |
 | Error maps with legends | `validation/figures/m1b_mangum_90m_HY_error.png` | looked at; bins tested (`test_classify_bins`) |

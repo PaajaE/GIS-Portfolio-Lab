@@ -242,5 +242,44 @@ def main(argv=None):
     print("perimeters:", report["perimeters"]["n"], report["perimeters"]["flags"])
 
 
+def stale_fuels(fire: str) -> dict:
+    """Share of burnable grid cells disturbed in each year after the fuel version (stale fuels) and in
+    the fire year, over the AOI and inside the final observed perimeter (PLAN §3). Disturbance code 0 =
+    none; any other code (fire, mechanical, ... x severity) counts. Writes provenance/stale_fuels_<fire>.json."""
+    from rasterio.enums import Resampling
+
+    from .harvest import DIST_LAYERS, FIRES
+
+    prof = grid_profile(fire)
+    z = np.load(INTERIM / fire / "inputs.npz")
+    burnable = ~np.isin(z["fuel"], (91, 92, 93, 98, 99)) & (z["fuel"] > 0)
+    final = z["first_in"] >= 0
+    ver = FIRES[fire]["landfire"][1] if FIRES[fire]["landfire"] else "LF2020"
+    fire_year = datetime.fromtimestamp(float(z["scan_unix"][0]), timezone.utc).year
+    rep = {"fire": fire, "fuel_version": ver, "fire_year": fire_year, "years": {}}
+    stale_any = np.zeros(burnable.shape, bool)
+    for cov in DIST_LAYERS[ver]:
+        d = warp(RAW / fire / "landfire" / f"{cov}.tif", prof, Resampling.nearest, dtype="int16")
+        dist = (d > 0) & (d != 32767)
+        year = 2000 + int(cov[-2:])
+        stale_any |= dist & (year < fire_year)
+        rep["years"][str(year)] = {"layer": cov, "role": "fire year" if year == fire_year else
+                                   ("stale" if year < fire_year else "after fire"),
+                                   "share_burnable_aoi": round(float((dist & burnable).sum() / burnable.sum()), 4),
+                                   "share_final_perimeter": round(float((dist & burnable & final).sum()
+                                                                        / max((burnable & final).sum(), 1)), 4)}
+    stale = [y for y, v in rep["years"].items() if v["role"] == "stale"]
+    rep["stale_any"] = {"share_burnable_aoi": round(float((stale_any & burnable).sum() / burnable.sum()), 4),
+                        "share_final_perimeter": round(float((stale_any & burnable & final).sum()
+                                                             / max((burnable & final).sum(), 1)), 4)}
+    rep["note"] = (f"stale years {stale}: disturbances missing from {ver} fuels; the fire-year row shows what a "
+                   f"version including {fire_year} would leak")
+    (PROJECT / "provenance" / f"stale_fuels_{fire}.json").write_text(json.dumps(rep, indent=1))
+    return rep
+
+
 if __name__ == "__main__":
-    main()
+    if sys.argv[1] == "stale":
+        print(json.dumps(stale_fuels(sys.argv[2]), indent=1))
+    else:
+        main()

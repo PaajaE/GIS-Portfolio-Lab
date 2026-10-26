@@ -88,9 +88,8 @@ def test_mode_a_outputs(kind):
 
 
 def test_landfire_version_precedes_fire_year():
-    """Leakage rule (PLAN §3) for the fires whose LANDFIRE comes from the WCS. The conus_2016 workspace
-    serves no disturbance (FDist) layer, so the check is structural: the version's last mapped
-    disturbance year must be before the year of the first scan."""
+    """Leakage rule (PLAN §3), structural part: the version's last mapped disturbance year must be
+    before the year of the first scan (the disturbance-layer part is the next test)."""
     from datetime import datetime, timezone
 
     from firepath.harvest import FIRES
@@ -99,3 +98,14 @@ def test_landfire_version_precedes_fire_year():
     ws, ver = FIRES[FIRE]["landfire"]
     year = datetime.fromtimestamp(float(np.load(D / "inputs.npz")["scan_unix"][0]), timezone.utc).year
     assert int(ver[2:]) < year, (ver, year)
+
+
+def test_fire_year_disturbance_confirms_version_choice():
+    """LF2020's 2020 disturbance layer covers the Mangum perimeter, so LF2020 fuels would leak the
+    outcome; the LF2016 rule version is the right one (provenance/stale_fuels_mangum.json)."""
+    p = PROJECT / "provenance" / f"stale_fuels_{FIRE}.json"
+    need(p)
+    r = json.loads(p.read_text())
+    assert r["fuel_version"] == "LF2016"
+    assert r["years"]["2020"]["share_final_perimeter"] > 0.9
+    assert all(v["role"] == "stale" for y, v in r["years"].items() if int(y) < r["fire_year"])

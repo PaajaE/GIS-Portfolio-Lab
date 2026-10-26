@@ -51,6 +51,10 @@ FIRES = {
 }
 POOL_INCIDENTS = [f["incident"] for f in FIRES.values()] + ["AZ-COF-000536_Haywire", "AZ-COF-000159_Tunnel"]
 LANDFIRE_LAYERS = ("FBFM40", "CC", "CH")
+WCS_ALL = "https://edcintl.cr.usgs.gov/geoserver/landfire/ows"
+# annual disturbance layers after each fuel version (stale years) and the fire years 2020-2022
+DIST_LAYERS = {"LF2016": ("LF2020_Dist17", "LF2020_Dist18", "LF2020_Dist19", "LF2020_Dist20"),
+               "LF2020": ("LF2022_Dist21", "LF2022_Dist22")}
 BUFFER_M = 5000.0
 CELL = 30.0
 
@@ -296,6 +300,28 @@ def landfire(fire: str, manifest: Manifest):
         manifest.add(out, url, version=ver, crs="EPSG:3857")
 
 
+def disturbance(fire: str, manifest: Manifest):
+    """Annual LANDFIRE disturbance layers between the fuel version's last disturbance year and the fire
+    year (stale fuels, PLAN §3), plus the fire year itself (shows what a later version would leak). Same
+    WCS and box as landfire(); prepare.stale_fuels() summarises them."""
+    from pyproj import Transformer
+
+    ver = FIRES[fire]["landfire"][1] if FIRES[fire]["landfire"] else "LF2020"
+    w, s, e, n = _lonlat_bbox(fire)
+    t = Transformer.from_crs(4326, 3857, always_xy=True)
+    (x0, x1), (y0, y1) = zip(*[t.transform(w, s), t.transform(e, n)])
+    x0, y0, x1, y1 = (np.floor(x0 / 30) * 30, np.floor(y0 / 30) * 30, np.ceil(x1 / 30) * 30, np.ceil(y1 / 30) * 30)
+    for cov in DIST_LAYERS[ver]:
+        url = (WCS_ALL + f"?service=WCS&version=2.0.1&request=GetCoverage&coverageId=landfire__{cov}_CONUS"
+               f"&format=image/geotiff&subset=X({x0:.0f},{x1:.0f})&subset=Y({y0:.0f},{y1:.0f})")
+        b = _get(url, timeout=600)
+        if not b.startswith((b"II*\x00", b"MM\x00*")):
+            raise RuntimeError(f"WCS did not return a GeoTIFF for {cov}: {b[:200]!r}")
+        out = RAW / fire / "landfire" / f"{cov}.tif"
+        out.write_bytes(b)
+        manifest.add(out, url, crs="EPSG:3857")
+
+
 # ----------------------------------------------------------------------------- 3DEP DEM
 
 def dem(fire: str, manifest: Manifest):
@@ -426,7 +452,8 @@ def gridmet(fire: str, manifest: Manifest):
         manifest.add(out, url)
 
 
-STEPS = {"perimeters": lambda f, m: perimeters(m), "aoi": aoi, "landfire": landfire, "dem": dem,
+STEPS = {"perimeters": lambda f, m: perimeters(m), "aoi": aoi, "landfire": landfire, "disturbance": disturbance,
+         "dem": dem,
          "hrrr": hrrr, "gridmet": gridmet}
 
 

@@ -2849,6 +2849,34 @@
    "url": "https://edcintl.cr.usgs.gov/geoserver/landfire/conus_2016/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=landfire__LF2016_FBFM40_CONUS&format=image/geotiff&subset=X(-12516240,-12466260)&subset=Y(4374180,4436190)",
    "version": "LF2016"
   },
+  "data/raw/mangum/landfire/LF2020_Dist17.tif": {
+   "bytes": 10486324,
+   "crs": "EPSG:3857",
+   "retrieved_utc": "2026-10-26T01:04:19+00:00",
+   "sha256": "2b9174e29a8859ade9006be938f8b6f39c8a27dfac3366efbaf13739f190be8c",
+   "url": "https://edcintl.cr.usgs.gov/geoserver/landfire/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=landfire__LF2020_Dist17_CONUS&format=image/geotiff&subset=X(-12516240,-12466260)&subset=Y(4374180,4436190)"
+  },
+  "data/raw/mangum/landfire/LF2020_Dist18.tif": {
+   "bytes": 10486324,
+   "crs": "EPSG:3857",
+   "retrieved_utc": "2026-10-26T01:04:23+00:00",
+   "sha256": "12dae2fffa3cf92aad56694b24d0b2cf5670f8cff29ef36af1affb3c2ee66aae",
+   "url": "https://edcintl.cr.usgs.gov/geoserver/landfire/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=landfire__LF2020_Dist18_CONUS&format=image/geotiff&subset=X(-12516240,-12466260)&subset=Y(4374180,4436190)"
+  },
+  "data/raw/mangum/landfire/LF2020_Dist19.tif": {
+   "bytes": 10486324,
+   "crs": "EPSG:3857",
+   "retrieved_utc": "2026-10-26T01:04:27+00:00",
+   "sha256": "6d3ede91e9b26044e65ffc894b69c988f71eaae98fffe738bf3d04d06fa7b2e0",
+   "url": "https://edcintl.cr.usgs.gov/geoserver/landfire/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=landfire__LF2020_Dist19_CONUS&format=image/geotiff&subset=X(-12516240,-12466260)&subset=Y(4374180,4436190)"
+  },
+  "data/raw/mangum/landfire/LF2020_Dist20.tif": {
+   "bytes": 10486324,
+   "crs": "EPSG:3857",
+   "retrieved_utc": "2026-10-26T01:04:30+00:00",
+   "sha256": "c2bdae6925dc473d7caf112c118fb7f0f7e30d010636dc9d73d609779797647b",
+   "url": "https://edcintl.cr.usgs.gov/geoserver/landfire/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=landfire__LF2020_Dist20_CONUS&format=image/geotiff&subset=X(-12516240,-12466260)&subset=Y(4374180,4436190)"
+  },
   "data/raw/perimeters/nirops_mendeley_pool.geojson": {
    "bytes": 25447710,
    "note": "subset of NIROPS_2020_2024_R1_R6.shp by Incident_C; CC BY 4.0",
@@ -2885,7 +2913,7 @@
   },
   "run": {
    "host": "Linux-6.18.44-fc-v153-x86_64-with-glibc2.39",
-   "utc": "2026-10-25T01:49:53+00:00"
+   "utc": "2026-10-26T01:04:15+00:00"
   }
  }
 }
