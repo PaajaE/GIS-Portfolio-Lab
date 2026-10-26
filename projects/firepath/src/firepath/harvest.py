@@ -45,9 +45,9 @@ GRIDMET = ("https://thredds.northwestknowledge.net/thredds/ncss/agg_met_{v}_1979
 FIRES = {
     "mangum": {"incident": "AZ-KNF-000359_Magnum", "epsg": 26912, "landfire": ("conus_2016", "LF2016")},
     "bush": {"incident": "AZ-TNF-001581_Bush", "epsg": 26912, "landfire": ("conus_2016", "LF2016")},
-    "telegraph": {"incident": "AZ-TNF-001255_Telegraph", "epsg": 26912, "landfire": None},     # LF 2020: ScienceBase
-    "pipeline": {"incident": "AZ-COF-000523_Pipeline", "epsg": 26912, "landfire": None},
-    "cerro_pelado": {"incident": "NM-SNF-000049_CerroPelado", "epsg": 26913, "landfire": None},
+    "telegraph": {"incident": "AZ-TNF-001255_Telegraph", "epsg": 26912, "landfire": ("sciencebase", "LF2020")},
+    "pipeline": {"incident": "AZ-COF-000523_Pipeline", "epsg": 26912, "landfire": ("sciencebase", "LF2020")},
+    "cerro_pelado": {"incident": "NM-SNF-000049_CerroPelado", "epsg": 26913, "landfire": ("sciencebase", "LF2020")},
 }
 POOL_INCIDENTS = [f["incident"] for f in FIRES.values()] + ["AZ-COF-000536_Haywire", "AZ-COF-000159_Tunnel"]
 LANDFIRE_LAYERS = ("FBFM40", "CC", "CH")
@@ -280,9 +280,9 @@ def landfire(fire: str, manifest: Manifest):
     EPSG:5070; prepare() warps them with nearest and reports class-proportion changes."""
     from pyproj import Transformer
 
-    if FIRES[fire]["landfire"] is None:
-        raise SystemExit(f"{fire}: LANDFIRE 2020 comes from the ScienceBase archive (not automated yet)")
     ws, ver = FIRES[fire]["landfire"]
+    if ws == "sciencebase":
+        return _landfire_zip(fire, ver, manifest)
     w, s, e, n = _lonlat_bbox(fire)
     t = Transformer.from_crs(4326, 3857, always_xy=True)
     (x0, x1), (y0, y1) = zip(*[t.transform(w, s), t.transform(e, n)])
@@ -298,6 +298,52 @@ def landfire(fire: str, manifest: Manifest):
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_bytes(b)
         manifest.add(out, url, version=ver, crs="EPSG:3857")
+
+
+LF_ZIPS = RAW / "landfire_conus"     # CONUS zips downloaded by hand from ScienceBase (captcha), see DATA_SOURCES
+LF_SCIENCEBASE = {"FBFM40": "6a1602c7b66b013d45990b82", "CC": "6a15f914b66b01e66c9c2f39",
+                  "CH": "6a16003fb66b013d45990b4b"}
+
+
+def _landfire_zip(fire: str, ver: str, manifest: Manifest):
+    """LF 2020 is not on the WCS: clip the fire box out of the CONUS GeoTIFF inside each ScienceBase zip
+    (read in place through GDAL /vsizip/, native EPSG:5070, no resampling)."""
+    import zipfile
+
+    import rasterio
+    from rasterio.warp import transform_bounds
+    from rasterio.windows import Window, from_bounds
+
+    out_dir = RAW / fire / "landfire"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    for layer in LANDFIRE_LAYERS:
+        zips = sorted(LF_ZIPS.glob(f"{ver}_{layer}_CONUS_*.zip"))
+        if not zips:
+            raise SystemExit(f"missing {LF_ZIPS}/{ver}_{layer}_CONUS_*.zip: download it from "
+                             f"https://www.sciencebase.gov/catalog/item/{LF_SCIENCEBASE[layer]}")
+        z = zips[-1]
+        tifs = [n for n in zipfile.ZipFile(z).namelist() if n.lower().endswith(".tif")]
+        if len(tifs) != 1:
+            raise RuntimeError(f"{z.name}: expected one .tif, found {tifs}")
+        with rasterio.open(f"/vsizip/{z}/{tifs[0]}") as src:
+            b = transform_bounds("EPSG:4326", src.crs, *_lonlat_bbox(fire), densify_pts=21)
+            w = from_bounds(*b, transform=src.transform)        # floor the near edges, ceil the far ones
+            r0, c0 = int(np.floor(w.row_off)), int(np.floor(w.col_off))
+            win = Window(c0, r0, int(np.ceil(w.col_off + w.width)) - c0, int(np.ceil(w.row_off + w.height)) - r0)
+            data = src.read(1, window=win)
+            prof = src.profile | {"driver": "GTiff", "height": data.shape[0], "width": data.shape[1],
+                                  "transform": src.window_transform(win), "compress": "deflate", "tiled": False}
+            prof.pop("blockxsize", None)
+            prof.pop("blockysize", None)
+        out = out_dir / f"{ver}_{layer}.tif"
+        with rasterio.open(out, "w", **prof) as dst:
+            dst.write(data, 1)
+        h = hashlib.sha256()
+        with open(z, "rb") as fh:
+            for chunk in iter(lambda: fh.read(1 << 24), b""):
+                h.update(chunk)
+        manifest.add(out, f"https://www.sciencebase.gov/catalog/item/{LF_SCIENCEBASE[layer]}", version=ver,
+                     crs=str(prof["crs"]), source_zip=z.name, source_zip_sha256=h.hexdigest(), member=tifs[0])
 
 
 def disturbance(fire: str, manifest: Manifest):
@@ -328,7 +374,7 @@ def dem(fire: str, manifest: Manifest):
     """1/3 arc-second 3DEP tiles (COG on the TNM S3 bucket), windowed reads, merged in native EPSG:4269."""
     import rasterio
     from rasterio.merge import merge
-    from rasterio.windows import from_bounds
+    from rasterio.windows import Window, from_bounds
 
     w, s, e, n = _lonlat_bbox(fire)
     tiles = [f"n{lat:02d}w{-lon:03d}" for lat in range(int(np.floor(s)) + 1, int(np.floor(n)) + 2)
@@ -384,7 +430,7 @@ def hrrr(fire: str, manifest: Manifest, hours_before: int = 24, hours_after: int
     discarded after cropping; each message's sha256 is kept."""
     import rasterio
     from pyproj import Transformer
-    from rasterio.windows import from_bounds
+    from rasterio.windows import Window, from_bounds
 
     p = fire_perimeters(fire)
     t0 = datetime.fromisoformat(p[0]["properties"]["UTC"]).replace(tzinfo=timezone.utc, minute=0, second=0)
