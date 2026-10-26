@@ -29,6 +29,15 @@ The scored set is CONSISTENT cells plus never-observed cells the run burned (MET
 run: overprediction adds scored cells. The rows are therefore not a ranking. With hand-set k = 1 the
 model spreads far too fast (96 % early); calibrating k, a_u and a_s is M3.
 
+### 30 m sub-window (model only)
+
+400 × 400 cells (12 × 12 km) at 30 m centred on the first perimeter (rows 1059–1459, cols 9–409 of the
+30 m grid), same window and hand-set parameters: 157,188 scored cells, mean abs 41.6 h, signed −41.0 h,
+95 % early, 4 % inside, 1 % late; Dice per scan 0.12–0.41. Run time 1,605 s (Rust HY, cloud). The window
+edge is a hard domain limit and most of the fire grows outside it, so this row checks that the 30 m path
+runs end to end; it is not comparable with the 90 m rows.
+`validation/m1b_mangum_30m_HY_w400_model.json`.
+
 ## One-step-ahead (perimeter k → k+1, growth outside perimeter k)
 
 Dice of the growth per step k = 0…6:
