@@ -28,3 +28,6 @@ bakeoff:            ## M1a D1 bake-off (analytic fixtures; ~1 h in pure Python) 
 
 bench:              ## Rust vs Python reference on the Mangum 90 m field + scenario thread scaling -> benchmarks/propagation.json
 	$(PY).bench
+
+sitreps-telegraph:  ## Telegraph 2021 situation reports from the Internet Archive (run on the build Mac)
+	$(PY).sitreps --wayback 7512 telegraph
