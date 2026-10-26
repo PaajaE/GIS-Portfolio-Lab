@@ -1,11 +1,15 @@
 """M1b run: Mode A from the first usable perimeter on the prepared inputs, model and baselines,
 interval-censored metrics (METHOD "Observations and validation metrics", PLAN §6–9).
 
-  uv run python -m firepath.run <fire> [--cell 90] [--scheme HY] [--models model,B0,B1]
+  uv run python -m firepath.run <fire> [--cell 90] [--scheme HY] [--models model,B0,B1] [--mode A|step]
+
+Mode A: one run from the first usable perimeter. Mode step (one-step-ahead): for each scan pair k -> k+1,
+start from perimeter k at t_k and stop at t_{k+1}; scored on the growth between the two perimeters.
 
 Parameters are HAND-SET placeholders (M1b), not calibrated: model k = a_u = a_s = 1; B0 c = 1 m/min;
 B1 c = 0.5 m/min, b = 0.05 (U10 in m/s). Results are a pipeline check, not a skill estimate.
-Writes data/out/<fire>/run_<fire>_<cell>m_<scheme>_<models>.npz and validation/m1b_<same>.json.
+Writes data/out/<fire>/run_<tag>.npz and validation/m1b_<tag>.json, tag = <fire>_<cell>m_<scheme>_<models>
+(Mode A) or <fire>_<cell>m_<scheme>_step_<models>.
 """
 
 from __future__ import annotations
@@ -70,15 +74,16 @@ def coarse_profile(fire: str, factor: int):
 def observed(fire: str, prof: dict):
     from pyproj import Transformer
     from rasterio.features import rasterize
+    import shapely
     from shapely.geometry import shape
-    from shapely.ops import transform
 
     feats = fire_perimeters(fire)
-    to_utm = Transformer.from_crs(4326, prof["crs"].to_epsg(), always_xy=True).transform
+    tr = Transformer.from_crs(4326, prof["crs"].to_epsg(), always_xy=True)
+    to_utm = lambda c: np.column_stack(tr.transform(c[:, 0], c[:, 1]))  # noqa: E731
     t_u, m_u = [], []
     for f in feats:
         t = datetime.fromisoformat(f["properties"]["UTC"]).replace(tzinfo=timezone.utc).timestamp()
-        m = rasterize([(transform(to_utm, shape(f["geometry"])), 1)], out_shape=(prof["height"], prof["width"]),
+        m = rasterize([(shapely.transform(shape(f["geometry"]), to_utm), 1)], out_shape=(prof["height"], prof["width"]),
                       transform=prof["transform"], dtype="uint8").astype(bool)
         if t_u and t == t_u[-1]:
             m_u[-1] |= m
@@ -142,12 +147,38 @@ def metrics(arr_min, lo, hi, flag, t_scans_rel, masks):
             "steps": steps}
 
 
+def step_metrics(arr_min, t_k, t_next, mask_k, mask_next, burnable):
+    """One-step-ahead scores on the growth k -> k+1 (burnable cells outside perimeter k): observed growth
+    = in perimeter k+1; modelled growth = reached by t_{k+1}. Recall/precision/Dice of the growth and the
+    interval error of observed-growth cells against (t_k, t_{k+1}] (unreached capped at 48 h late)."""
+    out = burnable & ~mask_k
+    obs = mask_next & out
+    mod = np.isfinite(arr_min) & (arr_min <= t_next) & out
+    inter = int((obs & mod).sum())
+    err = np.clip(interval_error(arr_min[obs], t_k, t_next), -CAP_MIN, CAP_MIN)
+    return {"obs_growth": int(obs.sum()), "model_growth": int(mod.sum()),
+            "growth_ratio": float(mod.sum() / max(obs.sum(), 1)),
+            "recall": float(inter / max(obs.sum(), 1)), "precision": float(inter / max(mod.sum(), 1)),
+            "dice": float(2 * inter / max(obs.sum() + mod.sum(), 1)),
+            "share_late": float((err > 0).mean()) if err.size else None,
+            "median_late_h": float(np.median(err[err > 0]) / 60) if (err > 0).any() else None}
+
+
+def run_scheme(scheme, f, inside, t0, t_stop):
+    if scheme == "HY":
+        return propagate_hybrid(f, inside=inside, t0=t0, t_stop=t_stop)
+    if scheme == "LS":
+        return propagate_levelset(f, inside=inside, t0=t0, t_stop=t_stop, order=5)
+    return propagate(f, radius=8, inside=inside, t0=t0, t_stop=t_stop)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("fire")
     ap.add_argument("--cell", type=int, default=90)
     ap.add_argument("--scheme", default="HY", choices=["HY", "LS", "G8"])
     ap.add_argument("--models", default="model,B0,B1")
+    ap.add_argument("--mode", default="A", choices=["A", "step"])
     a = ap.parse_args(argv)
     factor = a.cell // 30
     prof = coarse_profile(a.fire, factor)
@@ -191,12 +222,21 @@ def main(argv=None):
         terrain = {"tan_slope": tan_s, "upslope": up} if kind == "model" else {}
         f = SpreadField(t_change, r, e, th, st.burnable, cell, **terrain)
         t = time.perf_counter()
-        if a.scheme == "HY":
-            res = propagate_hybrid(f, inside=inside, t_stop=t_stop)
-        elif a.scheme == "LS":
-            res = propagate_levelset(f, inside=inside, t_stop=t_stop, order=5)
-        else:
-            res = propagate(f, radius=8, inside=inside, t_stop=t_stop)
+        if a.mode == "step":
+            steps, arrs = [], []
+            for k in range(len(rel) - 1):
+                ins = masks_w[k] & st.burnable
+                res = run_scheme(a.scheme, f, ins, rel[k], rel[k + 1])
+                sm = step_metrics(res.arrival, rel[k], rel[k + 1], masks_w[k], masks_w[k + 1], st.burnable)
+                steps.append({"k": k, **sm})
+                arrs.append(np.where(res.arrival <= rel[k + 1], res.arrival, np.inf).astype("f4"))
+                print(kind, k, {x: sm[x] for x in ("obs_growth", "growth_ratio", "recall", "precision")},
+                      flush=True)
+            sec = time.perf_counter() - t
+            report["results"][kind] = {"steps": steps, "seconds": sec}
+            out_arr[kind] = np.stack(arrs)
+            continue
+        res = run_scheme(a.scheme, f, inside, 0.0, t_stop)
         sec = time.perf_counter() - t
         mt = metrics(res.arrival, lo, hi, audit["flag"], rel, masks_w)
         mt["seconds"] = sec
@@ -204,7 +244,8 @@ def main(argv=None):
         out_arr[kind] = res.arrival.astype("f4")
         print(kind, f"{sec:.0f}s", {k: mt[k] for k in ("mean_abs_h", "share_early", "share_inside", "share_late")},
               flush=True)
-    tag = f"{a.fire}_{a.cell}m_{a.scheme}_{a.models.replace(',', '-')}"
+    mode = "_step" if a.mode == "step" else ""
+    tag = f"{a.fire}_{a.cell}m_{a.scheme}{mode}_{a.models.replace(',', '-')}"
     od = PROJECT / "data" / "out" / a.fire
     od.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(od / f"run_{tag}.npz", **out_arr, lo=lo, hi=hi, flag=audit["flag"],
