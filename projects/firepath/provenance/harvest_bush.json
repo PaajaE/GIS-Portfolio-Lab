@@ -12,6 +12,18 @@
    ],
    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n34w112/USGS_13_n34w112.tif ; https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n35w112/USGS_13_n35w112.tif"
   },
+  "data/raw/bush/gridmet/fm100.nc": {
+   "bytes": 31132,
+   "retrieved_utc": "2026-10-26T01:07:20+00:00",
+   "sha256": "aa66a674fcac256d539d81c8a8a2b84598e3a6a364919f1d1ef8862b64ae1a22",
+   "url": "https://thredds.northwestknowledge.net/thredds/ncss/agg_met_fm100_1979_CurrentYear_CONUS.nc?var=dead_fuel_moisture_100hr&north=34.18106964495669&west=-111.72549875035772&east=-111.00587994150467&south=33.44002741936401&disableProjSubset=on&horizStride=1&time_start=2020-06-12T00:00:00Z&time_end=2020-07-01T00:00:00Z&timeStride=1&accept=netcdf"
+  },
+  "data/raw/bush/gridmet/fm1000.nc": {
+   "bytes": 31136,
+   "retrieved_utc": "2026-10-26T01:07:21+00:00",
+   "sha256": "e4fc8ad50eaf6183dd558155a9895571880e136a3e28a6c906e4f25608e1f52b",
+   "url": "https://thredds.northwestknowledge.net/thredds/ncss/agg_met_fm1000_1979_CurrentYear_CONUS.nc?var=dead_fuel_moisture_1000hr&north=34.18106964495669&west=-111.72549875035772&east=-111.00587994150467&south=33.44002741936401&disableProjSubset=on&horizStride=1&time_start=2020-06-12T00:00:00Z&time_end=2020-07-01T00:00:00Z&timeStride=1&accept=netcdf"
+  },
   "data/raw/bush/hrrr/hrrr_f00_uv10_crop.npz": {
    "bytes": 1118735,
    "first": "2020-06-13T04:00:00+00:00",

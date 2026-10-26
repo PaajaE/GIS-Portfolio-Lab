@@ -1,0 +1,227 @@
+{
+ "fire": "bush",
+ "grid": {
+  "epsg": 26912,
+  "cell": 30.0,
+  "x0": 442290.0,
+  "y1": 3771150.0,
+  "width": 1596,
+  "height": 1994,
+  "bounds_utm": [
+   442290.0,
+   3711330.0,
+   490170.0,
+   3771150.0
+  ],
+  "buffer_m": 5000.0,
+  "bounds_lonlat": [
+   -111.62549875035772,
+   33.54002741936401,
+   -111.10587994150467,
+   34.08106964495669
+  ]
+ },
+ "utc": "2026-10-26T01:07:31+00:00",
+ "fuel": {
+  "version": "LF2016",
+  "missing_cells": 0,
+  "max_class_share_change_pp": 0.03170894860062834,
+  "shares_grid": {
+   "91": 0.00306,
+   "93": 6e-05,
+   "98": 0.02096,
+   "99": 0.04144,
+   "101": 0.02229,
+   "102": 0.11019,
+   "103": 6e-05,
+   "121": 0.02447,
+   "122": 0.67519,
+   "141": 0.00086,
+   "142": 0.00145,
+   "145": 0.0006,
+   "147": 0.04312,
+   "161": 0.0003,
+   "162": 0.00059,
+   "165": 0.00018,
+   "181": 0.0001,
+   "182": 0.00039,
+   "183": 0.03406,
+   "184": 0.00036,
+   "185": 0.00053,
+   "186": 0.00062,
+   "188": 0.01912
+  }
+ },
+ "terrain": {
+  "elev_min": 409.72601318359375,
+  "elev_max": 2402.196533203125,
+  "tan_slope_p50": 0.25917720794677734,
+  "tan_slope_p99": 0.8427679538726807
+ },
+ "perimeters": {
+  "n": 17,
+  "merged_equal_times": 0,
+  "first_utc": "2020-06-14 04:00:00",
+  "last_utc": "2020-06-30 00:34:00",
+  "steps": [
+   {
+    "k": 1,
+    "t": 1592202300.0,
+    "cells": 163010,
+    "new": 101809,
+    "removed_jitter": 18,
+    "removed_retraction": 0
+   },
+   {
+    "k": 2,
+    "t": 1592289960.0,
+    "cells": 290103,
+    "new": 127250,
+    "removed_jitter": 157,
+    "removed_retraction": 0
+   },
+   {
+    "k": 3,
+    "t": 1592374320.0,
+    "cells": 400458,
+    "new": 110355,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 4,
+    "t": 1592459340.0,
+    "cells": 516816,
+    "new": 118830,
+    "removed_jitter": 567,
+    "removed_retraction": 1905
+   },
+   {
+    "k": 5,
+    "t": 1592543880.0,
+    "cells": 679221,
+    "new": 163728,
+    "removed_jitter": 254,
+    "removed_retraction": 1069
+   },
+   {
+    "k": 6,
+    "t": 1592631180.0,
+    "cells": 784121,
+    "new": 104903,
+    "removed_jitter": 3,
+    "removed_retraction": 0
+   },
+   {
+    "k": 7,
+    "t": 1592715180.0,
+    "cells": 829680,
+    "new": 45703,
+    "removed_jitter": 141,
+    "removed_retraction": 3
+   },
+   {
+    "k": 8,
+    "t": 1592801580.0,
+    "cells": 836688,
+    "new": 7008,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 9,
+    "t": 1592890800.0,
+    "cells": 840113,
+    "new": 3452,
+    "removed_jitter": 24,
+    "removed_retraction": 3
+   },
+   {
+    "k": 10,
+    "t": 1592971200.0,
+    "cells": 851246,
+    "new": 11153,
+    "removed_jitter": 19,
+    "removed_retraction": 1
+   },
+   {
+    "k": 11,
+    "t": 1593061500.0,
+    "cells": 850788,
+    "new": 176,
+    "removed_jitter": 259,
+    "removed_retraction": 375
+   },
+   {
+    "k": 12,
+    "t": 1593150720.0,
+    "cells": 855507,
+    "new": 4875,
+    "removed_jitter": 156,
+    "removed_retraction": 0
+   },
+   {
+    "k": 13,
+    "t": 1593219300.0,
+    "cells": 870137,
+    "new": 14650,
+    "removed_jitter": 19,
+    "removed_retraction": 1
+   },
+   {
+    "k": 14,
+    "t": 1593320100.0,
+    "cells": 855551,
+    "new": 20,
+    "removed_jitter": 1260,
+    "removed_retraction": 13346
+   },
+   {
+    "k": 15,
+    "t": 1593397800.0,
+    "cells": 869855,
+    "new": 14305,
+    "removed_jitter": 1,
+    "removed_retraction": 0
+   },
+   {
+    "k": 16,
+    "t": 1593477240.0,
+    "cells": 869855,
+    "new": 0,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   }
+  ],
+  "flags": {
+   "consistent": 793453,
+   "initial": 61199,
+   "never": 2308397,
+   "inconsistent": 19375
+  }
+ },
+ "wind": {
+  "hours": 406,
+  "first_utc": "2020-06-13T04:00:00+00:00",
+  "last_utc": "2020-06-30T01:00:00+00:00",
+  "rotation_deg_at_centre": 8.428987004487647,
+  "hrrr_true_north_deg_from_grid_x_at_centre": 81.3592012790833,
+  "speed_max_ms": 13.486613273620605,
+  "wind_grid_shape": [
+   200,
+   160
+  ]
+ },
+ "moisture": {
+  "fm100_median_pct": 3.1058479532163745,
+  "fm1000_median_pct": 3.9119883040935677,
+  "window_utc": [
+   "2020-06-14T04:00:00+00:00",
+   "2020-06-30T00:34:00+00:00"
+  ]
+ },
+ "outputs": {
+  "data/interim/bush/inputs.npz": "1b13ee113ce891d7bb2e8ad7ace9eeed2c47874f083040dd66711975dad18091",
+  "data/interim/bush/wind.npz": "5c9fab7c91e755b3757c54cb6b1e505cfc873fef2f5b330e3abb4ef75082201c"
+ }
+}
