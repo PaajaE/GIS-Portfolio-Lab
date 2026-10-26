@@ -1,0 +1,112 @@
+{
+ "fire": "pipeline",
+ "inciweb_slug": "azcof-pipeline-fire",
+ "retrieved_utc": "2026-10-26T01:01:26+00:00",
+ "items": {
+  "activated-wildfire-smoke-forecasts-june-16th-from-adeq": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/activated-wildfire-smoke-forecasts-june-16th-from-adeq",
+   "chars": 1547,
+   "sha256": "8e5d840e64955967b99610702e2f372f84b422c0bef303ea98285654c94d6d33"
+  },
+  "baer-team-completes-soil-burn-severity-map-for-pipeline-fire": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/baer-team-completes-soil-burn-severity-map-for-pipeline-fire",
+   "chars": 3655,
+   "sha256": "60609e6400072a2204620575b2e07cd8bf98e7be2b90898f527a0aec383906cf"
+  },
+  "final-update-pipeline-fire-june-25": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/final-update-pipeline-fire-june-25",
+   "chars": 4103,
+   "sha256": "aab3ad05d0a169ddbbe450cd4d5c050246e9332dc2ec6c75acb1117658553eb8"
+  },
+  "incident-management-team-ordered-for-pipeline-fire": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/incident-management-team-ordered-for-pipeline-fire",
+   "chars": 2043,
+   "sha256": "1b70a0d34a331306c01ec9c455a386068e098ae01d621610fd46165016fc6679"
+  },
+  "june-16-2022-pipeline-haywire-fire-daily-update": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/june-16-2022-pipeline-haywire-fire-daily-update",
+   "chars": 3934,
+   "sha256": "1f40ca9db6f77b7a6a806ec5128fc394d90ecfe83b40f7c88a55ce2b1beaf5b4"
+  },
+  "june-17-2022-pipeline-haywire-fire-daily-update": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/june-17-2022-pipeline-haywire-fire-daily-update",
+   "chars": 4230,
+   "sha256": "1a374c0bc4267bf17f8249c354d5f49c04c0d3e43c5e6758c0eadfc215c2ae94"
+  },
+  "june-18-2022-pipelinehaywire-fire-daily-update": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/june-18-2022-pipelinehaywire-fire-daily-update",
+   "chars": 3823,
+   "sha256": "02d5edefd5110ad0891f29b9543db47ca517f28524c69ce097cf4ccf2ca350f4"
+  },
+  "june-19-2022-pipelinehaywire-fire-daily-update": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/june-19-2022-pipelinehaywire-fire-daily-update",
+   "chars": 3506,
+   "sha256": "f357bbf61dc93610bfbe83526f6a7b03ceadcd48db3f24e352f8f07923f78aa2"
+  },
+  "june-20-2022-pipelinehaywire-fire-daily-update": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/june-20-2022-pipelinehaywire-fire-daily-update",
+   "chars": 4569,
+   "sha256": "eacb079caabaf8bb095d78df44c166acda749117a7f27e204f61eea9daee4938"
+  },
+  "june-21-2022-pipelinehaywire-fire-daily-update": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/june-21-2022-pipelinehaywire-fire-daily-update",
+   "chars": 4317,
+   "sha256": "4722ccbfe53a73856115c3f59a526dcb70ba233a3b55422a3c79f2fb6c4e0d32"
+  },
+  "june-22-2022-pipelinehaywire-fire-daily-update": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/june-22-2022-pipelinehaywire-fire-daily-update",
+   "chars": 4105,
+   "sha256": "2952237ec7808f5bef7beb39569a792bbf1015e3353c539be1a1937fa614ed8b"
+  },
+  "june-23-pipelinehaywire-fire-daily-update": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/june-23-pipelinehaywire-fire-daily-update",
+   "chars": 3986,
+   "sha256": "9631ef7061efcd43fbfa3e321241de7cef5083426833aec3185815d608947533"
+  },
+  "june-24-pipeline-haywire-fire-daily-update": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/june-24-pipeline-haywire-fire-daily-update",
+   "chars": 3797,
+   "sha256": "4d5bb8b33807303fae7909dfe8c627450e283205540454dc71bfa4fbaf31cd0e"
+  },
+  "pipeline-and-haywire-fires-being-managed-by-type-2-imt-haywire": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/pipeline-and-haywire-fires-being-managed-by-type-2-imt-haywire",
+   "chars": 5492,
+   "sha256": "b6e5bb1f082db79cc91a0dd6f490a59bba58d977ea67b79e04aaf836e302ab5e"
+  },
+  "pipeline-and-haywire-fires-operations-video-update-6192022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/pipeline-and-haywire-fires-operations-video-update-6192022",
+   "chars": 1320,
+   "sha256": "9d9a0a68fae278b129f758af98dc573d00aa88b2cc3b307183a0208f1633fa64"
+  },
+  "pipeline-and-haywire-fires-operations-video-update-6202022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/pipeline-and-haywire-fires-operations-video-update-6202022",
+   "chars": 1324,
+   "sha256": "48df7e9047f96d7fb76eff7febfa00f8454dc4abf60226a221011e3b058dabbc"
+  },
+  "pipeline-and-haywire-fires-operations-video-update-6212022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/pipeline-and-haywire-fires-operations-video-update-6212022",
+   "chars": 1323,
+   "sha256": "a4bce293fcb2b1bdbe23023cfdefded05d65f7cbca8cec1d1db57f4da663eb67"
+  },
+  "pipeline-fire-continues-burning-north-of-flagstaff-two-additional-fires-re": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/pipeline-fire-continues-burning-north-of-flagstaff-two-additional-fires-re",
+   "chars": 5787,
+   "sha256": "0ff4fcd076499aab4d596e2f22f1d2a44f401145641e2875122979d0c9c917bc"
+  },
+  "pipeline-fire-morning-update-june-15-2022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/pipeline-fire-morning-update-june-15-2022",
+   "chars": 5448,
+   "sha256": "0046ce3504a31734ea1e06d5b6d06ff98e6298d43f3875215b0a449d5464a7db"
+  },
+  "subject-arrested-in-connection-with-pipeline-fire": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/subject-arrested-in-connection-with-pipeline-fire",
+   "chars": 3133,
+   "sha256": "85395cb354b8b209cc3789230f60f5ce5dc19c73e8cc6777ec2860d495a7654d"
+  },
+  "wildfire-start-6-miles-north-of-flagstaff-just-west-of-schultz-pass": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/azcof-pipeline-fire/wildfire-start-6-miles-north-of-flagstaff-just-west-of-schultz-pass",
+   "chars": 2046,
+   "sha256": "ad345d4e0e3c36cd517a2a2decebb42f1833263b3061adc2b8a9fe330b74b394"
+  }
+ }
+}

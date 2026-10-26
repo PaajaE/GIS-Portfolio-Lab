@@ -1,0 +1,337 @@
+{
+ "fire": "cerro_pelado",
+ "inciweb_slug": "nmsnf-cerro-pelado",
+ "retrieved_utc": "2026-10-26T01:02:02+00:00",
+ "items": {
+  "april-29-2022-afternoon-air-quality-alert": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/april-29-2022-afternoon-air-quality-alert",
+   "chars": 4639,
+   "sha256": "9d969d9d5ee049dac7f20b4e0431940f47de75d69b5edf8c73b100367d875569"
+  },
+  "cerro-pelado-burned-area-closure-lifted": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-burned-area-closure-lifted",
+   "chars": 3744,
+   "sha256": "d4fbbde8ae3836b35c460da51f62da76beb96a73e73703485ee465f712e2d999"
+  },
+  "cerro-pelado-daily-update-for-april-24-2022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-daily-update-for-april-24-2022",
+   "chars": 5897,
+   "sha256": "fce278e17ddea0fdf01a88221eaf4e51976b58b34d28f4861bec65dc907de15d"
+  },
+  "cerro-pelado-daily-update-for-april-26-2022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-daily-update-for-april-26-2022",
+   "chars": 8588,
+   "sha256": "316de894db8b14224bb4acb4d1a185ae17cf5e140a58f441f9f1812f25c8c49d"
+  },
+  "cerro-pelado-daily-update-for-april-27-2022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-daily-update-for-april-27-2022",
+   "chars": 6491,
+   "sha256": "899cefb4b7d8914fa427383d43897e504b9784aff2cdb7f55653dde81b483f57"
+  },
+  "cerro-pelado-daily-update-for-april-30-2022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-daily-update-for-april-30-2022",
+   "chars": 8590,
+   "sha256": "1876e12362f5b665b5b279447457f94250a10ba5dcff100886d830cb2b6b01f9"
+  },
+  "cerro-pelado-fire-daily-update-for-april-25-2022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-daily-update-for-april-25-2022",
+   "chars": 7046,
+   "sha256": "454638c2bc6c1d224d94779d9fce65ba004a6d61c417e967b4aaf08f54939211"
+  },
+  "cerro-pelado-fire-daily-update-for-april-28-2022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-daily-update-for-april-28-2022",
+   "chars": 7867,
+   "sha256": "09e3868aaf2fc70f8d3cf28622fa2823086bf9185e94eedebd08617f3087c418"
+  },
+  "cerro-pelado-fire-daily-update-for-april-29-2022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-daily-update-for-april-29-2022",
+   "chars": 8779,
+   "sha256": "e7b538e498c75c96a27023950859cbfedaa4bc32087797cae2e31d9020f00209"
+  },
+  "cerro-pelado-fire-daily-update-for-may-1-2022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-daily-update-for-may-1-2022",
+   "chars": 8724,
+   "sha256": "97b6fbe0f1b6c62f74430654f09c4de7be2bf8f0a6f4e5ae6c9e742ba6bd0695"
+  },
+  "cerro-pelado-fire-daily-update-for-may-2-2022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-daily-update-for-may-2-2022",
+   "chars": 9025,
+   "sha256": "18fdf069967e960b68d1410255a84b3da7aafc136c8648cb7a726069bbbe3d70"
+  },
+  "cerro-pelado-fire-daily-update-for-may-4": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-daily-update-for-may-4",
+   "chars": 9759,
+   "sha256": "9ac98dfb762dbe90127d178b34d7a07aac10547736de27875861d2e1fd2ae449"
+  },
+  "cerro-pelado-fire-daily-update-for-may-5": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-daily-update-for-may-5",
+   "chars": 9006,
+   "sha256": "2fcb6fbae98cfa6a73e292a31493992fd701efb5a340a17520dd3fea47670ada"
+  },
+  "cerro-pelado-fire-daily-update-for-may-6": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-daily-update-for-may-6",
+   "chars": 7990,
+   "sha256": "1b1ba44bf2c67404e633901a6841e0ed6684d4352bd062ab3481ad34d828f20d"
+  },
+  "cerro-pelado-fire-update-april-23-2022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-april-23-2022",
+   "chars": 4546,
+   "sha256": "d1f87723928b6fba331c965a2d62e3e4e42697e68b9d43089d6cbbcc2b9ff018"
+  },
+  "cerro-pelado-fire-update-for-friday-june-3": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-friday-june-3",
+   "chars": 4122,
+   "sha256": "583ecf31d3a149cfcc24403d5e8b8d276e7bff8b568cd6088909ba6e4551690a"
+  },
+  "cerro-pelado-fire-update-for-friday-may-13": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-friday-may-13",
+   "chars": 6761,
+   "sha256": "2ca8a0242b9785ce2de10e0c8df1063eb0aedea816b57f800bc9c0476a69f140"
+  },
+  "cerro-pelado-fire-update-for-friday-may-20": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-friday-may-20",
+   "chars": 4810,
+   "sha256": "7138d195f475695eeaa92f5c06fc8b6287cc54754749a3d63035e342ddd4bfa5"
+  },
+  "cerro-pelado-fire-update-for-friday-may-27": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-friday-may-27",
+   "chars": 3052,
+   "sha256": "003ee334070a1ae99791cf603929620bbc1c0a49267bd3c9861e7c108484f029"
+  },
+  "cerro-pelado-fire-update-for-monday-may-16": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-monday-may-16",
+   "chars": 6379,
+   "sha256": "4ab7e3302f61cf4d2f69d6e00f6d998472ac2bcca7985493b3953f374b0e7122"
+  },
+  "cerro-pelado-fire-update-for-monday-may-23": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-monday-may-23",
+   "chars": 4458,
+   "sha256": "5288863e36b4c34f8d03d7d6690d32375ee0058730bd611b0a9f1691b81002ac"
+  },
+  "cerro-pelado-fire-update-for-monday-may-30": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-monday-may-30",
+   "chars": 3025,
+   "sha256": "abadb3fd5b6a53d2f2d8b373f661e3b1614d66c78e00dd3fa3d7e5c35b903992"
+  },
+  "cerro-pelado-fire-update-for-monday-may-9": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-monday-may-9",
+   "chars": 8273,
+   "sha256": "c27297ee67c3c163fe23cf6d0652ff53020f51ff195684f028a106a15ec77637"
+  },
+  "cerro-pelado-fire-update-for-saturday-may-14": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-saturday-may-14",
+   "chars": 6483,
+   "sha256": "3483de729ffffcc93528b14a6027206778ead86d076857bf35b02f4c1f8c5d56"
+  },
+  "cerro-pelado-fire-update-for-saturday-may-21": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-saturday-may-21",
+   "chars": 4757,
+   "sha256": "2bcd5d4adedd87926e65e01fd540a448624af5c9519fe445fa26e59463573517"
+  },
+  "cerro-pelado-fire-update-for-saturday-may-28": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-saturday-may-28",
+   "chars": 3316,
+   "sha256": "c3c8b6e45821bd2e6ed1015cf5a4aa19823d35006e1d98930b5cf17098a1f7ec"
+  },
+  "cerro-pelado-fire-update-for-saturday-may-7": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-saturday-may-7",
+   "chars": 8500,
+   "sha256": "3b2e8086b82347e5d6e6c7db1acc6ae054a71edf96dc60550443d83e6affa9c9"
+  },
+  "cerro-pelado-fire-update-for-sunday-may-15": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-sunday-may-15",
+   "chars": 6156,
+   "sha256": "11d25d5d64b69abc8e0fea70c5fe1c623453ecead4759370ff5c5f066abfb9fd"
+  },
+  "cerro-pelado-fire-update-for-sunday-may-22": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-sunday-may-22",
+   "chars": 4342,
+   "sha256": "28e79165bd800aa90ca90c12064fb0738e7ec720be8f4ff884a310bd2f7a20d0"
+  },
+  "cerro-pelado-fire-update-for-sunday-may-29": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-sunday-may-29",
+   "chars": 3190,
+   "sha256": "60d920c8ea7b292cca82e062298f4bdb531244a31b7d63eea9351ab5fd06b162"
+  },
+  "cerro-pelado-fire-update-for-sunday-may-8": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-sunday-may-8",
+   "chars": 8537,
+   "sha256": "b9edadba3daba5205840ca62fe76b63db5679dd3ad8a43d43cbfaf14a08cc8a1"
+  },
+  "cerro-pelado-fire-update-for-thursday-june-2": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-thursday-june-2",
+   "chars": 4544,
+   "sha256": "087684d10fdcba5d4161ad520124485102775dc97c48e954020bd5902a5b30ee"
+  },
+  "cerro-pelado-fire-update-for-thursday-may-12": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-thursday-may-12",
+   "chars": 6970,
+   "sha256": "45778aaf26d70a7bb63cd271cec86feadb97a244241498f33a35fa7f83520809"
+  },
+  "cerro-pelado-fire-update-for-thursday-may-19": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-thursday-may-19",
+   "chars": 4335,
+   "sha256": "22293b3d29b07f15b4191da3cc827c38c7f64e2127888f62a27400035c607ab8"
+  },
+  "cerro-pelado-fire-update-for-thursday-may-26": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-thursday-may-26",
+   "chars": 3209,
+   "sha256": "fb1884d474f22f84f2eda603e2732500b684a6fc79e4cec752b4251eb53ac77b"
+  },
+  "cerro-pelado-fire-update-for-tuesday-may-10": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-tuesday-may-10",
+   "chars": 8705,
+   "sha256": "b1c87e83da22ee485af02445f191ea51a881115652cfbb40b74ea830189925c6"
+  },
+  "cerro-pelado-fire-update-for-tuesday-may-17": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-tuesday-may-17",
+   "chars": 6289,
+   "sha256": "6fd7bf4fd41a20ea05ca5b280e4b9f6d4a656028ddee3c1b625aad0b91c5af3a"
+  },
+  "cerro-pelado-fire-update-for-tuesday-may-24": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-tuesday-may-24",
+   "chars": 4108,
+   "sha256": "652581987d039f63346ba213104fddf21b790a088f8da85fc6605117f77768cd"
+  },
+  "cerro-pelado-fire-update-for-tuesday-may-31": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-tuesday-may-31",
+   "chars": 3317,
+   "sha256": "2634ee54de856e61b5c9d690662403c86ad0b22394a4e3c629d94a889b59b83d"
+  },
+  "cerro-pelado-fire-update-for-wednesday-may-11": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-wednesday-may-11",
+   "chars": 9472,
+   "sha256": "ce9dcb9efbb52bff58138bd22e996bd87a065ad25c0b66c2058191249bd6af14"
+  },
+  "cerro-pelado-fire-update-for-wednesday-may-18": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-wednesday-may-18",
+   "chars": 5628,
+   "sha256": "6067ec1098d3fe6ec6f6124ed917b13c06619249d84b27cc8b3959ea33dd0517"
+  },
+  "cerro-pelado-fire-update-for-wednesday-may-25": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-fire-update-for-wednesday-may-25",
+   "chars": 4249,
+   "sha256": "471b4f169b4f8bcee60a147b8c3eb0f6cdb4be6f04642d9b1fed813079db5011"
+  },
+  "cerro-pelado-update-for-tuesday-june-14": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-pelado-update-for-tuesday-june-14",
+   "chars": 4370,
+   "sha256": "944f8c15c74029356752aeb5b683712b5ce2575bb9fce7d3b25e9a38e2867839"
+  },
+  "cerro-peldao-fire-daily-update-for-may-3-2022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-peldao-fire-daily-update-for-may-3-2022",
+   "chars": 9081,
+   "sha256": "915f825111e1081fa3960f8d8c108a1510fc6470634a4cb0edbb208b3fd8a07b"
+  },
+  "cerro-peldao-fire-update-for-wednesday-june-1": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/cerro-peldao-fire-update-for-wednesday-june-1",
+   "chars": 3011,
+   "sha256": "779f4b546a260be423b6b007bfdc38f9ec1dc26c5f01a889e2340d86335a41d1"
+  },
+  "final-cerro-pelado-burned-area-closure-terminated": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/final-cerro-pelado-burned-area-closure-terminated",
+   "chars": 2622,
+   "sha256": "5c7750e8343daec9b2b476db2f71de805ad022caf4eb4eeb3325f5bb3da8ed80"
+  },
+  "kmz-files-for-use-in-google-earth": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/kmz-files-for-use-in-google-earth",
+   "chars": 2205,
+   "sha256": "1bca5550653ae7c6939d13d8f66b477f091bfbafa38ba356f395733e148c94df"
+  },
+  "links-to-daily-videos-of-operational-briefing": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/links-to-daily-videos-of-operational-briefing",
+   "chars": 1533,
+   "sha256": "b4836b314d685f75b32da0af2c1997f4594d243e0addbb066b4f1093ea6ad97c"
+  },
+  "new-fire-start-on-sfnf-jemez-ranger-district-cerro-pelado-fire": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/new-fire-start-on-sfnf-jemez-ranger-district-cerro-pelado-fire",
+   "chars": 3161,
+   "sha256": "0fe73ee21c2d2e3099208f5ce74bf74bc9709cef97e34b9feeebbf7247192ece"
+  },
+  "nps-news-release-4292022": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/nps-news-release-4292022",
+   "chars": 2937,
+   "sha256": "4df2af57d1fa7173f86e5494924a6710260ac4132e2119301675eaa0a5e2f85f"
+  },
+  "sfnf-updates-closure-order-for-cerro-pelado-fire-area": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/sfnf-updates-closure-order-for-cerro-pelado-fire-area",
+   "chars": 3603,
+   "sha256": "7b8632726a52ed68260701908522b50ef4a4095ec362e0d3fbb9f4de8be029d8"
+  },
+  "smoke-report-and-alert-information": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-and-alert-information",
+   "chars": 1674,
+   "sha256": "11ed16369f20b69cb8eda2aed134a8578d6497e1968950a8a762794288e9e014"
+  },
+  "smoke-report-for-cerro-pelado-fire-friday-april-29": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-for-cerro-pelado-fire-friday-april-29",
+   "chars": 1825,
+   "sha256": "d77c6e4e0b366081a803d206ff7137880c9243b62ad7ab7a131f4b15cb375bb8"
+  },
+  "smoke-report-for-cerro-pelado-fire-monday-may-2": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-for-cerro-pelado-fire-monday-may-2",
+   "chars": 1989,
+   "sha256": "81ca9fa8b35c3e60c390ecf46f8b8dff7b523b391e72b5f75f68dd24e9350b3f"
+  },
+  "smoke-report-for-cerro-pelado-fire-saturday-april-30": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-for-cerro-pelado-fire-saturday-april-30",
+   "chars": 1985,
+   "sha256": "5c5ebb96aa455c602c6933c4cb79a28b87d47210fe0d469c17c6f5908e8c4389"
+  },
+  "smoke-report-for-cerro-pelado-fire-saturday-may-7": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-for-cerro-pelado-fire-saturday-may-7",
+   "chars": 2240,
+   "sha256": "8654df3fb4f203dd47e8ecdd54adb868ed2a955433dc2114ef3570f48f874255"
+  },
+  "smoke-report-for-cerro-pelado-fire-sunday-may-1": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-for-cerro-pelado-fire-sunday-may-1",
+   "chars": 2137,
+   "sha256": "00d1d23106cfdb0a8011f92fa9fcb2c4d7f991f2cea88910f16eebeac0672af7"
+  },
+  "smoke-report-for-cerro-pelado-fire-sunday-may-8": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-for-cerro-pelado-fire-sunday-may-8",
+   "chars": 1932,
+   "sha256": "69122a524bc0e87d2dd79aeac0c6165e664b94c95cc186271668e40500e7da0d"
+  },
+  "smoke-report-for-cerro-pelado-fire-thursday-april-28": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-for-cerro-pelado-fire-thursday-april-28",
+   "chars": 1745,
+   "sha256": "ce2a024cdac1f3f0576396ae95c5498a64d753be4a3e1ba9edb690aff4fcefa8"
+  },
+  "smoke-report-for-cerro-pelado-fire-thursday-may-5": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-for-cerro-pelado-fire-thursday-may-5",
+   "chars": 2123,
+   "sha256": "ddab255c5b2bfaf7a3c4a50e52aaa8dd517b5886c3c6514d78ba110b495fec5d"
+  },
+  "smoke-report-for-cerro-pelado-fire-tuesday-april-26": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-for-cerro-pelado-fire-tuesday-april-26",
+   "chars": 1664,
+   "sha256": "f7c732d8c0789efec3ff36c9505b1798259cc4154fbdd4787708fb4242c03a0f"
+  },
+  "smoke-report-for-cerro-pelado-fire-tuesday-may-10": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-for-cerro-pelado-fire-tuesday-may-10",
+   "chars": 1574,
+   "sha256": "5ec541015f3cea98b72866e95471a3366ef137b90ba17f7b1d44ceca0fca473c"
+  },
+  "smoke-report-for-cerro-pelado-fire-tuesday-may-3": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-for-cerro-pelado-fire-tuesday-may-3",
+   "chars": 1993,
+   "sha256": "e4fdceecac80dc85318a1a0d90dc3f77f86dd645cb88c2757dfa0c20a5c4e67c"
+  },
+  "smoke-report-for-cerro-pelado-fire-wednesday-april-27": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-for-cerro-pelado-fire-wednesday-april-27",
+   "chars": 1576,
+   "sha256": "8eb1a4af30db3afd7da05278d263109e7c965fbcc4e9b908355387f7f2ad757f"
+  },
+  "smoke-report-for-cerro-pelado-fire-wednesday-may-11": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-for-cerro-pelado-fire-wednesday-may-11",
+   "chars": 1615,
+   "sha256": "1f1811f1e171d538e8be62403d77e18658c45d54d06863348782a69c820b5a5e"
+  },
+  "smoke-report-for-cerro-pelado-fire-wednesday-may-4": {
+   "url": "https://inciweb.wildfire.gov/incident-publication/nmsnf-cerro-pelado/smoke-report-for-cerro-pelado-fire-wednesday-may-4",
+   "chars": 2239,
+   "sha256": "3279163f6c9cfef5f6530e51d838ff1a732a942558c2067aa3725e8a2b44c955"
+  }
+ }
+}
