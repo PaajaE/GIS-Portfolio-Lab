@@ -693,7 +693,10 @@ do not start until validation (M4) has written its G1/G2 verdicts.
 - **Q6:** resolved. Work is pushed to `feat/firepath` (and `claude/epic-faraday-01rz3x`).
 - **Q7:** resolved. Project 02 (Landslide) exists on `main`; FirePath reuses its shared conventions.
 - **Q1:** Arizona/New Mexico R3 first; California only as a transfer test after M4, if G1/G2 pass.
-- **Q2:** FIRMS MAP_KEY obtained (git-ignored `.env`). **Q3:** RAWS from the WRCC archive (no token).
+- **Q2:** FIRMS MAP_KEY obtained (git-ignored `.env`). **Q3:** RAWS from the WRCC archive (no token). *Re-opened 2026-10-26:* WRCC now refuses hourly and daily
+  listings before 2026 without an access code ("due to recent bot attacks"; codes on request from
+  wrcc@dri.edu). The nearest RAWS to Mangum is Warm Springs Canyon (AWAR, 36.700 N 112.230 W, 8010 ft),
+  inside the AOI. Options: the owner requests a WRCC access code, or obtains a Synoptic token.
 - **S7 + fire set:** approved; Cerro Pelado 2022 replaces Tunnel 2022 for validation.
 
 **Revision 2: decisions that need your approval now** (detail and evidence in `CRITICAL_REVIEW.md`):
