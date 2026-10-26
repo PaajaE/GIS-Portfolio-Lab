@@ -172,6 +172,51 @@ def run_scheme(scheme, f, inside, t0, t_stop):
     return propagate(f, radius=8, inside=inside, t0=t0, t_stop=t_stop)
 
 
+def setup(fire: str, cell: int, window: int | None = None) -> dict:
+    """Inputs of a run: coarse grid, observed window and audit, static fields, hourly wind.
+    window: crop to window x window cells centred on the first usable perimeter (the 30 m sub-window)."""
+    factor = cell // 30
+    prof = coarse_profile(fire, factor)
+    fuel, cc, ch, dem, tan_s, up, cell_m = coarsen(fire, factor)
+    fuel = fuel[:prof["height"], :prof["width"]]
+    times, masks = observed(fire, prof)
+    t_end_window = times[0] + WINDOW_DAYS * 86400
+    k_last = int(np.searchsorted(times, t_end_window + 3600, side="right") - 1)     # last scan within 7 d (+1 h)
+    final_cells = masks[-1].sum()
+    k90 = next(k for k, m in enumerate(masks) if m.sum() >= 0.9 * final_cells)
+    k_last = min(k_last, k90)
+    times_w, masks_w = times[:k_last + 1], masks[:k_last + 1]
+    sl = (slice(None), slice(None))
+    if window:
+        rr, cc_ = np.nonzero(masks_w[0])
+        r0 = int(np.clip(rr.mean() - window // 2, 0, max(fuel.shape[0] - window, 0)))
+        c0 = int(np.clip(cc_.mean() - window // 2, 0, max(fuel.shape[1] - window, 0)))
+        sl = (slice(r0, r0 + window), slice(c0, c0 + window))
+        fuel, cc, ch, tan_s, up = (np.ascontiguousarray(x[:prof["height"], :prof["width"]][sl])
+                                   for x in (fuel, cc, ch, tan_s, up))
+        masks_w = [np.ascontiguousarray(mk[sl]) for mk in masks_w]
+    audit = audit_sequence(times_w, masks_w, jitter_cells=1)
+    t0 = times_w[0]
+    rel = (times_w - t0) / 60.0
+    lo = np.where(np.isfinite(audit["lo"]), (audit["lo"] - t0) / 60.0, audit["lo"])
+    hi = np.where(np.isfinite(audit["hi"]), (audit["hi"] - t0) / 60.0, audit["hi"])
+
+    pz = json.loads((PROJECT / "provenance" / f"prepare_{fire}.json").read_text())
+    m = from_gridmet(pz["moisture"]["fm100_median_pct"], "L1")
+    st = Static.build(fuel, cc, ch, tan_s, up, m)
+    u, v, valid = wind_at_cells(fire, prof)
+    u, v = u[:, sl[0], sl[1]], v[:, sl[0], sl[1]]
+    t_stop = rel[-1] + STOP_AFTER_MIN
+    h0 = int(np.searchsorted(valid, t0, side="right") - 1)
+    h1 = int(np.searchsorted(valid, t0 + t_stop * 60, side="right"))
+    hrs = list(range(h0, min(h1, len(valid))))
+    t_change = (valid[hrs[1:]] - t0) / 60.0
+    inside = masks_w[0] & st.burnable
+    return dict(window=sl, prof=prof, fuel=fuel, tan_s=tan_s, up=up, cell=cell_m, times_w=times_w, masks_w=masks_w,
+                audit=audit, t0=t0, rel=rel, lo=lo, hi=hi, pz=pz, m=m, st=st, u=u, v=v, valid=valid,
+                t_stop=t_stop, hrs=hrs, t_change=t_change, inside=inside)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("fire")
@@ -179,36 +224,13 @@ def main(argv=None):
     ap.add_argument("--scheme", default="HY", choices=["HY", "LS", "G8"])
     ap.add_argument("--models", default="model,B0,B1")
     ap.add_argument("--mode", default="A", choices=["A", "step"])
+    ap.add_argument("--window", type=int, default=None, help="crop to N x N cells around the first perimeter")
     a = ap.parse_args(argv)
-    factor = a.cell // 30
-    prof = coarse_profile(a.fire, factor)
-    fuel, cc, ch, dem, tan_s, up, cell = coarsen(a.fire, factor)
-    fuel = fuel[:prof["height"], :prof["width"]]
-    times, masks = observed(a.fire, prof)
-    t_end_window = times[0] + WINDOW_DAYS * 86400
-    k_last = int(np.searchsorted(times, t_end_window + 3600, side="right") - 1)     # last scan within 7 d (+1 h)
-    final_cells = masks[-1].sum()
-    k90 = next(k for k, m in enumerate(masks) if m.sum() >= 0.9 * final_cells)
-    k_last = min(k_last, k90)
-    times_w, masks_w = times[:k_last + 1], masks[:k_last + 1]
-    audit = audit_sequence(times_w, masks_w, jitter_cells=1)
-    t0 = times_w[0]
-    rel = (times_w - t0) / 60.0
-    lo = np.where(np.isfinite(audit["lo"]), (audit["lo"] - t0) / 60.0, audit["lo"])
-    hi = np.where(np.isfinite(audit["hi"]), (audit["hi"] - t0) / 60.0, audit["hi"])
-
-    pz = json.loads((PROJECT / "provenance" / f"prepare_{a.fire}.json").read_text())
-    m = from_gridmet(pz["moisture"]["fm100_median_pct"], "L1")
-    st = Static.build(fuel, cc, ch, tan_s, up, m)
-    u, v, valid = wind_at_cells(a.fire, prof)
-    t_stop = rel[-1] + STOP_AFTER_MIN
-    h0 = int(np.searchsorted(valid, t0, side="right") - 1)
-    h1 = int(np.searchsorted(valid, t0 + t_stop * 60, side="right"))
-    hrs = list(range(h0, min(h1, len(valid))))
-    t_change = (valid[hrs[1:]] - t0) / 60.0
-    inside = masks_w[0] & st.burnable
-
+    S = setup(a.fire, a.cell, a.window)
+    (sl, prof, fuel, tan_s, up, cell, times_w, masks_w, audit, t0, rel, lo, hi, pz, m, st, u, v, valid, t_stop, hrs,
+     t_change, inside) = S.values()
     report = {"fire": a.fire, "cell_m": cell, "scheme": a.scheme, "grid_shape": list(fuel.shape),
+              "window_rows_cols": [[sl[0].start, sl[0].stop], [sl[1].start, sl[1].stop]] if a.window else None,
               "window": {"t0_utc": datetime.fromtimestamp(t0, timezone.utc).isoformat(),
                          "t_end_utc": datetime.fromtimestamp(times_w[-1], timezone.utc).isoformat(),
                          "scans": len(times_w), "hours": len(hrs)},
@@ -245,6 +267,7 @@ def main(argv=None):
         print(kind, f"{sec:.0f}s", {k: mt[k] for k in ("mean_abs_h", "share_early", "share_inside", "share_late")},
               flush=True)
     mode = "_step" if a.mode == "step" else ""
+    mode += f"_w{a.window}" if a.window else ""
     tag = f"{a.fire}_{a.cell}m_{a.scheme}{mode}_{a.models.replace(',', '-')}"
     od = PROJECT / "data" / "out" / a.fire
     od.mkdir(parents=True, exist_ok=True)

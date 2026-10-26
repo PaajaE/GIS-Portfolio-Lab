@@ -301,8 +301,14 @@ calibration plan needs thousands of such propagations (PLAN §12).
   nearest interface point, ties → lowest point index (cKDTree left the tie order unspecified). The
   canonical A cases are unchanged by that rule (re-run 2026-10-26);
 - Mangum 24 h step at 90 m: level set 13 s, graph 1 s. HY uses both.
-Open M2 items: Rayon scenario parallelism and the thread-count bit-identity test, the benchmark table
-(`make bench`, §12 fields).
+- parity on 50 random grids each for the graph and the level set (2026-10-26);
+- scenario parallelism (`ensemble.run_many`): a thread pool over independent runs. Both kernels release
+  the GIL, and each run is the same sequential deterministic code on its own inputs, so results do not
+  depend on the thread count (tested bit-identical at 1, 2, 4 and 10 workers, `tests/test_ensemble.py`).
+  No Rayon crate: the parallelism needed is across runs (calibration candidates, ensemble members), not
+  inside one label-setting or time-stepping loop;
+- benchmark: `make bench` -> `benchmarks/propagation.json` (§12 fields). The rows committed so far were
+  measured in the cloud session, not on the build Mac; M7 repeats them on the Mac.
 
 ## Limitations and omitted processes
 Spotting, crown-fire transition, dynamic moisture, fire–atmosphere feedback, suppression and firing

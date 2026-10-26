@@ -1,0 +1,53 @@
+{
+ "algorithm": "time-dependent elliptical spread on the Mangum 90 m field (slope-plane, hourly HRRR): graph = label-setting on a radius-8 stencil; levelset = WENO5/LLF/TVD-RK3 narrow band; hybrid (HY, D1) = level set then graph seeded with its arrivals",
+ "input": "mangum 90 m model field, hand-set parameters, windows centred on the first perimeter, 24 h from it",
+ "hardware": {
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+  "logical_cpus": 4,
+  "ram_gb": 15.7,
+  "os": "Linux-6.18.44-fc-v153-x86_64-with-glibc2.39",
+  "python": "3.13.16",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+  "threads": "single-threaded kernels; scenario rows use a thread pool (ensemble.run_many)"
+ },
+ "harness": "timeit.repeat(number=1); reference repeat=1, Rust repeat=3; scenario rows repeat=3",
+ "sizes": [
+  {
+   "shape": [
+    64,
+    64
+   ],
+   "cells": 4096,
+   "hours": 25,
+   "graph_r8": {
+    "cells_reached": 3072,
+    "max_abs_diff_min": 2.2737367544323206e-13,
+    "reference_min_s": 14.547,
+    "reference_median_s": 14.547,
+    "rust_min_s": 0.535,
+    "rust_median_s": 0.54,
+    "speedup_median": 26.9
+   },
+   "levelset": {
+    "identical": true,
+    "reference_min_s": 14.386,
+    "reference_median_s": 14.386,
+    "rust_min_s": 4.893,
+    "rust_median_s": 4.926,
+    "speedup_median": 2.9
+   },
+   "hybrid": {
+    "cells_reached": 3072,
+    "max_abs_diff_min": 2.2737367544323206e-13,
+    "reference_min_s": 28.746,
+    "reference_median_s": 28.746,
+    "rust_min_s": 5.468,
+    "rust_median_s": 5.522,
+    "speedup_median": 5.2
+   }
+  }
+ ],
+ "scenarios": []
+}

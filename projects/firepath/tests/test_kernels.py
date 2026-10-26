@@ -17,7 +17,7 @@ def _check(f, radius, **kw):
     assert np.all(np.abs(a.arrival[fin] - b.arrival[fin]) <= 1e-9 * np.maximum(1.0, np.abs(a.arrival[fin])))
 
 
-@pytest.mark.parametrize("seed", range(6))
+@pytest.mark.parametrize("seed", range(50))
 def test_random_heterogeneous_grids_match_reference(seed):
     rng = np.random.default_rng(seed)
     n = int(rng.integers(12, 25))
@@ -53,7 +53,7 @@ def test_ignition_on_barrier_raises():
         propagate_graph(f, 1, points=[(0, 1, 0.0)])
 
 
-@pytest.mark.parametrize("seed", range(4))
+@pytest.mark.parametrize("seed", range(50))
 def test_rust_levelset_bit_identical_to_reference(seed):
     """Rust level-set loop vs the NumPy reference: identical arrivals (both use the same tie rule for
     the extension-velocity source: nearest interface point, ties -> lowest point index)."""

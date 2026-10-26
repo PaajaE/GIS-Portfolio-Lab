@@ -85,3 +85,17 @@ def test_mode_a_outputs(kind):
     assert (a[fin] >= 0).all()
     assert not (fin & ~z["burnable"]).any(), "a non-burnable cell was reached"
     assert np.isin(z["fuel"][fin], NONBURNABLE).sum() == 0
+
+
+def test_landfire_version_precedes_fire_year():
+    """Leakage rule (PLAN §3) for the fires whose LANDFIRE comes from the WCS. The conus_2016 workspace
+    serves no disturbance (FDist) layer, so the check is structural: the version's last mapped
+    disturbance year must be before the year of the first scan."""
+    from datetime import datetime, timezone
+
+    from firepath.harvest import FIRES
+
+    need(D / "inputs.npz")
+    ws, ver = FIRES[FIRE]["landfire"]
+    year = datetime.fromtimestamp(float(np.load(D / "inputs.npz")["scan_unix"][0]), timezone.utc).year
+    assert int(ver[2:]) < year, (ver, year)
