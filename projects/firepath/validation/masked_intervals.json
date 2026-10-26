@@ -35,7 +35,41 @@
    "note": "Past-tense narratives (2020-06-15 to 06-18) attribute growth to hot, dry, windy conditions and grass/chaparral fuels."
   },
   "telegraph": {
-   "status": "pending: InciWeb no longer serves the 2021 Telegraph pages (incident 7512 returns 404 and the slug lists no items); the Wayback Machine copies are not reachable from the cloud session. To do on the build Mac, before M3 (Telegraph is a calibration fire)."
+   "masked": [
+    {
+     "interval_utc": [
+      "2021-06-10 04:15",
+      "2021-06-11 03:58"
+     ],
+     "local_mst": "June 9 21:15 - June 10 20:58",
+     "report": "Telegraph Fire Morning Update - June 10, 2021 (article 59686) and Evening Update - June 10, 2021 (article 59696)",
+     "quote": "Overnight, crews completed a burn out operation to secure complete protection of the Top-of-The-World community. [...] The burn out along Forest Road 651 is complete up to Sulphide Del Ray campground.",
+     "reason": "the only perimeter-extending events reported for the period are two burnouts (Top-of-the-World overnight; Forest Road 651 on the west side of Pinal Peak); the evening report describes only holding, patrolling and contingency-line work, with no natural fire advance. This plainly implies that most of the period's growth came from firing. Borderline: neither report gives acres or states the share explicitly"
+    }
+   ],
+   "candidates_not_masked": [
+    {
+     "report": "Evening Update - June 8, 2021 (59657), interval 2021-06-08 03:37 -> 06-09 03:35 UTC",
+     "text": "Aircraft and ground personnel had good success containing increased fire activity in the Apache Leap and Top-of-the-World locations. Fire managers continued using burnout operations in the Russell Gulch area",
+     "reason": "fire's own activity reported alongside the burnout; growth not attributed to it"
+    },
+    {
+     "report": "Morning and Evening Updates - June 9, 2021 (59664, 59677), interval 2021-06-09 03:35 -> 06-10 04:15 UTC",
+     "text": "The fire burned actively through the night in the area of Signal and Pinal peaks. Fire crews worked all night burning out around structures and infrastructure in these areas. [...] Yesterday's burnout along Russell Gulch has been completed, with one slop over near Tuxedo Junction",
+     "reason": "active fire spread stated for the same period, so most growth is not attributable to firing; slop-over is fire escaping a burnout, not long-range spotting"
+    },
+    {
+     "report": "Morning Update - June 12, 2021 (59735)",
+     "text": "masticators are working along Pioneer Pass Road in anticipation of potential burn outs",
+     "reason": "planned (excluded)"
+    },
+    {
+     "report": "June 13-20 updates (59749, 59761, 59780, 59817, 59862, 59950, 60049)",
+     "text": "firing operations along Pioneer Pass Road; spot fire across Pioneer Pass Road; outflow winds pushed fire across Dripping Springs Road",
+     "reason": "outside the evaluation window (first scan 2021-06-05 20:59 UTC + 7 days: last scan 2021-06-12 04:12 UTC)"
+    }
+   ],
+   "note": "Window from the NIROPS scans: 2021-06-05 20:59 to 2021-06-12 04:12 UTC (MST = UTC-7). The June 7 and June 11 reports (59639, 59704, 59729) describe the fire's own spread (active growth in dry grass/brush; moving east downhill from Signal Peak toward Pioneer Pass) and no firing. Full texts read 2026-10-26 from the build-Mac fetch."
   },
   "pipeline": {
    "masked": [
@@ -105,5 +139,5 @@
    "note": "Window: first scan 2022-04-26 08:00 UTC, 7 days. Reports before April 26 (spot fires east of the main fire, April 23-24) are before the window."
   }
  },
- "source_2021_2022": "InciWeb incident publications/news/announcements (firepath.sitreps; texts hashed in provenance/sitreps_<fire>.json), retrieved 2026-10-26"
+ "source_2021_2022": "InciWeb incident publications/news/announcements (firepath.sitreps; texts hashed in provenance/sitreps_<fire>.json), retrieved 2026-10-26; Telegraph 2021 from Internet Archive copies of the old InciWeb articles (sitreps --wayback, run on the build Mac 2026-10-26, provenance/sitreps_telegraph.json)"
 }
