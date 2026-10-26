@@ -1,5 +1,7 @@
 # FirePath — Data sources
 
+*How each source was actually obtained (routes, blocked paths, hand steps): `DATA_ACQUISITION.md`.*
+
 Required fields follow spec §3 "Provenance". **Status: planning (2026-10-09).** Nothing has been harvested
 except one feasibility sample (HRRR, below). Fields not yet established are marked *to verify (M0)*; the
 reachability probe on the build Mac (`make probe`) and the harvest manifest will fill them.
@@ -42,7 +44,7 @@ dependency.
 | Provider | LANDFIRE (USGS EROS / USDA Forest Service) |
 | Official source URL | https://landfire.gov/ ; LFPS https://lfps.usgs.gov/api/ (verified 2026-10-24: catalogue LF2016, LF2022–2025); LF 2020 archived on USGS ScienceBase (landfire.gov/data/lf2020) |
 | Dataset / version / vintage | version whose last disturbance year precedes the fire: LF 2016 Remap (2020 fires) from the public GeoServer WCS `edcintl.cr.usgs.gov/geoserver/landfire` (EPSG:3857, server-resampled); LF 2020 / 220 (2021–2022 fires) from the ScienceBase CONUS zips (FBFM40 item 6a1602c7b66b013d45990b82, 3.36 GB; CC 6a15f914b66b01e66c9c2f39, 1.92 GB; CH 6a16003fb66b013d45990b4b, 1.81 GB). ScienceBase serves them only after a captcha, so they are downloaded by hand into `data/raw/landfire_conus/` and clipped by `harvest.py` through GDAL /vsizip/ (native EPSG:5070, exact window). Not LF 2022 (contains the 2021–22 burn scars). Annual disturbance layers LF2020_Dist17–20 and LF2022_Dist21–22 from the same WCS (stale-fuel and leakage check) |
-| Acquisition date | LF2016 + disturbance via WCS: Mangum 2026-10-25/26, Bush 2026-10-26; LF 2020 zips: not yet |
+| Acquisition date | LF2016 + disturbance via WCS: Mangum 2026-10-25/26, Bush 2026-10-26; LF 2020 zips downloaded by the owner and clipped on the build Mac 2026-10-26 (Telegraph, Pipeline, Cerro Pelado) |
 | License | public domain, credit requested — *confirm (M0)* |
 | AOI | per fire |
 | Source CRS → target CRS | EPSG:5070 (Albers) → EPSG:26912, nearest (categorical) |
