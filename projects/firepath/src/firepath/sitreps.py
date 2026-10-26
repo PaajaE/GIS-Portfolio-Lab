@@ -21,6 +21,7 @@ import html
 import json
 import re
 import sys
+import time
 import urllib.error
 from datetime import datetime, timezone
 
@@ -64,26 +65,60 @@ def fetch(slug: str, fire: str) -> dict:
     return man
 
 
-def fetch_wayback(incident_id: str, fire: str) -> dict:
+def _patient_get(url: str, waits=(60, 120, 240, 480)) -> bytes | None:
+    """The Internet Archive refuses connections when requests come too fast; wait and retry, else None."""
+    for w in (0, *waits):
+        if w:
+            print(f"   archive refused; waiting {w} s", flush=True)
+            time.sleep(w)
+        try:
+            return _get(url, HDR, attempts=1, timeout=120)
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
+            last = e
+    print(f"   giving up on {url}: {last}", flush=True)
+    return None
+
+
+def fetch_wayback(incident_id: str, fire: str, pause_s: float = 6.0) -> dict:
+    """Resumable: items already in provenance/sitreps_<fire>.json with their text on disk are skipped,
+    and the manifest is saved after every item, so an interrupted run can simply be started again."""
     cdx = ("https://web.archive.org/cdx/search/cdx?url=inciweb.nwcg.gov/incident/article/"
            f"{incident_id}/*&fl=timestamp,original&filter=statuscode:200&collapse=urlkey&output=json")
-    rows = json.loads(_get(cdx, HDR, timeout=120))[1:]
+    raw = _patient_get(cdx)
+    if raw is None:
+        raise SystemExit("the Internet Archive CDX index is not answering; try again later")
+    rows = json.loads(raw)[1:]
     out = RAW / fire / "sitreps"
     out.mkdir(parents=True, exist_ok=True)
-    items = {}
-    for ts, orig in rows:
-        art = orig.rstrip("/").split("/")[-1]
+    mpath = PROJECT / "provenance" / f"sitreps_{fire}.json"
+    man = json.loads(mpath.read_text()) if mpath.exists() else {}
+    man.update({"fire": fire, "source": f"Internet Archive copies of inciweb.nwcg.gov/incident/article/{incident_id}/*",
+                "retrieved_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"), "archived_urls": len(rows)})
+    items, failed = man.setdefault("items", {}), []
+    print(f"{len(rows)} archived articles, {len(items)} already fetched", flush=True)
+    for i, (ts, orig) in enumerate(rows):
+        name = f"article_{orig.rstrip('/').split('/')[-1]}"
+        if name in items and (out / f"{name}.txt").exists():
+            continue
+        time.sleep(pause_s)
         snap = f"https://web.archive.org/web/{ts}id_/{orig}"
-        h = _get(snap, HDR, timeout=120).decode("utf-8", "replace")
+        b = _patient_get(snap)
+        if b is None:
+            failed.append(orig)
+            continue
+        h = b.decode("utf-8", "replace")
         m = re.search(r"<title>(.*?)</title>", h, re.S)
         t = _text(h)
-        name = f"article_{art}"
         (out / f"{name}.txt").write_text(t)
         items[name] = {"url": orig, "snapshot": snap, "title": html.unescape(m.group(1).strip()) if m else None,
                        "chars": len(t), "sha256": hashlib.sha256(t.encode()).hexdigest()}
-    man = {"fire": fire, "source": f"Internet Archive copies of inciweb.nwcg.gov/incident/article/{incident_id}/*",
-           "retrieved_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"), "items": items}
-    (PROJECT / "provenance" / f"sitreps_{fire}.json").write_text(json.dumps(man, indent=1))
+        man["failed"] = failed
+        mpath.write_text(json.dumps(man, indent=1))
+        print(f"   {i + 1}/{len(rows)} {name} {len(t)} chars", flush=True)
+    man["failed"] = failed
+    mpath.write_text(json.dumps(man, indent=1))
+    if failed:
+        print(f"{len(failed)} articles failed; run the same command again later to fetch them", flush=True)
     return man
 
 
