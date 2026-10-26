@@ -96,7 +96,8 @@ LF 2022 must **not** be used for the 2021–22 fires: it contains their own burn
 - **M1b (Mangum 2020 slice): data side GO.** Mangum has 23 IR perimeters with UTC times; LF2016 via LFPS,
   HRRR, gridMET and 3DEP are reachable from the Mac; disk is sufficient. The remaining precondition is
   numerical: the pre-registered HY confirmation run at 30 m (M1A_RESULTS, "D1 decision").
-- **Screening freeze:** S7 decided; waits for the masked-day lists (ICS-209-PLUS).
+- **Screening freeze:** done 2026-10-26, `validation/fire_screening.json` (all five fires pass S1–S7; masked
+  intervals: Telegraph 1, Pipeline 1 outside its window, others none).
 
 ## Earlier status (kept for the record)
 

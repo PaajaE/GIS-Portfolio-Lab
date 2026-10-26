@@ -1,0 +1,262 @@
+{
+ "frozen_utc": "2026-10-26",
+ "status": "FROZEN: not to be changed after any calibration or validation run",
+ "criteria": "PLAN.md §2.3 S1-S7 (S7 added 2026-10-24, owner-approved, before any model run on these fires)",
+ "masked_intervals": "validation/masked_intervals.json (rule validation/MASKING_RULE.md, pre-declared 2026-10-25)",
+ "evaluation_window": "first usable IR scan to the last scan within 7 days (+1 h), cut at the first scan reaching 90 % of the final area (run.setup)",
+ "sources": {
+  "perimeters": "Mendeley NIROPS 2020-2024 (doi:10.17632/95rj5d379g.1), provenance/nirops_mendeley_inventory.json",
+  "window": "provenance/prepare_<fire>.json (rasterised perimeters, 30 m)",
+  "landfire": "provenance/stale_fuels_<fire>.json"
+ },
+ "fires": {
+  "bush": {
+   "name": "Bush 2020",
+   "role": "calibration",
+   "incident": "AZ-TNF-001581_Bush",
+   "irwin_id": "1361b1b5-8e75-4ba9-bbc2-556089ceac1c",
+   "window_utc": [
+    "2020-06-14 04:00:00",
+    "2020-06-20 05:33:00"
+   ],
+   "S1": {
+    "scans_in_window": 7,
+    "daily_pairs_in_window": 6,
+    "pass": true
+   },
+   "S2": {
+    "timing": "scan time from the dataset (DateFlown+TimeFlown, fixed offset per TimeZone label); +-1 h if a label is wrong (AZ has no DST)",
+    "pass": true
+   },
+   "S3": {
+    "start": "first usable IR perimeter (initial condition)",
+    "pass": true
+   },
+   "S4": {
+    "final_area_ha": 78315,
+    "pass": true
+   },
+   "S5": {
+    "landfire": "LF2016 (disturbances to 2016)",
+    "fire_year_layer_covers_final_perimeter": 0.9971,
+    "stale_share_final_perimeter": 0.0061,
+    "pass": true
+   },
+   "S6": {
+    "separable": true,
+    "note": "own IRWIN id",
+    "pass": true
+   },
+   "S7": {
+    "growth_in_daily_pairs_ha": 74134,
+    "pass": true
+   },
+   "masked_intervals_utc": [],
+   "passes_all": true
+  },
+  "mangum": {
+   "name": "Mangum 2020",
+   "role": "calibration",
+   "incident": "AZ-KNF-000359_Magnum",
+   "irwin_id": "f8c1a230-a324-44a1-bd74-60b77820828c",
+   "window_utc": [
+    "2020-06-10 07:13:00",
+    "2020-06-17 07:15:00"
+   ],
+   "S1": {
+    "scans_in_window": 8,
+    "daily_pairs_in_window": 7,
+    "pass": true
+   },
+   "S2": {
+    "timing": "scan time from the dataset (DateFlown+TimeFlown, fixed offset per TimeZone label); +-1 h if a label is wrong (AZ has no DST)",
+    "pass": true
+   },
+   "S3": {
+    "start": "first usable IR perimeter (initial condition)",
+    "pass": true
+   },
+   "S4": {
+    "final_area_ha": 28915,
+    "pass": true
+   },
+   "S5": {
+    "landfire": "LF2016 (disturbances to 2016)",
+    "fire_year_layer_covers_final_perimeter": 0.9994,
+    "stale_share_final_perimeter": 0.1347,
+    "pass": true
+   },
+   "S6": {
+    "separable": true,
+    "note": "own IRWIN id",
+    "pass": true
+   },
+   "S7": {
+    "growth_in_daily_pairs_ha": 28851,
+    "pass": true
+   },
+   "masked_intervals_utc": [],
+   "passes_all": true
+  },
+  "telegraph": {
+   "name": "Telegraph 2021",
+   "role": "calibration",
+   "incident": "AZ-TNF-001255_Telegraph",
+   "irwin_id": "ea3d3021-c3e7-4658-a4ae-284961ff0c8e",
+   "window_utc": [
+    "2021-06-05 20:59:00",
+    "2021-06-12 04:12:00"
+   ],
+   "S1": {
+    "scans_in_window": 8,
+    "daily_pairs_in_window": 6,
+    "pass": true
+   },
+   "S2": {
+    "timing": "scan time from the dataset (DateFlown+TimeFlown, fixed offset per TimeZone label); +-1 h if a label is wrong (AZ has no DST)",
+    "pass": true
+   },
+   "S3": {
+    "start": "first usable IR perimeter (initial condition)",
+    "pass": true
+   },
+   "S4": {
+    "final_area_ha": 73091,
+    "pass": true
+   },
+   "S5": {
+    "landfire": "LF2020 (disturbances to 2020)",
+    "fire_year_layer_covers_final_perimeter": 0.9913,
+    "stale_share_final_perimeter": 0.0,
+    "pass": true
+   },
+   "S6": {
+    "separable": true,
+    "note": "own IRWIN id",
+    "pass": true
+   },
+   "S7": {
+    "growth_in_daily_pairs_ha": 39672,
+    "pass": true
+   },
+   "masked_intervals_utc": [
+    [
+     "2021-06-10 04:15",
+     "2021-06-11 03:58"
+    ]
+   ],
+   "passes_all": true
+  },
+  "pipeline": {
+   "name": "Pipeline 2022",
+   "role": "validation",
+   "incident": "AZ-COF-000523_Pipeline",
+   "irwin_id": "f93be77a-5da1-43d1-b39c-86d6ddcc0440",
+   "window_utc": [
+    "2022-06-14 04:44:00",
+    "2022-06-16 07:10:00"
+   ],
+   "S1": {
+    "scans_in_window": 3,
+    "daily_pairs_in_window": 2,
+    "pass": true
+   },
+   "S2": {
+    "timing": "scan time from the dataset (DateFlown+TimeFlown, fixed offset per TimeZone label); +-1 h if a label is wrong (AZ has no DST)",
+    "pass": true
+   },
+   "S3": {
+    "start": "first usable IR perimeter (initial condition)",
+    "pass": true
+   },
+   "S4": {
+    "final_area_ha": 10729,
+    "pass": true
+   },
+   "S5": {
+    "landfire": "LF2020 (disturbances to 2020)",
+    "fire_year_layer_covers_final_perimeter": 0.9999,
+    "stale_share_final_perimeter": 0.0148,
+    "pass": true
+   },
+   "S6": {
+    "separable": true,
+    "note": "own IRWIN id; Haywire is a separate incident record (M0_RESULTS B3)",
+    "pass": true
+   },
+   "S7": {
+    "growth_in_daily_pairs_ha": 2548,
+    "pass": true
+   },
+   "masked_intervals_utc": [
+    [
+     "2022-06-20 05:41",
+     "2022-06-21 04:49"
+    ]
+   ],
+   "passes_all": true
+  },
+  "cerro_pelado": {
+   "name": "Cerro Pelado 2022",
+   "role": "validation",
+   "incident": "NM-SNF-000049_CerroPelado",
+   "irwin_id": "50365ac2-f15c-4f36-8bf4-69e12105c7a7",
+   "window_utc": [
+    "2022-04-26 08:00:00",
+    "2022-05-03 04:00:00"
+   ],
+   "S1": {
+    "scans_in_window": 8,
+    "daily_pairs_in_window": 7,
+    "pass": true
+   },
+   "S2": {
+    "timing": "scan time from the dataset (DateFlown+TimeFlown, fixed offset per TimeZone label); +-1 h if a label is wrong (AZ has no DST)",
+    "pass": true
+   },
+   "S3": {
+    "start": "first usable IR perimeter (initial condition)",
+    "pass": true
+   },
+   "S4": {
+    "final_area_ha": 18516,
+    "pass": true
+   },
+   "S5": {
+    "landfire": "LF2020 (disturbances to 2020)",
+    "fire_year_layer_covers_final_perimeter": 0.9967,
+    "stale_share_final_perimeter": 0.0128,
+    "pass": true
+   },
+   "S6": {
+    "separable": true,
+    "note": "own IRWIN id",
+    "pass": true
+   },
+   "S7": {
+    "growth_in_daily_pairs_ha": 16291,
+    "pass": true
+   },
+   "masked_intervals_utc": [],
+   "passes_all": true
+  }
+ },
+ "excluded": {
+  "tunnel": {
+   "name": "Tunnel 2022",
+   "reason": "fails S7: 78 ha of growth visible between daily IR pairs (IR starts after the 04-19/20 run); replaced by its listed alternative Cerro Pelado 2022 (M0_RESULTS B4)"
+  },
+  "haywire": {
+   "name": "Haywire 2022",
+   "reason": "not in the registered pool (neighbour of Pipeline, checked for S6); would fail S7 (611 ha)"
+  },
+  "south_fork": {
+   "name": "South Fork 2024",
+   "reason": "inventoried for reference only; not in the registered pool (2024, after the validation years)"
+  }
+ },
+ "notes": [
+  "Pipeline passes S1 with the minimum (3 scans, 2 daily pairs in the window: 90 % of the final area is reached by 2022-06-16); its validation evidence is thin and will be reported as such. Its masked interval (06-20/21) lies outside the window.",
+  "Telegraph's masked interval (2021-06-10 04:15 to 06-11 03:58 UTC) lies inside its window and is excluded from O2/O3 scoring."
+ ]
+}

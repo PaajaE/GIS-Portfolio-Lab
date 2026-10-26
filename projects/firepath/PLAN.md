@@ -134,7 +134,8 @@ after the calibrated parameters are locked (§8, `validation/locked_params.json`
   Pipeline 2022**.
 - **Current set (2026-10-24, after M0 screening S1–S7):** calibration = Bush 2020, Mangum 2020, Telegraph 2021;
   validation = **Cerro Pelado 2022** (replaces Tunnel, which fails S7) and **Pipeline 2022**. Perimeters from
-  the Mendeley NIROPS 2020–2024 dataset (the NIFC file share now requires FAMAuth). Masked days still to list.
+  the Mendeley NIROPS 2020–2024 dataset (the NIFC file share now requires FAMAuth). Masked days listed and the
+  screening **frozen 2026-10-26** (`validation/fire_screening.json`): all five fires pass S1–S7.
 - Why the test is fair and not cherry-picked: (1) the split is set by date, not by model fit, and mimics
   the real use (parameters from past fires applied to a later one); (2) the pool, the screening criteria
   and the rule are committed in this plan before any run, and every pool fire that passes screening is
