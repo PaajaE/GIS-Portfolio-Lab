@@ -62,3 +62,21 @@ Run time: model 647 s, B0 69 s, B1 66 s for all seven steps (cloud session).
   (M3), on a second harvest with a 10 km AOI. The HRRR crop (0.1° margin) and the 3DEP tiles already
   cover it; LANDFIRE needs a wider WCS subset.
 - **Masked days:** none for Mangum (`validation/masked_intervals.json`).
+
+## M2 benchmark (cloud session, `benchmarks/propagation.json`)
+
+Mangum 90 m model field, 24 h from the first perimeter; Intel Xeon 2.8 GHz, 4 logical CPUs. Not the
+build Mac: M7 repeats it there.
+
+| window | cells reached | graph r8: ref / Rust (s) | level set: ref / Rust (s) | HY: ref / Rust (s) |
+|---|---|---|---|---|
+| 64 × 64 | 3,072 | 14.2 / 0.56 (25×) | 14.6 / 4.9 (3.0×) | 29.3 / 5.4 (5.4×) |
+| 128 × 128 | 4,566 | 23.6 / 0.88 (27×) | 26.0 / 8.2 (3.2×) | 48.9 / 9.3 (5.3×) |
+| 204 × 197 (clipped at the grid edge) | 4,566 | 23.3 / 0.94 (25×) | 29.5 / 8.6 (3.4×) | 52.7 / 9.6 (5.5×) |
+
+Rust and reference agree: level set identical, graph and HY within 2.3e-13 min. In 24 h the fire
+reaches the same 4,566 cells in the two larger windows, so those rows differ only in grid overhead; the
+sizes do not scale the work. The level set dominates HY in Rust (≈ 90 % of its time) and gains only
+≈ 3×: its cost is the CFL-limited step count (head ROS up to 68 m/min at 90 m), which the port does not
+change. Scenario rows (10 runs, 128 × 128): 99.8 s on 1 worker, 52.8 s on 2 (1.89×), 32.7 s on 4
+(3.05×), results identical to 1 worker.
