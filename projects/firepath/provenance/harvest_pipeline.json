@@ -1,0 +1,1419 @@
+{
+ "files": {
+  "data/raw/pipeline/dem/usgs_13_merged.tif": {
+   "bytes": 40855956,
+   "crs": "EPSG:4269",
+   "resolution": "1/3 arc-second",
+   "retrieved_utc": "2026-10-26T21:43:22+00:00",
+   "sha256": "621ee3c6dd116b606289edc92ef0d7c36c3b94f04d2bff0b6b399427c57ff8b0",
+   "tiles": [
+    "n36w112"
+   ],
+   "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n36w112/USGS_13_n36w112.tif"
+  },
+  "data/raw/pipeline/gridmet/fm100.nc": {
+   "bytes": 13628,
+   "retrieved_utc": "2026-10-26T21:46:32+00:00",
+   "sha256": "cdc377c6c9da439ad7e08a201c08bcdef8c268559152822215708e560bbca030",
+   "url": "https://thredds.northwestknowledge.net/thredds/ncss/agg_met_fm100_1979_CurrentYear_CONUS.nc?var=dead_fuel_moisture_100hr&north=35.58910237722089&west=-111.82617758128228&east=-111.30311927622611&south=35.133338636543584&disableProjSubset=on&horizStride=1&time_start=2022-06-12T00:00:00Z&time_end=2022-06-27T00:00:00Z&timeStride=1&accept=netcdf"
+  },
+  "data/raw/pipeline/gridmet/fm1000.nc": {
+   "bytes": 13632,
+   "retrieved_utc": "2026-10-26T21:46:33+00:00",
+   "sha256": "f9dcc1f2e30cec8db229eb2ac1621d4e0c332bfef4a2388c72efa3fe8927651b",
+   "url": "https://thredds.northwestknowledge.net/thredds/ncss/agg_met_fm1000_1979_CurrentYear_CONUS.nc?var=dead_fuel_moisture_1000hr&north=35.58910237722089&west=-111.82617758128228&east=-111.30311927622611&south=35.133338636543584&disableProjSubset=on&horizStride=1&time_start=2022-06-12T00:00:00Z&time_end=2022-06-27T00:00:00Z&timeStride=1&accept=netcdf"
+  },
+  "data/raw/pipeline/hrrr/hrrr_f00_uv10_crop.npz": {
+   "bytes": 403194,
+   "first": "2022-06-13T04:00:00+00:00",
+   "hours": 326,
+   "last": "2022-06-26T17:00:00+00:00",
+   "message_sha256": {
+    "2022-06-13T04:00:00+00:00": {
+     "UGRD:10 m above ground": "8e2b4f7ff3370758cc06aacaae6158d8dc9760773600a9924d22e30ce17ba3d6",
+     "VGRD:10 m above ground": "99e1ee49d34c1e5dab594400ae377b2d8cf8ce48bc2a6815423b537a40408d33"
+    },
+    "2022-06-13T05:00:00+00:00": {
+     "UGRD:10 m above ground": "12da7470b0c233cb7158aa7affb374bf010469e07e892ad6962717af59b138db",
+     "VGRD:10 m above ground": "0a9bd93ea362b98627938a3abb7138e10c3c61eadbf9532698810a76b915716c"
+    },
+    "2022-06-13T06:00:00+00:00": {
+     "UGRD:10 m above ground": "d0e1ef3d710fa49ec690704e8c3767c7f199a5b456f4f692a2f8717fc08f2afe",
+     "VGRD:10 m above ground": "8e939f64728b27dd157827441bce9d851314b3b49b3b3c3de10d8a289bf4e705"
+    },
+    "2022-06-13T07:00:00+00:00": {
+     "UGRD:10 m above ground": "75c4c5347214f774b35195b6a8dc888cf10f1d47dcc2d418e53fcd0aa0b2ea5f",
+     "VGRD:10 m above ground": "654ad63a38ebab9f096d46e5a03f8fd1f0f9492d21b82c8d763b436c8f7a65ad"
+    },
+    "2022-06-13T08:00:00+00:00": {
+     "UGRD:10 m above ground": "062060f16906c9882c27bebe68d377955959a503d350f29c56a360c9b2ae9512",
+     "VGRD:10 m above ground": "0ce541375727262e45e5d2784c28b9db92bf38e307252fddd0180a97baa85e27"
+    },
+    "2022-06-13T09:00:00+00:00": {
+     "UGRD:10 m above ground": "91bc6102a6fea63f6166b2fdd857c7cffc8f9c3434f7e410d34c8c16a45ae324",
+     "VGRD:10 m above ground": "93ef2bcd5dd021732be269b08e86928e11d495567612e3a715148a29c39c5618"
+    },
+    "2022-06-13T10:00:00+00:00": {
+     "UGRD:10 m above ground": "804654af8df9fdbcaddd42c0ff9d24f8fcca8bc6d5481f98430856dcb6d85593",
+     "VGRD:10 m above ground": "7aa3f62f300343c8549f1f62d499aee24a09235c6fca9934fc32f57cd93a2592"
+    },
+    "2022-06-13T11:00:00+00:00": {
+     "UGRD:10 m above ground": "9fb54727aabee083096e7fb3d2dcd1591253cbfd350a264e79462348bd32ff38",
+     "VGRD:10 m above ground": "becd151b9794b6fc143be18e943fab8b026a100a956fd7c92eaa284481065d9d"
+    },
+    "2022-06-13T12:00:00+00:00": {
+     "UGRD:10 m above ground": "a3722df8e53d549161be01b2da0208364fbd488d5fac8d75eb5aeb6acc5c0b2c",
+     "VGRD:10 m above ground": "a6fe8c335e336071e82b47d703d48f3069b88950442e4b5e3c06e87c0edca42e"
+    },
+    "2022-06-13T13:00:00+00:00": {
+     "UGRD:10 m above ground": "d3f91a780b369252cb5c91d2626d4c3b2b2664dc60add9cfbfb91c0efe95a892",
+     "VGRD:10 m above ground": "74c13e1a2cddf405e995b9390a7158f67052440500f02a7d6a8a7c54fc852f10"
+    },
+    "2022-06-13T14:00:00+00:00": {
+     "UGRD:10 m above ground": "3e65885d029042af8b5a75a8811c465658c6a7562ce58bc431a0201809cd81cc",
+     "VGRD:10 m above ground": "4ba2685a01cfdd5d7d798f97fd3648ba77c3161e3d9aaf8f58e1493a10abcdd3"
+    },
+    "2022-06-13T15:00:00+00:00": {
+     "UGRD:10 m above ground": "d0dc5a26b15abcc55b093c422919b41d6f5cfdacec6c3951e703b00ba7574ee6",
+     "VGRD:10 m above ground": "048ff6612b88889fd9482af28caf74cc8366c51219c73ca32ae87eedb6b0691e"
+    },
+    "2022-06-13T16:00:00+00:00": {
+     "UGRD:10 m above ground": "9710103f719bdc36d29d927a713b9881d07ec944a612925e288a2ecbadc90a8e",
+     "VGRD:10 m above ground": "9ca202261cf732ade3991ba9071c4b521b763447e20a2513e47dbb3b66c09891"
+    },
+    "2022-06-13T17:00:00+00:00": {
+     "UGRD:10 m above ground": "43b6a57f2a2acccc64a69e0e4946533ac6d8be62b8a63f035a021c68434d2cd4",
+     "VGRD:10 m above ground": "1708e3446f9d88a1ebf3e28f4dd247b12673d400480522d9a9c0e6ae022bb984"
+    },
+    "2022-06-13T18:00:00+00:00": {
+     "UGRD:10 m above ground": "a54780a447956beb9aff293ce82944d3056dfe942607693e5c889ccfbf3a4c43",
+     "VGRD:10 m above ground": "b5cfc0c6f371aec196577524160cc6bb8d19aa96fb8870f01639e3b9323d68c1"
+    },
+    "2022-06-13T19:00:00+00:00": {
+     "UGRD:10 m above ground": "4c06df105de06d76b88239ad8aea41fdc83975686f5dca7c5d403c4f24794301",
+     "VGRD:10 m above ground": "9159974eb9178270e8cdea8c937a9aa3ed15640e13e83cd398759f91d9fa56e1"
+    },
+    "2022-06-13T20:00:00+00:00": {
+     "UGRD:10 m above ground": "d4edfcfd60a17a8c4941e789da796ae3df24c6f71dac7876b2562663764e9187",
+     "VGRD:10 m above ground": "58f257f4b0477b7352e3e4db826fb40250c067bc9ff74b4c93ce8b04940c8758"
+    },
+    "2022-06-13T21:00:00+00:00": {
+     "UGRD:10 m above ground": "1f35d4c4283c7fa8e5ed5ec4c87f0cdf1ec21ed7bd5cb066f2f5fbe2f0cbf34b",
+     "VGRD:10 m above ground": "2dce4dcb362fdedd19a55797bfb58f710da21091a27105d223ae31cf2423b174"
+    },
+    "2022-06-13T22:00:00+00:00": {
+     "UGRD:10 m above ground": "e5d55a0014864a21b5beb4c4c654a481a2a4b874bf37d32e375f605e141325b7",
+     "VGRD:10 m above ground": "f4560b51e5ce149092bdb00b596a40135b25d7d4fa63fc04b6487135fd201f75"
+    },
+    "2022-06-13T23:00:00+00:00": {
+     "UGRD:10 m above ground": "3ba75e24185d9fe6192d1c453895ca4fdad851b541c98531a271e69b7540680e",
+     "VGRD:10 m above ground": "6883acc8e71163934a2897f37fccaefb1c0da6f7940f09bb7dbaed4e1c8d6c9b"
+    },
+    "2022-06-14T00:00:00+00:00": {
+     "UGRD:10 m above ground": "280907178c8b28bd6cc7ae132f57e62f67c505c104eff4f40f2cfaa0d7b3cca2",
+     "VGRD:10 m above ground": "cbed40a0706f7acf9cc2601e625aeb27ffcf259135d6fc14092bebe054e8389e"
+    },
+    "2022-06-14T01:00:00+00:00": {
+     "UGRD:10 m above ground": "11d27359fa90e4c5d958cf3c6592edc758f0c3bb7c61134305e8575a5a6619d4",
+     "VGRD:10 m above ground": "4d651368fb55596e4f2c4b93527760ce3539b5f65b2d6192388e11ae6071e12f"
+    },
+    "2022-06-14T02:00:00+00:00": {
+     "UGRD:10 m above ground": "76fa9d102fd578847d255f3db8769a5430bf6892d36d556cb6d65d1e54670b7b",
+     "VGRD:10 m above ground": "9879ef83f42d40543bdc5b81330e7298ef911762588f517622f65f665d3ab895"
+    },
+    "2022-06-14T03:00:00+00:00": {
+     "UGRD:10 m above ground": "1f4f0d2f3ce5d74d5e850b87c2bf17cf02c7f94961b9c462e3d6a87a4c68349e",
+     "VGRD:10 m above ground": "f2a275f1722fe233fe052fc12a792bfcb8a1d5240299a9a855f36dcb926fdb84"
+    },
+    "2022-06-14T04:00:00+00:00": {
+     "UGRD:10 m above ground": "cf64e1168e0231e1205984dde9bcd88e3f8f3b0ace8e7a9a4969ee6adf46b2e3",
+     "VGRD:10 m above ground": "7172015ba1e84b678f81a85bb7ac28901089fb99f17341d7f0bb2da7b86c8306"
+    },
+    "2022-06-14T05:00:00+00:00": {
+     "UGRD:10 m above ground": "1cac07f09803b72b9614ff99623c683f049d86f7755a75547715e7ac67e8afec",
+     "VGRD:10 m above ground": "d91cf555dea5a0b9213f50e75dd4a2cde137243b61885cddbc2b6f76ba8ad6d1"
+    },
+    "2022-06-14T06:00:00+00:00": {
+     "UGRD:10 m above ground": "cc18d7140cd67d2106a56aaa4f2b769512fad6453c66e23840d946f3b2e721a8",
+     "VGRD:10 m above ground": "9038731fa762f53bc17d137401252605045b233f64e8cc059ec85034e8a69ea7"
+    },
+    "2022-06-14T07:00:00+00:00": {
+     "UGRD:10 m above ground": "59073aaa86ce0212af7bdfbb6340df8f265170fde89bf40adb4ad731e1eb8e18",
+     "VGRD:10 m above ground": "be5a4b8a10120139ccd8062dd0a2550a9168eaa64a650ffaf2d58c9e16a710ac"
+    },
+    "2022-06-14T08:00:00+00:00": {
+     "UGRD:10 m above ground": "61f3cf8f94895c6587746b3d91b2d3047d2eecb802923c65412016679221ea84",
+     "VGRD:10 m above ground": "7eaeb72ff8739a680649ac4a14c5af75d51f6ca35add5b2ccfde4a1b49bf6cf4"
+    },
+    "2022-06-14T09:00:00+00:00": {
+     "UGRD:10 m above ground": "eb1e487b5a39c35b0c5674bcf51b072bb17d104eb8ed8ba2f036533dcae32521",
+     "VGRD:10 m above ground": "1cbdb20ddba052229c1319b3420a12e09dcd9017eec135ff7106e76d24ee37a1"
+    },
+    "2022-06-14T10:00:00+00:00": {
+     "UGRD:10 m above ground": "0a18c391955db0023dde83f4f391c1c4096a001fff2215eb5954bc7d8a1b0e0c",
+     "VGRD:10 m above ground": "c3b8be8aadc6403001ae6cf22415266b98f3d0a49bd06bbf47c1fe1626eb55fe"
+    },
+    "2022-06-14T11:00:00+00:00": {
+     "UGRD:10 m above ground": "92799e979d2580cd4a0bcb44950a5b69f73837ba391f5d1da17704d800888f94",
+     "VGRD:10 m above ground": "1de17982008a2d6f6df44b30bf06042663a97d145526961f2648124bb88657e0"
+    },
+    "2022-06-14T12:00:00+00:00": {
+     "UGRD:10 m above ground": "c88fdffabe506a1dadff8ced9603814ae02827a76a892c2361e4bfebda3093a3",
+     "VGRD:10 m above ground": "f05473d065e7f5b6ae7623a1ded27117a11132506ca263789673d9fb1f0fd9f9"
+    },
+    "2022-06-14T13:00:00+00:00": {
+     "UGRD:10 m above ground": "a9e253ac7341d7e226ffca622d01c75f150d594db99b0b78df3905adb9fc9098",
+     "VGRD:10 m above ground": "7f166c2f49d67bfc1ae2b8b53f9d2312d2a1daa88b43cf95209e30871a7a3030"
+    },
+    "2022-06-14T14:00:00+00:00": {
+     "UGRD:10 m above ground": "b8034a719d2505398ec8e30b10cc850cd344418078e90c4f57ef8fdabd27eb11",
+     "VGRD:10 m above ground": "9bd9a9ab28b2efca10d6339a4b588fac5cfdf0b9cc547d25d19ab58b42ab8d6c"
+    },
+    "2022-06-14T15:00:00+00:00": {
+     "UGRD:10 m above ground": "950fd12a1d3685c2f5c5de609dbcde5acc759921cf74f8d40206761e689197ab",
+     "VGRD:10 m above ground": "f6d1c0ffae597c2a07d5e2cc476bdbb0bada68e7977ba5e0ec95ab05fa756e49"
+    },
+    "2022-06-14T16:00:00+00:00": {
+     "UGRD:10 m above ground": "409d0a16ebb70eae452e3106ffd984f2e0c3c7588721ab3819996cf58accd91b",
+     "VGRD:10 m above ground": "6be7c07658e3281990f4dd6811d51a59656f12722664be467bdb1098d67aae6a"
+    },
+    "2022-06-14T17:00:00+00:00": {
+     "UGRD:10 m above ground": "7370c6d2bba14ebaf1a4d1e5f33de848cd22f3c7d2ea1b5ea5d52e5b5188a50e",
+     "VGRD:10 m above ground": "cb9432939350ff593c6d53cd39e2d10fd3770a5765afaabf579a168ed52a4435"
+    },
+    "2022-06-14T18:00:00+00:00": {
+     "UGRD:10 m above ground": "c514c4e5e729ef1e59722abc4e95216abdbc6c16d4e9ee0729b8971e9c06d2b1",
+     "VGRD:10 m above ground": "6fa3c0f61d5f68cce46e1486e26223f4245b6a32f89f78fc9f85cb5858eb53b6"
+    },
+    "2022-06-14T19:00:00+00:00": {
+     "UGRD:10 m above ground": "b9d19b027a7367cbcae99cd43d5b28ce6c8251f2d07e01c0a043f4b01c13fdf5",
+     "VGRD:10 m above ground": "3d26f59a1faafb7a7a2f6a17c3d1ca3d49039d7fcff1e9581cb49abb3aa3a984"
+    },
+    "2022-06-14T20:00:00+00:00": {
+     "UGRD:10 m above ground": "73f70923fae16b319fbef9ccc6739e0afb9fe76685decdecf88602a8ac7efb66",
+     "VGRD:10 m above ground": "f62a84498853d31e01b030f616bd71ecba00dff7acf87588854d679cf299aef7"
+    },
+    "2022-06-14T21:00:00+00:00": {
+     "UGRD:10 m above ground": "65964f1bb393fd3eee07b8b621e98ae5e78f0ee811aa52ec1d3d65fa3bc0cd22",
+     "VGRD:10 m above ground": "a26370f5686cf1dbbfdbc0b2265cebfeae41192491aca84be28d936e1ce29426"
+    },
+    "2022-06-14T22:00:00+00:00": {
+     "UGRD:10 m above ground": "082e6b51925f6aab1fbde49df4ac2f4482598a33762e54dac088cae502f76c0d",
+     "VGRD:10 m above ground": "aedc6d2622a7773222da73dabf94f762d1cf59748cea246c914154d8972d550a"
+    },
+    "2022-06-14T23:00:00+00:00": {
+     "UGRD:10 m above ground": "575e8d3791990e23156f3d72517a717551cd50a33f3a75ac6dc6174e17a4f14b",
+     "VGRD:10 m above ground": "c4528a489e689dfc02b0b630c94212c641365b2d0f0de16950012ee3222d81e2"
+    },
+    "2022-06-15T00:00:00+00:00": {
+     "UGRD:10 m above ground": "8cc7e810fbf71cd64cabb8fdad95b9e4cd33aaf7ced23add7bfc2c0b0beb633c",
+     "VGRD:10 m above ground": "a06438a0de9054e7ff91ebdbdd4bf66b2870acaf611d82392c9a212264687aea"
+    },
+    "2022-06-15T01:00:00+00:00": {
+     "UGRD:10 m above ground": "5bcb85b2a75037cef79d866fddca1ded15c771413901cea1dbd2cbd3e3e9a340",
+     "VGRD:10 m above ground": "30630dcab0832e02f13bf579f66a2911ccbd89142ded8e91e8cbee34a36c2ba9"
+    },
+    "2022-06-15T02:00:00+00:00": {
+     "UGRD:10 m above ground": "ec1b1af051fa3620fdf80dfeeb1294d3bf2fb6513b2fc6e99989b0956ff6195f",
+     "VGRD:10 m above ground": "355c3d367830abe1f330b3a0f9cce5e5a59003becb6ed779d85d0de94806a9dc"
+    },
+    "2022-06-15T03:00:00+00:00": {
+     "UGRD:10 m above ground": "d237fbaf9dba990be3cc536610b1c6c6581798cbaaff852418955f61618c17d0",
+     "VGRD:10 m above ground": "a11fa85da8b278a6f7f8c7cef936c54bce33c657a8efd24afa55a2f559225cb9"
+    },
+    "2022-06-15T04:00:00+00:00": {
+     "UGRD:10 m above ground": "dba74991c1acc5061ba79e346efb7a1bd08af8de7478926cd799edbd4b84850a",
+     "VGRD:10 m above ground": "e274e4f7e039f90aa9dd57587cb8d2ceafc57e5c30188a69bfc6d20bd8e756cf"
+    },
+    "2022-06-15T05:00:00+00:00": {
+     "UGRD:10 m above ground": "7771cf70cd57b9c8c50b32638ecc615c74b25385f9306c109824654d8fd667d3",
+     "VGRD:10 m above ground": "9f0e1200bf861d67e425d12a6937e1ae2f24ce552464de6ec73397255d976901"
+    },
+    "2022-06-15T06:00:00+00:00": {
+     "UGRD:10 m above ground": "2c316c4ce7ec936da96748e1d128db542353c21c0b2f2cc567252f75bbca7363",
+     "VGRD:10 m above ground": "2d6c953d2cf014568b400132f72189b1588fba0a55c8a49fda22316ec0d68c45"
+    },
+    "2022-06-15T07:00:00+00:00": {
+     "UGRD:10 m above ground": "69537759ca6d178fd4d8991a08d844afa423446e0129c92210d06cca6cb004b6",
+     "VGRD:10 m above ground": "6e6f28ca932b11bca2fd2edcc5632fe9afc979fdbc6b9a323075f89eaab43dc6"
+    },
+    "2022-06-15T08:00:00+00:00": {
+     "UGRD:10 m above ground": "4a700aea92ce9c6025c82f400676aabea3ce8af57149d4e8198d04f0846a99af",
+     "VGRD:10 m above ground": "8ae5deda07ba33d7cd63a6780ab6b8f93113380727768c43f57de67f2c836e4f"
+    },
+    "2022-06-15T09:00:00+00:00": {
+     "UGRD:10 m above ground": "dc920d003bbbf14ee04dc955f6280bd42108c9f341abc445902634d7287f75b1",
+     "VGRD:10 m above ground": "6c388e35965b93b5332f3014db7e2d9ce81034e1a9aa6c087a7779515b7aad79"
+    },
+    "2022-06-15T10:00:00+00:00": {
+     "UGRD:10 m above ground": "f9a97e2da37eea099d44f9d159b306e61b8fe5f248b5a82b20ee2b844c466fa2",
+     "VGRD:10 m above ground": "3f6636a019ef633c7d718da7971b964bebad005533ab3370321d0324d155a4ee"
+    },
+    "2022-06-15T11:00:00+00:00": {
+     "UGRD:10 m above ground": "61bb79577770bc72ce9f03dc0c510f9ae31a0f148a287fd54423c076eaa49269",
+     "VGRD:10 m above ground": "26fc0750e58a9c59601794c8050a79b2b051c1403be01f4a4dc8009a29f1743a"
+    },
+    "2022-06-15T12:00:00+00:00": {
+     "UGRD:10 m above ground": "f993e0cbad2a014bae70344f375517bd1c415cd66d135b65870faad879cbb7e9",
+     "VGRD:10 m above ground": "9267d5ae967b00f6631759631607b54a8ccd6562b5024de384544951bd13ac3c"
+    },
+    "2022-06-15T13:00:00+00:00": {
+     "UGRD:10 m above ground": "90ffb237ab23d45106ccd28299d0a34bfdfe86fc98f668d2f376989c2feec564",
+     "VGRD:10 m above ground": "a7d601462309b4c9317e98e9d1add3aec2c8c49d89349eda06e997ab064d87bc"
+    },
+    "2022-06-15T14:00:00+00:00": {
+     "UGRD:10 m above ground": "0ad7dfa95c268ab01159c7e1cd261b29be0af4f3cbe254ce5b8d63bf45b64f23",
+     "VGRD:10 m above ground": "52482e7b12ece8ce4526a3f3665ed0a1e5e1c5491b8dd9a50c1396874f97fccc"
+    },
+    "2022-06-15T15:00:00+00:00": {
+     "UGRD:10 m above ground": "d9e2dc33af767f79b8ee3007fddd00fc05cfc901e24d16a1d522123f645b5ca0",
+     "VGRD:10 m above ground": "5b2c480a84f43b0ff06f04b7f594d452161e64935390897aec84a53299463df7"
+    },
+    "2022-06-15T16:00:00+00:00": {
+     "UGRD:10 m above ground": "ed0ec4b8f12f12cfe3d7eeed72cb328826813d580af7ea9ab601e2d35ac3a840",
+     "VGRD:10 m above ground": "792581c96083e646a617d0a08ef632df04d17941814ad74d9db049fc9b378059"
+    },
+    "2022-06-15T17:00:00+00:00": {
+     "UGRD:10 m above ground": "83d3704b6023524d5ec3e0b76097cdfee598f3d00af0a45c83b1335364ef1f49",
+     "VGRD:10 m above ground": "68a1778809c5f59e3c0da70c323bb8b601d1853403c30cdddd4ce1b97804227c"
+    },
+    "2022-06-15T18:00:00+00:00": {
+     "UGRD:10 m above ground": "337bdcef0f49fcef12246fe6c2f91bbe41e8525dab5ca7388b259744db1b4ddc",
+     "VGRD:10 m above ground": "007fdf59de337b1f47816657422516966fa1076cf3cfd09ec6abaeb131e41fed"
+    },
+    "2022-06-15T19:00:00+00:00": {
+     "UGRD:10 m above ground": "1be3ba7ec9670e1ea1c9cefe002ce341d06ea0780363e2b96ce36d819cbc331d",
+     "VGRD:10 m above ground": "f42f12bac8a6caae536b2fccc0c191f5e60f7af589115477e260f3d177dac347"
+    },
+    "2022-06-15T20:00:00+00:00": {
+     "UGRD:10 m above ground": "1c52162c2cdd795bf8498d6a85a4e27f7e1e8fed174aa5763498d32df628257f",
+     "VGRD:10 m above ground": "ec33c9e3a354c0b30ccdffcae68f215c181213138a17c0c12269f535e4e18bb9"
+    },
+    "2022-06-15T21:00:00+00:00": {
+     "UGRD:10 m above ground": "8df02d2f22458e239d2ca0e609f9984b7fee0347c90b1f9fd45acf74156d0cc6",
+     "VGRD:10 m above ground": "7bd16a01f53e71eb68480a34c62f9b5c6b4bad75384f41d4e7463e47d69c8b53"
+    },
+    "2022-06-15T22:00:00+00:00": {
+     "UGRD:10 m above ground": "671c87faf9c8840116908075157ec42575ec9f7e088ee3c710922f8907fad252",
+     "VGRD:10 m above ground": "6aa9dab56b383f3e6b46826a49f2eb610ecf5b893cb6e01dff21dbd2a2f710cd"
+    },
+    "2022-06-15T23:00:00+00:00": {
+     "UGRD:10 m above ground": "ef4c8d474b931308d37cbddead5d46074842900d4b174abf0e1a57fb35aa0a96",
+     "VGRD:10 m above ground": "3335964b68006820ceef08b1b9c16a1d67f8386f86e974956ac230f3698c61b4"
+    },
+    "2022-06-16T00:00:00+00:00": {
+     "UGRD:10 m above ground": "66bc1b382ef38f56e93d1c0299b0f273b38b81af76e40d31c60a490872ff51c5",
+     "VGRD:10 m above ground": "032f6faa082b808136235cd1cd5f899729c8b4478037e0b57e40f4a13cd996a7"
+    },
+    "2022-06-16T01:00:00+00:00": {
+     "UGRD:10 m above ground": "7e9c545ea4c10ddd3ef607734b2cbcec7b130e3d78d9fc7a988e1c55c1ad9831",
+     "VGRD:10 m above ground": "ccf1b893f826866cf9c8cd80030a13356a3b53a3a8be33ad363704ea1a7a6a38"
+    },
+    "2022-06-16T02:00:00+00:00": {
+     "UGRD:10 m above ground": "251d620b6b22c6b441524223b29578fecd820d067de22016879648c168a51744",
+     "VGRD:10 m above ground": "48d632a3eadabcb20ddb0899afb149b17c6de30f2f20dd56b8fb1bde10b62dbc"
+    },
+    "2022-06-16T03:00:00+00:00": {
+     "UGRD:10 m above ground": "01d4c8735c28326abf2067cef3e45d747488528ab7d552576023c1bdb114f426",
+     "VGRD:10 m above ground": "704089a7ce071a5b24d18fc98bc25e79896631a711cf6b68b7b0476851fa4431"
+    },
+    "2022-06-16T04:00:00+00:00": {
+     "UGRD:10 m above ground": "c41518605035141d7feb87cbb4319027a34a95572e57edec88f19b53cb98cf52",
+     "VGRD:10 m above ground": "182ef119b207b637e83a48fab6643b44cdd4e52931b75805e95487b6640a8923"
+    },
+    "2022-06-16T05:00:00+00:00": {
+     "UGRD:10 m above ground": "39ce377e6cfbfebce06edf47ffad054f8dc66edb13995f5070c3c8222a843fb4",
+     "VGRD:10 m above ground": "ed1ce5093c16a8ed3404b9cc20d610255999b938315ac22de3f2f563599a3d14"
+    },
+    "2022-06-16T06:00:00+00:00": {
+     "UGRD:10 m above ground": "fd0ebf57c7432dc3f152f1ee20e8fc0ff8cc716614e05e5a10e1b57f79a2dfe7",
+     "VGRD:10 m above ground": "e61652512d5d82d8a05bc7fb4368160366e20db8fd223055f6da4c0c2d9e7fab"
+    },
+    "2022-06-16T07:00:00+00:00": {
+     "UGRD:10 m above ground": "1f7aab6cd0cb9d48809ce0a4734292726d85b9957e65dc64e2f480c266e5de0d",
+     "VGRD:10 m above ground": "0af9a49743a325f68182bd9e536b535ee6680c452b625944fc6da8c6f037113f"
+    },
+    "2022-06-16T08:00:00+00:00": {
+     "UGRD:10 m above ground": "0cb890281e31771f28347da4113a58d809f12005e4367b992255f1dfed61a69a",
+     "VGRD:10 m above ground": "d7d4258519bccae26c9bef2a58c501c5f056a06650de483bed93d8e512da6e86"
+    },
+    "2022-06-16T09:00:00+00:00": {
+     "UGRD:10 m above ground": "357103651fa0d05aecc3490acd94ce06b043b9eedbf1b4a5e0282e59f55ae802",
+     "VGRD:10 m above ground": "b81c298596324132ec410eef24e37ab75dce84d96d9c09d9eb9cbea1bcfe9991"
+    },
+    "2022-06-16T10:00:00+00:00": {
+     "UGRD:10 m above ground": "ef670c2bd16a451165541ba9d25c8899258522d5df7248eb80003b639916c1d1",
+     "VGRD:10 m above ground": "1068e28e5f780666375f3db5ffdf4e5ca380444fdd9f49cb93451a8c958bd05c"
+    },
+    "2022-06-16T11:00:00+00:00": {
+     "UGRD:10 m above ground": "78dd1c9c3f5a6716cad2695e831e24449644578efa908b669497274f20fd1107",
+     "VGRD:10 m above ground": "62c7b523dab92fd28325559df48b949bcf13303f1a04c8787248505846a405ba"
+    },
+    "2022-06-16T12:00:00+00:00": {
+     "UGRD:10 m above ground": "9bca4da4ad7a46dcc9fbce41754df00dffc07290c0890cb40a76e49f7b0a12f2",
+     "VGRD:10 m above ground": "c6096f4744fd6e6defaab9c8f4598bfb318ff7f7c8fb913521d3690cec3c583b"
+    },
+    "2022-06-16T13:00:00+00:00": {
+     "UGRD:10 m above ground": "252fc6d1d2f33b892bceee9262e0669951572cfd2cea9ae171480327ca66433f",
+     "VGRD:10 m above ground": "6241c85e7f16d4a51b26ebc8c60da0672817b771c9ce997c6e1d8c19eedbc457"
+    },
+    "2022-06-16T14:00:00+00:00": {
+     "UGRD:10 m above ground": "cb27f8e9944bb3e35545931723122b2996fddd38f06b31c99f3eb640b2d6f434",
+     "VGRD:10 m above ground": "4bfda47d8f9297bf917f0df05c1c650b42610b4e3b45aa7ed706898865451323"
+    },
+    "2022-06-16T15:00:00+00:00": {
+     "UGRD:10 m above ground": "e9d02a7ef2ac12a90cf54bbb9e196e74514478b64f5261e4be51682f09201610",
+     "VGRD:10 m above ground": "048afb4a8e59b96f17c435ac750fa892c0b08f9eaac32ae141e6d222af0303ab"
+    },
+    "2022-06-16T16:00:00+00:00": {
+     "UGRD:10 m above ground": "f743f6aa46a4901bbdee0d0b8edb7c03cbd1ae5c3a729a675c81c9c9c6f49eaa",
+     "VGRD:10 m above ground": "055a6bc6c33c8e9bbab5678032000acce3fd93aef8ff50dcb824b790763aa007"
+    },
+    "2022-06-16T17:00:00+00:00": {
+     "UGRD:10 m above ground": "8198e74150d0dea061c13d5336a460a3066477a0525f5605414bb3ba1844df3a",
+     "VGRD:10 m above ground": "835217bf8f9885d4b3caaad1e32525d6bcbe52d884613ce5f8cdd19730252496"
+    },
+    "2022-06-16T18:00:00+00:00": {
+     "UGRD:10 m above ground": "dd6ec53690c5e5e66f1b6fc13385ad38effb15f742849f7a7c55fa5775a41b98",
+     "VGRD:10 m above ground": "60691bd80265dd367db1826a0f43ea80d4e3c78c810b9200f9b22fccbd4fd3f4"
+    },
+    "2022-06-16T19:00:00+00:00": {
+     "UGRD:10 m above ground": "ad04f7076f6a282223e081c11867afd88d636968e4631018aa327fefee996716",
+     "VGRD:10 m above ground": "478eb6919e2f691a9ba8df09d287d6fa500302c8a54a5742e00b3567d266ab0a"
+    },
+    "2022-06-16T20:00:00+00:00": {
+     "UGRD:10 m above ground": "d8226c1bd08883ece7693fd6264829ded6077c65d4ce653560a3bd4b87ec8430",
+     "VGRD:10 m above ground": "b882adb426bdb2c71e683799dcd435cae1795e46952ee2d660f70ffa1bd9170f"
+    },
+    "2022-06-16T21:00:00+00:00": {
+     "UGRD:10 m above ground": "4c2a841ecc364302c0e5f604608640b4151e951ec87e7eec9aee9620774ec658",
+     "VGRD:10 m above ground": "3ec2744be947aef0e5d99aaa96c447ab432a43a618360148c1a6d00e957c90e8"
+    },
+    "2022-06-16T22:00:00+00:00": {
+     "UGRD:10 m above ground": "de62ede03daf6f3234e93d36036283c64fb204b88b53d6ac318ebc70311ef23d",
+     "VGRD:10 m above ground": "6f23ec7bcade56aaaf15fec4d7a38f1c787ffbcbe50caab055efe70e1cba1c85"
+    },
+    "2022-06-16T23:00:00+00:00": {
+     "UGRD:10 m above ground": "f2b4ff41144f3908232f83b437dd9a88e002bace5e36455c5d95abd888a45bb6",
+     "VGRD:10 m above ground": "19ce3ded338c65e8f6445b94d94c84ef558319256e0118a13874c84ab99cee85"
+    },
+    "2022-06-17T00:00:00+00:00": {
+     "UGRD:10 m above ground": "ed51837775b6085910e92b62ce2002cd65e06780373b5d2986eeb96cd2269631",
+     "VGRD:10 m above ground": "cde7c1f344c2400a771e46d7ddd79d129fe8f0688f49b2d8db901c179f19a9a6"
+    },
+    "2022-06-17T01:00:00+00:00": {
+     "UGRD:10 m above ground": "cb2e226655ca81b64f228f5907519183c27d2565f07043ab5212249649a4d4e8",
+     "VGRD:10 m above ground": "2311105c3f569e949e3866746a38c976ba4adab7e9d6579dac216054cef949c4"
+    },
+    "2022-06-17T02:00:00+00:00": {
+     "UGRD:10 m above ground": "a7a12437c9e518773ae664fe101c27e6963cd28c4e774c9ff45a63d2c1513e8a",
+     "VGRD:10 m above ground": "8d55726b95dea8563d2b3eb63b5c5cdeac009265d85170b8571936ce3668b58c"
+    },
+    "2022-06-17T03:00:00+00:00": {
+     "UGRD:10 m above ground": "ea9d105abb7f6030a2283ab5a79e3adae3baedfdd3c307cc148b7c5345c4751d",
+     "VGRD:10 m above ground": "ffa76bab268b1590260ed2a8ccff267a8075bafeb4925cad6352cbdc826b4dc6"
+    },
+    "2022-06-17T04:00:00+00:00": {
+     "UGRD:10 m above ground": "d82a4f69e117907f2960e4aed4f881142b6c2275af1234a60f88a045a5089463",
+     "VGRD:10 m above ground": "0842608dd0eed1fae35b7396238a089d05aca16fe3cd0bddbe1f8356d361c239"
+    },
+    "2022-06-17T05:00:00+00:00": {
+     "UGRD:10 m above ground": "9bd7e1b3a4829657548a244d10dc8e60b7b20d0a4368e828fea1c0a2817ab5fb",
+     "VGRD:10 m above ground": "88b2479c7cf59e712b70b70b9a0c175496006171cfba24fca3c8cb25626c29b2"
+    },
+    "2022-06-17T06:00:00+00:00": {
+     "UGRD:10 m above ground": "6acf375fe75354c10add0d4a174f3a2863fe1dbca3b9a5ee72dd8900e434f5a7",
+     "VGRD:10 m above ground": "d7c8a147fda0b1669fd90dd6f589ae2c20ab34d901ee9d95d176fc90e8c89843"
+    },
+    "2022-06-17T07:00:00+00:00": {
+     "UGRD:10 m above ground": "a6a32d69d821cc4fd747f89d15a7e38b87df5f22a071f3c96e71e5f6c77f0a28",
+     "VGRD:10 m above ground": "7947a55309ced80ba01ad8eeabde1949dd5fd83a10384b0821f1a5a0a41e4c5f"
+    },
+    "2022-06-17T08:00:00+00:00": {
+     "UGRD:10 m above ground": "992a95681212fee9556c2240b0741868f08e10ab89db23b3d5688f9449130d54",
+     "VGRD:10 m above ground": "31d48e7f7d60ba7e9a33e4713112d5b2bb7459630a35434ab6518a3fff38adac"
+    },
+    "2022-06-17T09:00:00+00:00": {
+     "UGRD:10 m above ground": "b2c1a7ad0605e27d18d21677fab31d7375aa41d096071adf8a118f2a5dd01615",
+     "VGRD:10 m above ground": "41073dbeb764b821f0a4feab6c48dc780c50968b46d491fd96e55d63db9592c7"
+    },
+    "2022-06-17T10:00:00+00:00": {
+     "UGRD:10 m above ground": "ab153353829a3608f442517a215d2c1e0e541c31b427e1fead898470c7f2bce0",
+     "VGRD:10 m above ground": "c81fe666a007aa5a74bd53e962b0aaf2348c25a80b9cf0b7a119518ad9879be6"
+    },
+    "2022-06-17T11:00:00+00:00": {
+     "UGRD:10 m above ground": "b0ca022373ae53208b73086c912e95a374021938648e0921b7c3e5e8db9db342",
+     "VGRD:10 m above ground": "f932faac3647e1eafe149e4c2a85151a7e64be8f0d296068e9427ae8c683be8f"
+    },
+    "2022-06-17T12:00:00+00:00": {
+     "UGRD:10 m above ground": "1f88a6acd539f85f69d1f5c6a348b45c55b3a3a5a4efcd0c24c8387ed7d0f62b",
+     "VGRD:10 m above ground": "f6a963262c038201ff1d0bf2684fd0f1ac26adda9939caae11615469fcf8cc13"
+    },
+    "2022-06-17T13:00:00+00:00": {
+     "UGRD:10 m above ground": "dd905b733899a48993c2b5e550fe543ecb1473e65ffecdfb133fedb9a1451eac",
+     "VGRD:10 m above ground": "1ec777eb9018dc966ba89dbe9e67ab3bc44a3a17a7f6459d3bbba1493d950e44"
+    },
+    "2022-06-17T14:00:00+00:00": {
+     "UGRD:10 m above ground": "0e2ede38a24c1d5b7684deb574fa3f7c929cb55437c5eeb558df7e250358f3f1",
+     "VGRD:10 m above ground": "39363e16dace63f39f446e137f5946551c5325dddf34d735310b40df3d2c7a2b"
+    },
+    "2022-06-17T15:00:00+00:00": {
+     "UGRD:10 m above ground": "8dd8ef6304673a4ee3861f458db466a7f871155a4203821121682358953c9dd6",
+     "VGRD:10 m above ground": "055e91f4ddea44c990455ecb00a7b11d62276a8c600918f680f5f48a3ab83ff9"
+    },
+    "2022-06-17T16:00:00+00:00": {
+     "UGRD:10 m above ground": "0df1211bb442aff3153e0c6cf2ef858224fc7765a7e10e495e49ae2fa31d6cbd",
+     "VGRD:10 m above ground": "8e2673ba2f290dcb4f970ce9862e7628fb569b1c76f62792ffdbd4b31530c516"
+    },
+    "2022-06-17T17:00:00+00:00": {
+     "UGRD:10 m above ground": "eb4496aecef2b04ddeb9768552c1bacf095f61c389cb96f16907e179e8ef100b",
+     "VGRD:10 m above ground": "9b015b48c3ed038fa1e96b17c5659dda1a9e35507ab29834d54003ac863f22dc"
+    },
+    "2022-06-17T18:00:00+00:00": {
+     "UGRD:10 m above ground": "35595002d65a230d4914ae993745908a4bde9cce2e77162eed944c81d2045158",
+     "VGRD:10 m above ground": "d183e67eb3961ce4a48f6fe6dbe03303edbd897d5a0f49ff83135483ef736466"
+    },
+    "2022-06-17T19:00:00+00:00": {
+     "UGRD:10 m above ground": "e03e661c929c16e726e4772b265d8995f47d21343580a37424fc5e1488fd12cf",
+     "VGRD:10 m above ground": "cebd54b8472a2c95f76ed745d9ef4d5e17468781a71b11d184c95d90e4ac699b"
+    },
+    "2022-06-17T20:00:00+00:00": {
+     "UGRD:10 m above ground": "463a01f023a2e817d108e6ba68505000560afb5559166aec0f03f1f8b0c6b44f",
+     "VGRD:10 m above ground": "cded3554a790082c7f4dff85e2f5d85ae38a1a7986166fcd637db51d70ae222d"
+    },
+    "2022-06-17T21:00:00+00:00": {
+     "UGRD:10 m above ground": "44cad138221f3a0b7cb7654d9f8bf39c1a021eb7fbe844b622949a6762ee0ade",
+     "VGRD:10 m above ground": "b7fe45d4d22e6136659f435cd844fa1687e9598c6b1fa9c6a2cc7c0b54788aa2"
+    },
+    "2022-06-17T22:00:00+00:00": {
+     "UGRD:10 m above ground": "0fd4dd0da599518a97907c8cd16c44ec075989beff3c145c23baacc07248f9f0",
+     "VGRD:10 m above ground": "d153890cb33f19db57bc771e82ad66cd940b17ce938aa1440abdb9922686ee4b"
+    },
+    "2022-06-17T23:00:00+00:00": {
+     "UGRD:10 m above ground": "4a84562b62df193b39cc39d7fe7c8c04372304b3bfdabae94c09a06c7691e18a",
+     "VGRD:10 m above ground": "d9fc14c9b87fbe0c91ab89872a331c797cfb41e29f61f1ed90261b5e04798bb1"
+    },
+    "2022-06-18T00:00:00+00:00": {
+     "UGRD:10 m above ground": "f17cc89ac452c86167126a30974f82abcd4c60a94b4dac58786ba1eaf29984a3",
+     "VGRD:10 m above ground": "29a792ddb683fa1af5c2aebe8199fdad605ad7b60bed076b4d80b063392f2422"
+    },
+    "2022-06-18T01:00:00+00:00": {
+     "UGRD:10 m above ground": "1280ff8b64e2ff9f865510dd75ec06f920248a0cf8410be91a3cc42ee2355710",
+     "VGRD:10 m above ground": "543182a6b8cad5242095a4c426cf00b6c49ac2290224db0b48d848de7e28d929"
+    },
+    "2022-06-18T02:00:00+00:00": {
+     "UGRD:10 m above ground": "6dd55e6a43df74f73645ddcb6da4244b94066404be4fc77828d78862ab5d6db4",
+     "VGRD:10 m above ground": "2da6155682601abe0341d0f4308aeca7e0d1f0179eb0282e4a7eed9a6b919189"
+    },
+    "2022-06-18T03:00:00+00:00": {
+     "UGRD:10 m above ground": "526cead9eaa1034d558f92d278d8bb13f69d3334cfe2920b77247186dbedbb78",
+     "VGRD:10 m above ground": "835d22420ebb593d1e61e574fd2d41c721bd0d8f428ffadb61d84e027530b1ee"
+    },
+    "2022-06-18T04:00:00+00:00": {
+     "UGRD:10 m above ground": "53932b8e08cebb1e1a7ee11f52391560c0439b5890a8e861bbc2ebeec0b4a291",
+     "VGRD:10 m above ground": "4069d10b1ce4cac71732b05ffaa093d7271d465dadb33e626734fc58c71a41d1"
+    },
+    "2022-06-18T05:00:00+00:00": {
+     "UGRD:10 m above ground": "b70d69cfc19baa10417f07d162d0f2089792a265043f1ce9ed7515a75199fc63",
+     "VGRD:10 m above ground": "858ebe312312d36411d5da3c6fe71c24da643e762e540bff12b63977f2d2e377"
+    },
+    "2022-06-18T06:00:00+00:00": {
+     "UGRD:10 m above ground": "06fd563f3cd8eb2fd63b2a3c699fad0e78fafd51f08b78477f61deeb2090867c",
+     "VGRD:10 m above ground": "40b4726ef2afe0ec02dbda08559c64201da4516f65a5dfd244c9ed3749a3792e"
+    },
+    "2022-06-18T07:00:00+00:00": {
+     "UGRD:10 m above ground": "b183ab517828c433c25c7aa4361da705bb497e830da8434875ced5cabf724df3",
+     "VGRD:10 m above ground": "9bd31d1893b0c97f81d48caf3b749c5e9d36e4c0020a3c5e114f7cbd924777e4"
+    },
+    "2022-06-18T08:00:00+00:00": {
+     "UGRD:10 m above ground": "2b75cf8e49918982ac0c56c05cb1872ad31011980639f6a133a9ca2c6bd916a8",
+     "VGRD:10 m above ground": "ac9d01d8925b8ee5ba13c212b9b6125e9bf6ebee03d10a43ca5945e9baa63bf5"
+    },
+    "2022-06-18T09:00:00+00:00": {
+     "UGRD:10 m above ground": "1d386cdbe8da0d9f9c38f2322ced6c890186ad6c97ffea90db0f66dc7dcd470e",
+     "VGRD:10 m above ground": "1687a51f666ef66678f225bc128376cdc51f137f5ac4166a8e536afb7682a23c"
+    },
+    "2022-06-18T10:00:00+00:00": {
+     "UGRD:10 m above ground": "db2a881bb35a32d1510180830f5e0ef1450cd4a96556eb211a43cf68c85bb79b",
+     "VGRD:10 m above ground": "474c4810bcc8cd3cf2b151216fce8a5c203543457c8b7699c8efef94fba7524d"
+    },
+    "2022-06-18T11:00:00+00:00": {
+     "UGRD:10 m above ground": "cbb0ec2e1af7db2c21e948076a2d7f45b8957710dcd4a74d9b010110623b78bf",
+     "VGRD:10 m above ground": "b3d5da948a5c845ec8f44b38058483b42640af27972e6f3108cabe6f607ddc3a"
+    },
+    "2022-06-18T12:00:00+00:00": {
+     "UGRD:10 m above ground": "9f225b369fe96787377ccab153010a917bfcf984846edeb7b16dbc3bcbcb3759",
+     "VGRD:10 m above ground": "4d9b368c131dccceafc7d9602dd6cab668299b7314529c118e6b6c7afc8cd72f"
+    },
+    "2022-06-18T13:00:00+00:00": {
+     "UGRD:10 m above ground": "5aec1be66f4fe2ec12adbe9e4efca99ef7b12779c876e153be23b199062e413b",
+     "VGRD:10 m above ground": "a4c53ab144a6497e2a43bdaeb36e819252784b6ecad8f9954873f9d79db5e999"
+    },
+    "2022-06-18T14:00:00+00:00": {
+     "UGRD:10 m above ground": "233fa9db7f3a1b9c631dd55620d037dc2f9dae3a840def5fa41d7093817c4315",
+     "VGRD:10 m above ground": "7ed18abd13d351014ff6eceb85b08b548083394440e8a82a5f92aa3d098d32e2"
+    },
+    "2022-06-18T15:00:00+00:00": {
+     "UGRD:10 m above ground": "b4d7d4d1c406fc3f33f82172dd1715e660467e71663625ac6f1140590f8dc4cf",
+     "VGRD:10 m above ground": "3ee928aa78d4286f652c3d082058286a58d7708f809fbc2558c242f1486b150e"
+    },
+    "2022-06-18T16:00:00+00:00": {
+     "UGRD:10 m above ground": "435d0b4fc5ce53ed7b1b3821531affa7664f32dc1e31272ee2891671181a39b4",
+     "VGRD:10 m above ground": "9535c7b8e224fc2d94ec9d93f3e18ff54bd4bb9d6825af289560f876d0965046"
+    },
+    "2022-06-18T17:00:00+00:00": {
+     "UGRD:10 m above ground": "03b73a8606e91efc260a53037a1185de6656bc277594b41fd2c8f2d9d2d53401",
+     "VGRD:10 m above ground": "bb4f274378d4de213c44621892ff99af089d2eb1521074b32c5595770af3bbdb"
+    },
+    "2022-06-18T18:00:00+00:00": {
+     "UGRD:10 m above ground": "0bf496c86be9f33719433ba56461b4f7d3d43555415cfb52b680e5b196c556cb",
+     "VGRD:10 m above ground": "f42f658946b3812f9beeef440bd263bbe7ef66f9e834fad792752fa5c3a29450"
+    },
+    "2022-06-18T19:00:00+00:00": {
+     "UGRD:10 m above ground": "f700d4b793b8063dc17d0f199c8b63271cc4167cbc85208bfb4bb3fe132885a9",
+     "VGRD:10 m above ground": "2796e436cbbe926ff1d50f828905ea267168174f141f101db9df2b96c2eb064b"
+    },
+    "2022-06-18T20:00:00+00:00": {
+     "UGRD:10 m above ground": "9d615422072a7b09b1dd6ab56d0d0dba66064118882971b84bef39bff8f2a34a",
+     "VGRD:10 m above ground": "bbbcdde32f4b748def4317fd9be7b5e6347ec3caebedb7aeae7445c989028de3"
+    },
+    "2022-06-18T21:00:00+00:00": {
+     "UGRD:10 m above ground": "021fc05e9964dfa6cec8982bf10be86e2b38cba66f3492a383d6811684890350",
+     "VGRD:10 m above ground": "93ae8e71787b88e645fe2a1fb31a31aa0dfa8d2f274bd312e271dfc0439098be"
+    },
+    "2022-06-18T22:00:00+00:00": {
+     "UGRD:10 m above ground": "7f7e3552489915ce7a49ae828d754144e0a511fb74552a4fd509e2d9f23be46f",
+     "VGRD:10 m above ground": "801e1244d393d0a91635cafc53a52ca980abdb2303ba219ab256244cf5646aa6"
+    },
+    "2022-06-18T23:00:00+00:00": {
+     "UGRD:10 m above ground": "4515e8ee9e57aa83710a59de163937ecc1261fad22c34580c418854de1a0fd54",
+     "VGRD:10 m above ground": "044cebc957ca540285da3f08a32285f38ed1b4d2b1a98a31fbd5db429075fa6e"
+    },
+    "2022-06-19T00:00:00+00:00": {
+     "UGRD:10 m above ground": "a74d388a69a8a6722c750f1154f05aaa5cd52b888e617ca1954c9320cf370c86",
+     "VGRD:10 m above ground": "1d365f86661292962995c23f3acad3236e20e2116949fac204b27b1a78f7d46f"
+    },
+    "2022-06-19T01:00:00+00:00": {
+     "UGRD:10 m above ground": "9184f7734add238e932e8eebe6e1c47be9e5062842d1074d36667c618d2e63dc",
+     "VGRD:10 m above ground": "608190d6aead48bdff78d0fce0ca789fdd28cda5b395938df53f0a954ed5d6cf"
+    },
+    "2022-06-19T02:00:00+00:00": {
+     "UGRD:10 m above ground": "6e1af13e53eb3f3fc7fea98c9ab7bcede958f6d17a616a23ed309f3144330be0",
+     "VGRD:10 m above ground": "5f9190631834a0d92430cd7348b3857437df489b66a934932686e57aed2d916c"
+    },
+    "2022-06-19T03:00:00+00:00": {
+     "UGRD:10 m above ground": "edc0511b4ade84c5198fe50f9e338fb9a51325ae82cc61c769b2e5adf984fcc6",
+     "VGRD:10 m above ground": "0ec5829afb2b7b4e684fc6665b89f756cf8ad265d5b2bab7e342d09ef374f57c"
+    },
+    "2022-06-19T04:00:00+00:00": {
+     "UGRD:10 m above ground": "dba99f20d2da283cf71b46de52ed12fc3b0545ad941bfa7b9bfe116a9e09f9df",
+     "VGRD:10 m above ground": "7eb8db1f3ee2cdcead4a3948033096911c3204e17ef1779eda24787ee99dffe3"
+    },
+    "2022-06-19T05:00:00+00:00": {
+     "UGRD:10 m above ground": "5ef30d4df362e9d4ee08a1cfe41381e80fcf65de98b80b677a71ec4e578330bb",
+     "VGRD:10 m above ground": "720ae6e0fd91d6ec4483cf7e5f1294889829882d8da357f71c5ebe4767a8e0a2"
+    },
+    "2022-06-19T06:00:00+00:00": {
+     "UGRD:10 m above ground": "adbfc33657f38f92361d5fdba38c0cad31582eb9c8500e5691910d90c5612650",
+     "VGRD:10 m above ground": "ee4e195d47ce300b1b4a5760b3157c38698fa7ac342cd45cec7c2992fa9d5537"
+    },
+    "2022-06-19T07:00:00+00:00": {
+     "UGRD:10 m above ground": "9c04812af20793ab46364d689e596750bd24c0a91dbcf37a006f6b2a29a42ba9",
+     "VGRD:10 m above ground": "bf38357520cee3d9c4300218ff0a2929dd8ce2aaa35d75ae63b510a0507b79db"
+    },
+    "2022-06-19T08:00:00+00:00": {
+     "UGRD:10 m above ground": "4dc9a696d322cd3b0a7a165ea241e46256a44c8fd2bf6e852ee3a7c679c65887",
+     "VGRD:10 m above ground": "9942c8ad0265ac45c5469cc0072f752bc0208219829ed6efe21f36ba0e40177e"
+    },
+    "2022-06-19T09:00:00+00:00": {
+     "UGRD:10 m above ground": "6e52a691284b1a7ddd211a2fe5a0b3c2ea2adcb6a7b3dd630256b6754ff6f5a7",
+     "VGRD:10 m above ground": "c857515a5aa9283e5d88376c3d0c03d30d67407bbe9e69b17c2130545489d1d7"
+    },
+    "2022-06-19T10:00:00+00:00": {
+     "UGRD:10 m above ground": "d46291a9dbf24b0d971b0ea5d6f6150dbed0bf8071c3c7dd28a140ae5b3e6494",
+     "VGRD:10 m above ground": "b0541b7f45841f3c9feec37ebbe963ef6cc0a32441a0724a5cdaae6b9e39af09"
+    },
+    "2022-06-19T11:00:00+00:00": {
+     "UGRD:10 m above ground": "df71d18372b14f276a9f7c6b417317b0f1b84a309519f7d60b51ce9a0e9cbafe",
+     "VGRD:10 m above ground": "5fa6fd79b84b3719c48bd7c6ccf1b64546ccee22afc08346b0035bf197670dcd"
+    },
+    "2022-06-19T12:00:00+00:00": {
+     "UGRD:10 m above ground": "e6ef7fbc7d391ef3c561ebeb3b5c3e8c96d4c9fde460ab0358fc569d68550dd9",
+     "VGRD:10 m above ground": "35609a650c429e7fab1056e1aaf2de7c3da8cadeb5271b1d69b6e80c78000875"
+    },
+    "2022-06-19T13:00:00+00:00": {
+     "UGRD:10 m above ground": "0105d595f1d8df64e7905b9e70deabc3555b4b94d5890bb5cdf5af89e7b713d1",
+     "VGRD:10 m above ground": "24c6a263605a24fa7cfa4320f35b777944dfda2832cea28de572c04bf4fc1784"
+    },
+    "2022-06-19T14:00:00+00:00": {
+     "UGRD:10 m above ground": "42da4221865bb59e570d5b7ade5d021661956a4b2effe57187f88db17845bce7",
+     "VGRD:10 m above ground": "7a1f76a567c322b44284095b5fe969717b0ddc797137a5f41b5ac312e06bf08e"
+    },
+    "2022-06-19T15:00:00+00:00": {
+     "UGRD:10 m above ground": "ce2d00aafac8aad80e33fea0fdc4e7177c90936d068284b799129579278f1aad",
+     "VGRD:10 m above ground": "40f8fb201788d3b94ae785e49f523521ee66bc3e884403a08006703320bf775a"
+    },
+    "2022-06-19T16:00:00+00:00": {
+     "UGRD:10 m above ground": "de6f371e2da9dad1663ea8fe8b47c041745708a301314cd71be99d96a4da7a07",
+     "VGRD:10 m above ground": "98efc6dd97dfec07f0fb6d50cf079beb9678fd2e75fbc1a00215149feb4a6647"
+    },
+    "2022-06-19T17:00:00+00:00": {
+     "UGRD:10 m above ground": "870a74433fcea160e9daa04363bfb7701092c9f5ae60c9dcd43d9d94e16a69a5",
+     "VGRD:10 m above ground": "82d465338c28615de9a9c8d2c54050bdad2e034e61d9af79c7a791259d957752"
+    },
+    "2022-06-19T18:00:00+00:00": {
+     "UGRD:10 m above ground": "82f1ec85c786230c02248b91ed0a85f486546f06f3fee91a521b501464481cb8",
+     "VGRD:10 m above ground": "c226ef9dc487bdad7aa6c9be7afc6a5312b50b87802df3a8a1723e5129fb8ecc"
+    },
+    "2022-06-19T19:00:00+00:00": {
+     "UGRD:10 m above ground": "ccbf732cd977e8e342849c19014b57f0a526f0b025b43640ef4916d125e434d0",
+     "VGRD:10 m above ground": "9d4e4670a1b5636065cac9e3078817302480ceb087c78c7588568ea1b07016b7"
+    },
+    "2022-06-19T20:00:00+00:00": {
+     "UGRD:10 m above ground": "873212253563041cc70f5236d9a63797095a7c2116aa888ef9c705329b073e85",
+     "VGRD:10 m above ground": "c14689cff780e72b1879bf0a6f7aa723c8ad92271822cdfa88e5f999f802bdd5"
+    },
+    "2022-06-19T21:00:00+00:00": {
+     "UGRD:10 m above ground": "da1e15042c994a98f280f1772e3d2fdeace58c854cb219835570ce598ad5e4b4",
+     "VGRD:10 m above ground": "dd7774eb5aafe1292058b22d043d7f2aecaa101041be3e061e6b9360066f5b6a"
+    },
+    "2022-06-19T22:00:00+00:00": {
+     "UGRD:10 m above ground": "26fc30642667763699187a106dba721e33c3e32342dc386b89e9cb17facaee1d",
+     "VGRD:10 m above ground": "6d970dd3a7572f3976945b8d2331a96b9f8c3e3741d32dff929ea9133affbd02"
+    },
+    "2022-06-19T23:00:00+00:00": {
+     "UGRD:10 m above ground": "e43391d776fa1cad0d377b02d5c8447c85e4e401df7dc2e9fccbfb7bea22b02e",
+     "VGRD:10 m above ground": "2df6059b0039b3bed594d8743dc072f5338b8beffb6e6db81187da7c70ebb8fb"
+    },
+    "2022-06-20T00:00:00+00:00": {
+     "UGRD:10 m above ground": "31a09e2347c1e1fc2a8d0e3aa548f6c0f9d69551134138f17804f32be76564b4",
+     "VGRD:10 m above ground": "7758e7b9ec0467d2152794ae7b165e0a1f6f3ad6f9c4f87a1a74376945fcba7c"
+    },
+    "2022-06-20T01:00:00+00:00": {
+     "UGRD:10 m above ground": "9e0159d809f5e8e601f029da4ffe4ae19755d8d82e1c72457871a183e4c53275",
+     "VGRD:10 m above ground": "71bbaba393665ca7204b1c6d289e0e0055eeb6d9e9d4a1d636ba15d5895f01ff"
+    },
+    "2022-06-20T02:00:00+00:00": {
+     "UGRD:10 m above ground": "907c222387413e7b5e4e79fcd50d0661f8f114f1f6f27d08a06fe3ee94e70cb9",
+     "VGRD:10 m above ground": "ad114ee042c4a21fb489297780ce8165970244a8d366019594bc415c60c4a69b"
+    },
+    "2022-06-20T03:00:00+00:00": {
+     "UGRD:10 m above ground": "4007e469e6978907da3867a41dce15c6e2f92572285a5b839a12403c8d6fba68",
+     "VGRD:10 m above ground": "d6dbfd11b11dd1346c473958d4cd05ab0a8de535601c0b2635d43b5a34abd928"
+    },
+    "2022-06-20T04:00:00+00:00": {
+     "UGRD:10 m above ground": "7a2d7af8aba89027432e3dcff9e5527bf7850f5bea3b8016646cd74ad850ed48",
+     "VGRD:10 m above ground": "6153331e6f5af720333b57b09469e24ea8f306ccec8ba92c7242a69b88741d06"
+    },
+    "2022-06-20T05:00:00+00:00": {
+     "UGRD:10 m above ground": "fced843d73fff187203809f5ab20fac7d9ae043c724ea47e9c36cdd9fabb3ccf",
+     "VGRD:10 m above ground": "ea0f7374090d57ce7e50f5186161a058e7b8c38c8983afe0e34a6053ca1c995d"
+    },
+    "2022-06-20T06:00:00+00:00": {
+     "UGRD:10 m above ground": "dbc2c290d33328392a042d3c8105760ad37399269dc24a3346c7be3aa8a20bf0",
+     "VGRD:10 m above ground": "3904853d7a084907729669527b6571374a4240e4be8f4177e45de5926b8936b3"
+    },
+    "2022-06-20T07:00:00+00:00": {
+     "UGRD:10 m above ground": "3c935a3a8a8a3c3153f90e6bd6890c1be628082adc30248bed8a83443d575576",
+     "VGRD:10 m above ground": "d2a4d24a2c978effd74401b2c2a32b2b8524a8332972a0e93925c47ad265e03b"
+    },
+    "2022-06-20T08:00:00+00:00": {
+     "UGRD:10 m above ground": "2382d67d08ed633b4d99d2a51c2a63317d003080ab1d6c7bb05c992a0ce88689",
+     "VGRD:10 m above ground": "12d5dc8c3b328bd431de3496c237b1628c94cd50cc08b3e36b8deb2fd1aaf771"
+    },
+    "2022-06-20T09:00:00+00:00": {
+     "UGRD:10 m above ground": "caa5b0c39488c4d2f52ca4dd3fe62b3a96940074db443bf3b9ccdd8195fbed66",
+     "VGRD:10 m above ground": "3abbb04fab046fa7939cfa6f31b715faf37a5bbb811670f5b2b471936bde81c1"
+    },
+    "2022-06-20T10:00:00+00:00": {
+     "UGRD:10 m above ground": "e67f42bd49f6d715dd5479df53a573e4ca65d6bd52442b5265c70a9ada9a17e1",
+     "VGRD:10 m above ground": "33d2d012a07d9895d42997bf926d33601af0df49667880d41bb172bfeb5a90b9"
+    },
+    "2022-06-20T11:00:00+00:00": {
+     "UGRD:10 m above ground": "2e7ad8977d28d47e834e196fbd043bdac440d239b9e68c1eeadccac56351f6f9",
+     "VGRD:10 m above ground": "05510eec51aba70ab4684ed26a36a4e0cd8cb9831f281e9556751b92d53af439"
+    },
+    "2022-06-20T12:00:00+00:00": {
+     "UGRD:10 m above ground": "013e72f730ca0a0e366de24659472e5dee7ea91fbd13e306930bb9000f00e96a",
+     "VGRD:10 m above ground": "f49e7cbb198f12c5328409a29285ef4d564b0fdebc9ced57c94202de6116ab68"
+    },
+    "2022-06-20T13:00:00+00:00": {
+     "UGRD:10 m above ground": "1b036f2eb736d01561082a0f04ea81ebcaef7191d8ca94a7ea43a604285f0568",
+     "VGRD:10 m above ground": "0a6ade28f94460ac054d137a38f8927fcec01827c673178efe4e5edb00f4ea26"
+    },
+    "2022-06-20T14:00:00+00:00": {
+     "UGRD:10 m above ground": "21fa5d0c7f637c217531971fc6019e975facbcba50b3ba4b492c13fdc82963fe",
+     "VGRD:10 m above ground": "d9fae204b3523a463d09569700d1bf1acf519f67d507806e4682e6bc0ed72c8e"
+    },
+    "2022-06-20T15:00:00+00:00": {
+     "UGRD:10 m above ground": "73e853c04f918920bf8ea7641c992cd7eb7f7acd09cf965387be0c4bbfc370e1",
+     "VGRD:10 m above ground": "f5320b65465b47d58e5aa7d7c6783e7554ebc80934c93f3e52b77a64c934a07a"
+    },
+    "2022-06-20T16:00:00+00:00": {
+     "UGRD:10 m above ground": "75331e80cfe534e9f999432e71ca6c3e0c0f19b46a416204365c837b50129c84",
+     "VGRD:10 m above ground": "60d9b15825a182c1b9596679644ed26cf5dce3b73876b94542527d6bb2bc01ba"
+    },
+    "2022-06-20T17:00:00+00:00": {
+     "UGRD:10 m above ground": "5445b332b5c78c97785299db4bbe89eafb478a5787d56af657220d2a7d038e99",
+     "VGRD:10 m above ground": "c4848ec91090a4d2ec90098ced90b0a0e2a5fa00a08c4b154568c02e8e34edb3"
+    },
+    "2022-06-20T18:00:00+00:00": {
+     "UGRD:10 m above ground": "c2723ce816cf3b15a306a69b90167cfd9b020725c06560e47f5fe0ef069bba26",
+     "VGRD:10 m above ground": "ef0a388b6ce3551a67bcdcf7b7e2f6623fa5567a793128cf4d7b25992b9a1de9"
+    },
+    "2022-06-20T19:00:00+00:00": {
+     "UGRD:10 m above ground": "8e3b5d821aced17b135ec53c05d9c0dade41101baf4073f3010f3373e0fd6a78",
+     "VGRD:10 m above ground": "161d9527f10c107b99fe549a433bef4106bce9b6f120c2e05cd308c73194e799"
+    },
+    "2022-06-20T20:00:00+00:00": {
+     "UGRD:10 m above ground": "913f4a3313bbc9be452190d97bd1306c1fab295fc336f654d677d56e5c75a5bd",
+     "VGRD:10 m above ground": "175c187c567398ea1a72a80c9a3597adf1e08ac66a64acee62ce5fa099ab65f1"
+    },
+    "2022-06-20T21:00:00+00:00": {
+     "UGRD:10 m above ground": "b92ffc33417e0a3190440a12ae75dba3ef188f8f93513c14c4b7a2d366aa7b7e",
+     "VGRD:10 m above ground": "c35260ec8b6f6725daa8b78abdb4a10a61f1d9e8567bf3dace9d7571596879d3"
+    },
+    "2022-06-20T22:00:00+00:00": {
+     "UGRD:10 m above ground": "3a8d0d0213e25aa6be150e029e68fa5e1b4a3fc396f2915314b23201a5e43d71",
+     "VGRD:10 m above ground": "471cff3a6602f6b82c8136d43f3d5342e8b167f1631a9addd77e137996f12cf6"
+    },
+    "2022-06-20T23:00:00+00:00": {
+     "UGRD:10 m above ground": "17ef3e5f31c0edd614eed7ccc6312fc98b85a561d65f439ba7ae5baca1c32376",
+     "VGRD:10 m above ground": "76f85340aedb1954d3a54e63869c23b175d0abe6f453d0f2d2d727f11cda467b"
+    },
+    "2022-06-21T00:00:00+00:00": {
+     "UGRD:10 m above ground": "fbe4170509d244a47396de64f89a09894d2160d6b701b3af3ee2c78bd54f7c5a",
+     "VGRD:10 m above ground": "44c2e79575863a59e7a5f0f8f07e3cbfd4339b4de08389a13adbe1ceae4661ff"
+    },
+    "2022-06-21T01:00:00+00:00": {
+     "UGRD:10 m above ground": "1a063a15badf6da3c71900912944e3999801eb7636106e19d8088ce82cd06970",
+     "VGRD:10 m above ground": "44a2170a03bc991d0da7ae07088be325500873690a81c4d1d37e0d0a62d7e286"
+    },
+    "2022-06-21T02:00:00+00:00": {
+     "UGRD:10 m above ground": "805e3d845fb3f724664d58b2fc458fb6e8b9cb80b3bd7702c204f784d85670a0",
+     "VGRD:10 m above ground": "25442d162dae9c5aa99be52e6aec068704486fddfe1dd660e8a09f65150e2bfa"
+    },
+    "2022-06-21T03:00:00+00:00": {
+     "UGRD:10 m above ground": "40da9a566b18ad3cff36e09358fcfbec473302fa1a87cc95b6eb4093888c0a3f",
+     "VGRD:10 m above ground": "04498d148cb1ddee437154e7c6d68d300fa3af01c30eeaf780f17d523ea86ce2"
+    },
+    "2022-06-21T04:00:00+00:00": {
+     "UGRD:10 m above ground": "6462d7d3cbec8909549bd1da26c053b6cfdcdb6c768f4960f8460381010d8c3e",
+     "VGRD:10 m above ground": "bf4e23a9b89943ea5cf53ea86e39faecd14c4717933a9969aff2cccf5ddb8a4f"
+    },
+    "2022-06-21T05:00:00+00:00": {
+     "UGRD:10 m above ground": "f3f6bee79c313e01101bcbfd4755ff6fc2e6514b9ba76f7f04c67081927c20f7",
+     "VGRD:10 m above ground": "def42b2472a10cc6798b9cf5c1d8d66ad22e0780808256ecc70ef22769afe8b8"
+    },
+    "2022-06-21T06:00:00+00:00": {
+     "UGRD:10 m above ground": "266f19c31a55e9a7dc0d9631c884d3b78ece94b30c7dcf22e7346d43461fdc45",
+     "VGRD:10 m above ground": "3c8ed6dd5fc53f627efa31cc5f85affb29dedf24393fade7fb92bf43b91342dc"
+    },
+    "2022-06-21T07:00:00+00:00": {
+     "UGRD:10 m above ground": "30e8117000cabb6211f56c98038e99ff84ab120acb09157f95d6479034412a09",
+     "VGRD:10 m above ground": "d9c900715939be9dc0122739237de51bcc872464d754706d059ed2c9fd7f307e"
+    },
+    "2022-06-21T08:00:00+00:00": {
+     "UGRD:10 m above ground": "6230a2c351455c6f8327e1b59061271944afe133027d7a0e343cfa02942ae16c",
+     "VGRD:10 m above ground": "8a51e93d09a608ce325f56c443653349020fa4320ab0fd960c04b4a76c99fdae"
+    },
+    "2022-06-21T09:00:00+00:00": {
+     "UGRD:10 m above ground": "7768a8e2774de729343e362c8828bca6df86d05554263db1c917cee88a1f8f7a",
+     "VGRD:10 m above ground": "3a96ed5995a9f99d4bf4cac37af7eb8afa4a57e8e5991ec7c5299efa2e3f9243"
+    },
+    "2022-06-21T10:00:00+00:00": {
+     "UGRD:10 m above ground": "6347cbde0b35b0d78533b2cad94cf9f36507673b1abcb7ef879f5cf0f84a3a0c",
+     "VGRD:10 m above ground": "a1a7e1398828b0811545dc01aaacceffb4a2c898a6180e85a3d5865e436faa67"
+    },
+    "2022-06-21T11:00:00+00:00": {
+     "UGRD:10 m above ground": "27dc5e15483025e0f27e4c372c2c676508c8fc2356b28f3d1553b3e13d22f36d",
+     "VGRD:10 m above ground": "47d9004ab03f36b3cbb428f422fd6ec7ceb8c2a4b4a788997878635bd26dd17d"
+    },
+    "2022-06-21T12:00:00+00:00": {
+     "UGRD:10 m above ground": "3dc1e02886ba62566e78cb49d4d12697cd966a5acd1ae22972222db1eb3ce473",
+     "VGRD:10 m above ground": "b30121076d185b04699917011846878a4d8bbaf40a6cad2b64edf4807cc64c86"
+    },
+    "2022-06-21T13:00:00+00:00": {
+     "UGRD:10 m above ground": "59bc6beab49acdc4ee5a84ec79bf62178da44bfaf87e96da5efd25f644539016",
+     "VGRD:10 m above ground": "863e10ec01751b044dbf180023b353715cabd94370dcaeef1d0ba6261ac9c2f5"
+    },
+    "2022-06-21T14:00:00+00:00": {
+     "UGRD:10 m above ground": "fdb3f3155c9f0a9b750aee246f761e94081e243aa00a5a7b7200c08321f41b30",
+     "VGRD:10 m above ground": "eb69029534bd88baa0cff78a4492ee63e78012b6cba960f36bbcade53f0d3b8d"
+    },
+    "2022-06-21T15:00:00+00:00": {
+     "UGRD:10 m above ground": "f33f46a726718f96b1d168d5aa6de35e803d828e6ccd93e4160a68606c5e64dc",
+     "VGRD:10 m above ground": "250ea405d6d820a4b53d2a8abd691e73d0997c96dcb63e1ffc82783da9796a9e"
+    },
+    "2022-06-21T16:00:00+00:00": {
+     "UGRD:10 m above ground": "23b85043a12296519085842d2735519371fb64db776635b14234d8c328c2ac53",
+     "VGRD:10 m above ground": "ff495d37c27dfc875006ae3d0b80b9f561ddca5eb5462baf8533cd8dc968ee0a"
+    },
+    "2022-06-21T17:00:00+00:00": {
+     "UGRD:10 m above ground": "87302f9e3a4de501c2142fccc55327bf5db6928b108dadb40c4efce9f823b413",
+     "VGRD:10 m above ground": "414575d6646ad3b0a0cdc6d90ae04c0015ee206853da359b61601a52c3bbe9fb"
+    },
+    "2022-06-21T18:00:00+00:00": {
+     "UGRD:10 m above ground": "0172d98fe32239f5b4e403548b689308da89306733e63134c6307ee9ce498f2d",
+     "VGRD:10 m above ground": "8c3a09881f9d8d5e19f9e5a15eed384401c024d608596879594cee962351ea0b"
+    },
+    "2022-06-21T19:00:00+00:00": {
+     "UGRD:10 m above ground": "eb50bb599410f6f3394913690674953dc8119548317de3de768cd7e08b9ed999",
+     "VGRD:10 m above ground": "212e7d156a1389b5bf1cc787d3947a38e1e532edc434dc33f8fa517a742fc21c"
+    },
+    "2022-06-21T20:00:00+00:00": {
+     "UGRD:10 m above ground": "5a57ad4f6b996758cb017cbe725444dfa009c84ea89e1f7663e0e2f46de721f5",
+     "VGRD:10 m above ground": "937d5bc09d7dc93a04109ad8e1580069d80b42a70c6bfab29e91de8e0150f032"
+    },
+    "2022-06-21T21:00:00+00:00": {
+     "UGRD:10 m above ground": "7a48ea6800266cff9e2d9a619174ab19d853c78a8c8b9b05e37c19c8e2648def",
+     "VGRD:10 m above ground": "874b539798567013d5cf17c34724a50def722cf6ebfe8c1a69e5ad09ac4b8a8c"
+    },
+    "2022-06-21T22:00:00+00:00": {
+     "UGRD:10 m above ground": "974ec9aafc96d561a322fac7bf84fe33de8b0b82f834eb8ac7033ee94e0c842e",
+     "VGRD:10 m above ground": "8607db0f5bcf18d5b8547597bc11fd425adb4aa8d08535e05d9a4576cefcd413"
+    },
+    "2022-06-21T23:00:00+00:00": {
+     "UGRD:10 m above ground": "85a739ad47d9bcbfdb476250671a80ec3c799674ddf9ce6be10775f9c0181b36",
+     "VGRD:10 m above ground": "63a6399b12a4c64e5a2751d744bb61bfdff8c3a3c7e6234b6f818d552ba2bad6"
+    },
+    "2022-06-22T00:00:00+00:00": {
+     "UGRD:10 m above ground": "38cb77a76561935a04971d719ec2a387458a1f97ea3541acbf3c55a293868960",
+     "VGRD:10 m above ground": "19d93e4f4673c5fbb37631085d1d002642bbac8e2a4330921cf1cff5b6fa26a1"
+    },
+    "2022-06-22T01:00:00+00:00": {
+     "UGRD:10 m above ground": "d2e48d9f965a695cf03828d87fd85ee2fe30e4653eaf4fb0a30ba6778240f9c2",
+     "VGRD:10 m above ground": "afebd4138133dd270c7baba7f9087ad81eb1b7f3c9d31cd4f8fd735953ec90c6"
+    },
+    "2022-06-22T02:00:00+00:00": {
+     "UGRD:10 m above ground": "ef4995cf3e99032ecb41ceb53db4d2e9a003b27c97f03670924f1466aafb4823",
+     "VGRD:10 m above ground": "1104a8be6c842d4e2cb25a64eb7a3bb3532856d56ed788cecd0e586f946aaf2e"
+    },
+    "2022-06-22T03:00:00+00:00": {
+     "UGRD:10 m above ground": "09043fa7c99147968c7811250963915abec39ce012cb9255c4cf5cc35efc8090",
+     "VGRD:10 m above ground": "b114735dba6347954b54016b9d4d2d42966c5703d6befa50c1ec3884e2a1a1b5"
+    },
+    "2022-06-22T04:00:00+00:00": {
+     "UGRD:10 m above ground": "4fcb49a8066bbca43a5fc3d12e16edd95b3aedb924fc55248148152f419a28f9",
+     "VGRD:10 m above ground": "eb1e7fd961b5eab20f5f4d85a3967d65b819291461c21e576a51edaa70c98640"
+    },
+    "2022-06-22T05:00:00+00:00": {
+     "UGRD:10 m above ground": "53e54e29097c65563cd995604874f6c79e092c8452019886b8132eca3874ea5f",
+     "VGRD:10 m above ground": "931305af3a2228a3bf1c7922521031ef9b243c01b644c2113cecc9b81a223136"
+    },
+    "2022-06-22T06:00:00+00:00": {
+     "UGRD:10 m above ground": "ec0077ad720893a96fd48af6d73f8c4f7e2a90d97a6062fa49f4daa8361081c7",
+     "VGRD:10 m above ground": "52b6d82ae68db4b83382c6d35c0432fb774d3da4a9cbf6e3e5ba836097968adb"
+    },
+    "2022-06-22T07:00:00+00:00": {
+     "UGRD:10 m above ground": "08319bd8f0a73826f7edeb6413072c847f8ff137e381598ae68e4bd95bf482f8",
+     "VGRD:10 m above ground": "cba0a13a13cb189d508705d56ca1b10070d0916a2e2b2c754ef1501dd562ca13"
+    },
+    "2022-06-22T08:00:00+00:00": {
+     "UGRD:10 m above ground": "54db84a7e1fffb9f04c6f3ad86bda03e83384b192d52dd1bcdfdd2a17a1169f9",
+     "VGRD:10 m above ground": "b7c6372a1790b29f9b2f40d9c7f4fc19e829a5e86eb1521b6e2bfa571fea5d58"
+    },
+    "2022-06-22T09:00:00+00:00": {
+     "UGRD:10 m above ground": "9f39f666937e989b4416ffa70f547dfd17bb86d3b4a9331b1e3b767a195c56c8",
+     "VGRD:10 m above ground": "f12acbf3c4b7ef4225a7dc01f688662e629f088459af10162bb33fdf5841204f"
+    },
+    "2022-06-22T10:00:00+00:00": {
+     "UGRD:10 m above ground": "063fd4d454f449a8c74d02114974b05ab2da0919cbddff0390df9881833b396c",
+     "VGRD:10 m above ground": "4cc0c307c5071d5f0ba7699d8139185d881e8588b5c318781b83c587c550cc83"
+    },
+    "2022-06-22T11:00:00+00:00": {
+     "UGRD:10 m above ground": "bf984126f49dc55d523c64ff8a353dc3d9f2779331b92f2143bf7218aa79ce46",
+     "VGRD:10 m above ground": "37c9a6c1b67fd463ee34c384748fe99b227e49de60857fa58a908aae448d27bf"
+    },
+    "2022-06-22T12:00:00+00:00": {
+     "UGRD:10 m above ground": "f312e75faae365c7e02d427aff23a706115b72229e7a1799b742cc6c2715cb7f",
+     "VGRD:10 m above ground": "740943e97b71f5c74c6ebecea217b78e0dfee79ec2b7eaf1883e02c49c1df89c"
+    },
+    "2022-06-22T13:00:00+00:00": {
+     "UGRD:10 m above ground": "123bd802d919684b9bcd5f6dba80bb6d9a4573a6f958314e4f4022e83f95d519",
+     "VGRD:10 m above ground": "41a98a3e35bfe66a76838e9bef95cdc9af5261628ea55b9b96e1040dddb75b7f"
+    },
+    "2022-06-22T14:00:00+00:00": {
+     "UGRD:10 m above ground": "eb101da87f450796a25b567cc2a1d4a5b5d84bd636c40b2a8947ad0d2ad9ea91",
+     "VGRD:10 m above ground": "775e05dccb2fd1932401512b87a3c6a496dcae5c660f3e6130452efd23863903"
+    },
+    "2022-06-22T15:00:00+00:00": {
+     "UGRD:10 m above ground": "5ca37ef7250aa44a2d0c01131d8493ce6f1879eee0fa2b4901bad423ab288e78",
+     "VGRD:10 m above ground": "080fbf42ecdc79c58ceddd39799ba1415f9a52d725b9ddff8bb44d225f19ff39"
+    },
+    "2022-06-22T16:00:00+00:00": {
+     "UGRD:10 m above ground": "9cc3c006a4ea370f3995eac41314bdb4513928b3406922e992ad29b84f530e44",
+     "VGRD:10 m above ground": "957af4ca5a70ed5d01ae892caaa84b55c2e12dbfdd07f648156960a274a9636b"
+    },
+    "2022-06-22T17:00:00+00:00": {
+     "UGRD:10 m above ground": "ae612d9f65935db706091880cde6af72f8ed394920899423d531266d3eaadf1b",
+     "VGRD:10 m above ground": "48f76a4d8cd6bca6fad46a29089364dcef92e4e6f0018e5f2ec6b6e67416018d"
+    },
+    "2022-06-22T18:00:00+00:00": {
+     "UGRD:10 m above ground": "ce1e0ff47a6e6aeec043f7c095cf880587e48b8f37f94a372bf83a01971124d4",
+     "VGRD:10 m above ground": "b4a9c8039c88da5bf9a6bab080cff2e6bf4a4d9edbdae7d40bfbed64cf483933"
+    },
+    "2022-06-22T19:00:00+00:00": {
+     "UGRD:10 m above ground": "5a387704b56d5f4cdc85881633c5195f7f432020bcea8ebe1076844eb0ff1e97",
+     "VGRD:10 m above ground": "dfa3d25161e70712ea28cde74fb10906da5c052b8c20b146cb9c446c986690f2"
+    },
+    "2022-06-22T20:00:00+00:00": {
+     "UGRD:10 m above ground": "23bdae78404b1ed5568e4a0311c6da437c2d9aa05ad937394467394fffead314",
+     "VGRD:10 m above ground": "6bc1d04044e87c30f97f74d6c5bea265f869c5796bfa00becb7377587cb10e34"
+    },
+    "2022-06-22T21:00:00+00:00": {
+     "UGRD:10 m above ground": "55df692415c0b35c6ba8f95624ccd9a815b9436c277e059d43c1ba674ff51979",
+     "VGRD:10 m above ground": "8c1e7f4ecb37e44a250446d45f7bd6b4a173990abb6826af68c1593bec2e6e57"
+    },
+    "2022-06-22T22:00:00+00:00": {
+     "UGRD:10 m above ground": "a1435f489f37f3e0e130b8909e74b5524d4b622eba441bc1855751424d57ced8",
+     "VGRD:10 m above ground": "ce5219f90ee9a9c6ca33e956620389d111ef9d26f6c9887d7ea72a1a211f9863"
+    },
+    "2022-06-22T23:00:00+00:00": {
+     "UGRD:10 m above ground": "79e41b482ea619670a49b4ef7e64ca7bbc8e9d003c69a055daf8e85d6320d0aa",
+     "VGRD:10 m above ground": "1363f6aa035a484bc38fa66f34c1ea884fb7fb0b1e6b999ab9d5c7cfbd5620e3"
+    },
+    "2022-06-23T00:00:00+00:00": {
+     "UGRD:10 m above ground": "7327218a734b8fdf9d99b144f90df13134a7a099cda56d8b41e9140ffacbb780",
+     "VGRD:10 m above ground": "b3d3229b640bfe89de637320de53294552118b21f3825d25344013c83246fc36"
+    },
+    "2022-06-23T01:00:00+00:00": {
+     "UGRD:10 m above ground": "03311b98dd7cd323877c6b041a545d001e56e1a9e6d06ee26af8e97ea1e6b522",
+     "VGRD:10 m above ground": "eb261314236a261e30bb466e5b662ac4c09d261ba2917b4db29ccc9110c4e59f"
+    },
+    "2022-06-23T02:00:00+00:00": {
+     "UGRD:10 m above ground": "a7ec1bfc2af1139305f753f4aad8e31629acb2ccf77eab233136b733c01deffe",
+     "VGRD:10 m above ground": "b3a7c6d1015a4347a5dab459268de39fe4006085d4d2fd16a7092f14ee9c4612"
+    },
+    "2022-06-23T03:00:00+00:00": {
+     "UGRD:10 m above ground": "3cc8f98c4f33c149361bca7da935c80619bbecef14ae3f540206e43df128bd55",
+     "VGRD:10 m above ground": "d80c845372a04e55d61036d4816f4b1f6f19bd6025480e96c5f005b84abffef2"
+    },
+    "2022-06-23T04:00:00+00:00": {
+     "UGRD:10 m above ground": "f7fb3ed8b623fee66f73597c9f2ff28eb3f1302e8832464b760daa62eeaa0b73",
+     "VGRD:10 m above ground": "c9903b3abe980c99d782d0b7a1d666a22cab5964f47cbfae17b875c93ab30506"
+    },
+    "2022-06-23T05:00:00+00:00": {
+     "UGRD:10 m above ground": "8a59e4cfe9f3c51bbbfce749d6676b35fde199735c4ee2b05462f07601da07ea",
+     "VGRD:10 m above ground": "6310c6bd37182cfb475cb3e48f903cd0433c0f70f2a39621c1e3470c160d41e6"
+    },
+    "2022-06-23T06:00:00+00:00": {
+     "UGRD:10 m above ground": "38532d13ff77a4576f446496dabeae76aa31805e4777d5803a3c858e8f008feb",
+     "VGRD:10 m above ground": "06d4c5865d272b2b8a90c7fcf10a2cce4de75c6577d70095c3829c377c329aeb"
+    },
+    "2022-06-23T07:00:00+00:00": {
+     "UGRD:10 m above ground": "0b4344be93a63b5529c55169fef579a2c3aa118fbf26369a326a49c3d1024875",
+     "VGRD:10 m above ground": "5c58db098059d24b9843b07d8be97a09f222b4db24cc45ed53d71e4c3c625c7d"
+    },
+    "2022-06-23T08:00:00+00:00": {
+     "UGRD:10 m above ground": "11325a016d03e029719f8574b13bb11b1f2da7e09eebf61302249198367458f2",
+     "VGRD:10 m above ground": "86f937f79fe25941e0be1d8689329d181fa793c735b1134a1770140cf5c5d389"
+    },
+    "2022-06-23T09:00:00+00:00": {
+     "UGRD:10 m above ground": "672b6f5486ae71d3a5766fba9516dda6cbbd0ee4b71bdda3a31e9b5aa2043350",
+     "VGRD:10 m above ground": "36191f82f8d007300364caf6d118754fd33790476197afe71decbdbc9ebcd5fe"
+    },
+    "2022-06-23T10:00:00+00:00": {
+     "UGRD:10 m above ground": "ca53df4cedaa4558d05c6acd515f79b637aea5c8c9a099a1e8ef5ebc53f51504",
+     "VGRD:10 m above ground": "c1e6efe32248c172d7821c9fd13033e6a0ec8c56640ce8f75afef522fefef466"
+    },
+    "2022-06-23T11:00:00+00:00": {
+     "UGRD:10 m above ground": "e1526fb8d8fe1c58ffea84fb1362eb958c3bebca5f8cdf9c7dec0ff782134c89",
+     "VGRD:10 m above ground": "d68c99b51155aea1740e126c39b8cb1fd03ab127a73c93d066565b7d26cf0ff6"
+    },
+    "2022-06-23T12:00:00+00:00": {
+     "UGRD:10 m above ground": "a37722c733d9f2d542dadcf7eb67d54a72a241237e7776210692e4fcea69f1c8",
+     "VGRD:10 m above ground": "51e5c10f37c2b7af5ea32477ba050cc0cb46e67427e3a3878497ce033cb62236"
+    },
+    "2022-06-23T13:00:00+00:00": {
+     "UGRD:10 m above ground": "163ae85c292fdb89ba532101b91aefc38bb881e6020d0635ec44d2101f10297b",
+     "VGRD:10 m above ground": "676b05e10fd175fabc5ae434eada4c5aa5ef6b11f072ff76d21e8b67e7bc3f24"
+    },
+    "2022-06-23T14:00:00+00:00": {
+     "UGRD:10 m above ground": "43318fbe7f257114285bac44ea5db0abe882406bc7f0b3d81199c6f4b46b217b",
+     "VGRD:10 m above ground": "1620bb15ed242415290140b80197262a6344c2bd789b67cc9381631d5ef7cbee"
+    },
+    "2022-06-23T15:00:00+00:00": {
+     "UGRD:10 m above ground": "f5f4cb0cf4117fb9ba5651f85859c48b0b9f857715048b1584a380e5bf71a0fd",
+     "VGRD:10 m above ground": "857e02fa31260668f5bcb98f010ad7d53e22d85c1b97f3a7bf8755cfc82b1e1b"
+    },
+    "2022-06-23T16:00:00+00:00": {
+     "UGRD:10 m above ground": "96d0b3b6d27751f2ba94a70b622ae869fb9bfd10ac3aa8a192f35e5bd0a27bdf",
+     "VGRD:10 m above ground": "3a151485632dcf39b35b115f1f9cfd7242c59de9d48417e4a989a4dd47103616"
+    },
+    "2022-06-23T17:00:00+00:00": {
+     "UGRD:10 m above ground": "724cb8729a473938844cf7f18f6a17839e80486f9256c44b4146b39e1379d03c",
+     "VGRD:10 m above ground": "a1549a2533f18212ea8d91453bdefe22e9a55f43c752e91a5d8985dfe1521af0"
+    },
+    "2022-06-23T18:00:00+00:00": {
+     "UGRD:10 m above ground": "c23ba4d6bebc14d6860f4f4447969f39c0e6dcbfcafb8d18df53d83841014a52",
+     "VGRD:10 m above ground": "637f18892a1f7c2ad3347619f7fed56838a02592a7f78ba90f57e881294ac82d"
+    },
+    "2022-06-23T19:00:00+00:00": {
+     "UGRD:10 m above ground": "49450d01e50fb680ff65b8d4160ff2a10b98b1cd6e3670a905ad95e8e582af9a",
+     "VGRD:10 m above ground": "28968235b8ac625ad9250899dc28256be4e7d6f765378f779283f9353b461f15"
+    },
+    "2022-06-23T20:00:00+00:00": {
+     "UGRD:10 m above ground": "dcbd91e106618c6035a1ff16e8be15f67e7f1b0a5e90f038411b1d789fdc37da",
+     "VGRD:10 m above ground": "ab91e95046714310c2ac112aeadc27e278786782e55fda657c06111ed8a85c2e"
+    },
+    "2022-06-23T21:00:00+00:00": {
+     "UGRD:10 m above ground": "f4a826e4853480291fd13d0033189c2dbcdea4417a30bdb256d7c9c9736ca6d9",
+     "VGRD:10 m above ground": "6e32eef1cd128ae417945b37fb405db01a75231f6d3c936c50768145b1484007"
+    },
+    "2022-06-23T22:00:00+00:00": {
+     "UGRD:10 m above ground": "c2e83fe1a56012e3582002f2a96369ef5d0d8629cc7ceabf0f2324d9fb76b201",
+     "VGRD:10 m above ground": "bb68d7aca75cffd52e922387b7a5f882648b53328e6fe320d107f7db04efd6bb"
+    },
+    "2022-06-23T23:00:00+00:00": {
+     "UGRD:10 m above ground": "db218353de0864ab7512663f58914adcdb76605997f39d05df576ed3036881c9",
+     "VGRD:10 m above ground": "2c1a9c5110cecbcf1c2d25fe16d82714daae88a49b084425e804f46a6bcc39b9"
+    },
+    "2022-06-24T00:00:00+00:00": {
+     "UGRD:10 m above ground": "a390b08ad412f46dab88577489f81bc64ed99cfd860020553dbda3f5c2cbe524",
+     "VGRD:10 m above ground": "024d9663aa9a548dfaa0494f0caac1f07b2e5ce0d540d714441df66cf29edcd0"
+    },
+    "2022-06-24T01:00:00+00:00": {
+     "UGRD:10 m above ground": "f23600d993c51751055d62dd46e1a1a85728c08578442113198894f75400f0cc",
+     "VGRD:10 m above ground": "f8ffba79082b9914c6cff11a6a98141ef206798e8c896918e5b967a127eeba8c"
+    },
+    "2022-06-24T02:00:00+00:00": {
+     "UGRD:10 m above ground": "f9bf33e13fdb8fad8fedcaf5ec292c06e7484edd92674f2ec82147f32257e7eb",
+     "VGRD:10 m above ground": "7dd9e4f8ed4eefb713ded4e61415b8ffb4a1bad3f59ec39c7589626a3a43f738"
+    },
+    "2022-06-24T03:00:00+00:00": {
+     "UGRD:10 m above ground": "023152b5551437f50d2b74317cde24279c48125ac39a2eead5cede20d0219fcf",
+     "VGRD:10 m above ground": "cb9aa334343fd439312e8cfdd33b6338e06761c02fa52e544d7520c3638b866e"
+    },
+    "2022-06-24T04:00:00+00:00": {
+     "UGRD:10 m above ground": "b36c14ff9f28c40cf622f1d4ce236b130d721d1b6c39e47cca50ba9b2c434182",
+     "VGRD:10 m above ground": "00c887c8eb682c116dd8c5e5cf09c4de9f8acded5f9fcf9d0a346f1b6c03ea15"
+    },
+    "2022-06-24T05:00:00+00:00": {
+     "UGRD:10 m above ground": "42e6c88aa062541f8b76dd6e03a35918c691651fca80b543b2ad919b2e6ab125",
+     "VGRD:10 m above ground": "d1c70ab09caf07c9529e8cec3bd566d5cf2fb9ba482c31d4a0f79bee1e049c6e"
+    },
+    "2022-06-24T06:00:00+00:00": {
+     "UGRD:10 m above ground": "ac281d2dbca409a996a75d842055c055bf3c0f62ab6f27fac4a59d67606dcfa6",
+     "VGRD:10 m above ground": "031756b016780400d887a7927a33c9637cccb3856bd4d5c133ae1961e06e754e"
+    },
+    "2022-06-24T07:00:00+00:00": {
+     "UGRD:10 m above ground": "9c6fcaeca4a50f8d3e4b456d01259e3caa685e904ac500c367dfa5dcbe22e6f5",
+     "VGRD:10 m above ground": "05b266657d94753803b53afea7bf1bbecde3ed2deb47fe0e9ca78f87e10e3faa"
+    },
+    "2022-06-24T08:00:00+00:00": {
+     "UGRD:10 m above ground": "c2a25ea383660e9c3e826d4725dee05dca438e8e11993c45a16dd32af047ecf5",
+     "VGRD:10 m above ground": "4f0f84e78d284e3c27f42be5cfafbb59a0a603c5166c0f3d0c7724e6922eab10"
+    },
+    "2022-06-24T09:00:00+00:00": {
+     "UGRD:10 m above ground": "cf6b0d82d9287e771560b2142f0c2f9e2fdf3b4d914e8362a3d77a9fa9e37068",
+     "VGRD:10 m above ground": "ea89ca899c698794983d2e63cc914db4b8864373f86b64f73df1318666b46029"
+    },
+    "2022-06-24T10:00:00+00:00": {
+     "UGRD:10 m above ground": "54388759030bb0b2efa7e4667b182bda6b0c99ca5c79a4fde69cca26a9fc569f",
+     "VGRD:10 m above ground": "00a8928e8ccd4023b674d2aface5f27c057aeae21b96c31469d5a5a99fba183a"
+    },
+    "2022-06-24T11:00:00+00:00": {
+     "UGRD:10 m above ground": "3f0372018cc7800df91d25072d34c88c5e961d489a30ced243b2e54802e98ea6",
+     "VGRD:10 m above ground": "529ecfe595b6ceac907a99234d666159291f43ee3f6d95f63ce7db740133e3f4"
+    },
+    "2022-06-24T12:00:00+00:00": {
+     "UGRD:10 m above ground": "7944e3bf40e5d4aaa410b6357c0373461b5ac17c443c00caa4048f8fdca89bf9",
+     "VGRD:10 m above ground": "030a628cc3b8a37017ed1da6d600b410514fe2d654bdef7af7750454365f3915"
+    },
+    "2022-06-24T13:00:00+00:00": {
+     "UGRD:10 m above ground": "bd459c7f16310d0d60d7d149cf731ba97b740e8faacda990aa230a8d46d0a67f",
+     "VGRD:10 m above ground": "63ee5e364827e3b4fe245dc271a00d3dc4de535503a29b0ae3e3868cf132950d"
+    },
+    "2022-06-24T14:00:00+00:00": {
+     "UGRD:10 m above ground": "70d61538f6f5341ba485620bc7c9a0d758956794b71fccd2606fb007b340d796",
+     "VGRD:10 m above ground": "a0a63f04d156d4c3a84870d4febed9d18b18bc7780607de79abcd3dff7836f64"
+    },
+    "2022-06-24T15:00:00+00:00": {
+     "UGRD:10 m above ground": "3c16cfc6158b87844d4c53debc4c3255a7a39cc05b693abc8ef76a5c885d8deb",
+     "VGRD:10 m above ground": "aa02a87cd687b54da8148cfc9460242e2643e57b2432e7da5cd0af3febffd3d5"
+    },
+    "2022-06-24T16:00:00+00:00": {
+     "UGRD:10 m above ground": "ae9cff2c30a9d0d5c0b099e5a628d5ea0baf6368bb3bc588cb772509ad1d6bff",
+     "VGRD:10 m above ground": "b07d7b6d8365c4e9d9cb529571b21139468451d5d07d2ad04ab1016eefd5434e"
+    },
+    "2022-06-24T17:00:00+00:00": {
+     "UGRD:10 m above ground": "a13ca4000babca78ab121c707560466a2836f3329bce8e60974bb75d506a114e",
+     "VGRD:10 m above ground": "29fb73d42b8a22758aa1a9e8991dba6a9895c36e001672be2b6db08850c70afc"
+    },
+    "2022-06-24T18:00:00+00:00": {
+     "UGRD:10 m above ground": "22416d7abefdba280378aa158c85c789315e1448a32e5e3dd44b4d9a44c46d25",
+     "VGRD:10 m above ground": "bba416c7dee3f8c22d27ef39a71a80811169c50e4e757cca0a506fba758dadb0"
+    },
+    "2022-06-24T19:00:00+00:00": {
+     "UGRD:10 m above ground": "59a86850d06176105d9d3eb8cb2c024f2e8bd7d9b4c5df591dfe5f3cfa088586",
+     "VGRD:10 m above ground": "49607233e57a193f27a393af371f037d132101f65fc7b1e5fc038c9426511fda"
+    },
+    "2022-06-24T20:00:00+00:00": {
+     "UGRD:10 m above ground": "f91586759b05df4f47a0ea83b0a2a88b2d82dc216ceb425e40bd88f31cfef33f",
+     "VGRD:10 m above ground": "f14137049f1279252a5dc7236df755eba0c30ec2cf0610392ca30452f726ab84"
+    },
+    "2022-06-24T21:00:00+00:00": {
+     "UGRD:10 m above ground": "4298f2b17bed8c61610bbf18a13718393413b8b9196bb82e862b922e1407e30e",
+     "VGRD:10 m above ground": "d29a4a8c8d97ee64b5b167ad8a0a6b2db7d90f212b5eae9e2b08379fbc362c9a"
+    },
+    "2022-06-24T22:00:00+00:00": {
+     "UGRD:10 m above ground": "71a4024e82b2cb264e787c3f6f87b6b9ef7d7c8bc199589fc53594a30ecad2cf",
+     "VGRD:10 m above ground": "5e6ea84cc5adaa8a5db2ce1105341b0526520875edf96b2766e22c963d95799e"
+    },
+    "2022-06-24T23:00:00+00:00": {
+     "UGRD:10 m above ground": "1cdc69ea0f04cc61400154eae8319f8c62b54c70613a34d821a92f236fdcd268",
+     "VGRD:10 m above ground": "7e8bda2102d6aaa57c52b7cc3ff73892f7f005f5cade26c10be1407df3677b52"
+    },
+    "2022-06-25T00:00:00+00:00": {
+     "UGRD:10 m above ground": "78b0f773eca1eb1820459f0459ceba9cbb51966844b545568ade543910276607",
+     "VGRD:10 m above ground": "00490accea16a2419c135b47af2c0568de97d8dadbc9d0960022bc615e8475bf"
+    },
+    "2022-06-25T01:00:00+00:00": {
+     "UGRD:10 m above ground": "4e382af260240ada8f7dc3a16c14a58b2d72c0e5534bcfeb1c56ea5ef5093339",
+     "VGRD:10 m above ground": "94066d204855fcee3d7a73da00f33e73c594e31aca07b8c1439eac8e7793539e"
+    },
+    "2022-06-25T02:00:00+00:00": {
+     "UGRD:10 m above ground": "edd3989f9a0d0bf4dc08aaa72c73d996491bef488b4e114b248cfc8a4b9b9671",
+     "VGRD:10 m above ground": "f32eb770a290672307e8465f1a1ca48847e66143b4e70b3444475911fd5ade92"
+    },
+    "2022-06-25T03:00:00+00:00": {
+     "UGRD:10 m above ground": "cee50aa53a679204b618e19b858272353fad56a75db00ee762c5175c22c883da",
+     "VGRD:10 m above ground": "49af00fbd78f91ec4d8854f56901e287dabc51459045e4ac2f42647251e5057a"
+    },
+    "2022-06-25T04:00:00+00:00": {
+     "UGRD:10 m above ground": "bdc52ecd822d05e004255968d1c4acdd5fee8c03b97d09d2ca84705cda110001",
+     "VGRD:10 m above ground": "24d49bf1853ea31330177de96ecf15d9097f30d12bdd031d016c7fdc7a2f537c"
+    },
+    "2022-06-25T05:00:00+00:00": {
+     "UGRD:10 m above ground": "b416a3c70349f9230d2c136d7e1818b395a7faf6224780eaf90aaeed17e1afc0",
+     "VGRD:10 m above ground": "3b925cae3b40564839f0ec50fe77f4f1f0a2971fc52906816bbbdcff2ce73a05"
+    },
+    "2022-06-25T06:00:00+00:00": {
+     "UGRD:10 m above ground": "0771549d32e280f2284670338254757f08be3816ebdae78da55d969d33918fd4",
+     "VGRD:10 m above ground": "91d0f6ae5bfdf53f88fd744f9c711741d127003941c9596840f6cd76acd2485a"
+    },
+    "2022-06-25T07:00:00+00:00": {
+     "UGRD:10 m above ground": "0fb40805abbf6d9e037084d391208e670a3cd3fb55afb10fa9ad598a5b03da11",
+     "VGRD:10 m above ground": "1acc1af8c176610999dbb77f56169efb328bf070c7d10aecc41c989247776280"
+    },
+    "2022-06-25T08:00:00+00:00": {
+     "UGRD:10 m above ground": "6ec81e260d14cc1da92a2eb7cc24c745c44720f44c097f3a9a17b67b136499b5",
+     "VGRD:10 m above ground": "184e2c3eae8f8391ea13964b1ca582c3e724bc8ff3d065d64080862f5fea4ad2"
+    },
+    "2022-06-25T09:00:00+00:00": {
+     "UGRD:10 m above ground": "02b9e87352b47cbd5882eddf23fe4136bcc58c8ee2b43d821e1222615618b299",
+     "VGRD:10 m above ground": "5f3e2508d7c1495b3cc508aeb2ea61eb53fd8d32baac14a51244e79ec7fb8eed"
+    },
+    "2022-06-25T10:00:00+00:00": {
+     "UGRD:10 m above ground": "3e04477ce354087af5ad255713dc5eab4405c32f089477f4503994f8453a2a91",
+     "VGRD:10 m above ground": "ef6d0fd4bb67df8c9f47370103ade1c17c18f9c8fb6cea48e4f56922715366e3"
+    },
+    "2022-06-25T11:00:00+00:00": {
+     "UGRD:10 m above ground": "25adf30ee35365d43650db3e2b8d05295d5a7ed8c4bb82cec78673dc86bb6a3f",
+     "VGRD:10 m above ground": "8400c5cf5dff0e119c3901f3a552603ceea73de799e2b811e71be09c556d899c"
+    },
+    "2022-06-25T12:00:00+00:00": {
+     "UGRD:10 m above ground": "86fc7d99e0f76f18aa27347de90b01242c35d37040b9f96ccaaa2b35b1e4ee3e",
+     "VGRD:10 m above ground": "2c6fc120e95ec3fce95999f25e1eb1184fbeeca20482c9fa574f663e123eacd7"
+    },
+    "2022-06-25T13:00:00+00:00": {
+     "UGRD:10 m above ground": "f55cc3bb563ba8c3b03f40f9c266e5bf39ae4287a81252c382ed68533a9f7c1a",
+     "VGRD:10 m above ground": "94531085a7ff510c0219bfd10404df7c8ed9ec610f894b0d888220d764620b46"
+    },
+    "2022-06-25T14:00:00+00:00": {
+     "UGRD:10 m above ground": "cff02bcb521d4628bae8702abd1f429eb32af064dd435ec1f618c821a4969fa9",
+     "VGRD:10 m above ground": "36be5d4681457d7e8a692b2f527bae3a02ea596519fd0d27b45ff3ee143d4c89"
+    },
+    "2022-06-25T15:00:00+00:00": {
+     "UGRD:10 m above ground": "68b23f6fafd22302e89b70cc14e3d9dae32a8eada0eafbf1f6b0c1618454748c",
+     "VGRD:10 m above ground": "6d54c58f281d291f28f7bd6c0b9a53b10a26194db017afdab41f29b35ccdf7c6"
+    },
+    "2022-06-25T16:00:00+00:00": {
+     "UGRD:10 m above ground": "31ab15f94e1af823760bd07e7e5222759821d2a4440f0460b343472196e80872",
+     "VGRD:10 m above ground": "49f8f9f5fb7df68bb1fe04fe7fce05f4ec0833883a295be80ecc7d98ad93400f"
+    },
+    "2022-06-25T17:00:00+00:00": {
+     "UGRD:10 m above ground": "988b029fc39ae8b66869e96ec296538a52c0d6c224a069d6d4fb7c5d563b9f64",
+     "VGRD:10 m above ground": "aee03d3226321cfe5cf5addc9a207ef4bf00bf328853212c5b5bcd7c79a1c2cc"
+    },
+    "2022-06-25T18:00:00+00:00": {
+     "UGRD:10 m above ground": "2a6895bae8ea555bb6eb4fb0037099a53c51d0a4a03edb73b4a4f109ae6c7250",
+     "VGRD:10 m above ground": "de25671b2dee4c1df0102a47adb8f90e51d7d52bc1a6a271e5dc986019dc00e2"
+    },
+    "2022-06-25T19:00:00+00:00": {
+     "UGRD:10 m above ground": "bf7174b83a0fb2687f62fc4ba1ce9d8f9a572fbb7409460220998e023263f114",
+     "VGRD:10 m above ground": "9a073693bfe980fa13cffb8f4da5bd4f3f58c482e7b7d85227c166a76d2c79bc"
+    },
+    "2022-06-25T20:00:00+00:00": {
+     "UGRD:10 m above ground": "35f8620832a2fedf2d2688ffdef13ec662ca1eaf0831257a1935a3688e271b38",
+     "VGRD:10 m above ground": "2d758694224c05e15bfb96b4ac27a50259d52d0c2a2c73ee24d62e4d1226eeee"
+    },
+    "2022-06-25T21:00:00+00:00": {
+     "UGRD:10 m above ground": "6889b13b29b1c0bb19371ac22dd226466231250d8f7994414624f60f95b12119",
+     "VGRD:10 m above ground": "6641c3d7ce0a3fa70972f5f4a9c2086deb44208d65e55ff16ff2601cf3eef1d6"
+    },
+    "2022-06-25T22:00:00+00:00": {
+     "UGRD:10 m above ground": "fd6b0d2b73967ac04352a7de269f80ca261ab9fe918f06e530fde0abbd63d70a",
+     "VGRD:10 m above ground": "3661e3d285c4732b813bece60db17d5fa1003a1704cdcaeddd91ffbb01b52da0"
+    },
+    "2022-06-25T23:00:00+00:00": {
+     "UGRD:10 m above ground": "83dbf7c2333ee8cc8fc0911c815086a39d51d7ebafe7f849507e294beac672b6",
+     "VGRD:10 m above ground": "4b366919d2dff86749ff9b1347946cf1dd3da4c697eb2509843272e54750f28e"
+    },
+    "2022-06-26T00:00:00+00:00": {
+     "UGRD:10 m above ground": "6445288f1a5eeb2591c27f2265c74c2c0c49a36664ab88fc35f9e6b4c8b445c1",
+     "VGRD:10 m above ground": "2a0489ad916e4a40e404a664b5faec1b63f9aa7a40327d0b02803ce96aa14d24"
+    },
+    "2022-06-26T01:00:00+00:00": {
+     "UGRD:10 m above ground": "c5352f1f47d146929c3b6ae525ec380229412c13f9cfed49b92bc7dbbfd03e39",
+     "VGRD:10 m above ground": "b64f5dbf58e02a53e2d118478f6230a3c6dfdbe9a462ef2c06c21cd82050d8c9"
+    },
+    "2022-06-26T02:00:00+00:00": {
+     "UGRD:10 m above ground": "55c01bbd72433141caeb3c0c3664f60006c64a2e3fbbeccc425910d7afb44766",
+     "VGRD:10 m above ground": "f303467f8776c6fc0a5463be564e8331303dd7d35e0ea4093d115e8ec3b87c72"
+    },
+    "2022-06-26T03:00:00+00:00": {
+     "UGRD:10 m above ground": "eb845fa2059c11709dd96d9adfdbb456b49cb8ce01f96a00fe1e2418cc046a18",
+     "VGRD:10 m above ground": "4c7a98c89bf4f3c21149d2fe9d3161aa765377960aac999a4ba8ddff8298603d"
+    },
+    "2022-06-26T04:00:00+00:00": {
+     "UGRD:10 m above ground": "28499b66bdb5da5d1556053ad0ad1a8b0fb95d55441c8ad6253eae3dfd5cbcc3",
+     "VGRD:10 m above ground": "9705b0511833f64a72d55d531a435ef7dd6fa0f0b76773fdf0187c2fe21d2551"
+    },
+    "2022-06-26T05:00:00+00:00": {
+     "UGRD:10 m above ground": "a354131d7496fb7c6a8f59b68162f2f90410a2f7e15a5fb07e8e0b21f5104d6a",
+     "VGRD:10 m above ground": "4d607c57d440e9e1b919bc9a2b797ddf276f28ff2c7fa3f1fa98f1e3eef9b16d"
+    },
+    "2022-06-26T06:00:00+00:00": {
+     "UGRD:10 m above ground": "a2e66c3cd85c59768a6a70eb01fc2365289ef4257400831c45cce05897dc6775",
+     "VGRD:10 m above ground": "3c1e7921a2aa5d3d0c2909e92f7b7f0de182799b6ac704822a2961e0c05f0dd5"
+    },
+    "2022-06-26T07:00:00+00:00": {
+     "UGRD:10 m above ground": "6f37647b725ca0eea64b442939c567a27cdbdf77664dfd771468b0bdaab5d27e",
+     "VGRD:10 m above ground": "1cf08f2e3f0225431cc13450ee345b734b3c29203e27c5de6108616ca97840c0"
+    },
+    "2022-06-26T08:00:00+00:00": {
+     "UGRD:10 m above ground": "a548324ba949dcc13b08fccc308bf502fcc4e0fef6138eb6a843e3f47a6a9a35",
+     "VGRD:10 m above ground": "ad9982adc5939824bc4e32a7527700ba34f0e4837634211d9d23b6979326b51e"
+    },
+    "2022-06-26T09:00:00+00:00": {
+     "UGRD:10 m above ground": "0e3081be976626f7b6106d3634a7fc2fc6678318fbc40ee406d3e75e397a0675",
+     "VGRD:10 m above ground": "f3e8c6e8ca086214135a289f7f4f01fba044de971ee7b6cbf7d5ca51feee5fbd"
+    },
+    "2022-06-26T10:00:00+00:00": {
+     "UGRD:10 m above ground": "3e159175a1ed863b213b4bb6aa75a052e86bf9a915aa574570871f5479086db6",
+     "VGRD:10 m above ground": "7eab9659d6137363adcbb94cda56b957bf5e4b2cba0cd9ffd8d4e10aff0bbdaa"
+    },
+    "2022-06-26T11:00:00+00:00": {
+     "UGRD:10 m above ground": "398e5c415e8c6f1e653ea195496824c334395caafb7b7c5e29660328d2031252",
+     "VGRD:10 m above ground": "e1908ac6495fc84796a0cb5bd902876a4b224d57b17a03afd2377dc1a6b47b2f"
+    },
+    "2022-06-26T12:00:00+00:00": {
+     "UGRD:10 m above ground": "9996d9c58839b2686f249b55729dbd0d6e9fe8bb8a1e35f184b4c4c494929f49",
+     "VGRD:10 m above ground": "8757dd8c16c6a9b97b94fcc2924591447e30b47f43b5cf13a4ede1bea41d0ce7"
+    },
+    "2022-06-26T13:00:00+00:00": {
+     "UGRD:10 m above ground": "65cfa422eace84d8c887d086aba00d54104506129cffd54f6819c5b807785e3b",
+     "VGRD:10 m above ground": "579d37ec6c3392e41ad3a2fb21e78374a353f19015d47f61b8f9cef5eeaa2bd9"
+    },
+    "2022-06-26T14:00:00+00:00": {
+     "UGRD:10 m above ground": "cdfae83d1387b4f7ac7f63e4f27e110285821a93592a45537278e0449c1aa108",
+     "VGRD:10 m above ground": "b9ab16e76f3416c060f251e50d0d6446670fedc7f004f4cf19b0559b5c467529"
+    },
+    "2022-06-26T15:00:00+00:00": {
+     "UGRD:10 m above ground": "9fdf7bce3d0e7eec769ba745f0114c0f5a116b792cf3918389996fba21da44d0",
+     "VGRD:10 m above ground": "4e131277506255d83151df9bff81bff714432d449c778b9fde98154ae1212b80"
+    },
+    "2022-06-26T16:00:00+00:00": {
+     "UGRD:10 m above ground": "c7739fc7ff732a49d1fc5c5a512e858c13515eb4190061730054509356fba819",
+     "VGRD:10 m above ground": "3ca250a8cd3e233ea784ef11e1cd8c1de7859154c4b71dde20a8bb7ab872b098"
+    },
+    "2022-06-26T17:00:00+00:00": {
+     "UGRD:10 m above ground": "2a7b5ce13d9954194a0cbb91c3bbf0e1a3f4a50a43c44aa20702d21474ddf687",
+     "VGRD:10 m above ground": "ccfef7e322a3baf081421f1b05f721d1422f42b6d0aa2eba009ed703988b4ee9"
+    }
+   },
+   "missing_hours": [],
+   "note": "grid-relative U/V (Lambert conformal); rotate in prepare",
+   "retrieved_utc": "2026-10-26T21:46:32+00:00",
+   "sha256": "eb5c52acd17d9c5b731bc0b8c272b5844ed1c7e9aee78f7d9539782438e69f11",
+   "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.<date>/conus/hrrr.t<hh>z.wrfsfcf00.grib2"
+  },
+  "data/raw/pipeline/landfire/LF2020_CC.tif": {
+   "bytes": 445089,
+   "crs": "EPSG:5070",
+   "member": "LF2020_CC_CONUS/Tif/LF2020_CC_CONUS.tif",
+   "retrieved_utc": "2026-10-26T21:43:04+00:00",
+   "sha256": "84d0adfce04fecb85968e2d46a16b7d684407e99e1c68eeeaf7da1fe83411982",
+   "source_zip": "LF2020_CC_CONUS_20260522.zip",
+   "source_zip_sha256": "ac5b38b33498506febee5abbc0451391c2e1d5d19789ba822052daadeb14afa9",
+   "url": "https://www.sciencebase.gov/catalog/item/6a15f914b66b01e66c9c2f39",
+   "version": "LF2020"
+  },
+  "data/raw/pipeline/landfire/LF2020_CH.tif": {
+   "bytes": 438578,
+   "crs": "EPSG:5070",
+   "member": "LF2020_CH_CONUS/Tif/LC22_CH_220.tif",
+   "retrieved_utc": "2026-10-26T21:43:08+00:00",
+   "sha256": "5ecb5041ce85758f72dc674bf47b06f60e5491c92ee9ecc29e39dbbe39a390f2",
+   "source_zip": "LF2020_CH_CONUS_20260522.zip",
+   "source_zip_sha256": "0b69ff27c54a64bee24558068b910b22de72bded474242368a77318c7e39a247",
+   "url": "https://www.sciencebase.gov/catalog/item/6a16003fb66b013d45990b4b",
+   "version": "LF2020"
+  },
+  "data/raw/pipeline/landfire/LF2020_FBFM40.tif": {
+   "bytes": 541251,
+   "crs": "EPSG:5070",
+   "member": "LF2020_FBFM40_CONUS/Tif/LF2020_FBFM40_CONUS.tif",
+   "retrieved_utc": "2026-10-26T21:43:00+00:00",
+   "sha256": "f9b6e8179c275d94e206fc3489efa1c39cc4f904b27e84e4a4020ffb6a860124",
+   "source_zip": "LF2020_FBFM40_CONUS_20260522.zip",
+   "source_zip_sha256": "8b9e795dd8242f06534fffc6700ec2c1e7d52e1aaf4ce8f4b72dcbd211108586",
+   "url": "https://www.sciencebase.gov/catalog/item/6a1602c7b66b013d45990b82",
+   "version": "LF2020"
+  },
+  "data/raw/pipeline/landfire/LF2022_Dist21.tif": {
+   "bytes": 4719068,
+   "crs": "EPSG:3857",
+   "retrieved_utc": "2026-10-26T21:43:10+00:00",
+   "sha256": "daeac755ed39530b925637355d419b0299578b296629a4cdab5767c523ac3ecc",
+   "url": "https://edcintl.cr.usgs.gov/geoserver/landfire/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=landfire__LF2022_Dist21_CONUS&format=image/geotiff&subset=X(-12439530,-12399090)&subset=Y(4192890,4233300)"
+  },
+  "data/raw/pipeline/landfire/LF2022_Dist22.tif": {
+   "bytes": 4719069,
+   "crs": "EPSG:3857",
+   "retrieved_utc": "2026-10-26T21:43:13+00:00",
+   "sha256": "7fb509b5891130ca9bfb3aad74536b2e22d112cba6db3915615fce1ff6cd98bd",
+   "url": "https://edcintl.cr.usgs.gov/geoserver/landfire/ows?service=WCS&version=2.0.1&request=GetCoverage&coverageId=landfire__LF2022_Dist22_CONUS&format=image/geotiff&subset=X(-12439530,-12399090)&subset=Y(4192890,4233300)"
+  }
+ },
+ "fire": "pipeline",
+ "notes": {
+  "grid": {
+   "bounds_lonlat": [
+    -111.72617758128229,
+    35.233338636543586,
+    -111.4031192762261,
+    35.48910237722089
+   ],
+   "bounds_utm": [
+    434130.0,
+    3899160.0,
+    463320.0,
+    3927360.0
+   ],
+   "buffer_m": 5000.0,
+   "cell": 30.0,
+   "epsg": 26912,
+   "height": 940,
+   "width": 973,
+   "x0": 434130.0,
+   "y1": 3927360.0
+  },
+  "run": {
+   "host": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+   "utc": "2026-10-26T21:42:54+00:00"
+  }
+ }
+}
