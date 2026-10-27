@@ -2,7 +2,7 @@
 # Requires: uv. `make probe` needs only python3 (standard library).
 PY := uv run python -m firepath
 
-.PHONY: setup env probe harvest prepare test bakeoff bench
+.PHONY: setup env probe harvest prepare test bakeoff bench sitreps-telegraph calibrate calibrate-check
 
 setup:
 	uv sync
@@ -31,3 +31,12 @@ bench:              ## Rust vs Python reference on the Mangum 90 m field + scena
 
 sitreps-telegraph:  ## Telegraph 2021 situation reports from the Internet Archive (run on the build Mac)
 	$(PY).sitreps --wayback 7512 telegraph
+
+calibrate:          ## M3 on the build Mac: DE (G8, 90 m) for model, B1, B0 with seed 20261009, then seeds 1-3 for the model
+	for k in model B1 B0; do $(PY).calibrate search --kind $$k; done
+	for s in 1 2 3; do $(PY).calibrate search --kind model --seed $$s; done
+
+calibrate-check:    ## M3: behavioural set re-evaluated with HY; leave-one-fire-out for model and B1
+	$(PY).calibrate hy --kind model
+	$(PY).calibrate lofo --kind model
+	$(PY).calibrate lofo --kind B1

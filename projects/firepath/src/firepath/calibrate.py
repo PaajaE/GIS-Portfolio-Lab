@@ -155,6 +155,17 @@ class Objective:
             return np.array(list(ex.map(self.one, cols)))
 
 
+def safe_workers(cases, requested: int) -> int:
+    """Threads that fit in memory: each evaluation holds three float64 fields (H, nr, nc) plus the graph's
+    per-cell arrays; keep the total under 60 % of physical RAM."""
+    import os
+
+    per_eval = max(c.u.size for c in cases) * 8 * 3 * 1.3
+    ram = os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES")
+    shared = sum(c.u.nbytes + c.v.nbytes for c in cases)
+    return max(1, min(requested, int((0.6 * ram - shared) // per_eval)))
+
+
 def search(cases, kind, seed, workers, popsize=15, maxiter=60, fixed=None):
     from scipy.optimize import differential_evolution
 
@@ -198,7 +209,11 @@ def main(argv=None):
             "commit": commit, "host": platform.platform(), "started_utc": datetime.now(timezone.utc).isoformat()}
     t = time.perf_counter()
     cases = [load_case(f) for f in fires]
-    print(f"cases loaded in {time.perf_counter() - t:.0f}s", flush=True)
+    w = safe_workers(cases, a.workers)
+    if w < a.workers:
+        print(f"workers {a.workers} -> {w} (memory)", flush=True)
+    a.workers = meta["workers"] = w
+    print(f"cases loaded in {time.perf_counter() - t:.0f}s, workers {w}", flush=True)
 
     if a.command == "search":
         obj, res = search(cases, a.kind, a.seed, a.workers, a.popsize, a.maxiter)
