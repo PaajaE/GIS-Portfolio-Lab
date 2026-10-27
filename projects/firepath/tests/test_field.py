@@ -45,3 +45,12 @@ def test_waf_sheltered_switch_follows_gtr266():
     hc = 20.0 * 3.280839895
     assert np.isclose(w[0, 1], 0.555 / (np.sqrt(0.2 * hc) * np.log((20 + 0.36 * hc) / (0.13 * hc))))
     assert np.isclose(w[0, 2], 1.83 / np.log((20 + 0.36 * 1.0) / 0.13))
+
+
+def test_timber_group_multiplier_scales_only_tu_tl():
+    fuel = np.array([[102, 122, 165, 188]])          # GR2, SH2, TU5, TL8
+    st = _static(fuel)
+    z = np.zeros(fuel.shape)
+    r1, _, _ = hour(st, z, z, Params(k=0.8))
+    r2, _, _ = hour(st, z, z, Params(k=0.8, g=2.5))
+    assert np.allclose(r2[0, :2], r1[0, :2]) and np.allclose(r2[0, 2:], 2.5 * r1[0, 2:])

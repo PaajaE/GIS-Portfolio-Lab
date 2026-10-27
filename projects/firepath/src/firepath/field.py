@@ -35,6 +35,7 @@ class Params:
     k: float = 1.0
     a_u: float = 1.0
     a_s: float = 1.0
+    g: float = 1.0                # g_timber/g_grass: extra multiplier on k for timber groups (TU, TL)
     wind_factor: float = 1.0      # lambda: input-uncertainty scenario multiplier, 1 in calibration
 
 
@@ -76,11 +77,13 @@ class Static:
     waf: np.ndarray
     tan_slope: np.ndarray
     upslope: np.ndarray
+    timber: np.ndarray | None = None      # TU (161-165) and TL (181-189) cells, for Params.g
 
     @classmethod
     def build(cls, fuel, cc, ch, tan_slope, upslope, m: Moisture):
         r0, sig, beta, bop, burnable = fuel_tables(fuel, m)
-        return cls(r0, sig, beta, bop, burnable, waf(fuel, cc, ch), tan_slope, upslope)
+        timber = ((fuel >= 161) & (fuel <= 165)) | ((fuel >= 181) & (fuel <= 189))
+        return cls(r0, sig, beta, bop, burnable, waf(fuel, cc, ch), tan_slope, upslope, timber)
 
 
 def hour(st: Static, u10: np.ndarray, v10: np.ndarray, p: Params):
@@ -110,6 +113,8 @@ def hour(st: Static, u10: np.ndarray, v10: np.ndarray, p: Params):
     with np.errstate(divide="ignore", invalid="ignore"):
         u_e = np.where(phi_e > 0, (phi_e * ratio ** ee / c) ** (1.0 / bb), 0.0)   # ft/min
     r0 = p.k * st.r0[b]
+    if p.g != 1.0 and st.timber is not None:
+        r0 = np.where(st.timber[b], p.g * r0, r0)
     r_head = r0 * (1.0 + phi_e)
     cap = np.maximum(u_e / FT_PER_M, r0)                                         # E6 (andrews2013)
     r_head = np.where(u_e > 0, np.minimum(r_head, cap), r_head)
