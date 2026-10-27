@@ -2,3 +2,4 @@
 .env
 # Rust build output
 rust/target/
+validation/calibration/checkpoints/

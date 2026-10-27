@@ -166,13 +166,37 @@ def safe_workers(cases, requested: int) -> int:
     return max(1, min(requested, int((0.6 * ram - shared) // per_eval)))
 
 
-def search(cases, kind, seed, workers, popsize=15, maxiter=60, fixed=None):
+def search(cases, kind, seed, workers, popsize=15, maxiter=60, fixed=None, checkpoint=None):
+    """DE in log space. With `checkpoint` (a path), the population and the evaluation log are written
+    after every generation, and a later call with the same path resumes from them (the run then records
+    `resumed_at_generation`; the resumed path differs from an uninterrupted one only in RNG state)."""
+    import time
+
     from scipy.optimize import differential_evolution
 
     obj = Objective(cases, kind, workers=workers, fixed=fixed)
     bounds = [tuple(np.log(BOUNDS[kind][p])) for p in obj.free]
-    res = differential_evolution(obj, bounds, seed=seed, popsize=popsize, maxiter=maxiter, polish=False,
-                                 vectorized=True, updating="deferred", init="latinhypercube")
+    init, done, t0 = "latinhypercube", 0, time.perf_counter()
+    if checkpoint is not None and checkpoint.exists():
+        ck = json.loads(checkpoint.read_text())
+        init, done, obj.log = np.array(ck["population"]), ck["generation"], ck["evaluations"]
+        print(f"resuming at generation {done} ({len(obj.log)} evaluations)", flush=True)
+    state = {"gen": done}
+
+    def progress(intermediate_result):
+        state["gen"] += 1
+        r = intermediate_result
+        print(f"gen {state['gen']}: best {r.fun:.3f} h, evaluations {len(obj.log)}, "
+              f"{(time.perf_counter() - t0) / 60:.1f} min", flush=True)
+        if checkpoint is not None:
+            checkpoint.parent.mkdir(parents=True, exist_ok=True)
+            checkpoint.write_text(json.dumps({"generation": state["gen"], "population": r.population.tolist(),
+                                              "evaluations": obj.log}))
+
+    res = differential_evolution(obj, bounds, seed=seed, popsize=popsize, maxiter=max(1, maxiter - done),
+                                 polish=False, vectorized=True, updating="deferred", init=init,
+                                 callback=progress)
+    res.resumed_at_generation = done
     return obj, res
 
 
@@ -216,23 +240,29 @@ def main(argv=None):
     print(f"cases loaded in {time.perf_counter() - t:.0f}s, workers {w}", flush=True)
 
     if a.command == "search":
-        obj, res = search(cases, a.kind, a.seed, a.workers, a.popsize, a.maxiter)
+        ck = OUT / "checkpoints" / f"{a.kind}_seed{a.seed}.json"
+        obj, res = search(cases, a.kind, a.seed, a.workers, a.popsize, a.maxiter, checkpoint=ck)
         best = obj.theta(res.x)
         _save(f"{a.kind}_seed{a.seed}", {**meta, "best_theta": best, "best_objective_h": float(res.fun),
                                           "nit": int(res.nit), "nfev": int(res.nfev), "message": res.message,
+                                          "resumed_at_generation": res.resumed_at_generation,
                                           "seconds": time.perf_counter() - t, "evaluations": obj.log})
     elif a.command == "hy":
         # re-evaluate the behavioural set (within 5 % of the best G8 objective, all seeds) with HY
         runs = [json.loads(p.read_text()) for p in sorted(OUT.glob(f"{a.kind}_seed*.json"))]
         evals = [e for r in runs for e in r["evaluations"]]
         best = min(e["objective_h"] for e in evals)
-        beh = [e for e in evals if e["objective_h"] <= 1.05 * best]
-        uniq = {json.dumps(e["theta"], sort_keys=True): e for e in beh}
+        beh = sorted((e for e in evals if e["objective_h"] <= 1.05 * best), key=lambda e: e["objective_h"])
+        uniq = list({json.dumps(e["theta"], sort_keys=True): e for e in beh}.values())
+        # HY costs 5-15x G8: the best vector plus up to 29 more spread evenly over the behavioural set by rank
+        idx = sorted(set([0] + np.linspace(0, len(uniq) - 1, min(30, len(uniq))).round().astype(int).tolist()))
+        uniq = {i: uniq[i] for i in idx}
         hy = Objective(cases, a.kind, scheme="HY", workers=a.workers)
         X = np.log(np.array([[e["theta"][p] for p in BOUNDS[a.kind]] for e in uniq.values()])).T
         vals = hy(X)
         _save(f"{a.kind}_behavioural_HY", {**meta, "scheme": "HY at 90 m", "best_G8_h": best,
-                                           "n_behavioural": len(uniq), "evaluations": hy.log,
+                                           "n_behavioural": len(beh), "n_reevaluated": len(uniq),
+                                           "evaluations": hy.log,
                                            "g8_objective_h": [e["objective_h"] for e in uniq.values()],
                                            "hy_objective_h": vals.tolist(), "seconds": time.perf_counter() - t})
     elif a.command == "lofo":
