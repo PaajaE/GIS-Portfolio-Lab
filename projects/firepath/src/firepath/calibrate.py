@@ -247,6 +247,7 @@ def main(argv=None):
                                           "nit": int(res.nit), "nfev": int(res.nfev), "message": res.message,
                                           "resumed_at_generation": res.resumed_at_generation,
                                           "seconds": time.perf_counter() - t, "evaluations": obj.log})
+        ck.unlink(missing_ok=True)              # finished: a rerun starts afresh
     elif a.command == "hy":
         # re-evaluate the behavioural set (within 5 % of the best G8 objective, all seeds) with HY
         runs = [json.loads(p.read_text()) for p in sorted(OUT.glob(f"{a.kind}_seed*.json"))]
