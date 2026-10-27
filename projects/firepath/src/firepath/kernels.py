@@ -43,3 +43,15 @@ def propagate_graph(f: SpreadField, radius: int = 8, *, points=(), inside=None, 
                           inside=None if inside is None else c(inside, bool), points=pts,
                           seed=None if seed is None else c(seed), t0=float(t0), t_stop=float(t_stop))
     return Result(arr.reshape(f.shape), st.reshape(f.shape))
+
+
+def field_hours(st, u10, v10, p):
+    """Rust spread-field builder: same as field.hour(st, u10, v10, p) with u10, v10 of shape (H, nr, nc)
+    (tests/test_kernels.py: within 1e-12 relative). Returns r_head, ecc, theta, each (H, nr, nc)."""
+    from firepath_kernels import field_build
+
+    c = lambda a, dt=np.float64: np.ascontiguousarray(a, dtype=dt)  # noqa: E731
+    timber = st.timber if st.timber is not None else np.zeros(st.burnable.shape, bool)
+    return field_build(c(st.r0), c(st.sigma), c(st.beta), c(st.beta_op), c(st.waf), c(st.tan_slope),
+                       c(st.upslope), c(timber, bool), c(st.burnable, bool), c(u10), c(v10),
+                       p.k, p.a_u, p.a_s, p.g, p.wind_factor)

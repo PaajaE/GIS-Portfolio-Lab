@@ -87,11 +87,12 @@ class Static:
 
 
 def hour(st: Static, u10: np.ndarray, v10: np.ndarray, p: Params):
-    """(r_head m/min, ecc, theta rad) for one hour; u10, v10 = UTM-grid-relative 10 m wind (m/s) per cell."""
+    """(r_head m/min, ecc, theta rad) for one hour; u10, v10 = UTM-grid-relative 10 m wind (m/s) per cell.
+    u10, v10 may carry a leading hour axis (H, nr, nc): the hours are then computed together."""
     b = st.burnable
-    out_r = np.zeros(b.shape)
-    out_e = np.zeros(b.shape)
-    out_t = np.zeros(b.shape)
+    out_r = np.zeros(u10.shape)
+    out_e = np.zeros(u10.shape)
+    out_t = np.zeros(u10.shape)
     sig, beta, bop = st.sigma[b], st.beta[b], st.beta_op[b]
     ratio = beta / bop
     c = 7.47 * np.exp(-0.133 * sig ** 0.55)
@@ -99,7 +100,7 @@ def hour(st: Static, u10: np.ndarray, v10: np.ndarray, p: Params):
     ee = 0.715 * np.exp(-3.59e-4 * sig)
     cs, ux, uy = frame(st.tan_slope[b], st.upslope[b])
     # horizontal wind -> orthogonal projection onto the slope plane, in slope coordinates
-    u, v = u10[b], v10[b]
+    u, v = u10[..., b], v10[..., b]
     w1 = cs * (u * ux + v * uy)
     w2 = -u * uy + v * ux
     speed_plane = np.hypot(w1, w2)                                  # m/s at 10 m, in the plane
@@ -115,6 +116,7 @@ def hour(st: Static, u10: np.ndarray, v10: np.ndarray, p: Params):
     r0 = p.k * st.r0[b]
     if p.g != 1.0 and st.timber is not None:
         r0 = np.where(st.timber[b], p.g * r0, r0)
+    r0 = np.broadcast_to(r0, u.shape)
     r_head = r0 * (1.0 + phi_e)
     cap = np.maximum(u_e / FT_PER_M, r0)                                         # E6 (andrews2013)
     r_head = np.where(u_e > 0, np.minimum(r_head, cap), r_head)
@@ -124,5 +126,5 @@ def hour(st: Static, u10: np.ndarray, v10: np.ndarray, p: Params):
     d1 = np.where(phi_e > 0, e1, 1.0)
     d2 = np.where(phi_e > 0, e2, 0.0)
     hx, hy = vec_to_horizontal(d1, d2, cs, ux, uy)
-    out_r[b], out_e[b], out_t[b] = r_head, ecc, np.arctan2(hy, hx)
+    out_r[..., b], out_e[..., b], out_t[..., b] = r_head, ecc, np.arctan2(hy, hx)
     return out_r, out_e, out_t

@@ -75,3 +75,26 @@ def test_rust_levelset_bit_identical_to_reference(seed):
     assert np.array_equal(a.status, b.status)
     fin = np.isfinite(a.arrival)
     assert np.array_equal(a.arrival[fin], b.arrival[fin])
+
+
+@pytest.mark.parametrize("seed", range(10))
+def test_rust_field_builder_matches_numpy(seed):
+    from firepath.field import Params, Static, hour
+    from firepath.kernels import field_hours
+    from firepath.moisture import Moisture
+
+    rng = np.random.default_rng(700 + seed)
+    shp = (int(rng.integers(3, 12)), int(rng.integers(3, 12)))
+    fuel = rng.choice([91, 98, 101, 102, 122, 145, 165, 183, 188], shp)
+    st = Static.build(fuel, rng.uniform(0, 80, shp), rng.uniform(0, 30, shp), rng.uniform(0, 0.9, shp),
+                      rng.uniform(-np.pi, np.pi, shp), Moisture(3, 4, 5, 60, 90))
+    u, v = rng.normal(0, 7, (5, *shp)), rng.normal(0, 7, (5, *shp))
+    u[0, 0, 0] = v[0, 0, 0] = 0.0                                 # calm cell: upslope direction, ecc from slope
+    st.tan_slope[0, 1] = 0.0                                      # flat cell
+    p = Params(k=float(rng.uniform(0.2, 3)), a_u=float(rng.uniform(0.5, 2)), a_s=float(rng.uniform(0.3, 3)),
+               g=float(rng.uniform(0.3, 3)))
+    ref = hour(st, u, v, p)
+    got = field_hours(st, u, v, p)
+    for a, b in zip(ref, got):
+        assert a.shape == b.shape
+        assert np.allclose(a, b, rtol=1e-12, atol=1e-12)

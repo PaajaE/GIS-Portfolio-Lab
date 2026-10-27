@@ -21,8 +21,9 @@ from datetime import datetime, timezone
 import numpy as np
 
 from .ellipse import lb_anderson_ms
-from .field import Params, hour
+from .field import Params
 from .harvest import PROJECT
+from .kernels import field_hours
 from .observed import CONSISTENT, NEVER, interval_error
 from .reference import SpreadField
 from .run import CAP_MIN, setup
@@ -39,6 +40,8 @@ class Case:
     S: dict
     scored_obs: np.ndarray      # CONSISTENT and not in a masked interval
     never: np.ndarray           # NEVER (scored only where the model burns them)
+    u: np.ndarray = None        # wind for the run's hours (H, nr, nc) float64, shared by all evaluations
+    v: np.ndarray = None
 
 
 def _masked_rel(fire: str, t0: float) -> list[tuple[float, float]]:
@@ -58,7 +61,9 @@ def load_case(fire: str, cell: int = 90) -> Case:
     for a, b in _masked_rel(fire, S["t0"]):
         # observed interval (lo, hi] equals the masked scan interval (scan times are minutes apart at most)
         masked |= (np.abs(lo - a) < 1.0) & (np.abs(hi - b) < 1.0)
-    return Case(fire, S, (flag == CONSISTENT) & ~masked, flag == NEVER)
+    u = np.ascontiguousarray(S["u"][S["hrs"]], dtype=np.float64)
+    v = np.ascontiguousarray(S["v"][S["hrs"]], dtype=np.float64)
+    return Case(fire, S, (flag == CONSISTENT) & ~masked, flag == NEVER, u, v)
 
 
 def params_of(kind: str, x) -> dict:
@@ -68,20 +73,20 @@ def params_of(kind: str, x) -> dict:
 def field_for(case: Case, kind: str, theta: dict) -> SpreadField:
     S, st = case.S, case.S["st"]
     H = len(S["hrs"])
+    if kind == "model":                 # Rust builder, same as field.hour (tests/test_kernels.py)
+        r, e, th = field_hours(st, case.u, case.v, Params(**theta))
+        return SpreadField(S["t_change"], r, e, th, st.burnable, S["cell"], tan_slope=S["tan_s"], upslope=S["up"])
     r, e, th = (np.zeros((H, *st.burnable.shape)) for _ in range(3))
-    for j, h in enumerate(S["hrs"]):
-        u, v = S["u"][h], S["v"][h]
-        if kind == "model":
-            r[j], e[j], th[j] = hour(st, u, v, Params(**theta))
-        elif kind == "B0":
+    for j in range(H):
+        u, v = case.u[j], case.v[j]
+        if kind == "B0":
             r[j] = np.where(st.burnable, theta["c"], 0.0)
         else:                       # B1: uniform fuel, no slope, ellipse from U10 (run.fields)
             s10 = np.hypot(u, v)
             r[j] = np.where(st.burnable, theta["c"] * (1 + theta["b"] * s10 ** 1.5), 0.0)
             e[j] = np.where(st.burnable, np.sqrt(1 - 1 / lb_anderson_ms(s10 / 1.15 * 0.4) ** 2), 0.0)
             th[j] = np.arctan2(v, u)
-    terrain = {"tan_slope": S["tan_s"], "upslope": S["up"]} if kind == "model" else {}
-    return SpreadField(S["t_change"], r, e, th, st.burnable, S["cell"], **terrain)
+    return SpreadField(S["t_change"], r, e, th, st.burnable, S["cell"])
 
 
 def score(case: Case, arrival: np.ndarray) -> dict:
@@ -106,3 +111,137 @@ def evaluate(case: Case, kind: str, theta: dict, scheme: str = "HY") -> dict:
     f = field_for(case, kind, theta)
     res = run_scheme(scheme, f, case.S["inside"], 0.0, case.S["t_stop"])
     return score(case, res.arrival)
+
+
+# ----------------------------------------------------------------------------- search (PLAN §8 rev. 5)
+
+CAL_FIRES = ("bush", "mangum", "telegraph")
+OUT = PROJECT / "validation" / "calibration"
+
+
+class Objective:
+    """Mean over fires of the primary error, evaluated with G8 (revision 5); every call is logged."""
+
+    def __init__(self, cases, kind, scheme="G8", workers=1, fixed=None):
+        self.cases, self.kind, self.scheme, self.workers = cases, kind, scheme, workers
+        self.fixed = fixed or {}                         # parameters held fixed (profiles)
+        self.free = [p for p in BOUNDS[kind] if p not in self.fixed]
+        self.log = []
+
+    def theta(self, x_log):
+        th = dict(self.fixed)
+        th.update(zip(self.free, np.exp(np.asarray(x_log, float))))
+        return {p: float(th[p]) for p in BOUNDS[self.kind]}
+
+    def one(self, x_log):
+        th = self.theta(x_log)
+        per = {c.fire: evaluate(c, self.kind, th, self.scheme) for c in self.cases}
+        obj = float(np.mean([r["primary_h"] for r in per.values()]))
+        self.log.append({"theta": th, "objective_h": obj,
+                         "per_fire": {f: {"primary_h": r["primary_h"], "signed_h": r["signed_h"],
+                                          "median_growth_dice": float(np.median(r["growth_dice"]))}
+                                      for f, r in per.items()}})
+        return obj
+
+    def __call__(self, X):
+        """Vectorised for scipy (X has shape (n_free, S)); members run on threads (kernels drop the GIL),
+        each member's result is independent of the thread count."""
+        cols = [X[:, j] for j in range(X.shape[1])] if X.ndim == 2 else [X]
+        if self.workers == 1 or len(cols) == 1:
+            return np.array([self.one(x) for x in cols])
+        from concurrent.futures import ThreadPoolExecutor
+
+        with ThreadPoolExecutor(self.workers) as ex:
+            return np.array(list(ex.map(self.one, cols)))
+
+
+def search(cases, kind, seed, workers, popsize=15, maxiter=60, fixed=None):
+    from scipy.optimize import differential_evolution
+
+    obj = Objective(cases, kind, workers=workers, fixed=fixed)
+    bounds = [tuple(np.log(BOUNDS[kind][p])) for p in obj.free]
+    res = differential_evolution(obj, bounds, seed=seed, popsize=popsize, maxiter=maxiter, polish=False,
+                                 vectorized=True, updating="deferred", init="latinhypercube")
+    return obj, res
+
+
+def _save(name, payload):
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / f"{name}.json").write_text(json.dumps(payload, indent=1))
+    print("wrote", OUT / f"{name}.json", flush=True)
+
+
+def main(argv=None):
+    import argparse
+    import os
+    import platform
+    import subprocess
+    import time
+
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("command", choices=["search", "hy", "lofo", "profile"])
+    ap.add_argument("--kind", default="model", choices=list(BOUNDS))
+    ap.add_argument("--seed", type=int, default=20261009)
+    ap.add_argument("--fires", default=",".join(CAL_FIRES))
+    ap.add_argument("--workers", type=int, default=int(os.environ.get("FIREPATH_THREADS", os.cpu_count() or 1)))
+    ap.add_argument("--popsize", type=int, default=15)
+    ap.add_argument("--maxiter", type=int, default=60)
+    ap.add_argument("--param", help="profile: parameter to fix")
+    ap.add_argument("--points", type=int, default=7, help="profile: grid points over the bound")
+    a = ap.parse_args(argv)
+    fires = a.fires.split(",")
+    if set(fires) - set(CAL_FIRES):
+        raise SystemExit(f"calibration uses only {CAL_FIRES}; validation fires are opened once, in M4")
+    commit = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, cwd=PROJECT).stdout.strip()
+    meta = {"kind": a.kind, "seed": a.seed, "fires": fires, "popsize": a.popsize, "maxiter": a.maxiter,
+            "workers": a.workers, "scheme": "G8 radius 8 at 90 m (PLAN §8 rev. 5)", "bounds": BOUNDS[a.kind],
+            "commit": commit, "host": platform.platform(), "started_utc": datetime.now(timezone.utc).isoformat()}
+    t = time.perf_counter()
+    cases = [load_case(f) for f in fires]
+    print(f"cases loaded in {time.perf_counter() - t:.0f}s", flush=True)
+
+    if a.command == "search":
+        obj, res = search(cases, a.kind, a.seed, a.workers, a.popsize, a.maxiter)
+        best = obj.theta(res.x)
+        _save(f"{a.kind}_seed{a.seed}", {**meta, "best_theta": best, "best_objective_h": float(res.fun),
+                                          "nit": int(res.nit), "nfev": int(res.nfev), "message": res.message,
+                                          "seconds": time.perf_counter() - t, "evaluations": obj.log})
+    elif a.command == "hy":
+        # re-evaluate the behavioural set (within 5 % of the best G8 objective, all seeds) with HY
+        runs = [json.loads(p.read_text()) for p in sorted(OUT.glob(f"{a.kind}_seed*.json"))]
+        evals = [e for r in runs for e in r["evaluations"]]
+        best = min(e["objective_h"] for e in evals)
+        beh = [e for e in evals if e["objective_h"] <= 1.05 * best]
+        uniq = {json.dumps(e["theta"], sort_keys=True): e for e in beh}
+        hy = Objective(cases, a.kind, scheme="HY", workers=a.workers)
+        X = np.log(np.array([[e["theta"][p] for p in BOUNDS[a.kind]] for e in uniq.values()])).T
+        vals = hy(X)
+        _save(f"{a.kind}_behavioural_HY", {**meta, "scheme": "HY at 90 m", "best_G8_h": best,
+                                           "n_behavioural": len(uniq), "evaluations": hy.log,
+                                           "g8_objective_h": [e["objective_h"] for e in uniq.values()],
+                                           "hy_objective_h": vals.tolist(), "seconds": time.perf_counter() - t})
+    elif a.command == "lofo":
+        out = {}
+        for left in fires:
+            train = [c for c in cases if c.fire != left]
+            obj, res = search(train, a.kind, a.seed, a.workers, a.popsize, a.maxiter)
+            th = obj.theta(res.x)
+            test = next(c for c in cases if c.fire == left)
+            out[left] = {"theta": th, "in_sample_h": float(res.fun),
+                         "left_out_G8": evaluate(test, a.kind, th, "G8"),
+                         "left_out_HY": evaluate(test, a.kind, th, "HY")}
+            print(left, out[left]["theta"], out[left]["left_out_G8"]["primary_h"], flush=True)
+        _save(f"{a.kind}_lofo_seed{a.seed}", {**meta, "folds": out, "seconds": time.perf_counter() - t})
+    else:
+        lo, hi = BOUNDS[a.kind][a.param]
+        rows = []
+        for val in np.exp(np.linspace(np.log(lo), np.log(hi), a.points)):
+            obj, res = search(cases, a.kind, a.seed, a.workers, a.popsize, a.maxiter, fixed={a.param: float(val)})
+            rows.append({"value": float(val), "objective_h": float(res.fun), "theta": obj.theta(res.x)})
+            print(a.param, val, res.fun, flush=True)
+        _save(f"{a.kind}_profile_{a.param}", {**meta, "param": a.param, "rows": rows,
+                                              "seconds": time.perf_counter() - t})
+
+
+if __name__ == "__main__":
+    main()

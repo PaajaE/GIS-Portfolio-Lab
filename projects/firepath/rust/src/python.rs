@@ -1,8 +1,9 @@
-use numpy::{IntoPyArray, PyArray1, PyReadonlyArray1, PyReadonlyArray2, PyReadonlyArray3};
+use numpy::{IntoPyArray, PyArray1, PyArray3, PyReadonlyArray1, PyReadonlyArray2, PyReadonlyArray3};
 use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
 
 use crate::graph::{propagate, Field, Traversal};
+use crate::field;
 use crate::levelset;
 
 /// Graph propagation. Stencil tables come from `firepath.stencil` (flattened):
@@ -121,9 +122,58 @@ fn levelset_run(
     Ok(())
 }
 
+/// Spread field for the given hours (oracle `firepath.field.hour`). Static per-cell arrays are 2-D
+/// (nr, nc); u, v are (hours, nr, nc) float64; returns r_head, ecc, theta as (hours, nr, nc).
+#[pyfunction]
+#[allow(clippy::too_many_arguments)]
+fn field_build<'py>(
+    py: Python<'py>,
+    r0: PyReadonlyArray2<f64>,
+    sigma: PyReadonlyArray2<f64>,
+    beta: PyReadonlyArray2<f64>,
+    beta_op: PyReadonlyArray2<f64>,
+    waf: PyReadonlyArray2<f64>,
+    tan_slope: PyReadonlyArray2<f64>,
+    upslope: PyReadonlyArray2<f64>,
+    timber: PyReadonlyArray2<bool>,
+    burnable: PyReadonlyArray2<bool>,
+    u: PyReadonlyArray3<f64>,
+    v: PyReadonlyArray3<f64>,
+    k: f64,
+    a_u: f64,
+    a_s: f64,
+    g: f64,
+    wind_factor: f64,
+) -> PyResult<(Bound<'py, PyArray3<f64>>, Bound<'py, PyArray3<f64>>, Bound<'py, PyArray3<f64>>)> {
+    let (hours, nr, nc) = u.as_array().dim();
+    if v.as_array().dim() != (hours, nr, nc) || burnable.as_array().dim() != (nr, nc) {
+        return Err(PyValueError::new_err("shape mismatch between wind and static arrays"));
+    }
+    let st = field::Static {
+        r0: r0.as_slice()?,
+        sigma: sigma.as_slice()?,
+        beta: beta.as_slice()?,
+        beta_op: beta_op.as_slice()?,
+        waf: waf.as_slice()?,
+        tan_slope: tan_slope.as_slice()?,
+        upslope: upslope.as_slice()?,
+        timber: timber.as_slice()?,
+        burnable: burnable.as_slice()?,
+    };
+    let p = field::Params { k, a_u, a_s, g, wind_factor };
+    let (us, vs) = (u.as_slice()?, v.as_slice()?);
+    let len = hours * nr * nc;
+    let (mut r, mut e, mut t) = (vec![0.0; len], vec![0.0; len], vec![0.0; len]);
+    py.detach(|| field::build(&st, &p, us, vs, &mut r, &mut e, &mut t));
+    let shape = (hours, nr, nc);
+    let to3 = |x: Vec<f64>| numpy::ndarray::Array3::from_shape_vec(shape, x).unwrap().into_pyarray(py);
+    Ok((to3(r), to3(e), to3(t)))
+}
+
 #[pymodule]
 fn firepath_kernels(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(propagate_graph, m)?)?;
     m.add_function(wrap_pyfunction!(levelset_run, m)?)?;
+    m.add_function(wrap_pyfunction!(field_build, m)?)?;
     Ok(())
 }

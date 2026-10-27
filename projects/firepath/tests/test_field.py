@@ -54,3 +54,15 @@ def test_timber_group_multiplier_scales_only_tu_tl():
     r1, _, _ = hour(st, z, z, Params(k=0.8))
     r2, _, _ = hour(st, z, z, Params(k=0.8, g=2.5))
     assert np.allclose(r2[0, :2], r1[0, :2]) and np.allclose(r2[0, 2:], 2.5 * r1[0, 2:])
+
+
+def test_hour_axis_matches_per_hour_calls():
+    rng = np.random.default_rng(3)
+    fuel = rng.choice([91, 102, 122, 165, 188], (5, 6))
+    st = _static(fuel, tan_s=0.3, up=0.7, cc=40, ch=12)
+    u, v = rng.normal(0, 6, (4, 5, 6)), rng.normal(0, 6, (4, 5, 6))
+    p = Params(k=0.7, a_u=1.3, a_s=0.8, g=1.7)
+    r, e, t = hour(st, u, v, p)
+    for h in range(4):
+        rh, eh, th = hour(st, u[h], v[h], p)
+        assert np.array_equal(r[h], rh) and np.array_equal(e[h], eh) and np.array_equal(t[h], th)

@@ -169,7 +169,9 @@ def run_scheme(scheme, f, inside, t0, t_stop):
         return propagate_hybrid(f, inside=inside, t0=t0, t_stop=t_stop)
     if scheme == "LS":
         return propagate_levelset(f, inside=inside, t0=t0, t_stop=t_stop, order=5)
-    return propagate(f, radius=8, inside=inside, t0=t0, t_stop=t_stop)
+    from .kernels import propagate_graph       # Rust, at parity with reference.propagate (test_kernels)
+
+    return propagate_graph(f, radius=8, inside=inside, t0=t0, t_stop=t_stop)
 
 
 def setup(fire: str, cell: int, window: int | None = None) -> dict:
