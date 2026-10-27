@@ -303,10 +303,24 @@ model", "Propagation", "Edge geometry and barriers", "Initial perimeter"). In sh
   t_{k−1} and t_k), cumulative IoU/Dice, area ratio, boundary distances. Calibration must not improve the
   primary at the cost of the growth-only Dice relative to B1 (checked).
 - **Optimizer:** SciPy `differential_evolution` in log-parameter space within the bounds of §6.7,
-  `seed=20261009`, `popsize=15`, `maxiter=60`, `polish=True` (L-BFGS-B), `vectorized=True`. Each generation is
+  `seed=20261009`, `popsize=15`, `maxiter=60`, `polish=True` (L-BFGS-B; *revision 5: False*), `vectorized=True`. Each generation is
   one Rust batch call (Rayon across population members × fires), so results do not depend on thread
   timing. Repeat with seeds {1, 2, 3} to show the optimum is reproducible. Each baseline goes through the
   same procedure.
+- **Revision 5 (2026-10-27, owner-approved before any calibration run): search scheme and budget.**
+  Measured on Mangum at 90 m (7-day window, Rust, cloud 4 CPU): HY costs 89 s at k = 0.25, 420 s at
+  k = 0.5 and 1,080 s at k = 1 (the level set is CFL-limited, so its cost grows with k); G8 alone costs
+  15 s and 33 s, and its objective differs from HY's by ≤ 0.09 h (41.83 vs 41.83 h; 31.55 vs 31.46 h). At
+  180 m the objective shifts by up to 0.7 h against 90 m. A §8 search with HY (~34,000 runs for the
+  model alone, k up to 5) would take hundreds of hours on the build Mac. Therefore:
+  (1) DE, profiles and leave-one-fire-out search with **G8 (the graph half of HY, radius 8) at 90 m**;
+  (2) the best vector and the whole behavioural set are **re-evaluated with HY at 90 m**, and both
+  objectives are reported; validation (M4) uses HY;
+  (3) `polish=False`: the objective is piecewise constant at cell level, so finite-difference L-BFGS-B
+  refinement is meaningless;
+  (4) every evaluated vector is stored (`validation/calibration/<kind>_seed<s>.npz`) for the
+  behavioural set. Search at 180 m was rejected: it would calibrate a different model from the one
+  validated.
 - **Identifiability / equifinality:** (1) the *behavioural set* is every evaluated parameter vector within
   5 % of the best objective; report the 5–95 % range and pairwise rank correlations (expected
   `k`–`a_w` trade-off); (2) a one-parameter profile per parameter (re-optimising the others); (3) a

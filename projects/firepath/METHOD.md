@@ -105,6 +105,9 @@ tan 0.6 at 30 m (median 5.2 %) and converges (0.4 % at 7.5 m). `validation/m1a6_
 - M4: dynamic transfer per E10.
 - M5: `m` scales M1–M2 only.
 
+**Calibration search (revision 5, PLAN §8):** searched with G8 at 90 m, best vector and behavioural set
+re-evaluated with HY at 90 m (measured objective difference ≤ 0.09 h on Mangum); validation with HY.
+
 **Fixed during calibration:** M1–M4, `m` = 1, λ = 1, LB relation (D2), stencil/scheme (D1), WAF rule,
 wind conversion. **Separation of model sensitivity from input uncertainty (D3):** `a_u` and λ enter only as
 the product λ·a_u, so the model cannot tell them apart (tested: identical arrival fields). The separation is
