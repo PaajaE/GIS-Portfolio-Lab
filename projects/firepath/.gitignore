@@ -1,0 +1,5 @@
+# Local secrets (copied from .env.example)
+.env
+# Rust build output
+rust/target/
+validation/calibration/checkpoints/

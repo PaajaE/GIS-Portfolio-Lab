@@ -1,0 +1,60 @@
+{
+ "iso": {
+  "case": "iso",
+  "n": 3544,
+  "g8_7p5_seconds": 60.86427015300001,
+  "share_LS7p5_above_G8_7p5": 0.9988713318284425,
+  "LS7p5_minus_G8_rel": {
+   "median": 0.029047023923302544,
+   "p95": 0.05693957849339243
+  },
+  "HY30_minus_G8_7p5_rel": {
+   "median": -0.027046806377518058,
+   "p95": -0.005455967881238237
+  },
+  "share_HY30_above_G8_7p5": 0.008182844243792325,
+  "abs_HY30_vs_G8_7p5": {
+   "median": 0.027046806377518058,
+   "p95": 0.09354261495450077
+  }
+ },
+ "lb2": {
+  "case": "lb2",
+  "n": 1933,
+  "g8_7p5_seconds": 50.615901355000005,
+  "share_LS7p5_above_G8_7p5": 0.9979306777030522,
+  "LS7p5_minus_G8_rel": {
+   "median": 0.022206248526971836,
+   "p95": 0.05344646441226494
+  },
+  "HY30_minus_G8_7p5_rel": {
+   "median": -0.02280809511282183,
+   "p95": 0.01771311349923878
+  },
+  "share_HY30_above_G8_7p5": 0.28142783238489394,
+  "abs_HY30_vs_G8_7p5": {
+   "median": 0.02698745196735668,
+   "p95": 0.10504829068685481
+  }
+ },
+ "lb4": {
+  "case": "lb4",
+  "n": 774,
+  "g8_7p5_seconds": 25.61409383199998,
+  "share_LS7p5_above_G8_7p5": 0.7661498708010336,
+  "LS7p5_minus_G8_rel": {
+   "median": 0.01685745675894892,
+   "p95": 0.04699730824785261
+  },
+  "HY30_minus_G8_7p5_rel": {
+   "median": -0.005030386194136888,
+   "p95": 0.037976141313523205
+  },
+  "share_HY30_above_G8_7p5": 0.38113695090439276,
+  "abs_HY30_vs_G8_7p5": {
+   "median": 0.02115595539850574,
+   "p95": 0.15213771149817557
+  }
+ },
+ "note": "POST-HOC diagnostic, not pre-registered. G8 at 7.5 m (exact edge integrals, static field) is a feasible-path upper bound on the true arrival for the 7.5 m geometry; values are 4x4 block means around coarse centres."
+}

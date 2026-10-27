@@ -1,0 +1,42 @@
+# FirePath — local, reproducible pipeline (stages are added milestone by milestone; see PLAN.md §16).
+# Requires: uv. `make probe` needs only python3 (standard library).
+PY := uv run python -m firepath
+
+.PHONY: setup env probe harvest prepare test bakeoff bench sitreps-telegraph calibrate calibrate-check
+
+setup:
+	uv sync
+
+env:                ## create the git-ignored .env from .env.example (keeps an existing .env)
+	@test -f .env && echo ".env exists, not overwritten" || (cp .env.example .env && echo "created .env: fill in FIRMS_MAP_KEY")
+
+probe:              ## M0: reachability / auth / inventory probe -> provenance/probe_<label>.json
+	python3 src/firepath/probe.py --label $${LABEL:-build-mac}
+
+harvest:            ## M1b raw inputs + provenance/harvest_<fire>.json (FIRE=mangum; STEPS optional)
+	uv run python -m firepath.harvest $${FIRE:-mangum} $(STEPS)
+
+prepare:            ## M1b: raw -> analysis grid, data/interim/<fire>/{inputs,wind}.npz + provenance/prepare_<fire>.json
+	uv run python -m firepath.prepare $${FIRE:-mangum}
+
+test:               ## reference propagation fixtures, observation audit, inputs, probe crawler
+	uv run pytest -q
+
+bakeoff:            ## M1a D1 bake-off (analytic fixtures; ~1 h in pure Python) -> validation/m1a_bakeoff_*.json
+	for s in levelset levelset5 dijkstra_r8 dijkstra_r2; do $(PY).bakeoff $$s; done
+	$(PY).bakeoff combine
+
+bench:              ## Rust vs Python reference on the Mangum 90 m field + scenario thread scaling -> benchmarks/propagation.json
+	$(PY).bench
+
+sitreps-telegraph:  ## Telegraph 2021 situation reports from the Internet Archive (run on the build Mac)
+	$(PY).sitreps --wayback 7512 telegraph
+
+calibrate:          ## M3 on the build Mac: DE (G8, 90 m) for model, B1, B0 with seed 20261009, then seeds 1-3 for the model
+	for k in model B1 B0; do $(PY).calibrate search --kind $$k; done
+	for s in 1 2 3; do $(PY).calibrate search --kind model --seed $$s; done
+
+calibrate-check:    ## M3: behavioural set re-evaluated with HY; leave-one-fire-out for model and B1
+	$(PY).calibrate hy --kind model
+	$(PY).calibrate lofo --kind model
+	$(PY).calibrate lofo --kind B1

@@ -1,0 +1,24 @@
+{
+ "fire": "telegraph",
+ "fuel_version": "LF2020",
+ "fire_year": 2021,
+ "years": {
+  "2021": {
+   "layer": "LF2022_Dist21",
+   "role": "fire year",
+   "share_burnable_aoi": 0.4167,
+   "share_final_perimeter": 0.9913
+  },
+  "2022": {
+   "layer": "LF2022_Dist22",
+   "role": "after fire",
+   "share_burnable_aoi": 0.0021,
+   "share_final_perimeter": 0.0
+  }
+ },
+ "stale_any": {
+  "share_burnable_aoi": 0.0,
+  "share_final_perimeter": 0.0
+ },
+ "note": "stale years []: disturbances missing from LF2020 fuels; the fire-year row shows what a version including 2021 would leak"
+}

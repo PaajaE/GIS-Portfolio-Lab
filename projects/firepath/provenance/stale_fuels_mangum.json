@@ -1,0 +1,36 @@
+{
+ "fire": "mangum",
+ "fuel_version": "LF2016",
+ "fire_year": 2020,
+ "years": {
+  "2017": {
+   "layer": "LF2020_Dist17",
+   "role": "stale",
+   "share_burnable_aoi": 0.0494,
+   "share_final_perimeter": 0.0484
+  },
+  "2018": {
+   "layer": "LF2020_Dist18",
+   "role": "stale",
+   "share_burnable_aoi": 0.0175,
+   "share_final_perimeter": 0.062
+  },
+  "2019": {
+   "layer": "LF2020_Dist19",
+   "role": "stale",
+   "share_burnable_aoi": 0.0285,
+   "share_final_perimeter": 0.0552
+  },
+  "2020": {
+   "layer": "LF2020_Dist20",
+   "role": "fire year",
+   "share_burnable_aoi": 0.1966,
+   "share_final_perimeter": 0.9994
+  }
+ },
+ "stale_any": {
+  "share_burnable_aoi": 0.088,
+  "share_final_perimeter": 0.1347
+ },
+ "note": "stale years ['2017', '2018', '2019']: disturbances missing from LF2016 fuels; the fire-year row shows what a version including 2020 would leak"
+}

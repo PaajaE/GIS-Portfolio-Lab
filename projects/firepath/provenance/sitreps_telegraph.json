@@ -1,0 +1,415 @@
+{
+ "fire": "telegraph",
+ "source": "Internet Archive copies of inciweb.nwcg.gov/incident/article/7512/*",
+ "retrieved_utc": "2026-10-26T21:17:14+00:00",
+ "archived_urls": 58,
+ "items": {
+  "article_59596": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59596/",
+   "snapshot": "https://web.archive.org/web/20210606022033id_/https://inciweb.nwcg.gov/incident/article/7512/59596/",
+   "title": "Area Closure for the Telegraph Fire - InciWeb the Incident Information System",
+   "chars": 2359,
+   "sha256": "31bb36b72beec8d8f51eb000f4493058c6b0a5cf5c07d0fc2b9f7e418510f343"
+  },
+  "article_59605": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59605/",
+   "snapshot": "https://web.archive.org/web/20210616060509id_/https://inciweb.nwcg.gov/incident/article/7512/59605/",
+   "title": "EVACUATION \"GO\" for Top of the World - InciWeb the Incident Information System",
+   "chars": 1902,
+   "sha256": "21a8e18c9093a015936413407185939bf201411189812b56e0985288c9ef7641"
+  },
+  "article_59639": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59639/",
+   "snapshot": "https://web.archive.org/web/20210803093532id_/https://inciweb.nwcg.gov/incident/article/7512/59639/",
+   "title": "Telegraph Fire Evening Update \u2013 June 7, 2021  - InciWeb the Incident Information System",
+   "chars": 4543,
+   "sha256": "ea2f2f9ce4fc17cea07b9e5b04fae518770744e706ae921a4d90adf8e0c923a4"
+  },
+  "article_59657": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59657/",
+   "snapshot": "https://web.archive.org/web/20210609142239id_/https://inciweb.nwcg.gov/incident/article/7512/59657/",
+   "title": "Telegraph Fire Evening Update - June 8, 2021 - InciWeb the Incident Information System",
+   "chars": 4217,
+   "sha256": "6c9c0a31050883f70bbdc4c3f4fc238edb6c217b8907b78414d4b42b46f534b0"
+  },
+  "article_59661": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59661/",
+   "snapshot": "https://web.archive.org/web/20210609172406id_/https://inciweb.nwcg.gov/incident/article/7512/59661/",
+   "title": "Telegraph Fire Virtual Public Meeting 6pm Tonight June 9 - InciWeb the Incident Information System",
+   "chars": 1401,
+   "sha256": "528ead4a5d308fe029b2f5b22ca1f2e037fba64f74fd93fc08cd2104ab92f276"
+  },
+  "article_59664": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59664/",
+   "snapshot": "https://web.archive.org/web/20210609172430id_/https://inciweb.nwcg.gov/incident/article/7512/59664/",
+   "title": "Telegraph Fire Morning Update - June 9, 2021 - InciWeb the Incident Information System",
+   "chars": 4070,
+   "sha256": "4d7090591f0caf0c581a00c959ec772dae365bca5f852b6da95107d0ca7cb274"
+  },
+  "article_59667": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59667/",
+   "snapshot": "https://web.archive.org/web/20210609212650id_/https://inciweb.nwcg.gov/incident/article/7512/59667/",
+   "title": "Telegraph Fire Morning Video Update - June 9, 2021 - InciWeb the Incident Information System",
+   "chars": 1457,
+   "sha256": "7274038ba1dc69bff9bee553d27880ff3f45721c4e06ba8456b559e0903a3612"
+  },
+  "article_59676": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59676/",
+   "snapshot": "https://web.archive.org/web/20210611204543id_/https://inciweb.nwcg.gov/incident/article/7512/59676/",
+   "title": "Superior, Battle Ax area return to \"READY\" status - InciWeb the Incident Information System",
+   "chars": 1969,
+   "sha256": "e7e2fbf55423891ddc703d646c3bbe7051e7ecba1daf4218f10b3c95be94af40"
+  },
+  "article_59677": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59677/",
+   "snapshot": "https://web.archive.org/web/20210611204445id_/https://inciweb.nwcg.gov/incident/article/7512/59677/",
+   "title": "Telegraph Fire Evening Update - June 9, 2021 - InciWeb the Incident Information System",
+   "chars": 4162,
+   "sha256": "b92253802082ffa722fbbc0ea23c3a981ec05cb44b9992d78582a61d28e43079"
+  },
+  "article_59679": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59679/",
+   "snapshot": "https://web.archive.org/web/20210611204620id_/https://inciweb.nwcg.gov/incident/article/7512/59679/",
+   "title": "Telegraph Fire June 9 virtual community meeting video available on Facebook - InciWeb the Incident Information System",
+   "chars": 1438,
+   "sha256": "4f0db41f646e6744bdeeca9ac350c1ff4109030f213b347a994de0edadefd3ab"
+  },
+  "article_59686": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59686/",
+   "snapshot": "https://web.archive.org/web/20210612022307id_/https://inciweb.nwcg.gov/incident/article/7512/59686/",
+   "title": "Telegraph Fire Morning Update \u2013 June 10, 2021 - InciWeb the Incident Information System",
+   "chars": 4110,
+   "sha256": "5fb89b750dc842158eb4dfc2c273a0d4f6d47c5bf5fa7a97fa6849f7c3287614"
+  },
+  "article_59694": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59694/",
+   "snapshot": "https://web.archive.org/web/20210612022425id_/https://inciweb.nwcg.gov/incident/article/7512/59694/",
+   "title": "From Gila County:  Miami Residents can return home, remain in \"Set\" status - InciWeb the Incident Information System",
+   "chars": 2547,
+   "sha256": "549424785706e713c25849cc7705466f7960c3d83a71c6972ec3d8312de644c8"
+  },
+  "article_59696": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59696/",
+   "snapshot": "https://web.archive.org/web/20210612034520id_/https://inciweb.nwcg.gov/incident/article/7512/59696/",
+   "title": "Telegraph Fire Evening Update - June 10, 2021 - InciWeb the Incident Information System",
+   "chars": 4134,
+   "sha256": "5bf7b3d6a99e8674b63350f0f354770973058ceae26be1a035f2795f838b8ed2"
+  },
+  "article_59698": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59698/",
+   "snapshot": "https://web.archive.org/web/20210613084318id_/https://inciweb.nwcg.gov/incident/article/7512/59698/",
+   "title": "Telegraph Fire Virtual Community Meeting 6pm June 11 - InciWeb the Incident Information System",
+   "chars": 1481,
+   "sha256": "9c3ff28d68823b5c61e83533f53fe18159ab463f688e76cb33da8bcff8aeb2fb"
+  },
+  "article_59702": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59702/",
+   "snapshot": "https://web.archive.org/web/20210613084253id_/https://inciweb.nwcg.gov/incident/article/7512/59702/",
+   "title": "Tonto National Forest Issues Stage 2 Fire Restrictions - InciWeb the Incident Information System",
+   "chars": 1583,
+   "sha256": "6bb8157d16484eb407a731e553c764270ca29ae8db6119a2e292c41185513908"
+  },
+  "article_59704": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59704/",
+   "snapshot": "https://web.archive.org/web/20210613084430id_/https://inciweb.nwcg.gov/incident/article/7512/59704/",
+   "title": "Telegraph Fire Morning Update - June 11, 2021 - InciWeb the Incident Information System",
+   "chars": 4708,
+   "sha256": "3ae017671059f766a52bca7b7c943a5de36ac0209b31dde68e5b10175acc918b"
+  },
+  "article_59706": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59706/",
+   "snapshot": "https://web.archive.org/web/20210613084452id_/https://inciweb.nwcg.gov/incident/article/7512/59706/",
+   "title": "Telegraph Fire Morning Video Update - June 11, 2021 - InciWeb the Incident Information System",
+   "chars": 1380,
+   "sha256": "9c13f0d93b31cebd5a1a2b54de98f5a506b167c470611878ef793103da8757f2"
+  },
+  "article_59721": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59721/",
+   "snapshot": "https://web.archive.org/web/20210621144142id_/https://inciweb.nwcg.gov/incident/article/7512/59721/",
+   "title": "U.S. HIGHWAY 60 IS OPEN AND LOWER CENTRAL HEIGHTS EVACUATION STATUS LOWERED - InciWeb the Incident Information System",
+   "chars": 2001,
+   "sha256": "0ef15cd059e9d20e7927a069ad8ad630c6242214ed83b1ba6925fcbf3adf6b08"
+  },
+  "article_59729": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59729/",
+   "snapshot": "https://web.archive.org/web/20210621144722id_/https://inciweb.nwcg.gov/incident/article/7512/59729/",
+   "title": "Telegraph Fire Evening Update \u2013 June 11, 2021 - InciWeb the Incident Information System",
+   "chars": 4299,
+   "sha256": "66efb7eb92407a6cef70d6f6f296180e4ab60aa466a054dd2340710ee84d8a85"
+  },
+  "article_59731": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59731/",
+   "snapshot": "https://web.archive.org/web/20210621151714id_/https://inciweb.nwcg.gov/incident/article/7512/59731/",
+   "title": "ACTUALIZACI\u00d3N DE LA TARDE DE INCENDIO TELEGAPH\u2013 11 DE JUNIO, 2021 - InciWeb the Incident Information System",
+   "chars": 4869,
+   "sha256": "504bf7cff52eeb4f23c84296b71fd67c7ca6f8baf23df0ec4393db8d4625d6c6"
+  },
+  "article_59735": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59735/",
+   "snapshot": "https://web.archive.org/web/20210621152701id_/https://inciweb.nwcg.gov/incident/article/7512/59735/",
+   "title": "Telegraph Fire Morning Update \u2013 June 12, 2021 - InciWeb the Incident Information System",
+   "chars": 4690,
+   "sha256": "350f39e223da33ae4e9033de885a43e03964f6f3515511184c32fe8b50aae282"
+  },
+  "article_59738": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59738/",
+   "snapshot": "https://web.archive.org/web/20210621152524id_/https://inciweb.nwcg.gov/incident/article/7512/59738/",
+   "title": "Top of the World Open to Returning Residents - InciWeb the Incident Information System",
+   "chars": 1515,
+   "sha256": "1a29b259869b63eaa01592c758c3301a77683a4b09d3c9025dfbd861068c5f22"
+  },
+  "article_59742": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59742/",
+   "snapshot": "https://web.archive.org/web/20210621155230id_/https://inciweb.nwcg.gov/incident/article/7512/59742/",
+   "title": "NEW Evacuation Status rolled back for several areas - InciWeb the Incident Information System",
+   "chars": 1990,
+   "sha256": "cd21a9adac8231797f3ac17fb326f09b5e56d74da40801c10c6ce387bda89504"
+  },
+  "article_59749": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59749/",
+   "snapshot": "https://web.archive.org/web/20210621160639id_/https://inciweb.nwcg.gov/incident/article/7512/59749/",
+   "title": "Telegraph Fire Evening Update \u2013 June 12, 2021 - InciWeb the Incident Information System",
+   "chars": 4503,
+   "sha256": "ae406d3c547894a3a39c84d1d9db513fa161103eea984fe8c229c9f8bae683b8"
+  },
+  "article_59761": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59761/",
+   "snapshot": "https://web.archive.org/web/20210623212652id_/https://inciweb.nwcg.gov/incident/article/7512/59761/",
+   "title": "Telegraph Fire Morning Update \u2013 June 13, 2021 - InciWeb the Incident Information System",
+   "chars": 4458,
+   "sha256": "882ccc4b8b1f23872cd403f45bb7ec03d2123063bca41d808003d5226f5ef617"
+  },
+  "article_59776": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59776/",
+   "snapshot": "https://web.archive.org/web/20210623212653id_/https://inciweb.nwcg.gov/incident/article/7512/59776/",
+   "title": "SR 77 IS CLOSED AGAIN DUE TO INCREASED TELEGRAPH FIRE ACTIVITY - InciWeb the Incident Information System",
+   "chars": 1563,
+   "sha256": "99e53efb770c4318ed14d5855a33f94b358cc488a88297eb3bbb0c9548723e87"
+  },
+  "article_59780": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59780/",
+   "snapshot": "https://web.archive.org/web/20210623212449id_/https://inciweb.nwcg.gov/incident/article/7512/59780/",
+   "title": "Telegraph Fire Evening Update \u2013 June 13, 2021 - InciWeb the Incident Information System",
+   "chars": 4358,
+   "sha256": "6b5607a15c5bfdc63074fc42f713d44359a897b6007f7141a3d0e0b0e18eaba5"
+  },
+  "article_59781": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59781/",
+   "snapshot": "https://web.archive.org/web/20210623212818id_/https://inciweb.nwcg.gov/incident/article/7512/59781/",
+   "title": "Actualizaci\u00f3n vespertina del incendio del tel\u00e9grafo - 13 de junio de 2021 - InciWeb the Incident Information System",
+   "chars": 5157,
+   "sha256": "e26bea585824e8f24ed50f86730bf848dc926097ae355fcba953254922966a3c"
+  },
+  "article_59782": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59782/",
+   "snapshot": "https://web.archive.org/web/20210625120538id_/https://inciweb.nwcg.gov/incident/article/7512/59782/",
+   "title": "GO EVACUATION STATUS FOR EL CAPITAN - InciWeb the Incident Information System",
+   "chars": 1463,
+   "sha256": "3bce5bd0b4132f57eaa7dba5cb72efa164412390771600e449d641f47f3cf7cf"
+  },
+  "article_59787": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59787/",
+   "snapshot": "https://web.archive.org/web/20220812065632id_/https://inciweb.nwcg.gov/incident/article/7512/59787/",
+   "title": "Dripping Springs is in GO Evacuation Status Evacuate NOW - InciWeb the Incident Information System",
+   "chars": 1188,
+   "sha256": "dcdfe18bbdd7c3c9435d2d2cbd51c49a436c8f6db9d5dada45c1259d181fa162"
+  },
+  "article_59789": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59789/",
+   "snapshot": "https://web.archive.org/web/20210625132201id_/https://inciweb.nwcg.gov/incident/article/7512/59789/",
+   "title": "THERE IS NOW GO STATUS FOR DRIPPING SPRINGS, ALL OF EL CAPITAN AND BEVERLY  - InciWeb the Incident Information System",
+   "chars": 1406,
+   "sha256": "6b9724e869699a4eff2572c0f3f5574123e1cb8f2585f0c4e2e426c510f20dc1"
+  },
+  "article_59794": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59794/",
+   "snapshot": "https://web.archive.org/web/20210625133037id_/https://inciweb.nwcg.gov/incident/article/7512/59794/",
+   "title": "NEW Closure on BLM due to Telegraph Fire - InciWeb the Incident Information System",
+   "chars": 3170,
+   "sha256": "022ecb1a89a03bf3af8147d54b2b170e04d6d04b4ca9f25d567d0c16be4be6ce"
+  },
+  "article_59795": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59795/",
+   "snapshot": "https://web.archive.org/web/20210625133034id_/https://inciweb.nwcg.gov/incident/article/7512/59795/",
+   "title": "NEW BLM  Closure Map - InciWeb the Incident Information System",
+   "chars": 1171,
+   "sha256": "50d046acd0594f8a3c97e8758fd1f1335b3e9103fd5fec8fb6971c87a0a4939e"
+  },
+  "article_59796": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59796/",
+   "snapshot": "https://web.archive.org/web/20210614224008id_/https://inciweb.nwcg.gov/incident/article/7512/59796/",
+   "title": "San Carlos Indian Reservation has set up shelters for fire evacuees - InciWeb the Incident Information System",
+   "chars": 1621,
+   "sha256": "f297cb8c915a1087ab7020a48e0f26a5bd53c399b44134161ad16220eb94f289"
+  },
+  "article_59797": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59797/",
+   "snapshot": "https://web.archive.org/web/20210625131931id_/https://inciweb.nwcg.gov/incident/article/7512/59797/",
+   "title": "Salvation Army sets up Telegraph Fire Resource Center - InciWeb the Incident Information System",
+   "chars": 1654,
+   "sha256": "4b4ee94301351342e563acafa16cff335af91f7bd5dd0a2e4cd9d016c1e6659c"
+  },
+  "article_59806": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59806/",
+   "snapshot": "https://web.archive.org/web/20210625172135id_/https://inciweb.nwcg.gov/incident/article/7512/59806/",
+   "title": "Telegraph Fire Evacuation Status and Closure Update \u2013 June 14, 2021 - InciWeb the Incident Information System",
+   "chars": 4488,
+   "sha256": "8069ee140e0206d707dfc82d1d9b58a708981644544198c75f7327e14cfb813b"
+  },
+  "article_59807": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59807/",
+   "snapshot": "https://web.archive.org/web/20210625171629id_/https://inciweb.nwcg.gov/incident/article/7512/59807/",
+   "title": "Telegraph Fire Virtual Community Meeting 6 p.m. tonight on Facebook Live - InciWeb the Incident Information System",
+   "chars": 1438,
+   "sha256": "a2ded8c456eec6d8c04590b3e452408a94339428f280e9cb93ea9f07c9324a52"
+  },
+  "article_59817": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59817/",
+   "snapshot": "https://web.archive.org/web/20210625172136id_/https://inciweb.nwcg.gov/incident/article/7512/59817/",
+   "title": "Telegraph Fire Early Evening Update \u2013 June 14, 2021 - InciWeb the Incident Information System",
+   "chars": 3946,
+   "sha256": "f31a6959fab8fedcd4736ef45ad5ab2520ac0daba460dc2c17a616069bce536c"
+  },
+  "article_59820": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59820/",
+   "snapshot": "https://web.archive.org/web/20210625170116id_/https://inciweb.nwcg.gov/incident/article/7512/59820/",
+   "title": "Actualizaci\u00f3n de la noche del incendio del tel\u00e9grafo - 14 de junio de 2021 - InciWeb the Incident Information System",
+   "chars": 4340,
+   "sha256": "d567e6b20f96fe69443b1f470881df1a843558abd1971b049d31d1a4edc98384"
+  },
+  "article_59830": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59830/",
+   "snapshot": "https://web.archive.org/web/20220810170635id_/https://inciweb.nwcg.gov/incident/article/7512/59830/",
+   "title": "Telegraph Fire Facebook Live Virtual Community Meeting Tonight 6 p.m.  - InciWeb the Incident Information System",
+   "chars": 1177,
+   "sha256": "fb594dacea9ff84154c8a62e1908c305338fcc4de9ae1ffd7ae48858d134db8b"
+  },
+  "article_59859": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59859/",
+   "snapshot": "https://web.archive.org/web/20210616150712id_/https://inciweb.nwcg.gov/incident/article/7512/59859/",
+   "title": "Telegraph Fire Evacuation Status and Closure Update - June 16, 2021 - InciWeb the Incident Information System",
+   "chars": 4650,
+   "sha256": "e3979f34901aef1cfde8383d8484cbe2005d41eb1f02cdf1336b2b5841484c44"
+  },
+  "article_59862": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59862/",
+   "snapshot": "https://web.archive.org/web/20210616154611id_/https://inciweb.nwcg.gov/incident/article/7512/59862/",
+   "title": "Telegraph Fire Morning Update - June 16, 2021 - InciWeb the Incident Information System",
+   "chars": 5275,
+   "sha256": "c8186aef4007472ecd40f37a103f9d13113d900c69ba7b8b08b2d2df2092ddf4"
+  },
+  "article_59864": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59864/",
+   "snapshot": "https://web.archive.org/web/20220810180209id_/https://inciweb.nwcg.gov/incident/article/7512/59864/",
+   "title": "Telegraph Fire Facebook Live Virtual Community Meeting 6-16 at 6 p.m. - InciWeb the Incident Information System",
+   "chars": 1191,
+   "sha256": "b8926ce1b8c1ba1a0276416aee43bb6f677a0d6892ab636665d03381559a0066"
+  },
+  "article_59880": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59880/",
+   "snapshot": "https://web.archive.org/web/20220810173759id_/https://inciweb.nwcg.gov/incident/article/7512/59880/",
+   "title": "Ray Mine, Riverside, Kearny, Winkleman, Hayden on \u201cREADY\u201d status - InciWeb the Incident Information System",
+   "chars": 1495,
+   "sha256": "c6707040b592857944643a3d64e3ed88a4051294b5421ba1d3d719bd0838942e"
+  },
+  "article_59919": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59919/",
+   "snapshot": "https://web.archive.org/web/20210618033316id_/https://inciweb.nwcg.gov/incident/article/7512/59919/",
+   "title": "Fuels and Fire Behavior Advisory - InciWeb the Incident Information System",
+   "chars": 1959,
+   "sha256": "b3731dbd656a0a9b4e48bec4fc7aed1cc6490ec145b7a450080f20d600a5c150"
+  },
+  "article_59921": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59921/",
+   "snapshot": "https://web.archive.org/web/20210618014715id_/https://inciweb.nwcg.gov/incident/article/7512/59921/",
+   "title": "Telegraph Fire Evacuation Status and Closure Update \u2013 June 17, 2021 - InciWeb the Incident Information System",
+   "chars": 4665,
+   "sha256": "60bb930370893bc2dd15fa3aa7737f2db46a6273d4adcd922396694abdbe1c5b"
+  },
+  "article_59922": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59922/",
+   "snapshot": "https://web.archive.org/web/20220810171303id_/https://inciweb.nwcg.gov/incident/article/7512/59922/",
+   "title": "Smoke Outlook for June 16-17 - InciWeb the Incident Information System",
+   "chars": 1055,
+   "sha256": "95a56a394fc81b00c44888b1d596098e5b5a1df867fb61517a74cdb7ac6a5511"
+  },
+  "article_59950": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59950/",
+   "snapshot": "https://web.archive.org/web/20210619110530id_/https://inciweb.nwcg.gov/incident/article/7512/59950/",
+   "title": "Telegraph Fire Morning Update \u2013 June 18, 2021 - InciWeb the Incident Information System",
+   "chars": 4971,
+   "sha256": "df4bbcd3748c54f5ee022abac43a3f41ff6b253b6f9f6c64e0dca387beaea392"
+  },
+  "article_59989": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/59989/",
+   "snapshot": "https://web.archive.org/web/20210619220524id_/https://inciweb.nwcg.gov/incident/article/7512/59989/",
+   "title": "BLM Gila District Emergency Fire Closure - InciWeb the Incident Information System",
+   "chars": 3509,
+   "sha256": "20f89011a29cd03a7882474f572af29610160c54eaa8f1922bf635f15c9c025a"
+  },
+  "article_60049": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/60049/",
+   "snapshot": "https://web.archive.org/web/20210621184425id_/https://inciweb.nwcg.gov/incident/article/7512/60049/",
+   "title": "Telegraph Fire Evening Update - June 20, 2021 - InciWeb the Incident Information System",
+   "chars": 4962,
+   "sha256": "c55e26fef41c77a9dddd2c4ca45f7aff34a2c271d87b4c25289af9f445070f22"
+  },
+  "article_60119": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/60119/",
+   "snapshot": "https://web.archive.org/web/20210623190805id_/https://inciweb.nwcg.gov/incident/article/7512/60119/",
+   "title": "Telegraph Fire Morning Update June 22, 2021 - InciWeb the Incident Information System",
+   "chars": 3874,
+   "sha256": "304ada9b673ba5a4ccae0d541a507fc47a0cac00047ecb9843e321161a9f5256"
+  },
+  "article_60153": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/60153/",
+   "snapshot": "https://web.archive.org/web/20210703045400id_/https://inciweb.nwcg.gov/incident/article/7512/60153/",
+   "title": "Telegraph Fire Evening Update June 22, 2021 - InciWeb the Incident Information System",
+   "chars": 4462,
+   "sha256": "4fb125227121b7eacb241cefa5d3768e8fefa1bb87e3ef9b17c599cf09342599"
+  },
+  "article_60156": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/60156/",
+   "snapshot": "https://web.archive.org/web/20210703041820id_/https://inciweb.nwcg.gov/incident/article/7512/60156/",
+   "title": "Smoke Outlook for June 22-23 - InciWeb the Incident Information System",
+   "chars": 1194,
+   "sha256": "1bd24e8bb92db21ff6e8caed293e79b803be993af246d2cd4ba6758e55e12399"
+  },
+  "article_60282": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/60282/",
+   "snapshot": "https://web.archive.org/web/20210706212253id_/https://inciweb.nwcg.gov/incident/article/7512/60282/",
+   "title": "Telegraph Fire Update - June 25, 2021 - InciWeb the Incident Information System",
+   "chars": 3945,
+   "sha256": "c39ed5f97ad7f34cd6815847fbb1c5814035ad732812a5abb13e19cefbb74dca"
+  },
+  "article_60363": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/60363/",
+   "snapshot": "https://web.archive.org/web/20210803194046id_/https://inciweb.nwcg.gov/incident/article/7512/60363/",
+   "title": "Telegraph Fire Update - June 27, 2021 - InciWeb the Incident Information System",
+   "chars": 4025,
+   "sha256": "85a6e5c2efe277b20f46bff9bdf865f47de7808406a6ac28e9447d4663a943b9"
+  },
+  "article_60364": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/60364/",
+   "snapshot": "https://web.archive.org/web/20210803201623id_/https://inciweb.nwcg.gov/incident/article/7512/60364/",
+   "title": "Actualizaci\u00f3n diaria sobre el incendio de Telegraph \u2013 27 de junio de 2021 - InciWeb the Incident Information System",
+   "chars": 4693,
+   "sha256": "461c1ccef616f42ba4b8de30a233547a00b682f80bfaf079f0b2561453c9185f"
+  },
+  "article_60396": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/60396/",
+   "snapshot": "https://web.archive.org/web/20210803203617id_/https://inciweb.nwcg.gov/incident/article/7512/60396/",
+   "title": "Telegraph Fire June 28,2021 - InciWeb the Incident Information System",
+   "chars": 3634,
+   "sha256": "b1fc12cd669b96b800b29d0a4aed606c2ea2889180b1f7a5d3e599492f03c5ca"
+  },
+  "article_60397": {
+   "url": "https://inciweb.nwcg.gov/incident/article/7512/60397/",
+   "snapshot": "https://web.archive.org/web/20210803210538id_/https://inciweb.nwcg.gov/incident/article/7512/60397/",
+   "title": "Actualizaci\u00f3n diaria sobre el incendio de Telegraph \u2013 28 de junio de 2021 - InciWeb the Incident Information System",
+   "chars": 4225,
+   "sha256": "d10331bdd4507f029059bc0f0f23d56b7759c8ee8427502273246319fad2f8d2"
+  }
+ },
+ "failed": []
+}

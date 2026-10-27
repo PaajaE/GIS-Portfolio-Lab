@@ -1,0 +1,1579 @@
+{
+  "label": "build-mac",
+  "utc": "2026-10-24T21:18:37+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "python": "3.9.6",
+  "cpu_count": 10,
+  "https_proxy_set": false,
+  "disk": {
+    "path": "/Users/pavelecer/MyDevel/GIS-Portfolio-Lab/projects/firepath",
+    "free_gb": 55.5,
+    "total_gb": 245.1,
+    "required_free_gb": 30,
+    "ok": true
+  },
+  "checks": [
+    {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20220419/conus/hrrr.t21z.wrfsfcf00.grib2.idx",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:37+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20220419/conus/hrrr.t21z.wrfsfcf00.grib2.idx",
+      "elapsed_s": 0.65,
+      "headers": {
+        "content-type": "binary/octet-stream",
+        "content-length": "9118",
+        "last-modified": "Tue, 19 Apr 2022 21:53:45 GMT"
+      },
+      "bytes_read": 9118,
+      "sha256": "a0e151adb1969626d351d1bff05fb791f24616102c5fe72ec3695ba729b801a8",
+      "auth_hint": false,
+      "attempts": [
+        200
+      ],
+      "id": "hrrr_idx",
+      "purpose": "HRRR index (weather)"
+    },
+    {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20220419/conus/hrrr.t21z.wrfsfcf00.grib2",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:37+00:00",
+      "status": 206,
+      "reason": "Partial Content",
+      "final_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20220419/conus/hrrr.t21z.wrfsfcf00.grib2",
+      "elapsed_s": 0.49,
+      "headers": {
+        "content-type": "binary/octet-stream",
+        "content-length": "4096",
+        "last-modified": "Tue, 19 Apr 2022 21:53:40 GMT",
+        "content-range": "bytes 45506335-45510430/150562341"
+      },
+      "bytes_read": 4096,
+      "sha256": "9fd56cd0b7ff2b9ba1bf6f540abcd031ba9e90d2812b7504b8b76f615202aa23",
+      "auth_hint": false,
+      "attempts": [
+        206
+      ],
+      "id": "hrrr_range",
+      "purpose": "HRRR byte-range sample"
+    },
+    {
+      "url": "https://landfire.gov/",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:38+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://landfire.gov/",
+      "elapsed_s": 0.85,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-length": "36677"
+      },
+      "bytes_read": 36677,
+      "sha256": "fbcf20287d5ea3d620d950269fe6b18ed02bc63c8b03a73f3a55e9cf2901c9f6",
+      "auth_hint": false,
+      "snippet": " <!DOCTYPE html> <html lang=\"en\" dir=\"ltr\"> <head> <meta charset=\"utf-8\" /> <meta name=\"Generator\" content=\"Drupal 11 (https://www.drupal.org)\" /> <meta name=\"MobileOptimized\" content=\"width\" /> <meta name=\"HandheldFriendly\" content=\"true\" /> <meta name=\"viewport\" content=\"width=device-wid",
+      "attempts": [
+        200
+      ],
+      "id": "landfire_home",
+      "purpose": "LANDFIRE site"
+    },
+    {
+      "url": "https://landfire.gov/data/lf_versions",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:39+00:00",
+      "status": 404,
+      "reason": "Not Found",
+      "elapsed_s": 0.39,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-length": "27301"
+      },
+      "bytes_read": 20000,
+      "sha256": "366ebe95a7795cc6cc760f02f6718c62bceb23db770a08690b3ead61cd4de90e",
+      "auth_hint": false,
+      "snippet": " <!DOCTYPE html> <html lang=\"en\" dir=\"ltr\"> <head> <meta charset=\"utf-8\" /> <meta name=\"Generator\" content=\"Drupal 11 (https://www.drupal.org)\" /> <meta name=\"MobileOptimized\" content=\"width\" /> <meta name=\"HandheldFriendly\" content=\"true\" /> <meta name=\"viewport\" content=\"width=device-wid",
+      "attempts": [
+        404
+      ],
+      "id": "landfire_versions",
+      "purpose": "LANDFIRE version table"
+    },
+    {
+      "url": "https://lfps.usgs.gov/api/",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:39+00:00",
+      "status": 308,
+      "reason": "Permanent Redirect",
+      "elapsed_s": 0.41,
+      "headers": {
+        "content-length": "4"
+      },
+      "bytes_read": 4,
+      "sha256": "702acf7c08d3b03b321d97b4903ad2210d87cee61dae07068d060b8d7dcbd693",
+      "auth_hint": false,
+      "snippet": "/api",
+      "attempts": [
+        308
+      ],
+      "id": "lfps_root",
+      "purpose": "LANDFIRE Product Service API"
+    },
+    {
+      "url": "https://lfps.usgs.gov/api/products",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:40+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://lfps.usgs.gov/api/products",
+      "elapsed_s": 0.4,
+      "headers": {
+        "content-type": "application/json",
+        "content-length": "26338"
+      },
+      "bytes_read": 26338,
+      "sha256": "aaf963c6761d7a22c1ce1a69bedddd2b38c76039fdfab5d172dccab32f90e10e",
+      "auth_hint": false,
+      "snippet": "{\"products\":[{\"productName\":\"13 Anderson Fire Behavior Fuel Models\",\"theme\":\"Fuels\",\"layerName\":\"LF2025_FBFM13\",\"acronym\":\"FBFM13\",\"version\":\"LF2025\",\"conus\":true,\"ak\":true,\"hi\":false,\"prvi\":false,\"geoAreas\":\"SW, NW\"},{\"productName\":\"40 Scott and Burgan Fire Behavior Fuel Models\",\"theme\":\"Seasonal F",
+      "attempts": [
+        200
+      ],
+      "id": "lfps_products",
+      "purpose": "LFPS product list"
+    },
+    {
+      "url": "https://lfps.usgs.gov/api/job/submit",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:40+00:00",
+      "status": 400,
+      "reason": "Bad Request",
+      "elapsed_s": 0.36,
+      "headers": {
+        "content-type": "application/json",
+        "content-length": "174"
+      },
+      "bytes_read": 174,
+      "sha256": "2e7bdd12b4f8240c9ad43df7d14b837188ac6cd9bd95fca5b0e1fed468972e58",
+      "auth_hint": false,
+      "snippet": "{\"message\":[{\"parameter\":\"Layer_List\",\"message\":\"Required\"},{\"parameter\":\"Area_of_Interest\",\"message\":\"Required\"},{\"parameter\":\"Email\",\"message\":\"Required\"}],\"success\":false}",
+      "attempts": [
+        400
+      ],
+      "id": "lfps_submit_noargs",
+      "purpose": "LFPS submit without args (expects a parameter error, no job)"
+    },
+    {
+      "url": "https://landfire.gov/data-downloads/US_200/LF2016_FBFM40_200_CONUS.zip",
+      "method": "HEAD",
+      "utc": "2026-10-24T21:18:40+00:00",
+      "status": 404,
+      "reason": "Not Found",
+      "elapsed_s": 0.52,
+      "headers": {
+        "content-type": "text/html; charset=iso-8859-1"
+      },
+      "bytes_read": 0,
+      "attempts": [
+        404
+      ],
+      "id": "lf_dl_200_f40",
+      "purpose": "LANDFIRE LF2016 Remap FBFM40 CONUS zip (HEAD)"
+    },
+    {
+      "url": "https://landfire.gov/data-downloads/US_220/LF2022_FBFM40_220_CONUS.zip",
+      "method": "HEAD",
+      "utc": "2026-10-24T21:18:41+00:00",
+      "status": 404,
+      "reason": "Not Found",
+      "elapsed_s": 0.39,
+      "headers": {
+        "content-type": "text/html; charset=iso-8859-1"
+      },
+      "bytes_read": 0,
+      "attempts": [
+        404
+      ],
+      "id": "lf_dl_220_f40",
+      "purpose": "LANDFIRE LF2020 FBFM40 CONUS zip (HEAD)"
+    },
+    {
+      "url": "https://landfire.gov/data-downloads/US_230/LF2022_FBFM40_230_CONUS.zip",
+      "method": "HEAD",
+      "utc": "2026-10-24T21:18:41+00:00",
+      "status": 404,
+      "reason": "Not Found",
+      "elapsed_s": 0.47,
+      "headers": {
+        "content-type": "text/html; charset=iso-8859-1"
+      },
+      "bytes_read": 0,
+      "attempts": [
+        404
+      ],
+      "id": "lf_dl_230_f40",
+      "purpose": "LANDFIRE LF2022 FBFM40 CONUS zip (HEAD)"
+    },
+    {
+      "url": "https://landfire.gov/data-downloads/US_240/LF2023_FBFM40_240_CONUS.zip",
+      "method": "HEAD",
+      "utc": "2026-10-24T21:18:42+00:00",
+      "status": 404,
+      "reason": "Not Found",
+      "elapsed_s": 0.59,
+      "headers": {
+        "content-type": "text/html; charset=iso-8859-1"
+      },
+      "bytes_read": 0,
+      "attempts": [
+        404
+      ],
+      "id": "lf_dl_240_f40",
+      "purpose": "LANDFIRE LF2023 FBFM40 CONUS zip (HEAD)"
+    },
+    {
+      "url": "https://www.mtbs.gov/direct-download",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:42+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://www.mtbs.gov/direct-download",
+      "elapsed_s": 0.64,
+      "headers": {
+        "content-type": "text/html; charset=UTF-8",
+        "content-length": "19609"
+      },
+      "bytes_read": 19609,
+      "sha256": "a0068f8dd27eab435fadaaaaaf4d632a41f4144265b3a3f70b8b5c7555baa2f6",
+      "auth_hint": false,
+      "snippet": " <!DOCTYPE html> <html lang=\"en\" dir=\"ltr\"> <head> <meta charset=\"utf-8\" /> <noscript><style>form.antibot > * { display: none !important; } form.antibot noscript { display: block !important; }</style> </noscript><meta name=\"description\" content=\"The MTBS Direct Download tool has been consolida",
+      "attempts": [
+        200
+      ],
+      "id": "mtbs_home",
+      "purpose": "MTBS site"
+    },
+    {
+      "url": "https://edcintl.cr.usgs.gov/downloads/sciweb1/shared/MTBS_Fire/data/composite_data/burned_area_extent_shapefile/mtbs_perimeter_data.zip",
+      "method": "HEAD",
+      "utc": "2026-10-24T21:18:43+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://edcintl.cr.usgs.gov/downloads/sciweb1/shared/MTBS_Fire/data/composite_data/burned_area_extent_shapefile/mtbs_perimeter_data.zip",
+      "elapsed_s": 0.52,
+      "headers": {
+        "content-type": "application/zip",
+        "content-length": "389925217",
+        "last-modified": "Sat, 24 Oct 2026 05:08:09 GMT"
+      },
+      "bytes_read": 0,
+      "attempts": [
+        200
+      ],
+      "id": "mtbs_perims_zip",
+      "purpose": "MTBS national perimeters zip (HEAD)"
+    },
+    {
+      "url": "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services?f=json",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:43+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services?f=json",
+      "elapsed_s": 1.37,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "115408"
+      },
+      "bytes_read": 115408,
+      "sha256": "a14e856486cb6512dc4cf6bf1099201a33cd10eadaec2df6ef75d18bad108821",
+      "auth_hint": false,
+      "snippet": "{\"currentVersion\":12,\"services\":[{\"name\":\"2019_NIFS_OpenData\",\"type\":\"FeatureServer\",\"url\":\"https://services3.arcgis.com/T4QMspbfLg3qTGWY/ArcGIS/rest/services/2019_NIFS_OpenData/FeatureServer\"},{\"name\":\"20201101_Progression_CameronPeak_COARF000636_ThompsonZone_WYMRF000408\",\"type\":\"FeatureServer\",\"ur",
+      "attempts": [
+        200
+      ],
+      "id": "nifc_services",
+      "purpose": "NIFC ArcGIS Online services list"
+    },
+    {
+      "url": "https://ftp.wildfire.gov/public/incident_specific_data/",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:45+00:00",
+      "status": 404,
+      "reason": "Not Found",
+      "elapsed_s": 0.33,
+      "headers": {
+        "content-type": "text/html; charset=iso-8859-1",
+        "content-length": "236"
+      },
+      "bytes_read": 236,
+      "sha256": "9448f8a1159c9b14e3e1b9d8eab1a6ddf88d26e1f888a34cef430c756e4e6e1e",
+      "auth_hint": false,
+      "snippet": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\"> <html><head> <title>404 Not Found</title> </head><body> <h1>Not Found</h1> <p>The requested URL was not found on this server.</p> </body></html> ",
+      "attempts": [
+        404
+      ],
+      "id": "nifc_ftp_root",
+      "purpose": "NIFC FTP incident data (NIROPS IR)"
+    },
+    {
+      "url": "https://ftp.wildfire.gov/public/nirops/Tools/",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:45+00:00",
+      "status": 404,
+      "reason": "Not Found",
+      "elapsed_s": 0.29,
+      "headers": {
+        "content-type": "text/html; charset=iso-8859-1",
+        "content-length": "236"
+      },
+      "bytes_read": 236,
+      "sha256": "9448f8a1159c9b14e3e1b9d8eab1a6ddf88d26e1f888a34cef430c756e4e6e1e",
+      "auth_hint": false,
+      "snippet": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\"> <html><head> <title>404 Not Found</title> </head><body> <h1>Not Found</h1> <p>The requested URL was not found on this server.</p> </body></html> ",
+      "attempts": [
+        404
+      ],
+      "id": "nirops_tools",
+      "purpose": "NIROPS tools (IRIN template / layer pack: naming convention)"
+    },
+    {
+      "url": "https://data.mendeley.com/public-api/datasets/95rj5d379g",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:45+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://data.mendeley.com/public-api/datasets/95rj5d379g",
+      "elapsed_s": 0.99,
+      "headers": {
+        "content-type": "application/json; charset=utf-8"
+      },
+      "bytes_read": 11028,
+      "sha256": "b0f210a4a2abbea81f1d7c34e4018ad58faaade2a887fdca1001467931aea1b1",
+      "auth_hint": false,
+      "snippet": "{\"id\":\"95rj5d379g\",\"doi\":{\"id\":\"10.17632/95rj5d379g.1\",\"status\":\"allocated\",\"prefix\":\"10.17632\"},\"name\":\"A high spatial resolution daily fire perimeter progression dataset for wildfires in the Western United States: 2020-2024\",\"description\":\"This dataset provides high-resolution wildfire perimeter d",
+      "attempts": [
+        200
+      ],
+      "id": "mendeley_meta",
+      "purpose": "Mendeley NIROPS progression dataset metadata"
+    },
+    {
+      "url": "https://firms.modaps.eosdis.nasa.gov/api/data_availability/csv/NO_KEY/all",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:46+00:00",
+      "status": 401,
+      "reason": "Unauthorized",
+      "elapsed_s": 0.45,
+      "headers": {
+        "content-type": "text/plain;charset=UTF-8"
+      },
+      "bytes_read": 16,
+      "sha256": "9382ea9009e0297d5f4bfb4f71e0d826b58484630511a98052ceadd9474a9362",
+      "auth_hint": true,
+      "snippet": "Invalid MAP_KEY.",
+      "attempts": [
+        401
+      ],
+      "id": "firms_nokey",
+      "purpose": "FIRMS API without MAP_KEY (expects key error)"
+    },
+    {
+      "url": "https://openveda.cloud/api/features/collections?f=json",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:47+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://openveda.cloud/api/features/collections?f=json",
+      "elapsed_s": 0.32,
+      "headers": {
+        "content-type": "application/json",
+        "content-length": "15932"
+      },
+      "bytes_read": 15932,
+      "sha256": "725ef4b9d2ca247dc4f4c953d92f56afd1d31b2f851fad9eb0b9bcf0863a05f7",
+      "auth_hint": false,
+      "snippet": "{\"links\":[{\"href\":\"https://openveda.cloud/api/features/collections\",\"rel\":\"self\",\"type\":\"application/json\"}],\"numberMatched\":12,\"numberReturned\":12,\"collections\":[{\"id\":\"public.eis_fire_lf_perimeter_archive\",\"title\":\"public.eis_fire_lf_perimeter_archive\",\"links\":[{\"href\":\"https://openveda.cloud/api/",
+      "attempts": [
+        200
+      ],
+      "id": "feds_collections",
+      "purpose": "NASA FEDS via VEDA OGC API"
+    },
+    {
+      "url": "https://www.northwestknowledge.net/metdata/data/",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:47+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://www.northwestknowledge.net/metdata/data/",
+      "elapsed_s": 0.58,
+      "headers": {
+        "content-type": "text/html;charset=ISO-8859-1"
+      },
+      "bytes_read": 248006,
+      "sha256": "1dee2cba737be16b977b83845220c0020402fd712e3809d227ab06cff305095b",
+      "auth_hint": false,
+      "snippet": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\"> <html> <head> <title>Index of /metdata/data</title> </head> <body> <h1>Index of /metdata/data</h1> <table> <tr><th valign=\"top\"><img src=\"/icons/blank.gif\" alt=\"[ICO]\"></th><th><a href=\"?C=N;O=D\">Name</a></th><th><a href=\"?C=M;O=A\">La",
+      "attempts": [
+        200
+      ],
+      "id": "gridmet_listing",
+      "purpose": "gridMET file listing"
+    },
+    {
+      "url": "https://www.northwestknowledge.net/metdata/data/fm100_2022.nc",
+      "method": "HEAD",
+      "utc": "2026-10-24T21:18:48+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://www.northwestknowledge.net/metdata/data/fm100_2022.nc",
+      "elapsed_s": 0.27,
+      "headers": {
+        "content-type": "application/x-netcdf",
+        "content-length": "136252390",
+        "last-modified": "Mon, 07 Apr 2025 19:45:11 GMT"
+      },
+      "bytes_read": 0,
+      "attempts": [
+        200
+      ],
+      "id": "gridmet_fm100_2022",
+      "purpose": "gridMET fm100 2022 (HEAD)"
+    },
+    {
+      "url": "http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_met_fm100_1979_CurrentYear_CONUS.nc.das",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:48+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_met_fm100_1979_CurrentYear_CONUS.nc.das",
+      "elapsed_s": 0.27,
+      "headers": {
+        "content-type": "text/plain"
+      },
+      "bytes_read": 3932,
+      "sha256": "e811bf72e071471bebfed124d735f90441d922c443c37e46c275c6d5907b65c6",
+      "auth_hint": false,
+      "snippet": "Attributes { lat { String units \"degrees_north\"; String description \"latitude\"; String long_name \"latitude\"; String standard_name \"latitude\"; String axis \"Y\"; Int32 _ChunkSizes 585; } crs { String grid_mapping_name \"latitude_longitu",
+      "attempts": [
+        200
+      ],
+      "id": "gridmet_thredds",
+      "purpose": "gridMET THREDDS DAS"
+    },
+    {
+      "url": "https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National%20Elevation%20Dataset%20(NED)%201/3%20arc-second&bbox=-111.8,35.2,-111.4,35.5&max=5&outputFormat=JSON",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:48+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National%20Elevation%20Dataset%20(NED)%201/3%20arc-second&bbox=-111.8,35.2,-111.4,35.5&max=5&outputFormat=JSON",
+      "elapsed_s": 0.5,
+      "headers": {
+        "content-type": "application/json",
+        "content-length": "20179"
+      },
+      "bytes_read": 20179,
+      "sha256": "1dd00c237476acf8b95df37d73070469e12b872f390989434d43783dda27d426",
+      "auth_hint": false,
+      "snippet": "{\"total\": 7, \"items\": [{\"title\": \"USGS 1/3 Arc Second n36w112 20121001\", \"moreInfo\": \"This tile of the 3D Elevation Program (3DEP) seamless products is 1/3 Arc Second resolution. 3DEP data serve as the elevation layer of The National Map, and provide basic elevation information for Earth science stu",
+      "attempts": [
+        200
+      ],
+      "id": "tnm_3dep",
+      "purpose": "TNM Access API: 3DEP 1/3 arc-second over Flagstaff"
+    },
+    {
+      "url": "https://www2.census.gov/geo/tiger/TIGER2022/EDGES/tl_2022_04005_edges.zip",
+      "method": "HEAD",
+      "utc": "2026-10-24T21:18:49+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://www2.census.gov/geo/tiger/TIGER2022/EDGES/tl_2022_04005_edges.zip",
+      "elapsed_s": 0.24,
+      "headers": {
+        "content-type": "application/zip",
+        "content-length": "44288703",
+        "last-modified": "Mon, 31 Oct 2022 20:12:06 GMT"
+      },
+      "bytes_read": 0,
+      "attempts": [
+        200
+      ],
+      "id": "tiger_edges",
+      "purpose": "TIGER/Line 2022 edges, Coconino County (HEAD)"
+    },
+    {
+      "url": "https://www2.census.gov/geo/tiger/TIGER2020/TABBLOCK20/tl_2020_04_tabblock20.zip",
+      "method": "HEAD",
+      "utc": "2026-10-24T21:18:49+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://www2.census.gov/geo/tiger/TIGER2020/TABBLOCK20/tl_2020_04_tabblock20.zip",
+      "elapsed_s": 0.22,
+      "headers": {
+        "content-type": "application/zip",
+        "content-length": "204298997",
+        "last-modified": "Fri, 06 Jan 2023 21:45:38 GMT"
+      },
+      "bytes_read": 0,
+      "attempts": [
+        200
+      ],
+      "id": "tiger_blocks",
+      "purpose": "TIGER 2020 TABBLOCK20 Arizona (HEAD)"
+    },
+    {
+      "url": "https://disasters.geoplatform.gov/USA_Structures/",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:49+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://gis-fema.hub.arcgis.com/pages/usa-structures-data",
+      "elapsed_s": 1.22,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-length": "117632"
+      },
+      "bytes_read": 100000,
+      "sha256": "1aeb84c26c1cf6eeac0734fda8aba4702e78ebdda1bdd274bd25dea990d578c5",
+      "auth_hint": false,
+      "snippet": "<!DOCTYPE html><html lang=\"en-us\"><head> <title>FEMA Geospatial Resource Center</title><meta name=\"twitter:title\" content=\"FEMA Geospatial Resource Center\"><meta property=\"og:title\" content=\"FEMA Geospatial Resource Center\"><meta name=\"description\" content=\"FEMA GIS supports the emergency manage",
+      "attempts": [
+        200
+      ],
+      "id": "usa_structures",
+      "purpose": "USA Structures (FEMA geoplatform)"
+    },
+    {
+      "url": "https://www.arcgis.com/sharing/rest/search?q=title%3A%22USA%20Structures%22&num=5&f=json",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:51+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://www.arcgis.com/sharing/rest/search?q=title%3A%22USA%20Structures%22&num=5&f=json",
+      "elapsed_s": 0.31,
+      "headers": {
+        "content-type": "application/json;charset=utf-8"
+      },
+      "bytes_read": 43975,
+      "sha256": "d7d395eb4c44bd798c30695f48f4c74911b8ff0a78cdc783e969c1b15055a0ad",
+      "auth_hint": false,
+      "snippet": "{\"total\":307,\"start\":1,\"num\":5,\"nextStart\":6,\"results\":[{\"id\":\"0ec8512ad21e4bb987d7e848d14e7e24\",\"owner\":\"Esri_US_Federal_Data\",\"created\":1648478920000,\"modified\":1792697637000,\"guid\":null,\"name\":\"USA_Structures_View\",\"title\":\"USA Structures\",\"type\":\"Feature Service\",\"typeKeywords\":[\"ArcGIS API for ",
+      "attempts": [
+        200
+      ],
+      "id": "agol_search_structures",
+      "purpose": "ArcGIS Online search: USA Structures"
+    },
+    {
+      "url": "https://api.figshare.com/v2/articles/19858927",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:51+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://api.figshare.com/v2/articles/19858927",
+      "elapsed_s": 1.02,
+      "headers": {
+        "content-type": "application/json",
+        "content-length": "7158"
+      },
+      "bytes_read": 7158,
+      "sha256": "440e06d50c77c5580b943739a6e20fd77139ef1a15fe4fca9d0edc877e21e17e",
+      "auth_hint": false,
+      "snippet": "{\"files\": [{\"id\": 38766492, \"name\": \"ics209plus-reference.zip\", \"size\": 88397, \"is_link_only\": false, \"download_url\": \"https://ndownloader.figshare.com/files/38766492\", \"supplied_md5\": \"5fec186428418aa28b4c8b2d5fb0e38d\", \"computed_md5\": \"5fec186428418aa28b4c8b2d5fb0e38d\", \"mimetype\": \"application/zi",
+      "attempts": [
+        200
+      ],
+      "id": "ics209plus",
+      "purpose": "ICS-209-PLUS (figshare API)"
+    },
+    {
+      "url": "https://inciweb.wildfire.gov/incident-information/azcof-tunnel-fire",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:52+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://inciweb.wildfire.gov/incident-information/azcof-tunnel-fire",
+      "elapsed_s": 0.32,
+      "headers": {
+        "content-type": "text/html; charset=UTF-8",
+        "content-length": "75858"
+      },
+      "bytes_read": 75858,
+      "sha256": "78ae701e3dc3d4d828ea36ca9df1b940fddf99f54dee79be908d83c6cb2dd26c",
+      "auth_hint": false,
+      "snippet": " <!DOCTYPE html> <html lang=\"en\" dir=\"ltr\" prefix=\"og: https://ogp.me/ns#\"> <head> <meta charset=\"utf-8\" /> <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-14FWB8WM1B\"></script> <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag(\"js\"",
+      "attempts": [
+        200
+      ],
+      "id": "inciweb_tunnel",
+      "purpose": "InciWeb Tunnel Fire page"
+    },
+    {
+      "url": "https://www.wfas.net/nfmd/public/index.php",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:52+00:00",
+      "status": 404,
+      "reason": "Not Found",
+      "elapsed_s": 0.34,
+      "headers": {
+        "content-type": "text/html; charset=iso-8859-1",
+        "content-length": "219"
+      },
+      "bytes_read": 219,
+      "sha256": "1d901bd1812946b226d9a5e9bf1b856e68ed0e188ec5710c78059ccb0923404b",
+      "auth_hint": false,
+      "snippet": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\"> <html><head> <title>404 Not Found</title> </head><body> <h1>Not Found</h1> <p>The requested URL /nfmd/public/index.php was not found on this server.</p> </body></html> ",
+      "attempts": [
+        404
+      ],
+      "id": "nfmd",
+      "purpose": "National Fuel Moisture Database"
+    },
+    {
+      "url": "https://raws.dri.edu/",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:53+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://raws.dri.edu/",
+      "elapsed_s": 0.39,
+      "headers": {
+        "content-type": "text/html",
+        "content-length": "1405",
+        "last-modified": "Mon, 19 May 2025 20:18:33 GMT"
+      },
+      "bytes_read": 1405,
+      "sha256": "2080484268b9cf9668ea6f1326dfcd1991eefbaf873642aac48f9f54b2c6ea3c",
+      "auth_hint": false,
+      "snippet": "<html> <head> <title>RAWS USA Climate Archive State Selection Map</title> <script type='text/javascript' src='functions/exmplmenu_var.js'></script> <script type='text/javascript' src='functions/menu_com.js'></script> <noscript>Your browser does not support script</noscript> <script type='text/javas",
+      "attempts": [
+        200
+      ],
+      "id": "raws_wrcc",
+      "purpose": "WRCC RAWS archive"
+    },
+    {
+      "url": "https://api.synopticdata.com/v2/stations/metadata?stid=KFLG",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:53+00:00",
+      "status": 401,
+      "reason": "Unauthorized",
+      "elapsed_s": 0.24,
+      "headers": {
+        "content-type": "application/json; charset=UTF-8",
+        "content-length": "112"
+      },
+      "bytes_read": 112,
+      "sha256": "7a3578da72c9257c46acd8c1f3c5197e45e04c6f1a2e9b2a66a9f5f45157e3c1",
+      "auth_hint": true,
+      "snippet": "{\"SUMMARY\": {\"RESPONSE_CODE\": 2, \"RESPONSE_MESSAGE\": \"Missing token\", \"VERSION\": null, \"HTTP_STATUS_CODE\": 401}}",
+      "attempts": [
+        401
+      ],
+      "id": "synoptic_notoken",
+      "purpose": "Synoptic API without token (expects auth error)"
+    },
+    {
+      "url": "https://pypi.org/pypi/pyretechnics/json",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:53+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://pypi.org/pypi/pyretechnics/json",
+      "elapsed_s": 0.08,
+      "headers": {
+        "content-type": "application/json",
+        "content-length": "29821"
+      },
+      "bytes_read": 29821,
+      "sha256": "45b0659b19fadf526b717a55a551ea4a901f4a1ad4676ac371b060cb98a6f4ec",
+      "auth_hint": false,
+      "snippet": "{\"info\":{\"author\":null,\"author_email\":\"\\\"Gary W. Johnson, PhD\\\" <<email>>, Valentin Waeselynck <<email>>, \\\"Chris Lautenberger, PhD, PE\\\" <<email>>, \\\"David Saah, PhD\\\" <<email>>\",\"bugtrack_url\":null,\"classifiers\":[\"Development Status :: 4 - Beta\",\"",
+      "attempts": [
+        200
+      ],
+      "id": "pypi_pyretechnics",
+      "purpose": "pyretechnics package metadata (PyPI)"
+    },
+    {
+      "url": "https://firms.modaps.eosdis.nasa.gov/mapserver/mapkey_status/?MAP_KEY=<redacted>",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:53+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://firms.modaps.eosdis.nasa.gov/mapserver/mapkey_status/?MAP_KEY=<redacted>",
+      "elapsed_s": 0.38,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "bytes_read": 96,
+      "sha256": "c7ff129aee318cf1de2ee49518541ce329b04dfe6c4d63e4f169c6329eef2001",
+      "auth_hint": false,
+      "snippet": "{ \"transaction_limit\" : 5000, \"current_transactions\": 0, \"transaction_interval\" : \"10 minutes\" }",
+      "attempts": [
+        200
+      ],
+      "id": "firms_key_status",
+      "purpose": "FIRMS MAP_KEY status (transaction quota)",
+      "key_var": "FIRMS_MAP_KEY"
+    },
+    {
+      "url": "https://firms.modaps.eosdis.nasa.gov/api/data_availability/csv/<redacted>/all",
+      "method": "GET",
+      "utc": "2026-10-24T21:18:54+00:00",
+      "status": 200,
+      "reason": "OK",
+      "final_url": "https://firms.modaps.eosdis.nasa.gov/api/data_availability/csv/<redacted>/all",
+      "elapsed_s": 0.55,
+      "headers": {
+        "content-type": "text/plain;charset=UTF-8"
+      },
+      "bytes_read": 442,
+      "sha256": "6bd2d2a21ce82d8dc29e598c9a481b80224f5e3235d9acfcd12a4818ea457dcf",
+      "auth_hint": false,
+      "snippet": "data_id,min_date,max_date MODIS_NRT,2026-08-01,2026-10-24 MODIS_SP,2000-11-01,2026-07-31 VIIRS_NOAA20_NRT,2026-07-01,2026-10-24 VIIRS_NOAA20_SP,2018-04-01,2026-06-30 VIIRS_NOAA21_NRT,2024-01-17,2026-10-24 VIIRS_NOAA21_SP,2023-03-01,2026-06-30 VIIRS_SNPP_NRT,2026-07-01,2026-10-24 VIIRS_SNPP_SP,2012-0",
+      "attempts": [
+        200
+      ],
+      "id": "firms_key_availability",
+      "purpose": "FIRMS data availability with MAP_KEY",
+      "key_var": "FIRMS_MAP_KEY"
+    },
+    {
+      "id": "synoptic_token",
+      "purpose": "Synoptic station metadata with token",
+      "status": null,
+      "skipped": "SYNOPTIC_TOKEN not set"
+    }
+  ],
+  "keys_present": {
+    "FIRMS_MAP_KEY": true,
+    "SYNOPTIC_TOKEN": false
+  },
+  "env_file_keys_loaded": [
+    "FIRMS_MAP_KEY"
+  ],
+  "nirops_inventory": {
+    "root": "https://ftp.wildfire.gov/public/incident_specific_data/",
+    "requests": 1,
+    "regions": [],
+    "fires": {},
+    "notes": [
+      "root not listable: 404 "
+    ]
+  },
+  "nifc_perimeters": {
+    "services": [
+      "2019_NIFS_OpenData",
+      "AZ_Fire_Perimeter_History",
+      "Bass_Lake_RX_Subunit_Perimeter_09132018",
+      "BLM_NV_Wildland_Fire_Perimeters",
+      "BLM_WDD_GooseCreek_FirePerimeter",
+      "Enriched_Perimeters_2020",
+      "Historic_Geomac_Perimeters_2000",
+      "Historic_Geomac_Perimeters_2001",
+      "Historic_Geomac_Perimeters_2002",
+      "Historic_Geomac_Perimeters_2003",
+      "Historic_Geomac_Perimeters_2004",
+      "Historic_Geomac_Perimeters_2005",
+      "Historic_Geomac_Perimeters_2006",
+      "Historic_Geomac_Perimeters_2007",
+      "Historic_Geomac_Perimeters_2008",
+      "Historic_Geomac_Perimeters_2009",
+      "Historic_Geomac_Perimeters_2010",
+      "Historic_Geomac_Perimeters_2011",
+      "Historic_Geomac_Perimeters_2012",
+      "Historic_Geomac_Perimeters_2013",
+      "Historic_Geomac_Perimeters_2014",
+      "Historic_Geomac_Perimeters_2015",
+      "Historic_Geomac_Perimeters_2016",
+      "Historic_Geomac_Perimeters_2017",
+      "Historic_Geomac_Perimeters_2018",
+      "Historic_GeoMAC_Perimeters_2019",
+      "Historic_Geomac_Perimeters_Combined_2000_2018",
+      "InteragencyFirePerimeterHistor_2000s_Read_Only",
+      "InteragencyFirePerimeterHistory_1979_And_Prior_Grayscale",
+      "InterAgencyFirePerimeterHistory_1979_And_Prior_Read_Only",
+      "InteragencyFirePerimeterHistory_1980s_Grayscale",
+      "InteragencyFirePerimeterHistory_1980s_Read_Only",
+      "InteragencyFirePerimeterHistory_1990s_Graysacale",
+      "InteragencyFirePerimeterHistory_1990s_Read_Only",
+      "InteragencyFirePerimeterHistory_2000s_Grayscale",
+      "InteragencyFirePerimeterHistory_2010s_Grayscale",
+      "InteragencyFirePerimeterHistory_2010s_Read_Only",
+      "InteragencyFirePerimeterHistory_2020s_Grayscale",
+      "InterAgencyFirePerimeterHistory_2020s_Read_Only",
+      "InterAgencyFirePerimeterHistory_All_Years_View",
+      "NPS_National_Wildland_Fire_Perimeters_FLAT_view",
+      "NPS_Planned_Treatment_Perimeters_(Public)",
+      "Operational_Data_Archive_2022",
+      "Operational_Data_Archive_2023",
+      "Operational_Data_Archive_2024",
+      "Operational_Data_Archive_2025",
+      "PerimeterLine",
+      "s_Completed_Perimeters_Past_5FY_View",
+      "WFDSS_InteragencyFirePerimeterHistory_AllYears",
+      "WFIGS_Daily_Perimeters_Public",
+      "WFIGS_Incident_Locations",
+      "WFIGS_Incident_Locations_Current",
+      "WFIGS_Incident_Locations_Last24h",
+      "WFIGS_Incident_Locations_YearToDate",
+      "WFIGS_Interagency_Perimeters",
+      "WFIGS_Interagency_Perimeters_Certified",
+      "WFIGS_Interagency_Perimeters_Current",
+      "WFIGS_Interagency_Perimeters_YearToDate",
+      "WFIGS_YTDLocs_CmplxInfo"
+    ],
+    "pipeline_haywire": [
+      {
+        "service": "2019_NIFS_OpenData",
+        "name_field": "IncidentName",
+        "time_fields": [
+          "LineDateTime",
+          "CreateDate",
+          "GDB_FROM_DATE"
+        ],
+        "status": 200,
+        "n": 11,
+        "rows": [
+          {
+            "IncidentName": "Pipeline",
+            "LineDateTime": null,
+            "CreateDate": 1564276434000,
+            "GDB_FROM_DATE": null
+          },
+          {
+            "IncidentName": "Pipeline",
+            "LineDateTime": null,
+            "CreateDate": 1564276434000,
+            "GDB_FROM_DATE": null
+          },
+          {
+            "IncidentName": "Pipeline",
+            "LineDateTime": null,
+            "CreateDate": 1564276434000,
+            "GDB_FROM_DATE": null
+          },
+          {
+            "IncidentName": "Pipeline",
+            "LineDateTime": null,
+            "CreateDate": 1564276434000,
+            "GDB_FROM_DATE": null
+          },
+          {
+            "IncidentName": "Pipeline",
+            "LineDateTime": null,
+            "CreateDate": 1564276434000,
+            "GDB_FROM_DATE": null
+          },
+          {
+            "IncidentName": "Pipeline",
+            "LineDateTime": null,
+            "CreateDate": 1564276434000,
+            "GDB_FROM_DATE": null
+          },
+          {
+            "IncidentName": "Pipeline",
+            "LineDateTime": null,
+            "CreateDate": 1564276434000,
+            "GDB_FROM_DATE": null
+          },
+          {
+            "IncidentName": "Pipeline",
+            "LineDateTime": null,
+            "CreateDate": 1564276434000,
+            "GDB_FROM_DATE": null
+          },
+          {
+            "IncidentName": "Double Day",
+            "LineDateTime": null,
+            "CreateDate": 1569436226000,
+            "GDB_FROM_DATE": null
+          },
+          {
+            "IncidentName": "Double Day",
+            "LineDateTime": null,
+            "CreateDate": 1569436226000,
+            "GDB_FROM_DATE": 1569513533000
+          },
+          {
+            "IncidentName": "Double Day",
+            "LineDateTime": null,
+            "CreateDate": 1569436226000,
+            "GDB_FROM_DATE": 1569565110000
+          }
+        ]
+      },
+      {
+        "service": "BLM_NV_Wildland_Fire_Perimeters",
+        "name_field": "IncidentName",
+        "time_fields": [
+          "FireDiscoveryDateTime",
+          "ControlDateTime"
+        ],
+        "status": 200,
+        "n": 11,
+        "rows": [
+          {
+            "IncidentName": "Double H",
+            "FireDiscoveryDateTime": 963846000000,
+            "ControlDateTime": 964105200000
+          },
+          {
+            "IncidentName": "Double Mt",
+            "FireDiscoveryDateTime": 994172400000,
+            "ControlDateTime": 994431600000
+          },
+          {
+            "IncidentName": "Double Mtn",
+            "FireDiscoveryDateTime": 1025967600000,
+            "ControlDateTime": 1026226800000
+          },
+          {
+            "IncidentName": "Double",
+            "FireDiscoveryDateTime": 990889200000,
+            "ControlDateTime": 990889200000
+          },
+          {
+            "IncidentName": "Double R",
+            "FireDiscoveryDateTime": 1372777200000,
+            "ControlDateTime": 1372863600000
+          },
+          {
+            "IncidentName": "Double Nickel",
+            "FireDiscoveryDateTime": 1151938800000,
+            "ControlDateTime": 1152111600000
+          },
+          {
+            "IncidentName": "Double Up (USFS 1)",
+            "FireDiscoveryDateTime": 1148223600000,
+            "ControlDateTime": 1167580800000
+          },
+          {
+            "IncidentName": "Double R",
+            "FireDiscoveryDateTime": 1155394800000,
+            "ControlDateTime": 1155567600000
+          },
+          {
+            "IncidentName": "Double Chin",
+            "FireDiscoveryDateTime": 1534932031000,
+            "ControlDateTime": 1535065200000
+          },
+          {
+            "IncidentName": "Doubleh",
+            "FireDiscoveryDateTime": 489628800000,
+            "ControlDateTime": 489801600000
+          },
+          {
+            "IncidentName": "Double Play",
+            "FireDiscoveryDateTime": 1727891158000,
+            "ControlDateTime": 1727903040000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2000",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 25,
+        "rows": [
+          {
+            "incidentname": "Double Tk",
+            "perimeterdatetime": 978220800000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 978220800000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 978220800000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          },
+          {
+            "incidentname": "Double H Fire",
+            "perimeterdatetime": 963792000000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2001",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 8,
+        "rows": [
+          {
+            "incidentname": "Double Mountain",
+            "perimeterdatetime": 994636800000
+          },
+          {
+            "incidentname": "Double Mountain",
+            "perimeterdatetime": 994636800000
+          },
+          {
+            "incidentname": "Pipeline Fire",
+            "perimeterdatetime": 1009756800000
+          },
+          {
+            "incidentname": "Double",
+            "perimeterdatetime": 990835200000
+          },
+          {
+            "incidentname": "Double",
+            "perimeterdatetime": 990835200000
+          },
+          {
+            "incidentname": "Doublehead",
+            "perimeterdatetime": 994723200000
+          },
+          {
+            "incidentname": "Double Creek",
+            "perimeterdatetime": 1000425600000
+          },
+          {
+            "incidentname": "Double O",
+            "perimeterdatetime": 994809600000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2002",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 3,
+        "rows": [
+          {
+            "incidentname": "DOUBLE MOUNTAIN",
+            "perimeterdatetime": 1026604800000
+          },
+          {
+            "incidentname": "Double Mountain",
+            "perimeterdatetime": 1026086400000
+          },
+          {
+            "incidentname": "Double Mountain",
+            "perimeterdatetime": 1026086400000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2003",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 0,
+        "rows": []
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2004",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 2,
+        "rows": [
+          {
+            "incidentname": "Double Gate",
+            "perimeterdatetime": 1095521400000
+          },
+          {
+            "incidentname": "Double",
+            "perimeterdatetime": 1085788800000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2005",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 1,
+        "rows": [
+          {
+            "incidentname": "Double Mountain",
+            "perimeterdatetime": 1122717600000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2006",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 9,
+        "rows": [
+          {
+            "incidentname": "Double R",
+            "perimeterdatetime": 1155340800000
+          },
+          {
+            "incidentname": "Double-Up",
+            "perimeterdatetime": 1148472000000
+          },
+          {
+            "incidentname": "Double Nickel",
+            "perimeterdatetime": 1152576000000
+          },
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": 1167523200000
+          },
+          {
+            "incidentname": "PIPELINE",
+            "perimeterdatetime": 1148083200000
+          },
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": 1151254200000
+          },
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": 1155340800000
+          },
+          {
+            "incidentname": "Double Diamond T",
+            "perimeterdatetime": 1167523200000
+          },
+          {
+            "incidentname": "Double-Up",
+            "perimeterdatetime": 1148385600000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2007",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 3,
+        "rows": [
+          {
+            "incidentname": "Double",
+            "perimeterdatetime": 1188345600000
+          },
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": 1185156360000
+          },
+          {
+            "incidentname": "Double D Fire",
+            "perimeterdatetime": 1182902400000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2008",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 5,
+        "rows": [
+          {
+            "incidentname": "Doubleday",
+            "perimeterdatetime": 1221910380000
+          },
+          {
+            "incidentname": "DOUBLE SHOT EAST",
+            "perimeterdatetime": 1215259200000
+          },
+          {
+            "incidentname": "DOUBLE SHOT WEST",
+            "perimeterdatetime": 1215259200000
+          },
+          {
+            "incidentname": "Doubleday",
+            "perimeterdatetime": 1220305140000
+          },
+          {
+            "incidentname": "PIPELINE FIRE",
+            "perimeterdatetime": 1205539200000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2009",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 2,
+        "rows": [
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": "7/22/2009 09:00:00 AM"
+          },
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": "7/19/2009"
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2010",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 0,
+        "rows": []
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2011",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 9,
+        "rows": [
+          {
+            "incidentname": "Double Cattle Guard",
+            "perimeterdatetime": 1316995200000
+          },
+          {
+            "incidentname": "Oasis Pipeline",
+            "perimeterdatetime": 1304034900000
+          },
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": 1303188720000
+          },
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": 1303241400000
+          },
+          {
+            "incidentname": "Oasis Pipeline",
+            "perimeterdatetime": 1303945800000
+          },
+          {
+            "incidentname": "Double A",
+            "perimeterdatetime": 1312675200000
+          },
+          {
+            "incidentname": "Pipeline Rd",
+            "perimeterdatetime": 1302912000000
+          },
+          {
+            "incidentname": "Oasis Pipeline",
+            "perimeterdatetime": 1304010000000
+          },
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": 1314144000000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2012",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 1,
+        "rows": [
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": 1329955200000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2013",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 4,
+        "rows": [
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": 1380153600000
+          },
+          {
+            "incidentname": "DOUBLE",
+            "perimeterdatetime": 1376611200000
+          },
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": 1379894400000
+          },
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": 1380034800000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2014",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 5,
+        "rows": [
+          {
+            "incidentname": "Double Diamond",
+            "perimeterdatetime": 1399973100000
+          },
+          {
+            "incidentname": "Double Diamond",
+            "perimeterdatetime": 1400073780000
+          },
+          {
+            "incidentname": "Double Diamond",
+            "perimeterdatetime": 1400145060000
+          },
+          {
+            "incidentname": "Double Diamond",
+            "perimeterdatetime": 1399990080000
+          },
+          {
+            "incidentname": "Double Rock",
+            "perimeterdatetime": 1410962400000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2015",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 0,
+        "rows": []
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2016",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 2,
+        "rows": [
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": 1456653600000
+          },
+          {
+            "incidentname": "Pipeline",
+            "perimeterdatetime": 1456790400000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2017",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 17,
+        "rows": [
+          {
+            "incidentname": "Double E",
+            "perimeterdatetime": 1500249600000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1502496000000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1503116280000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1503182340000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1502428620000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1502559600000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1502753400000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1502928000000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1503014400000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1503100020000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1503073800000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1503446400000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1503620880000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1503872280000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1503966960000
+          },
+          {
+            "incidentname": "TL DOUBLE BUCK 289",
+            "perimeterdatetime": 1504042080000
+          },
+          {
+            "incidentname": "Daily Double",
+            "perimeterdatetime": 1500940800000
+          }
+        ]
+      },
+      {
+        "service": "Historic_Geomac_Perimeters_2018",
+        "name_field": "incidentname",
+        "time_fields": [
+          "perimeterdatetime"
+        ],
+        "status": 200,
+        "n": 2,
+        "rows": [
+          {
+            "incidentname": "Double Chin",
+            "perimeterdatetime": 1535036400000
+          },
+          {
+            "incidentname": "DOUBLE EW",
+            "perimeterdatetime": 1529020800000
+          }
+        ]
+      }
+    ]
+  }
+}

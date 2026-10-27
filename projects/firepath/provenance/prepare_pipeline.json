@@ -1,0 +1,157 @@
+{
+ "fire": "pipeline",
+ "grid": {
+  "epsg": 26912,
+  "cell": 30.0,
+  "x0": 434130.0,
+  "y1": 3927360.0,
+  "width": 973,
+  "height": 940,
+  "bounds_utm": [
+   434130.0,
+   3899160.0,
+   463320.0,
+   3927360.0
+  ],
+  "buffer_m": 5000.0,
+  "bounds_lonlat": [
+   -111.72617758128229,
+   35.233338636543586,
+   -111.4031192762261,
+   35.48910237722089
+  ]
+ },
+ "utc": "2026-10-26T21:46:33+00:00",
+ "fuel": {
+  "version": "LF2020",
+  "missing_cells": 0,
+  "max_class_share_change_pp": 0.009300671561882079,
+  "shares_grid": {
+   "91": 0.03611,
+   "93": 0.0,
+   "98": 0.00559,
+   "99": 0.05867,
+   "101": 0.11119,
+   "102": 0.28815,
+   "103": 0.00011,
+   "121": 0.06837,
+   "122": 0.14951,
+   "141": 0.00176,
+   "142": 0.00902,
+   "145": 0.0188,
+   "147": 0.02664,
+   "161": 0.00239,
+   "162": 0.00063,
+   "165": 0.03051,
+   "181": 0.00124,
+   "182": 0.0002,
+   "183": 0.06356,
+   "184": 0.00027,
+   "185": 0.01168,
+   "186": 0.00033,
+   "187": 0.007,
+   "188": 0.10827,
+   "189": 0.0
+  }
+ },
+ "terrain": {
+  "elev_min": 1649.79052734375,
+  "elev_max": 3847.251220703125,
+  "tan_slope_p50": 0.08438674360513687,
+  "tan_slope_p99": 0.6675277948379517
+ },
+ "perimeters": {
+  "n": 8,
+  "merged_equal_times": 0,
+  "first_utc": "2022-06-14 04:44:00",
+  "last_utc": "2022-06-26 16:00:00",
+  "steps": [
+   {
+    "k": 1,
+    "t": 1655273700.0,
+    "cells": 102834,
+    "new": 12169,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 2,
+    "t": 1655363400.0,
+    "cells": 111504,
+    "new": 8836,
+    "removed_jitter": 69,
+    "removed_retraction": 97
+   },
+   {
+    "k": 3,
+    "t": 1655451540.0,
+    "cells": 118152,
+    "new": 6648,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 4,
+    "t": 1655537700.0,
+    "cells": 118951,
+    "new": 799,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 5,
+    "t": 1655703660.0,
+    "cells": 119198,
+    "new": 269,
+    "removed_jitter": 16,
+    "removed_retraction": 6
+   },
+   {
+    "k": 6,
+    "t": 1655786940.0,
+    "cells": 119219,
+    "new": 21,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 7,
+    "t": 1656259200.0,
+    "cells": 119219,
+    "new": 0,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   }
+  ],
+  "flags": {
+   "consistent": 28544,
+   "initial": 90665,
+   "never": 795223,
+   "inconsistent": 188
+  }
+ },
+ "wind": {
+  "hours": 326,
+  "first_utc": "2022-06-13T04:00:00+00:00",
+  "last_utc": "2022-06-26T17:00:00+00:00",
+  "rotation_deg_at_centre": 8.428737236958044,
+  "hrrr_true_north_deg_from_grid_x_at_centre": 81.24097016942332,
+  "speed_max_ms": 21.73348617553711,
+  "wind_grid_shape": [
+   94,
+   98
+  ]
+ },
+ "moisture": {
+  "fm100_median_pct": 5.44423076923077,
+  "fm1000_median_pct": 5.208012820512822,
+  "window_utc": [
+   "2022-06-14T04:44:00+00:00",
+   "2022-06-26T16:00:00+00:00"
+  ]
+ },
+ "outputs": {
+  "data/interim/pipeline/inputs.npz": "3294248961711c9a52509cea76e51fabe1a4edd1c3278827816fd49a6ca0267a",
+  "data/interim/pipeline/wind.npz": "34bd9ba026f75433d5b5eaafd096a23dd425ed9612eae24a0840f29966226c3e"
+ }
+}

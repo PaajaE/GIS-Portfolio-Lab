@@ -1,0 +1,158 @@
+{
+ "fire": "mangum",
+ "cell_m": 90.0,
+ "scheme": "HY",
+ "grid_shape": [
+  495,
+  399
+ ],
+ "window": {
+  "t0_utc": "2020-06-10T07:13:00+00:00",
+  "t_end_utc": "2020-06-17T07:15:00+00:00",
+  "scans": 8,
+  "hours": 217
+ },
+ "moisture": {
+  "fm100": 4.0732421875,
+  "scenario": {
+   "d1": 2.0732421875,
+   "d10": 3.0732421875,
+   "d100": 4.0732421875,
+   "live_herb": 30.0,
+   "live_woody": 60.0
+  }
+ },
+ "audit": {
+  "steps": [
+   {
+    "k": 1,
+    "t": 1591860540.0,
+    "cells": 396,
+    "new": 108,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 2,
+    "t": 1591947960.0,
+    "cells": 1116,
+    "new": 720,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 3,
+    "t": 1592035440.0,
+    "cells": 5387,
+    "new": 4271,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 4,
+    "t": 1592107920.0,
+    "cells": 9876,
+    "new": 4489,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 5,
+    "t": 1592208960.0,
+    "cells": 12341,
+    "new": 2468,
+    "removed_jitter": 3,
+    "removed_retraction": 0
+   },
+   {
+    "k": 6,
+    "t": 1592293500.0,
+    "cells": 14839,
+    "new": 2498,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   },
+   {
+    "k": 7,
+    "t": 1592378100.0,
+    "cells": 23743,
+    "new": 8904,
+    "removed_jitter": 0,
+    "removed_retraction": 0
+   }
+  ]
+ },
+ "parameters": {
+  "model": {
+   "k": 1.0,
+   "a_u": 1.0,
+   "a_s": 1.0,
+   "wind_factor": 1.0
+  },
+  "B0": {
+   "c": 1.0
+  },
+  "B1": {
+   "c": 0.5,
+   "b": 0.05
+  }
+ },
+ "note": "hand-set parameters; pipeline check, not a skill estimate",
+ "results": {
+  "model": {
+   "n_scored": 183297,
+   "mean_abs_h": 34.149759149330194,
+   "mean_signed_h": -33.340015195978694,
+   "share_early": 0.9553020507700617,
+   "share_inside": 0.021604281575803203,
+   "share_late": 0.02309366765413509,
+   "median_early_h": -48.0,
+   "median_late_h": 14.988915308552698,
+   "steps": [
+    {
+     "k": 1,
+     "area_ratio": 11.732323232323232,
+     "dice": 0.15549385164617216,
+     "iou": 0.08430107526881721
+    },
+    {
+     "k": 2,
+     "area_ratio": 13.187275985663083,
+     "dice": 0.13415019263563444,
+     "iou": 0.07189763726220297
+    },
+    {
+     "k": 3,
+     "area_ratio": 7.269166511973269,
+     "dice": 0.1581735733848157,
+     "iou": 0.08587865343831509
+    },
+    {
+     "k": 4,
+     "area_ratio": 7.943904414742811,
+     "dice": 0.17058756934223934,
+     "iou": 0.09324719045497303
+    },
+    {
+     "k": 5,
+     "area_ratio": 8.557491289198607,
+     "dice": 0.19454170870460963,
+     "iou": 0.10775198166723017
+    },
+    {
+     "k": 6,
+     "area_ratio": 9.81669923849316,
+     "dice": 0.18155991252826945,
+     "iou": 0.09984376927188258
+    },
+    {
+     "k": 7,
+     "area_ratio": 7.721180979657162,
+     "dice": 0.22678649905586115,
+     "iou": 0.1278957660400791
+    }
+   ],
+   "seconds": 1079.825522094
+  }
+ }
+}

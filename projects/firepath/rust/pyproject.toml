@@ -1,0 +1,12 @@
+[build-system]
+requires = ["maturin>=1.7,<2"]
+build-backend = "maturin"
+
+[project]
+name = "firepath-kernels"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = ["numpy>=2.1"]
+
+[tool.maturin]
+features = ["python"]

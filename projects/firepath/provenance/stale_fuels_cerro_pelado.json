@@ -1,0 +1,24 @@
+{
+ "fire": "cerro_pelado",
+ "fuel_version": "LF2020",
+ "fire_year": 2022,
+ "years": {
+  "2021": {
+   "layer": "LF2022_Dist21",
+   "role": "stale",
+   "share_burnable_aoi": 0.0181,
+   "share_final_perimeter": 0.0128
+  },
+  "2022": {
+   "layer": "LF2022_Dist22",
+   "role": "fire year",
+   "share_burnable_aoi": 0.2253,
+   "share_final_perimeter": 0.9967
+  }
+ },
+ "stale_any": {
+  "share_burnable_aoi": 0.0181,
+  "share_final_perimeter": 0.0128
+ },
+ "note": "stale years ['2021']: disturbances missing from LF2020 fuels; the fire-year row shows what a version including 2022 would leak"
+}
